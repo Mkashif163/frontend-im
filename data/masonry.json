@@ -1,0 +1,97 @@
+
+{
+    "all" : [
+        {
+            "type":"electronic",
+            "img" : "portfolio/1.jpg"
+        },
+        {
+            "type":"electronic",
+            "img" : "portfolio/2.jpg"
+        },
+        {
+            "type":"electronic",
+            "img" : "portfolio/3.jpg"
+        },
+        {
+            "type":"electronic",
+            "img" : "portfolio/4.jpg"
+        },
+        {
+            "type":"electronic",
+            "img" : "portfolio/5.jpg"
+        },
+        {
+            "type":"bags",
+            "img" : "portfolio/6.jpg"
+        },
+        {
+            "type":"fashion",
+            "img" : "portfolio/7.jpg"
+        },
+        {
+            "type":"fashion",
+            "img" : "portfolio/8.jpg"
+        },
+        {
+            "type":"bags",
+            "img" : "portfolio/9.jpg"
+        },
+        {
+            "type":"shoes",
+            "img" : "portfolio/10.jpg"
+        },
+        {
+            "type":"electronic",
+            "img" : "portfolio/11.jpg"
+        },
+        {
+            "type":"shoes",
+            "img" : "portfolio/12.jpg"
+        },
+        {
+            "type":"bags",
+            "img" : "portfolio/13.jpg"
+        },
+        {
+            "type":"watch",
+            "img" : "portfolio/14.jpg"
+        },
+        {
+            "type":"watch",
+            "img" : "portfolio/15.jpg"
+        },
+        {
+            "type":"shoes",
+            "img" : "portfolio/16.jpg"
+        },
+        {
+            "type":"watch",
+            "img" : "portfolio/17.jpg"
+        },
+        {
+            "type":"fashion",
+            "img" : "portfolio/18.jpg"
+        },
+        {
+            "type":"fashion",
+            "img" : "portfolio/19.jpg"
+        },
+        {
+            "type":"fashion",
+            "img" : "portfolio/20.jpg"
+        },
+        {
+            "type":"watch",
+            "img" : "portfolio/21.jpg"
+        },
+        {
+            "type":"bags",
+            "img" : "portfolio/22.jpg"
+        },
+        {
+            "type":"shoes",
+            "img" : "portfolio/23.jpg"
+        }
+    ]
+}

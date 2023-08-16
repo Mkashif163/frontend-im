@@ -1,0 +1,18 @@
+suchika
+change icon of header add to cart as html,  is it is nice one
+add color red in out of stock in detail page
+-Need to make header sticky --> need to add sticky css
+- on menu overlay overflow hidden in body  >> done nback showing in show by category
+
+
+New suchika
+http://localhost:3000/  >> if change language to spanish menu goes down
+http://localhost:3000/features/portfolio/mesonary-grid-full-width  >> showing left sidebar
+logout button design on click of user beside menu 
+
+
+
+
+need to check .html in href path
+http://localhost:3000/features/portfolio/mesonary-grid-full-width
+product name same in main demo 4 box
