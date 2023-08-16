@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import { NextPage } from "next";
-import { Media } from "reactstrap";
+// import { Media } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { MenuContext } from "helpers/menu/MenuContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding , faShip, faGear ,faScrewdriverWrench ,} from '@fortawesome/free-solid-svg-icons'
+
 
 interface byCategory {
   category: boolean;
@@ -44,72 +47,48 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                 </a>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" />
-                  FASHION
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="https://static.thenounproject.com/png/2327734-200.png" alt="category-product" className="img-fluid w-10" /> */}
+                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
+                  Programmable Controlers
+                </div>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=ELECTRONIC">
-                  <Media src="/images/layout-1/nav-img/02.png" alt="category-product" className="img-fluid" />
-                  ELECTRONIC
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
+                  <FontAwesomeIcon icon={faShip} size="lg"/>
+                  Drives
+                </div>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=PETS">
-                  <Media src="/images/layout-1/nav-img/03.png" alt="category-product" className="img-fluid" />
-                  PETS
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
+                  <FontAwesomeIcon icon={faGear} size="lg"/>
+                  Industrial Solutions
+                </div>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=FLOWER">
-                  <Media src="/images/layout-1/nav-img/04.png" alt="category-product" className="img-fluid" /> FLOWER
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
+                  <FontAwesomeIcon icon={faScrewdriverWrench} size="lg"/>
+                  Electric & Mechanical
+                </div>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=FURNITURE">
-                  <Media src="/images/layout-1/nav-img/05.png" alt="category-product" className="img-fluid" />
-                  FURNITURE
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
+                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
+                  Industrial Lights & Valves
+                </div>
               </li>
               <li>
-                <a href="/collections/leftsidebar?category=BEAUTY">
-                  <Media src="/images/layout-1/nav-img/06.png" alt="category-product" className="img-fluid" />
-                  BEAUTY
-                </a>
+                <div className="catogory-main-items">
+                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
+                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
+                  Refurbished
+                </div>
               </li>
-              <li>
-                <a href="/collections/leftsidebar?category=VEGETABLES">
-                  <Media src="/images/layout-1/nav-img/07.png" alt="category-product" className="img-fluid" />
-                  VEGETABLES
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=JEWELLWEY">
-                  <Media src="/images/layout-1/nav-img/08.png" alt="category-product" className="img-fluid" />
-                  JEWELLWEY
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=BAGS">
-                  <Media src="/images/layout-1/nav-img/09.png" alt="category-product" className="img-fluid" /> BAGS
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=WATCH">
-                  <Media src="/images/layout-1/nav-img/10.png" alt="category-product" className="img-fluid" /> WATCH
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=TOOLS">
-                  <Media src="/images/layout-1/nav-img/11.png" alt="category-product" className="img-fluid" /> TOOLS
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=KIDS">
-                  <Media src="/images/layout-1/nav-img/12.png" alt="category-product" className="img-fluid" /> KIDS
-                </a>
-              </li>
+              
             </ul>
           </div>
         </div>

@@ -36,6 +36,26 @@ const MenuBar1: NextPage<MenuBarState> = ({ menuData = data }) => {
           </div>
         </li>
       )}
+
+      <li className="mega home">
+        <a
+          className="dark-menu-item has-submenu"
+          onClick={() => {
+          }}>
+          Home
+        </a>
+        <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>
+      </li>
+
+      <li className="mega home">
+        <a
+          className="dark-menu-item has-submenu"
+          onClick={() => {
+          }}>
+          Shop
+        </a>
+        <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>
+      </li>
       {menuData.map((menuItem, i) => {
         return (
           // Main Menu title
@@ -109,6 +129,53 @@ const MenuBar1: NextPage<MenuBarState> = ({ menuData = data }) => {
                     </Row>
                   </Container>
                 }
+              </ul>
+            )}
+
+            {/* Submenu */}
+            {menuItem.children && !menuItem.megaMenu && (
+              <ul ref={ref} className={`submenu ${isComponentVisible && isOpen === menuItem.title ? "d-block submenu" : ""}`}>
+                {menuItem.children.map((childrenItem: any, index: any) => (
+                  <li key={index} className={`${childrenItem.children ? "submenuTitle " : ""}`}>
+                    {childrenItem.type === "sub" && (
+                      <a
+                        onClick={() => {
+                          setIsComponentVisible(true);
+                          setIsSubNavOpen(childrenItem.title === isSubNavOpen ? false : childrenItem.title);
+                        }}>
+                        {childrenItem.title}
+                        <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isSubNavOpen === childrenItem.title ? "minus" : "plus")}`}></span>
+                      </a>
+                    )}
+                    {childrenItem.type === "link" && (
+                      <Link href={`${childrenItem.path}`}>
+                        <a>{childrenItem.title}</a>
+                      </Link>
+                    )}
+
+                    {childrenItem.children && (
+                      <ul
+                        className={`submenuContent 
+                      ${
+                        path !== "/Layouts/layout3" && isComponentVisible && mobileSize && isSubNavOpen === childrenItem.title
+                          ? "d-block"
+                          : path === "/Layouts/layout3" && isComponentVisible && isSubNavOpen === childrenItem.title
+                          ? "d-block"
+                          : ""
+                      }`}>
+                        {childrenItem.children.map((childrenSubItem: any, key: any) => (
+                          <li key={key}>
+                            {childrenSubItem.type === "link" && (
+                              <Link href={`${childrenSubItem.path}`}>
+                                <a className="sub-menu-title">{childrenSubItem.title}</a>
+                              </Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
               </ul>
             )}
           </li>

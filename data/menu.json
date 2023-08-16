@@ -1,56 +1,5 @@
 [
   {
-    "title": "Home",
-    "type": "sub",
-    "children": []
-  },
-  {
-    "title": "Shop",
-    "type": "sub",
-    "children": [
-      {
-        "path": "/collections/leftsidebar",
-        "title": "Left Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/collections/right-sidebar",
-        "title": "Right Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/collections/no-sidebar",
-        "title": "No Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/collections/sidebar-popup",
-        "title": "Sidebar Popup",
-        "type": "link"
-      },
-      {
-        "path": "/collections/metro",
-        "title": "Metro",
-        "type": "link"
-      },
-      {
-        "path": "/collections/full-width",
-        "title": "Full Width",
-        "type": "link"
-      },
-      {
-        "path": "/collections/3-grid",
-        "title": "3 Grid",
-        "type": "link"
-      },
-      {
-        "path": "/collections/list-view",
-        "title": "List View",
-        "type": "link"
-      }
-    ]
-  },
-  {
     "title": "Product",
     "type": "sub",
     "megaMenu": true,
