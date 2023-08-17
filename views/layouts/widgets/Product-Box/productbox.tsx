@@ -161,7 +161,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                   {selectedCurr.symbol}
                   {((price - price * (discount / 100)) * selectedCurr.value).toFixed(2)}
                 </div>
-                <div className="stock">
+                <div className={stock>0 ? "stock":"out-stock"}>
                   Stock: {stock}
                 </div>
 
