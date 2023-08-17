@@ -10,6 +10,7 @@ import Img from "utils/BgImgRatio";
 interface productType {
   id: Number;
   title: string;
+  model: string;
   newLabel: boolean;
   sale: Boolean;
   price: number;
@@ -17,6 +18,9 @@ interface productType {
   stock: number;
   images: any;
   layout: string;
+  suplier: any;
+  brand: string;
+  condition: string;
   addCart: Function;
   addWish: Function;
   addCompare: Function;
@@ -25,8 +29,9 @@ interface productType {
   type: Array<string>;
 }
 
-const ProductBox: NextPage<productType> = ({ layout, id, item, title, newLabel, sale, price, discount, stock, images, addCart, addCompare, addWish, hoverEffect }) => {
+const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, newLabel, sale, suplier, condition, model, price, discount, stock, images, addCart, addCompare, addWish, hoverEffect }) => {
   const currencyContext = useContext(CurrencyContext);
+  const para = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took galley of type and scrambled it to make a type specimen book"
   const { selectedCurr } = currencyContext;
   const [imgsrc, setImgsrc] = useState("");
   const imgChange = (src) => {
@@ -69,9 +74,11 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, newLabel, 
     router.push(`/product-details/${id}` + "-" + `${titleProps}`);
   };
 
+  const trimedPara = para.substring(0, 10);
   return (
     <Fragment>
       <div className="product-box">
+
         <div className="product-imgbox">
           <div className="product-front" onClick={clickProductDetail}>
             <Img src={`/images/${imgsrc || images[0].src}`} className="img-fluid" alt="product" />
@@ -114,9 +121,21 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, newLabel, 
           )}
           {sale && <div className="on-sale1">on sale</div>}
         </div>
+
+        {/* prouct box footer */}
+
         <div className="product-detail detail-inline ">
           <div className="detail-title">
             <div className="detail-left">
+              <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
+                <h6 className="price-title">{title}</h6>
+              </Link>
+              <Link href={`/product-details/${id}`}>
+                <p >Model: <span><h6 className="price-title">1756-A7</h6></span></p>
+              </Link>
+              <p>
+                {trimedPara}<Link href={`/product-details/${id}` + "-" + `${titleProps}`}>...read more</Link>
+              </p>
               <ul className="rating-star">
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
@@ -124,19 +143,10 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, newLabel, 
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
               </ul>
-
-              {layout === "list-view" ? (
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book
-                </p>
-              ) : (
-                ""
-              )}
-              <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
-                <h6 className="price-title">{title}</h6>
-              </Link>
+              
             </div>
+
+
             <div className="detail-right">
               <div className="check-price">
                 {selectedCurr.symbol}

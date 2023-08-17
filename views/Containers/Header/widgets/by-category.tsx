@@ -47,46 +47,46 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                 </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="https://static.thenounproject.com/png/2327734-200.png" alt="category-product" className="img-fluid w-10" /> */}
                   <FontAwesomeIcon icon={faBuilding} size="lg"/>
                   Programmable Controlers
-                </div>
+                </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
                   <FontAwesomeIcon icon={faShip} size="lg"/>
                   Drives
-                </div>
+                </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
                   <FontAwesomeIcon icon={faGear} size="lg"/>
                   Industrial Solutions
-                </div>
+                </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
                   <FontAwesomeIcon icon={faScrewdriverWrench} size="lg"/>
                   Electric & Mechanical
-                </div>
+                </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
                   <FontAwesomeIcon icon={faBuilding} size="lg"/>
                   Industrial Lights & Valves
-                </div>
+                </a>
               </li>
               <li>
-                <div className="catogory-main-items">
+                <a href="/collections/leftsidebar?category=FASHION">
                   {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
                   <FontAwesomeIcon icon={faBuilding} size="lg"/>
                   Refurbished
-                </div>
+                </a>
               </li>
               
             </ul>
