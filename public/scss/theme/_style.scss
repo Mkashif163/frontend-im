@@ -1749,6 +1749,7 @@ button {
 .product {
   .product-box {
     padding-right: 15px;
+
     .product-imgbox {
       position: relative;
       overflow: hidden;
@@ -2048,6 +2049,7 @@ button {
         }
       }
     }
+
     .product-detail {
       &.detail-center1 {
         text-align: center;
@@ -2102,6 +2104,7 @@ button {
               margin-left: 6px;
               color: var(--theme-color1);
               margin-top: 0;
+              justify-content: right;
             }
           }
         }
@@ -2149,12 +2152,25 @@ button {
         }
         .detail-right {
           float: right;
+          
           font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
           .check-price {
             text-decoration: line-through;
             font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
           }
           .price {
+            color: var(--theme-color2);
+            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+            font-weight: 700;
+            margin-top: 3px;
+          }
+          .stock{
+            color: var(--theme-color2);
+            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+            font-weight: 700;
+            margin-top: 3px;
+          }
+          .out-stock{
             color: var(--theme-color2);
             font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
             font-weight: 700;

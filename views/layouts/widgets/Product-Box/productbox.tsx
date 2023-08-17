@@ -43,6 +43,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [stockState, setStockState] = useState("InStock");
+  condition = "New";
   const uniqueSize = [];
   const uniqueColor = [];
   const titleProps = title.split(" ").join("");
@@ -126,16 +127,18 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
 
         <div className="product-detail detail-inline ">
           <div className="detail-title">
+
             <div className="detail-left">
               <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
                 <h6 className="price-title">{title}</h6>
               </Link>
               <Link href={`/product-details/${id}`}>
-                <p >Model: <span><h6 className="price-title">1756-A7</h6></span></p>
+                <h6 className="price-title">1756-A7</h6>
               </Link>
-              <p>
+              
+              {/* <p>
                 {trimedPara}<Link href={`/product-details/${id}` + "-" + `${titleProps}`}>...read more</Link>
-              </p>
+              </p> */}
               <ul className="rating-star">
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
@@ -143,22 +146,29 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
               </ul>
-              
+              <h5>{condition}</h5>
             </div>
-
-
             <div className="detail-right">
+
               <div className="check-price">
                 {selectedCurr.symbol}
                 {(price * selectedCurr.value).toFixed(2)}{" "}
               </div>
+
               <div className="price">
+                
                 <div className="price">
                   {selectedCurr.symbol}
                   {((price - price * (discount / 100)) * selectedCurr.value).toFixed(2)}
                 </div>
+                <div className="stock">
+                  Stock: {stock}
+                </div>
+
               </div>
+              
             </div>
+
           </div>
         </div>
       </div>
