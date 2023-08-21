@@ -161,7 +161,7 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
             </div>
             <div className="top-bar-product-catogories">
               <ul className="product-catogories">
-                {collection.map((c, i) => (
+                {collection.slice(0, 8).map((c, i) => (
                   <li className="top-catogories" key={i}>
                     <a className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
                       {c}
@@ -172,29 +172,28 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
             </div>
             <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
               <div className="px-2 ">
-              <ul className="catogories-arrows">
-                <li>
-                  <a className="prev" onClick={() => setActiveTab("new products")}>
-                    <i className="fa fa-angle-left"></i>
-                  </a>
-                </li>
-                <li>
-                  <a className="next" onClick={() => setActiveTab("new products")}>
-                    <i className="fa fa-angle-right"></i>
-                  </a>
-                </li>
-              </ul>
+                <ul className="catogories-arrows">
+                  <li>
+                    <a className="prev" onClick={() => setActiveTab("new products")}>
+                      <i className="fa fa-angle-left"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a className="next" onClick={() => setActiveTab("new products")}>
+                      <i className="fa fa-angle-right"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
-             <div>
-             <a href="#">
-                View all
-              </a>
-             </div>
+              <div>
+                <a href="#">View all</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      
+
+
       <section className="section-py-space ratio_asos product">
         <div className="custom-container">
           <Row>
