@@ -1746,6 +1746,53 @@ button {
 /*============================
   14. Product CSS start
 ==============================*/
+
+.product-title {
+  display: flex;
+  justify-content: space-between;
+  .title {
+    a {
+      color: var(--theme-color1);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      &:hover {
+        color: var(--theme-color2);
+      }
+    }
+  }
+  .more-product-sm {
+    display: none;
+  }
+  .more-product {
+    a {
+      color: var(--theme-color1);
+      font-size: 14px;
+      font-weight: 700;
+      &:hover {
+        color: var(--theme-color2);
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .more-product {
+      display: none;
+    }
+    .more-product-sm {
+      display: none; // Hide on screens larger than 900px
+      a {
+        color: var(--theme-color1);
+        font-size: 14px;
+        font-weight: 700;
+        &:hover {
+          color: var(--theme-color2);
+        }
+      }
+    }
+  }
+}
+
 .product {
   .product-box {
     padding-right: 15px;
@@ -2060,7 +2107,9 @@ button {
           li {
             i {
               color: $rating-star;
-              font-size: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
+              font-size: calc(
+                10px + (14 - 10) * ((100vw - 320px) / (1920 - 320))
+              );
             }
             &:last-child {
               i {
@@ -2100,7 +2149,9 @@ button {
             width: 100%;
             margin-top: 6px;
             .price {
-              font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+              font-size: calc(
+                12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+              );
               margin-left: 6px;
               color: var(--theme-color1);
               margin-top: 0;
@@ -2130,53 +2181,94 @@ button {
       }
       .detail-title {
         padding-top: 0;
+        .price-title {
+          text-transform: capitalize;
+          color: $black1;
+          font-size: calc(15px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+          font-weight: 300;
+          margin: 4px 0;
+        }
         .detail-left {
           float: left;
           .rating-star {
             i {
               color: $rating-star;
-              font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1920 - 320)));
+              font-size: calc(
+                11px + (14 - 11) * ((100vw - 320px) / (1920 - 320))
+              );
               margin-right: 4px;
               &:last-child {
                 color: $light-gray;
               }
             }
           }
-          .price-title {
-            text-transform: capitalize;
+          .model-number {
             color: $black1;
-            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-            font-weight: 600;
+            font-size: calc(
+              12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
+            font-weight: 500;
             margin-top: 4px;
+          }
+          // .brand-div{
+          //   margin: 10px 0;
+          // }
+          .condition-box {
+            margin-top: 5px;
+            .condition-text {
+              padding: 5px;
+              background-color: var(--theme-color1);
+              color: $white;
+              font-size: calc(
+                12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+              );
+              font-weight: 600;
+              margin-right: 5px;
+            }
           }
         }
         .detail-right {
           float: right;
-          
+
           font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
           .check-price {
             text-decoration: line-through;
-            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
           }
           .price {
-            color: var(--theme-color2);
-            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-            font-weight: 700;
-            margin-top: 3px;
+            color: var(--theme-color1);
+            font-size: calc(
+              18px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
+            font-weight: 500;
           }
-          .stock{
+          // .suplier-div{
+          //   margin: 10px 0;
+          // }
+          .stock {
             color: green;
-            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-            font-weight: 700;
+            font-size: calc(
+              15px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
+            font-weight: 600;
             margin-top: 3px;
           }
-          .out-stock{
+          .out-stock {
             color: var(--theme-color2);
-            font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-            font-weight: 700;
+            font-size: calc(
+              15px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
+            font-weight: 600;
             margin-top: 3px;
           }
         }
+        // @media (max-width: 768px) { // Hide on tablet and below
+        //   .brand-div, .condition-box, .suplier-div, .stock, .out-stock {
+        //     display: none;
+        //   }
+        // }
       }
       .icon-detail {
         position: absolute;
@@ -2425,7 +2517,9 @@ button {
             color: $black;
             margin: 0 4px;
             min-width: fit-content;
-            font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              18px + (24 - 18) * ((100vw - 320px) / (1920 - 320))
+            );
             padding: 0;
             &:nth-child(even) {
               color: $light-border;
@@ -3103,7 +3197,9 @@ button {
           text-transform: uppercase;
           letter-spacing: 1px;
           span {
-            font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              14px + (20 - 14) * ((100vw - 320px) / (1920 - 320))
+            );
             font-weight: 600;
           }
         }
@@ -4118,7 +4214,9 @@ button {
         a {
           i {
             color: $gray-2;
-            font-size: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              20px + (30 - 20) * ((100vw - 320px) / (1920 - 320))
+            );
             .cart-icon {
               display: inline-block;
               color: $gray-3;
@@ -4850,22 +4948,30 @@ button {
               line-height: 1;
               border: none;
               svg {
-                width: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+                width: calc(
+                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+                );
                 color: #444444;
               }
               i {
                 color: #444444;
-                font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+                font-size: calc(
+                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+                );
               }
             }
             a {
               color: #444444;
               svg {
-                width: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+                width: calc(
+                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+                );
                 color: #444444;
               }
               i {
-                font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+                font-size: calc(
+                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+                );
               }
               &:nth-child(n + 2) {
                 margin-left: 5px;
@@ -6080,42 +6186,85 @@ button {
   21. Tab-product css
 ==============================*/
 .tab-product-main {
-  background-color: $white;
+  margin-top: 10px;
+  padding: 0 55px;
   .tab-prodcut-contain {
-    text-align: center;
-    ul {
-      display: unset !important;
-      border: none;
-      li {
-        margin: 0 20px;
-        padding: 40px 0;
-        position: relative;
-        a.active {
-          color: var(--theme-color1);
-          &:before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background-color: var(--theme-color1);
-            width: 100%;
-            content: "";
+    display: flex;
+    align-items: center;
+
+    .category-title {
+      display: flex;
+      align-items: flex-start;
+      padding-right: 108px;
+      h3 {
+        font-size: 30px;
+        text-transform: capitalize;
+        color: var(--theme-color1);
+        font-weight: 300;
+        margin: 0;
+      }
+    }
+
+      ul.product-catogories {
+        display: flex;
+        li {
+          margin: 0 15px;
+          padding: 10px 0;
+          position: relative;
+
+       a.active {
+            color: var(--theme-color2);
+            &:before {
+              position: absolute;
+              height: 5px;
+              background-color: var(--theme-color2);
+              width: 100%;
+              content: "";
+            }
+          }
+
+          a {
+            color: var(--theme-color1);
+            font-weight: 300;
+            font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+            cursor: pointer;
+            text-transform: capitalize;
+          }
+        }
+      }
+
+      .view-all {
+        align-items: center;
+        justify-content: end;
+        ul.catogories-arrows{
+          display: flex;
+          align-items: center;
+          li {
+            margin: 0 8px;
+            position: relative;
+            a {
+              color: var(--theme-color1);
+              font-weight: 300;
+              font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+              cursor: pointer;
+              text-transform: capitalize;
+            }
           }
         }
         a {
-          color: $dark;
-          text-transform: uppercase;
-          font-weight: 700;
-          font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-          padding: 0;
-          border: none;
-          margin: 0;
+          color: var(--theme-color1);
+          text-transform: capitalize;
+          font-weight: 400;
           cursor: pointer;
         }
       }
-    }
+
+    
   }
 }
+
+
+
 
 /*============================
    22.  Newsleatter css
@@ -7135,7 +7284,9 @@ button {
         .detail-title {
           .detail-left {
             .price-title {
-              font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)));
+              font-size: calc(
+                12px + (16 - 12) * ((100vw - 320px) / (1920 - 320))
+              );
               padding-top: 0;
             }
           }
@@ -7477,7 +7628,9 @@ button {
           h6 {
             margin-right: 61px;
             margin-top: 5px;
-            font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))
+            );
             margin-bottom: 0;
             color: $icon-color;
           }
@@ -7972,7 +8125,9 @@ button {
             padding-top: 5px;
             font-weight: 600;
             color: var(--theme-color1);
-            font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+            );
           }
         }
         p {
@@ -8636,7 +8791,9 @@ button {
   .slick-slide {
     > div {
       display: flex;
-      margin: calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320))) calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320))) 0 calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320)));
+      margin: calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320)))
+        calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320))) 0
+        calc(5px + (15 - 5) * ((100vw - 320px) / (1920 - 320)));
       border: 1px solid $white1;
       transition: all 0.5s ease;
     }
@@ -10537,7 +10694,8 @@ button {
   }
   .filter-button {
     .nav-link {
-      padding: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320))) calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
+      padding: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)))
+        calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
       font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
       border: none;
       background-color: $white;
@@ -11083,39 +11241,147 @@ button {
 }
 .color1 {
   background: #ff6000;
-  background: -moz-linear-gradient(-45deg, #ff6000 49%, #ff6000 50%, #ffa800 51%, #ffa800 100%);
-  background: -webkit-linear-gradient(-45deg, #ff6000 49%, #ff6000 50%, #ffa800 51%, #ffa800 100%);
-  background: linear-gradient(135deg, #ff6000 49%, #ff6000 50%, #ffa800 51%, #ffa800 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #ff6000 49%,
+    #ff6000 50%,
+    #ffa800 51%,
+    #ffa800 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #ff6000 49%,
+    #ff6000 50%,
+    #ffa800 51%,
+    #ffa800 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #ff6000 49%,
+    #ff6000 50%,
+    #ffa800 51%,
+    #ffa800 100%
+  );
 }
 .color2 {
   background: #1c3481;
-  background: -moz-linear-gradient(-45deg, #00baf2 49%, #00baf2 50%, #1c3481 51%, #1c3481 100%);
-  background: -webkit-linear-gradient(-45deg, #00baf2 49%, #00baf2 50%, #1c3481 51%, #1c3481 100%);
-  background: linear-gradient(135deg, #00baf2 49%, #00baf2 50%, #1c3481 51%, #1c3481 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #00baf2 49%,
+    #00baf2 50%,
+    #1c3481 51%,
+    #1c3481 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #00baf2 49%,
+    #00baf2 50%,
+    #1c3481 51%,
+    #1c3481 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #00baf2 49%,
+    #00baf2 50%,
+    #1c3481 51%,
+    #1c3481 100%
+  );
 }
 .color3 {
   background: #f1bb3a;
-  background: -moz-linear-gradient(-45deg, #f1bb3a 49%, #f1bb3a 50%, #0083c1 51%, #0083c1 100%);
-  background: -webkit-linear-gradient(-45deg, #f1bb3a 49%, #f1bb3a 50%, #0083c1 51%, #0083c1 100%);
-  background: linear-gradient(135deg, #f1bb3a 49%, #f1bb3a 50%, #0083c1 51%, #0083c1 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #f1bb3a 49%,
+    #f1bb3a 50%,
+    #0083c1 51%,
+    #0083c1 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #f1bb3a 49%,
+    #f1bb3a 50%,
+    #0083c1 51%,
+    #0083c1 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #f1bb3a 49%,
+    #f1bb3a 50%,
+    #0083c1 51%,
+    #0083c1 100%
+  );
 }
 .color4 {
   background: #f15838;
-  background: -moz-linear-gradient(-45deg, #f15838 49%, #f15838 50%, #6465a5 51%, #6465a5 100%);
-  background: -webkit-linear-gradient(-45deg, #f15838 49%, #f15838 50%, #6465a5 51%, #6465a5 100%);
-  background: linear-gradient(135deg, #f15838 49%, #f15838 50%, #6465a5 51%, #6465a5 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #f15838 49%,
+    #f15838 50%,
+    #6465a5 51%,
+    #6465a5 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #f15838 49%,
+    #f15838 50%,
+    #6465a5 51%,
+    #6465a5 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #f15838 49%,
+    #f15838 50%,
+    #6465a5 51%,
+    #6465a5 100%
+  );
 }
 .color5 {
   background: #2690e4;
-  background: -moz-linear-gradient(-45deg, #2690e4 49%, #2690e4 50%, #252525 51%, #252525 100%);
-  background: -webkit-linear-gradient(-45deg, #2690e4 49%, #2690e4 50%, #252525 51%, #252525 100%);
-  background: linear-gradient(135deg, #2690e4 49%, #2690e4 50%, #252525 51%, #252525 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #2690e4 49%,
+    #2690e4 50%,
+    #252525 51%,
+    #252525 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #2690e4 49%,
+    #2690e4 50%,
+    #252525 51%,
+    #252525 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #2690e4 49%,
+    #2690e4 50%,
+    #252525 51%,
+    #252525 100%
+  );
 }
 .color6 {
   background: #84b213;
-  background: -moz-linear-gradient(-45deg, #84b213 49%, #84b213 50%, #f97c2d 51%, #f97c2d 100%);
-  background: -webkit-linear-gradient(-45deg, #84b213 49%, #84b213 50%, #f97c2d 51%, #f97c2d 100%);
-  background: linear-gradient(135deg, #84b213 49%, #84b213 50%, #f97c2d 51%, #f97c2d 100%);
+  background: -moz-linear-gradient(
+    -45deg,
+    #84b213 49%,
+    #84b213 50%,
+    #f97c2d 51%,
+    #f97c2d 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #84b213 49%,
+    #84b213 50%,
+    #f97c2d 51%,
+    #f97c2d 100%
+  );
+  background: linear-gradient(
+    135deg,
+    #84b213 49%,
+    #84b213 50%,
+    #f97c2d 51%,
+    #f97c2d 100%
+  );
 }
 /*=====================
   26.add to cart CSS start

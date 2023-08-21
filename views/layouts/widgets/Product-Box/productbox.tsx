@@ -74,8 +74,10 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const clickProductDetail = () => {
     router.push(`/product-details/${id}` + "-" + `${titleProps}`);
   };
+  title = "Rockwell ControlLogix 5570 PLC kashif aasbda";
+  const shortTitle = title.substring(0, 30);
 
-  const trimedPara = para.substring(0, 10);
+  // const trimedPara = para.substring(0, 10);
   return (
     <Fragment>
       <div className="product-box">
@@ -127,15 +129,14 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
 
         <div className="product-detail detail-inline ">
           <div className="detail-title">
-
+            <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
+              <h6 className="price-title">{shortTitle}...</h6>
+            </Link>
             <div className="detail-left">
-              <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
-                <h6 className="price-title">{title}</h6>
-              </Link>
               <Link href={`/product-details/${id}`}>
-                <h6 className="price-title">1756-A7</h6>
+                <h6 className="model-number">1756-A7</h6>
               </Link>
-              
+
               {/* <p>
                 {trimedPara}<Link href={`/product-details/${id}` + "-" + `${titleProps}`}>...read more</Link>
               </p> */}
@@ -146,7 +147,13 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
               </ul>
-              <h5>{condition}</h5>
+              <div className="condition-box">
+                <span className="condition-text">New</span>
+                <span className="condition-text">Used</span>
+              </div>
+              {/* <div className="brand-div">
+                  <img src="https://industrymall.net/root/upload/brands/small/631994900cb6crockwell-logo.png" className="img-fluid" alt="brand" width="80px"/>
+              </div> */}
             </div>
             <div className="detail-right">
 
@@ -156,19 +163,25 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
               </div>
 
               <div className="price">
-                
                 <div className="price">
                   {selectedCurr.symbol}
                   {((price - price * (discount / 100)) * selectedCurr.value).toFixed(2)}
                 </div>
-                <div className={stock>0 ? "stock":"out-stock"}>
-                  Stock: {stock}
-                </div>
-
               </div>
-              
+              <div className={stock > 0 ? "stock" : "out-stock"}>
+                {stock > 0 ? "In Stock" : "Out of Stock"}
+              </div>
+              {/* <div>
+                  <select name="location" id="location">
+                    <option value="paksitan">Paksitan</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                  </select>
+                </div>
+                <div className="suplier-div">
+                  <img src="https://industrymall.net/root/upload/users/im.png" className="img-fluid" alt="suplier" width="70px"/>
+                </div> */}
             </div>
-
           </div>
         </div>
       </div>

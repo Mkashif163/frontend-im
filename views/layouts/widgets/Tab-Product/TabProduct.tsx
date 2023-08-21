@@ -120,6 +120,28 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
       collection: activeTab,
     },
   });
+  if (data) {
+    data.products.items.forEach((item) => {
+      item.collection.forEach((i) => {
+        const index = collection.indexOf(i.collectionName);
+        if (index === -1 && i.collectionName !== "" && i.collectionName !== "special products") {
+          collection.push(i.collectionName);
+        }
+      });
+
+      // Add more categories
+      if (collection.length < 8) {
+        collection.push("Category 1");
+        collection.push("Category 2");
+        collection.push("Category 3");
+        collection.push("Category 4");
+        collection.push("Category 5");
+        collection.push("Category 6");
+        collection.push("Category 7");
+        collection.push("Category 8");
+      }
+    });
+  }
 
   return (
     <>
@@ -130,21 +152,49 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
             if (index === -1 && i.collectionName !== "" && i.collectionName !== "special products") collection.push(i.collectionName);
           });
         })}
+
       <section className="section-pt-space">
         <div className="tab-product-main">
           <div className="tab-prodcut-contain">
-            <Nav tabs>
-              {collection.map((c, i) => (
-                <NavItem key={i}>
-                  <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                    {c}
-                  </NavLink>
-                </NavItem>
-              ))}
-            </Nav>
+            <div className="category-title">
+              <h3>Top Products</h3>
+            </div>
+            <div className="top-bar-product-catogories">
+              <ul className="product-catogories">
+                {collection.map((c, i) => (
+                  <li className="top-catogories" key={i}>
+                    <a className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
+                      {c}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
+              <div className="px-2 ">
+              <ul className="catogories-arrows">
+                <li>
+                  <a className="prev" onClick={() => setActiveTab("new products")}>
+                    <i className="fa fa-angle-left"></i>
+                  </a>
+                </li>
+                <li>
+                  <a className="next" onClick={() => setActiveTab("new products")}>
+                    <i className="fa fa-angle-right"></i>
+                  </a>
+                </li>
+              </ul>
+              </div>
+             <div>
+             <a href="#">
+                View all
+              </a>
+             </div>
+            </div>
           </div>
         </div>
       </section>
+      
       <section className="section-py-space ratio_asos product">
         <div className="custom-container">
           <Row>
