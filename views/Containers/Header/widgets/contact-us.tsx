@@ -10,7 +10,7 @@ const ContactUs: NextPage<contactProps> = ({ spanClass }) => {
       <div className="d-flex">
         <i className="fa fa-volume-control-phone"></i>
         <span className={spanClass}>
-          call us<span>123-456-76890</span>
+          Contact us<span>0(800)123-456</span>
         </span>
       </div>
     </div>

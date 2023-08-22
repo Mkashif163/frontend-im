@@ -7251,7 +7251,7 @@
   // creativer card //
   .creative-card {
     border-width: 0;
-    padding: 0;
+    padding: 0; 
   }
   .tab-product-main {
     padding: 0;
@@ -7259,7 +7259,7 @@
       margin: 0 1px 3px;
       border: none;
       padding: 10px 12px;
-      
+
       &.current {
         border-color: var(--theme-color1);
         &:before {

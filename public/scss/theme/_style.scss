@@ -1536,7 +1536,7 @@ button {
         text-align: center;
         padding: 0;
         h3 {
-          color: $icon-color;
+          color: white;
           text-transform: capitalize;
           font-size: 36px;
           font-weight: 400;
@@ -3438,9 +3438,8 @@ button {
   }
 }
 .category-header-2 {
-  background-color: $white;
+  background-color: #e9e9e9;
   margin-bottom: 30px;
-  color:$dark;
   .navbar-menu {
     display: flex;
     justify-content: space-between;
@@ -3574,7 +3573,7 @@ button {
         ul {
           li {
             i {
-              color: $white;
+              color: var(--theme-color2);
               font-size: 22px;
             }
             .cart-item {
@@ -3586,7 +3585,7 @@ button {
               letter-spacing: 0.5px;
               span {
                 display: block;
-                color: $white;
+                color: var(--theme-color2);
                 margin-top: 3px;
               }
             }
@@ -3643,11 +3642,11 @@ button {
         align-self: center;
         i {
           font-size: 28px;
-          color: $white;
+          color: var(--theme-color1);
         }
         span {
           font-size: 14px;
-          color: $white;
+          color: var(--theme-color1);
           margin-left: 15px;
           text-transform: uppercase;
           letter-spacing: 1px;
@@ -5642,11 +5641,11 @@ button {
       align-items: center;
       text-align: end;
       padding: 0 100px;
-      .transparent-bg{
+      .transparent-bg {
         background-color: rgba(213, 221, 223, 0.5);
         padding: 20px;
         border-radius: 10px;
-        
+
         h4 {
           font-size: 24px;
           color: $black;
@@ -5682,8 +5681,8 @@ button {
           right: 0;
         }
       }
-      }
-      
+    }
+
     .layout2-slide-2 {
       li {
         position: absolute;
@@ -5718,9 +5717,8 @@ button {
       .layout1-slide-2 {
         li {
           position: absolute;
-          left: 50px;slider
-
-          &:nth-child(2) {
+          left: 50px;
+          slider &:nth-child(2) {
             right: 20px;
             left: unset;
           }
@@ -5812,6 +5810,11 @@ button {
           padding: 40px;
           text-align: center;
           min-width: 440px;
+          .transparent-bg-collection {
+            background-color: rgba(213, 221, 223, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+          }
           h4 {
             font-size: 18px;
             color: $dark;
@@ -6219,70 +6222,69 @@ button {
       }
     }
 
-      ul.product-catogories {
-        display: flex;
-        li {
-          margin: 0 15px;
-          padding: 10px 0;
-          position: relative;
+    ul.product-catogories {
+      display: flex;
+      li {
+        margin: 0 15px;
+        padding: 10px 0;
+        position: relative;
 
-       a.active {
-            color: var(--theme-color2);
-            &:before {
-              position: absolute;
-              height: 5px;
-              background-color: var(--theme-color2);
-              width: 100%;
-              content: "";
-            }
+        a.active {
+          color: var(--theme-color2);
+          &:before {
+            position: absolute;
+            height: 5px;
+            background-color: var(--theme-color2);
+            width: 100%;
+            content: "";
           }
+        }
 
+        a {
+          color: var(--theme-color1);
+          font-weight: 300;
+          font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+          cursor: pointer;
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    .view-all {
+      align-items: center;
+      justify-content: end;
+      ul.catogories-arrows {
+        display: flex;
+        align-items: center;
+        li {
+          margin: 0 8px;
+          position: relative;
           a {
             color: var(--theme-color1);
             font-weight: 300;
-            font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+            font-size: calc(
+              14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
+            );
             cursor: pointer;
             text-transform: capitalize;
           }
         }
       }
-
-      .view-all {
-        align-items: center;
-        justify-content: end;
-        ul.catogories-arrows{
-          display: flex;
-          align-items: center;
-          li {
-            margin: 0 8px;
-            position: relative;
-            a {
-              color: var(--theme-color1);
-              font-weight: 300;
-              font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-              cursor: pointer;
-              text-transform: capitalize;
-            }
-          }
-        }
-        a {
-          color: var(--theme-color1);
-          text-transform: capitalize;
-          font-weight: 400;
-          cursor: pointer;
-        }
+      a {
+        color: var(--theme-color1);
+        text-transform: capitalize;
+        font-weight: 400;
+        cursor: pointer;
       }
-
-    
+    }
   }
 }
 @media (max-width: 767px) {
-  .top-bar-product-catogories,.arrows {
+  .top-bar-product-catogories,
+  .arrows {
     display: none;
   }
 }
-
-
 
 /*============================
    22.  Newsleatter css

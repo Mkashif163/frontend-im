@@ -19,9 +19,9 @@ const banners = [
   {
     img: "/images/layout-2/collection-banner/7.jpg",
     title: "save up to 30% off",
-    subTitle: `women<span>fashion</span>`,
+    subTitle: `Electric<span>Motors</span>`,
     btn: "shop now",
-    category: "FASHION",
+    category: "Motors",
   },
 ];
 
@@ -34,18 +34,20 @@ const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
         </div>
         <div className="collection-banner-contain ">
           <div className="sub-contain">
-            <h3>{banner.title}</h3>
-            <h4 dangerouslySetInnerHTML={{ __html: banner.subTitle }}></h4>
-            <div className="shop">
-              <Link
-                href={{
-                  pathname: "/collections/leftsidebar/",
-                  query: {
-                    category: banner.category,
-                  },
-                }}>
-                <a className="btn btn-normal">{banner.btn}</a>
-              </Link>
+            <div className="transparent-bg-collection">
+              <h3>{banner.title}</h3>
+              <h4 dangerouslySetInnerHTML={{ __html: banner.subTitle }}></h4>
+              <div className="shop">
+                <Link
+                  href={{
+                    pathname: "/collections/leftsidebar/",
+                    query: {
+                      category: banner.category,
+                    },
+                  }}>
+                  <a className="btn btn-normal">{banner.btn}</a>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
