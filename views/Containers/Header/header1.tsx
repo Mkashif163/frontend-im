@@ -61,7 +61,7 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
                   </div>
                   <div className="logo-block">
                     <a href="/#">
-                      <Media src={`/images/${layoutLogo}/logo/logo.png`} className="img-fluid  " alt="logo" />
+                      <Media src={`/images/layout-2/logo/im-logo.png`} className="img-fluid logo" width="150px" alt="logo" />
                     </a>
                   </div>
                   <Search />

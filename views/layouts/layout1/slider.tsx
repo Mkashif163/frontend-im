@@ -27,18 +27,18 @@ interface sliderProps {
 
 const banners = [
   {
-    img1: "/images/layout-2/slider/1.1.png",
-    img2: "/images/layout-2/slider/1.2.png",
-    title1: "mi",
-    title2: "Mobile",
-    subTitle1: "fast and light",
-    subTitle2: "Pixel Perfect Deal Camera",
+    img1: "/images/layout-2/slider/s1.jpg",
+    img2: "/images/layout-2/slider/s1.jpg",
+    title1: "Valves",
+    title2: "Lights",
+    subTitle1: "now start at $99",
+    subTitle2: "50% off",
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
   {
-    img1: "/images/layout-2/slider/2.1.png",
-    img2: "/images/layout-2/slider/2.2.png",
+    img1: "/images/layout-2/slider/s2.jpg",
+    img2: "/images/layout-2/slider/s2.jpg",
     title1: "big",
     title2: "Sale",
     subTitle1: "now start at $99",
@@ -47,10 +47,30 @@ const banners = [
     btn: "Shop Now",
   },
   {
-    img1: "/images/layout-2/slider/3.2.png",
-    img2: "/images/layout-2/slider/3.1.png",
+    img1: "/images/layout-2/slider/s3.jpg",
+    img2: "/images/layout-2/slider/s3.jpg",
     title1: "camera",
     title2: "Sale",
+    subTitle1: "now start at $79",
+    subTitle2: "70% off today",
+    category: "ELECTRONICS",
+    btn: "Shop Now",
+  },
+  {
+    img1: "/images/layout-2/slider/s4.jpg",
+    img2: "/images/layout-2/slider/s4.jpg",
+    title1: "ALL",
+    title2: "Sale",
+    subTitle1: "now start at $79",
+    subTitle2: "70% off today",
+    category: "ELECTRONICS",
+    btn: "Shop Now",
+  },
+  {
+    img1: "/images/layout-2/slider/s5.jpg",
+    img2: "/images/layout-2/slider/s5.jpg",
+    title1: "weekend",
+    title2: "Offers",
     subTitle1: "now start at $79",
     subTitle2: "70% off today",
     category: "ELECTRONICS",
@@ -71,19 +91,17 @@ const BannerList: React.FC<sliderProps> = ({ banner }) => {
   };
 
   return (
-    <div className="slider-banner p-center slide-banner-1" onMouseMove={(e) => onMouseHover(e)}>
+    <div className="slider-banner p-center slide-banner-1" >
       <div className="slider-img">
         <ul className="layout1-slide-1">
-          <li id="img-1" style={elemOne}>
+          <li id="img-1">
             <Media src={banner.img1} className="img-fluid" alt="slider" />
           </li>
-          <li id="img-2" className="slide-center" style={elemOne}>
-            <Media src={banner.img2} className="img-fluid" alt="slider" />
-          </li>
+         
         </ul>
       </div>
       <div className="slider-banner-contain">
-        <div>
+        <div className="transparent-bg">
           <h1>
             {banner.title1}
             <span>{banner.title2}</span>

@@ -10,8 +10,8 @@ import CollectionBannerTwo from "../views/layouts/layout1/collection-banner-two"
 import RatioSquare from "../views/layouts/widgets/ratio-square";
 import CollectionBannerThree from "../views/layouts/layout1/collection-banner-three";
 // import HotDeal from "../views/layouts/layout1/hot-deal";
-import Testimonial from "../views/layouts/widgets/testimonial";
-import SpecialProduct from "../views/layouts/widgets/title-section";
+// import Testimonial from "../views/layouts/widgets/testimonial";
+// import SpecialProduct from "../views/layouts/widgets/title-section";
 // import InstagramSection from "../views/layouts/widgets/instagram/instagram1";
 import ContactBanner from "../views/layouts/widgets/contact-us";
 import Category from "../views/layouts/widgets/roundedCategory";
@@ -30,13 +30,16 @@ const Home: NextPage = () => {
           <CollectionBanner />
           {/* <DiscountBanner /> */}
           <TabProduct effect="icon-inline" />
+          <TabProduct effect="icon-inline" />
           <CollectionBannerTwo />
           {/* <section className="deal-banner">
             <DealBanner />
           </section> */}
+          <TabProduct effect="icon-inline" />
           <section className="rounded-category">
             <Category />
           </section>
+          <TabProduct effect="icon-inline" />
           {/* <section className="box-category section-py-space">
             <DiscountCoupon />
           </section> */}
@@ -46,7 +49,7 @@ const Home: NextPage = () => {
           {/* <section className="testimonial testimonial-inverse">
             <Testimonial />
           </section> */}
-          <SpecialProduct hoverEffect="icon-inline" />
+          {/* <SpecialProduct hoverEffect="icon-inline" /> */}
           {/* <section className="instagram">
             <InstagramSection />
           </section> */}

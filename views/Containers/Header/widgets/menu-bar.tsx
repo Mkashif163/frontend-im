@@ -38,20 +38,18 @@ const MenuBar1: NextPage<MenuBarState> = ({ menuData = data }) => {
       )}
 
       <li className="mega home">
-        <a
+        <a href="/"
           className="dark-menu-item has-submenu"
-          onClick={() => {
-          }}>
+          >
           Home
         </a>
         <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>
       </li>
 
       <li className="mega home">
-        <a
+        <a href="/collections/leftsidebar"
           className="dark-menu-item has-submenu"
-          onClick={() => {
-          }}>
+          >
           Shop
         </a>
         <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>

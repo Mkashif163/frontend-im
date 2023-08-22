@@ -74,8 +74,10 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const clickProductDetail = () => {
     router.push(`/product-details/${id}` + "-" + `${titleProps}`);
   };
-  title = "Rockwell ControlLogix 5570 PLC kashif aasbda";
+  // title = "Rockwell ControlLogix 5570 PLC kashif aasbda";
   const shortTitle = title.substring(0, 30);
+  model = '1756-A7-1756-A7-1756-A7'
+  const shortModel = model.substring(0, 30);
 
   // const trimedPara = para.substring(0, 10);
   return (
@@ -134,7 +136,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
             </Link>
             <div className="detail-left">
               <Link href={`/product-details/${id}`}>
-                <h6 className="model-number">1756-A7</h6>
+                <h6 className="model-number">{shortModel}...</h6>
               </Link>
 
               {/* <p>

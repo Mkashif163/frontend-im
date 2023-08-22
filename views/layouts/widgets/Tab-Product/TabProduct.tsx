@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gql } from "@apollo/client";
 import { NextPage } from "next";
 import { useQuery } from "@apollo/client";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from "reactstrap";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Carousel, CarouselItem, CarouselControl } from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
 import { CartContext } from "../../../../helpers/cart/cart.context";
@@ -120,6 +120,26 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
       collection: activeTab,
     },
   });
+  console.log("Fetched Data:", dataR)
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const next = () => {
+    if (activeIndex === collection.length - 1) {
+      setActiveIndex(0);
+    } else {
+      setActiveIndex(activeIndex + 1);
+    }
+  };
+
+  const previous = () => {
+    if (activeIndex === 0) {
+      setActiveIndex(collection.length - 1);
+    } else {
+      setActiveIndex(activeIndex - 1);
+    }
+  };
+
   if (data) {
     data.products.items.forEach((item) => {
       item.collection.forEach((i) => {
@@ -139,6 +159,7 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
         collection.push("Category 6");
         collection.push("Category 7");
         collection.push("Category 8");
+        collection.push("Category 9");
       }
     });
   }
@@ -160,32 +181,40 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
               <h3>Top Products</h3>
             </div>
             <div className="top-bar-product-catogories">
-              <ul className="product-catogories">
-                {collection.slice(0, 8).map((c, i) => (
-                  <li className="top-catogories" key={i}>
-                    <a className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                      {c}
-                    </a>
-                  </li>
+              <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
+                {collection.map((c, i) => (
+                  <CarouselItem key={i}>
+                    <ul className="product-catogories">
+                      {collection.slice(i, i + 9).map((category, index) => (
+                        <li className="top-catogories" key={index}>
+                          <a className={activeTab === category ? "active" : ""} onClick={() => setActiveTab(category)}>
+                            {category}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </CarouselItem>
                 ))}
-              </ul>
+              </Carousel>
             </div>
             <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
-              <div className="px-2 ">
+
+              <div className="px-2 arrows">
                 <ul className="catogories-arrows">
                   <li>
-                    <a className="prev" onClick={() => setActiveTab("new products")}>
+                    <a className="prev" onClick={previous}>
                       <i className="fa fa-angle-left"></i>
                     </a>
                   </li>
                   <li>
-                    <a className="next" onClick={() => setActiveTab("new products")}>
+                    <a className="next" onClick={next}>
                       <i className="fa fa-angle-right"></i>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div>
+
+              <div className="view-akk">
                 <a href="#">View all</a>
               </div>
             </div>
