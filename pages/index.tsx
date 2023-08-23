@@ -14,7 +14,8 @@ import CollectionBannerThree from "../views/layouts/layout1/collection-banner-th
 // import SpecialProduct from "../views/layouts/widgets/title-section";
 // import InstagramSection from "../views/layouts/widgets/instagram/instagram1";
 import ContactBanner from "../views/layouts/widgets/contact-us";
-import Category from "../views/layouts/widgets/roundedCategory";
+import Brands  from "../views/layouts/widgets/roundedCategory";
+import Suplier from "views/layouts/layout2/suplierCategory";
 // import DiscountCoupon from "../views/layouts/widgets/discountCoupon";
 // import NewsLatter from "views/Containers/news-letter";
 // import Loader from "common/Loader";
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
           </section> */}
           <TabProduct effect="icon-inline" />
           <section className="rounded-category">
-            <Category />
+            <Brands />
           </section>
           <TabProduct effect="icon-inline" />
           {/* <section className="box-category section-py-space">
@@ -53,6 +54,10 @@ const Home: NextPage = () => {
           {/* <section className="instagram">
             <InstagramSection />
           </section> */}
+          {/* <Suplier /> */}
+          <section className="rounded-category">
+            <Suplier />
+          </section>
           <ContactBanner />
         </div>
       </Layouts>

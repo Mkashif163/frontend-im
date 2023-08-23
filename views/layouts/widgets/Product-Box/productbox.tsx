@@ -77,7 +77,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   // title = "Rockwell ControlLogix 5570 PLC kashif aasbda";
   const shortTitle = title.substring(0, 30);
   model = '1756-A7-1756-A7-1756-A7'
-  const shortModel = model.substring(0, 30);
+  const shortModel = model.substring(0,8);
 
   // const trimedPara = para.substring(0, 10);
   return (

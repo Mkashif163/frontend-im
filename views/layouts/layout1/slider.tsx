@@ -6,8 +6,8 @@ import { Row, Col, Media } from "reactstrap";
 import Link from "next/link";
 
 var settings = {
-  autoplay: false,
-  autoplaySpeed: 2500,
+  autoplay: true,
+  autoplaySpeed: 3500,
 };
 
 interface slider {

@@ -16,7 +16,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                 <Col lg="4" md="12">
                   <div className="footer-left">
                     <div className="footer-logo">
-                      <Media src={`/images/${layoutLogo}/logo/logo.png`} className="img-fluid  " alt="logo" />
+                      <Media src={`/images/layout-2/logo/im-logo.png`} width="250px" className="img-fluid  " alt="logo" />
                     </div>
                     <div className="footer-detail">
                       <p>
@@ -62,7 +62,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                             <div className="col-md-5 ">
                               <div className="subscribe-block">
                                 <div className="subscrib-contant ">
-                                  <h4>subscribe to newsletter</h4>
+                                  <h4>subscribe </h4>
                                 </div>
                               </div>
                             </div>

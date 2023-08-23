@@ -17,7 +17,7 @@ const ContactUS: NextPage = () => {
                   <h3>if you have any question please call us</h3>
                 </div>
                 <div>
-                  <h2>123-456-7890</h2>
+                  <h2>0(800)123-456</h2>
                 </div>
               </div>
             </Col>

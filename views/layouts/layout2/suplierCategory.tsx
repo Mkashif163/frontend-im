@@ -57,18 +57,7 @@ const BrandList = [
   { img: "/images/layout-2/rounded-cat/8.png", category: "cardigans" },
   { img: "/images/layout-2/rounded-cat/9.png", category: "cardigans" },
 ];
-const SupplierList = [
-  { img: "/images/layout-2/rounded-cat/1.png", category: "Flower" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "Furniture" },
-  { img: "/images/layout-2/rounded-cat/3.png", category: "Bag" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-  { img: "/images/layout-2/rounded-cat/5.png", category: "Grocery" },
-  { img: "/images/layout-2/rounded-cat/6.png", category: "Camera" },
-  { img: "/images/layout-2/rounded-cat/7.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/8.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "cardigans" },
-];
-const Brands: NextPage = () => {
+const Suplier: NextPage = () => {
   return (
     <>
       <div className="container-brands">
@@ -95,33 +84,6 @@ const Brands: NextPage = () => {
   );
 };
 
-// const Supplier: NextPage = () => {
-//   return (
-//     <>
-//       <Container>
-//         <Row>
-//           <Col>
-//             <div className="slide-6 no-arrow">
-//               <Slider {...settings}>
-//                 {SupplierList.map((data, i) => (
-//                   <div key={i}>
-//                     <div className="category-contain">
-//                       <a href="#">
-//                         <div className="img-wrapper">
-//                           <Media src={data.img} alt="category" className="img-fluid brands-img" />
-//                         </div>
-//                       </a>
-//                     </div>
-//                   </div>
-//                 ))}
-//               </Slider>
-//             </div>
-//           </Col>
-//         </Row>
-//       </Container>
-//     </>
-//   );
-// };
 
-export default Brands;
+export default Suplier;
 // export {Supplier};

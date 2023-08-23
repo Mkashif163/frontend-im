@@ -46,7 +46,7 @@ const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
         <div className="collection-img">
           <Media src={banner.img} className="img-fluid bg-img " alt="banner" />
         </div>
-        <div className="collection-banner-contain ">
+        {/* <div className="collection-banner-contain ">
           <div>
             <h3>{banner.title}</h3>
             <h4>{banner.subTitle}</h4>
@@ -62,7 +62,7 @@ const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Col>
   );
