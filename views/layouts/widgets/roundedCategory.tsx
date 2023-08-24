@@ -4,13 +4,13 @@ import { Row, Col, Container, Media } from "reactstrap";
 import Slider from "react-slick";
 
 var settings = {
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 3500,
   dots: false,
   infinite: true,
   speed: 300,
-  slidesToShow: 6,
-  slidesToScroll: 6,
+  slidesToShow: 9,
+  slidesToScroll: 9,
   responsive: [
     {
       breakpoint: 1367,
@@ -48,20 +48,23 @@ var settings = {
 
 const BrandList = [
   { img: "/images/layout-2/rounded-cat/1.png", category: "Flower" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "Furniture" },
+  { img: "/images/layout-2/rounded-cat/2.png", category: "Furniture" },
+  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
   { img: "/images/layout-2/rounded-cat/3.png", category: "Bag" },
   { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
   { img: "/images/layout-2/rounded-cat/5.png", category: "Grocery" },
   { img: "/images/layout-2/rounded-cat/6.png", category: "Camera" },
+  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
   { img: "/images/layout-2/rounded-cat/7.png", category: "cardigans" },
   { img: "/images/layout-2/rounded-cat/8.png", category: "cardigans" },
   { img: "/images/layout-2/rounded-cat/9.png", category: "cardigans" },
+  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
 ];
 
 const Brands: NextPage = () => {
   return (
     <>
-      <div className="container-brands">
+      <div className="container-brands slide-6 no-arrow">
               <Slider {...settings}>
                 {BrandList.map((data, i) => (
                     <div className="category-contain">

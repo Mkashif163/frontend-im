@@ -1154,22 +1154,23 @@ button {
 ==========================*/
 .rounded-category {
   // background-color: #e7d0d0;
-  background-color: #f9f4f4;
+  background-color: #eeeeee;
   margin: 25px 0;
   // padding: 14px 0 14px;
   .container-brands {
-    align-items: center;
     padding-left: 65px;
     .category-contain {
-      justify-content: center;
       .img-wrapper {
         filter: grayscale(100%);
         align-items: center;
         width: 110px;
-        // height: 80px;
+        margin: 10px 0 0;
         transition: 0.5s ease;
         .brands-img {
           width: 100%;
+          aspect-ratio: 3/2;
+          object-fit: contain;
+          mix-blend-mode: color-burn;
         }
       }
       &:hover {
@@ -1350,8 +1351,7 @@ button {
       transition: all 0.5s ease;
       img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     &.p-left {
@@ -8846,6 +8846,7 @@ button {
   }
 }
 .product-right {
+  cursor: context-menu;
   p {
     margin-bottom: 0;
     line-height: 1.5em;
@@ -8860,12 +8861,11 @@ button {
     font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
   }
   .border-product {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid $light-border;
   }
   h2 {
-    margin-bottom: 15px;
     font-size: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
     line-height: 1.2em;
     color: $font-color;
@@ -8873,22 +8873,64 @@ button {
     text-transform: capitalize;
     font-weight: 600;
   }
-  h3 {
-    font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1920 - 320)));
-    color: $font-color;
-    margin-bottom: 15px;
-    font-weight: 400;
-  }
-  h4 {
-    font-size: 16px;
-    margin-bottom: 7px;
-    del {
-      color: $gray-6;
-      font-weight: 400;
+  .price-box {
+    display: flex;
+    margin: 3px 0;
+    gap: 15px;
+    align-items: center;
+    h3 {
+      font-size: calc(20px + (26 - 18) * ((100vw - 320px) / (1920 - 320)));
+      color: $font-color;
+      font-weight: 300;
+      margin: 0 0 5px;
     }
-    span {
-      padding-left: 5px;
-      color: var(--theme-color1);
+    h4 {
+      font-size: 18px;
+      del {
+        color: $gray-6;
+        font-weight: 300;
+      }
+      span {
+        padding-left: 10px;
+        color: var(--theme-color1);
+      }
+    }
+  }
+  .reviews {
+    gap: 10px;
+    display: flex;
+    .review {
+      a {
+        color: var(--theme-color1);
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+          color: var(--theme-color2);
+        }
+      }
+    }
+  }
+  .best-seller {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+    .seller-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: rgba($light-border, 0.6);
+      padding: 4px 10px;
+      border: 1px solid rgba($light-border, 0.8);
+      border-radius: 8px;
+      .seller-icon {
+        color: var(--theme-color1);
+      }
+      p {
+        font-size: 14px;
+        color: $icon-color;
+      }
     }
   }
   .color-variant {
@@ -8961,14 +9003,15 @@ button {
       li {
         height: 35px;
         width: 35px;
-        border-radius: 50%;
+        border-radius: 10%;
         margin-right: 10px;
         cursor: pointer;
         border: 1px solid $light-border;
         text-align: center;
         a {
           color: $dark;
-          font-size: 15px;
+          font-size: 16px;
+          text-transform: capitalize;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -8980,6 +9023,56 @@ button {
       }
     }
   }
+  .coupens {
+    .coupens-title {
+      gap: 10px;
+      display: flex;
+      .tag {
+        color: #0072bb;
+      }
+    }
+    .offers {
+      margin-top: 5px;
+      max-height: 300px; /* Set the maximum height to show 5 offers without scrolling */
+      overflow-y: auto; /* Add vertical scrollbar when content overflows */
+      ul {
+        list-style: none;
+        li {
+          display: flex;
+          align-items: center;
+          span {
+            color: #00baf2;
+            background-color: rgba(0, 186, 242, 0.08);
+            border: 1px dashed #00baf2;
+            padding: 3px 10px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: calc(
+              12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+            );
+            animation: headShake 2s ease-in-out infinite;
+          }
+          .offer-details {
+            h5 {
+              font-weight: 600;
+              font-size: 14px;
+            }
+            p {
+              font-size: calc(
+                12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
+              );
+            }
+          }
+        }
+      }
+      .show-offer {
+        color: #00baf2;
+        cursor: pointer;
+      }
+    }
+  }
+
   .product-icon {
     display: flex;
     .product-social {
