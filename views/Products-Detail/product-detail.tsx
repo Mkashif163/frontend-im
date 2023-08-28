@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Modal, ModalHeader, ModalBody, Input } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Input, Form } from "reactstrap";
 import ImageGroup from "./common/ImageGroup";
 import CountDownComponent from "views/layouts/widgets/CountDownComponent";
 import { CartContext } from "helpers/cart/cart.context";
@@ -7,7 +7,7 @@ import { CurrencyContext } from "helpers/currency/CurrencyContext";
 import { WishlistContext } from "helpers/wishlist/wish.context";
 import ImageSwatch from "./common/ImageSwatch";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faMedal, faTags } from '@fortawesome/free-solid-svg-icons'
+import { faAward, faCircleCheck, faMedal, faTags, faTruckField } from '@fortawesome/free-solid-svg-icons'
 
 interface ProductRightProps {
   item: any;
@@ -87,10 +87,14 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const [stock, setStock] = useState("InStock");
   const [activesize, setSize] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const [condition, setCondition] = useState("");
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
+
+  console.log(item)
+  console.log(qty)
 
   const visibleOffers = showAll ? dummyOffers : dummyOffers.slice(0, 1);
   const { addToWish } = React.useContext(WishlistContext);
@@ -98,6 +102,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const { addToCart } = useContext(CartContext);
 
   totalReview = 28;
+  const model = '1756-A7-1756-A7';
 
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol, value } = selectedCurr;
@@ -127,12 +132,18 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const changeQty = (e: any) => {
     setQty(parseInt(e.target.value));
   };
+  const title = "Rockwell CompactLogix";
+
 
   const uniqueColor = [];
   const uniqueSize = [];
   return (
     <div className="product-right">
-      <h2>{item.title}</h2>
+      <div className="title">
+        <h2>{title}</h2>
+        <h5>Model: {model}</h5>
+      </div>
+
       <div className="price-box">
         <h3>
           {symbol}
@@ -154,6 +165,9 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
         <div className="review">
           <a href="#">({totalReview} Reviews)</a>
         </div>
+        <div className={item.stock > 0 ? "stock" : "out-stock"}>
+          <a href="#">{stock}</a>
+        </div>
       </div>
 
       <div className="best-seller">
@@ -162,11 +176,41 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
           <p className="seller">Best Seller</p>
         </div>
         <div className="seller-container">
-        <FontAwesomeIcon icon={faCircleCheck} size="lg" style={{color: "#20cb53",}} />
+          <FontAwesomeIcon icon={faCircleCheck} size="lg" style={{ color: "#20cb53", }} />
           <p className="seller">Verified Seller</p>
         </div>
       </div>
 
+      <div className="product-description border-product">
+        <div className="condition-box">
+          <div>
+            <input
+              type="checkbox"
+              checked={condition === 'New'}
+              onChange={() => setCondition('New')}
+            />
+            <span className="condition-text">New</span>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              checked={condition === 'Used'}
+              onChange={() => setCondition('Used')}
+            />
+            <span className="condition-text">Used</span>
+          </div>
+        </div>
+        <div className="supplier-brand">
+          <div className="brnd-div">
+            <p><span><FontAwesomeIcon icon={faAward}  size="lg" /></span> Brand:</p>
+            <img src="/images/layout-2/rounded-cat/7.png" className="img-fluid" alt="brand" />
+          </div>
+          <div className="suplier-div">
+            <p><span><FontAwesomeIcon icon={faTruckField}  size="lg" /></span> Suplier:</p>
+            <img src="/images/layout-2/rounded-cat/1.png" className="img-fluid" alt="brand" />
+          </div>
+        </div>
+      </div>
 
       {item.variants &&
         item.variants.map((vari) => {
@@ -281,7 +325,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
           </div>
 
           <div className="offers">
-            <ul>
+            <ul className="Offers-list">
               {visibleOffers.map((offer, index) => (
                 <li key={index}>
                   <span className="offer">{offer.offerCode}</span>

@@ -54,7 +54,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
         </Row>
       </Col>
       <Col lg="7" className="rtl-text">
-        <ProductDetail item={item} changeColorVar={changeColorVar} bundle={bundle} swatch={swatch} />
+        <ProductDetail item={item} changeColorVar={changeColorVar} bundle={bundle} swatch={swatch} totalReview={0} offers={0} />
       </Col>
     </>
   );

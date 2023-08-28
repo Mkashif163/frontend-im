@@ -16,12 +16,6 @@ const TabProduct: React.FC = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "2" ? "active" : ""} onClick={() => setActiveTab("2")}>
-                Video
-                <div className="material-border"></div>
-              </NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
                 Write Review
                 <div className="material-border"></div>
