@@ -3,7 +3,7 @@ import { Col, Row, Media } from "reactstrap";
 import Slider from "react-slick";
 import ProductDetail from "./product-detail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faFileArrowDown, faFilePdf, faHeadset } from "@fortawesome/free-solid-svg-icons";
 
 interface ProductSlickProps {
   item: any;
@@ -69,9 +69,15 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
             <div className="product-contact">
             <FontAwesomeIcon icon={faHeadset} size="2xl" />
             </div>
-            <div className="product-contact"></div>
-            <div className="product-contact"></div>
-            <div className="product-contact"></div>
+            <div className="product-contact">
+            <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
+            </div>
+            <div className="product-contact">
+            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+            </div>
+            <div className="product-contact">
+            <FontAwesomeIcon icon={faCartPlus} size="2xl" />
+            </div>
           </div>
           </Col>
         </Row>
