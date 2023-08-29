@@ -68,6 +68,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
           <div className="contanier">
             <div className="product-contact">
             <FontAwesomeIcon icon={faHeadset} size="2xl" />
+            
             </div>
             <div className="product-contact">
             <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
