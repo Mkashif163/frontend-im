@@ -2243,11 +2243,6 @@ button {
             text-align: end;
           }
         }
-        // @media (max-width: 768px) { // Hide on tablet and below
-        //   .brand-div, .condition-box, .suplier-div, .stock, .out-stock {
-        //     display: none;
-        //   }
-        // }
       }
       .icon-detail {
         position: absolute;
@@ -8910,20 +8905,7 @@ button {
         }
       }
     }
-    .stock {
-      a {
-        color: rgb(31, 139, 31);
-        font-size: 14px;
-        font-weight: 600;
-      }
-    }
-    .out-stock {
-      a {
-        color: rgb(191, 37, 37);
-        font-size: 14px;
-        font-weight: 600;
-      }
-    }
+    
   }
   .best-seller {
     display: flex;
@@ -9148,9 +9130,8 @@ button {
   .condition-box {
     display: flex;
     margin: 5px 0 10px;
-    gap:50px;
+    gap:10px;
     .condition-text {
-      margin-left: 10px;
       padding: 5px;
       background-color: var(--theme-color1);
       color: $white;
@@ -9159,14 +9140,27 @@ button {
         12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))
       );
       font-weight: 600;
-      margin-right: 5px;
+    }
+    .stock {
+      a {
+        color: rgb(31, 139, 31);
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    .out-stock {
+      a {
+        color: rgb(191, 37, 37);
+        font-size: 14px;
+        font-weight: 600;
+      }
     }
   }
   .supplier-brand {
     display: flex;
     margin-top: 10px;
     margin-bottom: 5px;
-    gap: 20px;
+    gap: 48px;
     .suplier-div {
       width: 100px;
       p {
@@ -9200,26 +9194,6 @@ button {
       }
     }
   }
-  // .timer {
-  //   p {
-  //     color: $dark;
-  //     span {
-  //       min-width: 70px;
-  //       padding-top: 15px;
-  //       padding-bottom: 15px;
-  //       span {
-  //         color: #999999;
-  //         padding-bottom: 0;
-  //         padding-top: 8px;
-  //       }
-  //       .timer-cal {
-  //         padding-top: 3px;
-  //         padding-bottom: 0;
-  //       }
-  //     }
-  //   }
-  //   margin-top: 10px;
-  // }
   &.product-form-box {
     text-align: center;
     padding: 20px;

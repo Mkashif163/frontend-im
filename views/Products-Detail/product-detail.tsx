@@ -102,7 +102,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const { addToCart } = useContext(CartContext);
 
   totalReview = 28;
-  const model = '1756-A7-1756-A7';
+  const model = '1756-A7X-Plus-Enhanced-2023-NextGen-XYZ';
 
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol, value } = selectedCurr;
@@ -132,7 +132,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const changeQty = (e: any) => {
     setQty(parseInt(e.target.value));
   };
-  const title = "Rockwell CompactLogix";
+  const title = "Rockwell CompactLogix Contrary to popular belief";
 
 
   const uniqueColor = [];
@@ -158,6 +158,19 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
         </h4>
 
       </div>
+
+      <div className="condition-box">
+        <div>
+          <span className="condition-text">New</span>
+        </div>
+        <div>
+          <span className="condition-text">Used</span>
+        </div>
+        <div className={item.stock > 0 ? "stock" : "out-stock"}>
+          <a href="#">{stock}</a>
+        </div>
+      </div>
+
       <div className="reviews">
         <div className="rating three-star mb-2">
           <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
@@ -165,90 +178,72 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
         <div className="review">
           <a href="#">({totalReview} Reviews)</a>
         </div>
-        <div className={item.stock > 0 ? "stock" : "out-stock"}>
-          <a href="#">{stock}</a>
-        </div>
-      </div>
 
-      <div className="best-seller">
-        <div className="seller-container">
-          <FontAwesomeIcon size="xl" className="seller-icon" icon={faMedal} />
-          <p className="seller">Best Seller</p>
-        </div>
-        <div className="seller-container">
-          <FontAwesomeIcon icon={faCircleCheck} size="lg" style={{ color: "#20cb53", }} />
-          <p className="seller">Verified Seller</p>
-        </div>
       </div>
 
       <div className="product-description border-product">
-        <div className="condition-box">
-          <div>
-            <input
-              type="checkbox"
-              checked={condition === 'New'}
-              onChange={() => setCondition('New')}
-            />
-            <span className="condition-text">New</span>
+
+
+        <div className="best-seller">
+          <div className="seller-container">
+            <FontAwesomeIcon size="xl" className="seller-icon" icon={faMedal} />
+            <p className="seller">Best Seller</p>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={condition === 'Used'}
-              onChange={() => setCondition('Used')}
-            />
-            <span className="condition-text">Used</span>
+          <div className="seller-container">
+            <FontAwesomeIcon icon={faCircleCheck} size="lg" style={{ color: "#20cb53", }} />
+            <p className="seller">Verified Seller</p>
           </div>
         </div>
         <div className="supplier-brand">
           <div className="brnd-div">
-            <p><span><FontAwesomeIcon icon={faAward}  size="lg" /></span> Brand:</p>
+            <p>Brand:</p>
             <img src="/images/layout-2/rounded-cat/7.png" className="img-fluid" alt="brand" />
           </div>
           <div className="suplier-div">
-            <p><span><FontAwesomeIcon icon={faTruckField}  size="lg" /></span> Suplier:</p>
+            <p>Suplier:</p>
             <img src="/images/layout-2/rounded-cat/1.png" className="img-fluid" alt="brand" />
           </div>
         </div>
-      </div>
+        {item.variants &&
+          item.variants.map((vari) => {
+            var findItem = uniqueColor.find((x) => x.color === vari.color);
+            if (!findItem && vari.color) uniqueColor.push(vari);
+            var findItemSize = uniqueSize.find((x) => x === vari.size);
+            if (!findItemSize && vari.size) uniqueSize.push(vari.size);
+          })}
+        {swatch ? <ImageSwatch item={item} changeColorVar={changeColorVar} /> : ""}
 
-      {item.variants &&
-        item.variants.map((vari) => {
-          var findItem = uniqueColor.find((x) => x.color === vari.color);
-          if (!findItem && vari.color) uniqueColor.push(vari);
-          var findItemSize = uniqueSize.find((x) => x === vari.size);
-          if (!findItemSize && vari.size) uniqueSize.push(vari.size);
-        })}
-      {swatch ? <ImageSwatch item={item} changeColorVar={changeColorVar} /> : ""}
-
-      <div className="product-description border-product">
-        <h6 className="product-title">select color</h6>
-        {changeColorVar === undefined
-          ? !!uniqueColor.length && (
-            <ul className="color-variant">
-              {uniqueColor.map((vari, i) => {
-                return <li className={vari.color} key={i} title={vari.color}></li>;
-              })}
-            </ul>
-          )
-          : !!uniqueColor.length && (
-            <ul className="color-variant">
-              {uniqueColor.map((vari, i) => {
-                return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
-              })}
-            </ul>
-          )}
-        {!!uniqueSize.length && (
-          <>
-            <h6 className="product-title size-text">
-              select size{" "}
-              <span>
+        <div className="product-description border-product row">
+          <div className="colors col-3">
+            <h6 className="product-title">select color</h6>
+            {changeColorVar === undefined
+              ? !!uniqueColor.length && (
+                <ul className="color-variant">
+                  {uniqueColor.map((vari, i) => {
+                    return <li className={vari.color} key={i} title={vari.color}></li>;
+                  })}
+                </ul>
+              )
+              : !!uniqueColor.length && (
+                <ul className="color-variant">
+                  {uniqueColor.map((vari, i) => {
+                    return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
+                  })}
+                </ul>
+              )}
+          </div>
+          <div className="product-size col-6">
+            {!!uniqueSize.length && (
+              <>
+                <h6 className="product-title size-text">
+                  select size{" "}
+                  {/* <span>
                 <a data-toggle="modal" data-target="#sizemodal" onClick={onOpenModal}>
                   size chart
                 </a>
-              </span>
-            </h6>
-            <Modal isOpen={modal} centered={true} toggle={onCloseModal}>
+              </span> */}
+                </h6>
+                {/* <Modal isOpen={modal} centered={true} toggle={onCloseModal}>
               <ModalHeader>
                 Sheer Straight Kurta <i className="fa fa-close modal-close" onClick={onCloseModal}></i>
               </ModalHeader>
@@ -257,64 +252,68 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
                   <img src="/images/size-chart.jpg" alt="" className="img-fluid " />
                 </div>
               </ModalBody>
-            </Modal>
+            </Modal> */}
 
-            <div className="size-box">
-              <ul>
-                {uniqueSize.map((size, i) => (
-                  <li className={`${size === activesize ? "active" : ""}`} key={i}>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSize(size);
-                      }}>
-                      {size}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="product-description border-product">
-        {stock !== "InStock" ? <span className="instock-cls">{stock}</span> : ""}
-        <h6 className="product-title">quantity</h6>
-        <div className="qty-box">
-          <div className="input-group">
-            <span className="input-group-prepend">
-              <button type="button" className="btn quantity-left-minus" data-type="minus" data-field="" onClick={minusQty}>
-                <i className="ti-angle-left"></i>
-              </button>
-            </span>
-            <Input type="text" name="quantity" className="form-control input-number" value={qty} onChange={changeQty} />
-            <span className="input-group-prepend">
-              <button type="button" className="btn quantity-right-plus" data-type="plus" data-field="" onClick={plusQty}>
-                <i className="ti-angle-right"></i>
-              </button>
-            </span>
+                <div className="size-box">
+                  <ul>
+                    {uniqueSize.map((size, i) => (
+                      <li className={`${size === activesize ? "active" : ""}`} key={i}>
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSize(size);
+                          }}>
+                          {size}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
+
+        </div>
+        <div className="product-description border-product">
+          {stock !== "InStock" ? <span className="instock-cls">{stock}</span> : ""}
+          <h6 className="product-title">quantity</h6>
+          <div className="qty-box">
+            <div className="input-group">
+              <span className="input-group-prepend">
+                <button type="button" className="btn quantity-left-minus" data-type="minus" data-field="" onClick={minusQty}>
+                  <i className="ti-angle-left"></i>
+                </button>
+              </span>
+              <Input type="text" name="quantity" className="form-control input-number" value={qty} onChange={changeQty} />
+              <span className="input-group-prepend">
+                <button type="button" className="btn quantity-right-plus" data-type="plus" data-field="" onClick={plusQty}>
+                  <i className="ti-angle-right"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="product-buttons">
+          <a
+            href="#"
+            data-toggle="modal"
+            data-target="#addtocart"
+            className="btn btn-normal"
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(item);
+            }}>
+            add to cart
+          </a>
+          <a href="/pages/account/checkout" className="btn btn-normal">
+            buy now
+          </a>
         </div>
       </div>
 
-      <div className="product-buttons">
-        <a
-          href="#"
-          data-toggle="modal"
-          data-target="#addtocart"
-          className="btn btn-normal"
-          onClick={(e) => {
-            e.preventDefault();
-            addToCart(item);
-          }}>
-          add to cart
-        </a>
-        <a href="/pages/account/checkout" className="btn btn-normal">
-          buy now
-        </a>
-      </div>
+
 
       <div className="product-description border-product">
         <div className="coupens">
