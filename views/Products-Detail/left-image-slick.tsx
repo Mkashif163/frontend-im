@@ -69,7 +69,7 @@ const LeftImageProductSlick: React.FC<LeftImageProductSlickProps> = ({ item }) =
         </Slider>
       </Col>
       <Col lg="7" className="rtl-text">
-        <ProductDetail item={item} bundle={false} swatch={false} changeColorVar={changeColorVar} />
+        <ProductDetail item={item} bundle={false} swatch={false} changeColorVar={changeColorVar} totalReview={0} offers={0} />
       </Col>
     </>
   );

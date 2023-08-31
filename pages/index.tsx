@@ -16,6 +16,7 @@ import CollectionBannerThree from "../views/layouts/layout1/collection-banner-th
 import ContactBanner from "../views/layouts/widgets/contact-us";
 import Brands  from "../views/layouts/widgets/roundedCategory";
 import Suplier from "views/layouts/layout2/suplierCategory";
+import ShortDisplay from "views/layouts/layout2/ShortDisplay";
 // import DiscountCoupon from "../views/layouts/widgets/discountCoupon";
 // import NewsLatter from "views/Containers/news-letter";
 // import Loader from "common/Loader";
@@ -37,10 +38,12 @@ const Home: NextPage = () => {
             <DealBanner />
           </section> */}
           <TabProduct effect="icon-inline" />
+          <ShortDisplay />
           <section className="rounded-category">
             <Brands />
           </section>
           <TabProduct effect="icon-inline" />
+          
           {/* <section className="box-category section-py-space">
             <DiscountCoupon />
           </section> */}

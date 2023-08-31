@@ -8840,6 +8840,25 @@ button {
     }
   }
 }
+.support-div{
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  .product-contact{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--theme-color1);
+    padding: 30px;
+    h6{
+      margin-top: 3px;
+    }
+  }
+}
 .product-right {
   cursor: context-menu;
   p {
@@ -9622,6 +9641,10 @@ button {
     }
   }
 }
+
+//short product 
+
+
 
 // Quick-view //
 .quick-view {

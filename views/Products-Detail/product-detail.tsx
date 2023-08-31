@@ -92,10 +92,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
-
-  console.log(item)
-  console.log(qty)
-
+  
   const visibleOffers = showAll ? dummyOffers : dummyOffers.slice(0, 1);
   const { addToWish } = React.useContext(WishlistContext);
 
@@ -389,6 +386,16 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
               <span className="title-font">Add To WishList</span>
             </button>
           </div>
+        </div>
+      </div>
+      <div className="product-description border-product">
+        <div className="payment-methods d-flex gap-5">
+          <div ><h6>Return</h6></div>
+          <div>Return or Exchange this product within 15-Days | See details</div>
+        </div>
+        <div className="payment-methods d-flex gap-4  ">
+          <div ><h6>Payment methods</h6></div>
+          <div><img src="/images/layout-2/7-07.png" alt="" className="w-50"/></div>
         </div>
       </div>
 

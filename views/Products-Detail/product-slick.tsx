@@ -55,7 +55,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
           <Col>
             <Slider className="slider-nav" asNavFor={nav1} ref={(slider) => (slider2.current = slider)} slidesToShow={3} swipeToSlide={true} focusOnSelect={true} arrows={false} adaptiveHeight={true}>
               {item &&
-                 productImages.map((img: any, i: any) => {
+                productImages.map((img: any, i: any) => {
                   return (
                     <div key={i}>
                       <Media src={img.img} alt="" className="img-fluid  image_zoom_cls-0" />
@@ -65,20 +65,24 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
             </Slider>
           </Col>
           <Col>
-          <div className="contanier">
-            <div className="product-contact">
-            <FontAwesomeIcon icon={faHeadset} size="2xl" />
+            <div className="support-div">
+              <div className="product-contact">
+                <FontAwesomeIcon icon={faHeadset} size="2xl" />
+                <h6>support</h6>
+              </div>
+              <div className="product-contact">
+                <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
+                <h6>Download pdf</h6>
+              </div>
+              <div className="product-contact">
+                <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                <h6>Detail Document</h6>
+              </div>
+              {/* <div className="product-contact">
+                <FontAwesomeIcon icon={faCartPlus} size="2xl" />
+                <h6>support</h6>
+              </div> */}
             </div>
-            <div className="product-contact">
-            <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
-            </div>
-            <div className="product-contact">
-            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
-            </div>
-            <div className="product-contact">
-            <FontAwesomeIcon icon={faCartPlus} size="2xl" />
-            </div>
-          </div>
           </Col>
         </Row>
       </Col>

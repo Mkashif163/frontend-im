@@ -141,6 +141,8 @@ const RatioSquare: NextPage = () => {
     },
   });
 
+
+  
   return (
     <section className="ratio_square">
       <div className="custom-container  section-pb-space">
@@ -153,6 +155,7 @@ const RatioSquare: NextPage = () => {
                 if (index === -1) collection.push(i.collectionName);
               });
             })}
+            
           <Row>
             <Col className="p-0">
               <div className="theme-tab product">

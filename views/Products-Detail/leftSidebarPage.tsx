@@ -9,6 +9,7 @@ import ProductSlick from "../../views/Products-Detail/product-slick";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { FilterContext } from "helpers/filter/filter.context";
+import CustomerMessageForm from "./CustomerMessageForm";
 
 interface LeftSidebar {
   pathId: any;
@@ -80,6 +81,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
                 <ProductSlick item={data.product} bundle={false} swatch={false} />
               </Row>
               <TabProduct />
+              <CustomerMessageForm/>
             </Col>
           </Row>
         </div>

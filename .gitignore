@@ -45,6 +45,8 @@ dist/
 
 # Compiled TypeScript Definitions
 *.d.ts
+.next/cache/webpack/client-development/*.pack
+node_modules/
 
 # Compiled JavaScript
 *.js.map
