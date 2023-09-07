@@ -1,16 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
 import { Media, Row, Col } from "reactstrap";
-import Breadcrumb from "../../views/Containers/Breadcrumb";
 
 const OrderHistoryPage: NextPage = () => {
   return (
     <div className="bg-light">
-      {/* <!-- breadcrumb start --> */}
-      <Breadcrumb title="order history" parent="home" />
-      {/* <!-- breadcrumb End --> */}
-
-      {/* <!--section start--> */}
+     
       <section className="cart-section order-history section-big-py-space">
         <div className="custom-container">
           <Row>

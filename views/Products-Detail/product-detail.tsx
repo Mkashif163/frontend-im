@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Modal, ModalHeader, ModalBody, Input, Form } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import ImageGroup from "./common/ImageGroup";
-import CountDownComponent from "views/layouts/widgets/CountDownComponent";
 import { CartContext } from "helpers/cart/cart.context";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 import { WishlistContext } from "helpers/wishlist/wish.context";
 import ImageSwatch from "./common/ImageSwatch";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAward, faCircleCheck, faMedal, faTags, faTruckField } from '@fortawesome/free-solid-svg-icons'
+import {  faCircleCheck, faMedal, faTags } from '@fortawesome/free-solid-svg-icons'
 
 interface ProductRightProps {
   item: any;
@@ -82,7 +81,7 @@ const dummyOffers = [
 ];
 
 const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bundle, swatch, totalReview, offers }) => {
-  const [modal, setModal] = useState(false);
+
   const [qty, setQty] = useState(1);
   const [stock, setStock] = useState("InStock");
   const [activesize, setSize] = useState("");
@@ -104,13 +103,6 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol, value } = selectedCurr;
 
-  const onOpenModal = () => {
-    setModal(true);
-  };
-
-  const onCloseModal = () => {
-    setModal(false);
-  };
 
   const minusQty = () => {
     if (qty > 1) {

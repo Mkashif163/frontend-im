@@ -54,7 +54,7 @@ const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
 const CollectionBannerThree: NextPage = () => {
   return (
     <section className="collection-banner section-py-space">
-      <div className="container-fluid">
+      <div className="custom-container">
         <Row className="collection2">
           {banners.map((banner, i) => (
             <CollectionBannerList banner={banner} key={i} />

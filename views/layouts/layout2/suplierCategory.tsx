@@ -60,6 +60,7 @@ const BrandList = [
 const Suplier: NextPage = () => {
   return (
     <>
+    <div className="custom-container">
       <div className="container-brands">
         
             <div className="slide-6 no-arrow">
@@ -80,6 +81,7 @@ const Suplier: NextPage = () => {
               </Slider>
             </div>
       </div>
+    </div>
     </>
   );
 };

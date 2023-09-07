@@ -18,6 +18,15 @@ const GET_BRANDS = gql`
   }
 `;
 
+const categories = [
+  "Programmable Controlers",
+  "Drives",
+  "Industrial Solutions",
+  "Electric & Mechanical",
+  "Industrial Lights & Valves",
+  "Refurbished"
+]
+
 const Sidebar: NextPage = () => {
   const {
     handleBrands,
@@ -88,194 +97,26 @@ const Sidebar: NextPage = () => {
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
               <ul className="category-list">
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("ALL");
-                        resetFilter();
-                      }}>
-                      ALL PRODUCTS
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("FASHION");
-                        resetFilter();
-                      }}>
-                      FASHION
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("ELECTRONICS");
-                        resetFilter();
-                      }}>
-                      ELECTRONIC
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("VEGETABLES");
-                        resetFilter();
-                      }}>
-                      VEGETABLES
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("FURNITURE");
-                        resetFilter();
-                      }}>
-                      FURNITURE
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("JEWELLWEY");
-                        resetFilter();
-                      }}>
-                      JEWELLWEY
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("BEAUTY");
-                        resetFilter();
-                      }}>
-                      BEAUTY
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("FLOWER");
-                        resetFilter();
-                      }}>
-                      FLOWER
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("TOOLS");
-                        resetFilter();
-                      }}>
-                      TOOLS
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("WATCH");
-                        resetFilter();
-                      }}>
-                      WATCH
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("METRO");
-                        resetFilter();
-                      }}>
-                      METRO
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("SHOES");
-                        resetFilter();
-                      }}>
-                      SHOES
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("BAGS");
-                        resetFilter();
-                      }}>
-                      BAGS
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("KIDS");
-                        resetFilter();
-                      }}>
-                      KIDS
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("PETS");
-                        resetFilter();
-                      }}>
-                      PETS
-                    </a>
-                  </Link>
-                </li>
+                {categories.map(category => (
+                  <li key={category}>
+                    <Link href="#!">
+                      <a
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedCategory(category);
+                          resetFilter();
+                        }}>
+                        {category}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </Collapse>
       </div>
-      {!data || !data.getBrands || data.getBrands.brand.length === 0 || loading ? (
-        loading && <h4>Loading</h4>
-      ) : (
+    
         <div className="collection-collapse-block open">
           <h3 className="collapse-block-title mt-0" onClick={toggleBrand}>
             brand
@@ -283,8 +124,19 @@ const Sidebar: NextPage = () => {
           <Collapse isOpen={isBrandOpen}>
             <div className="collection-collapse-block-content">
               <div className="collection-brand-filter">
-                {data.getBrands.brand.map((brand: string, i: number) => (
-                  <div className="custom-control custom-checkbox collection-filter-checkbox" key={`brand-${i}`}>
+                {[
+                  "BCST",
+                  "ROCKWELL",
+                  "SUPCON",
+                  "TRITECH",
+                  "VENAS",
+                  "WEG",
+                  "WESDOM"
+                ].map((brand, i) => (
+                  <div
+                    className="custom-control custom-checkbox collection-filter-checkbox"
+                    key={`brand-${i}`}
+                  >
                     <Input
                       checked={selectedBrands.includes(brand)}
                       onChange={() => {
@@ -292,7 +144,7 @@ const Sidebar: NextPage = () => {
                       }}
                       type="checkbox"
                       className="custom-control-input"
-                      id="zara"
+                      id={brand}
                     />
                     <label className="custom-control-label">{brand}</label>
                   </div>
@@ -301,7 +153,6 @@ const Sidebar: NextPage = () => {
             </div>
           </Collapse>
         </div>
-      )}
       {/* <!-- color filter start here --> */}
       {!data || !data.getColors || data.getColors.colors.length === 0 || loading ? (
         loading && <h4>Loading</h4>

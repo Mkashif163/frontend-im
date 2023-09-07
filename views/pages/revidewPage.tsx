@@ -1,7 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
 import { Container, Row, Col, Media } from "reactstrap";
-import Breadcrumb from "../../views/Containers/Breadcrumb";
 
 interface reviews {
   img: string;
@@ -88,9 +87,6 @@ const ReviewList: React.FC<reviewProps> = ({ review }) => {
 const ReviewPage: NextPage = () => {
   return (
     <div className="bg-light">
-      {/* <!-- breadcrumb start --> */}
-      <Breadcrumb title="Review" parent="home" />
-      {/* <!-- breadcrumb End --> */}
 
       {/* <!--review start--> */}
       <section className="review section-big-py-space">

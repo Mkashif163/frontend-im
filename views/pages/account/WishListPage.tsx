@@ -19,7 +19,6 @@ const WishListPage: NextPage = () => {
   };
   return (
     <>
-      <Breadcrumb parent="home" title="wishlist" />
       <section className="wishlist-section section-big-py-space bg-light">
         <div className="custom-container">
           {wishlistItems && wishlistItems.length > 0 ? (

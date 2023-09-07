@@ -6,7 +6,6 @@ import Breadcrumb from "../../Containers/Breadcrumb";
 const ForgetPassword: NextPage = () => {
   return (
     <>
-      <Breadcrumb title="Forget Password" parent="home" />
       <section className="login-page pwd-page section-big-py-space bg-light">
         <Container>
           <Row>

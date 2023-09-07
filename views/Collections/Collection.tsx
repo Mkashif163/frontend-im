@@ -50,6 +50,7 @@ type CollectionProps = {
   layoutList: string;
 };
 
+
 const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
@@ -107,6 +108,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const removeColor = () => {
     setSelectedColor("");
   };
+  
 
   return (
     <Col className="collection-content">

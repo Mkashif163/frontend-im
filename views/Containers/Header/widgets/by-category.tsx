@@ -1,20 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
-// import { Media } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { MenuContext } from "helpers/menu/MenuContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuilding , faShip, faGear ,faScrewdriverWrench ,} from '@fortawesome/free-solid-svg-icons'
-
 
 interface byCategory {
-  category: boolean;
+  category: [];
 }
 const ByCategory: NextPage<byCategory> = ({ category }) => {
   const [showState, setShowState] = useState(category || false);
+  const [categoryData, setCategoryData] = useState([]);
   const { t } = useTranslation();
   const menuContext = useContext(MenuContext);
   const { leftMenu, setLeftMenu } = menuContext;
+
+  useEffect(() => {
+    fetch("http://18.234.66.77/api/menus")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategoryData(data);
+      });
+  }, []);
+
+  const [subCategories, setSubCategories] = useState({});
+
+  // Function to fetch subcategories for a category
+  const fetchSubCategories = async (menuId) => {
+    const response = await fetch(`http://18.234.66.77/api/categories/${menuId}`);
+    const data = await response.json();
+    setSubCategories(prev => ({ ...prev, [menuId]: data.data }));
+  }
+
   return (
     <>
       <div className="nav-block" onClick={() => setShowState(!showState)}>
@@ -36,59 +51,37 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
               }}
               className={`overlay-cat ${leftMenu ? "showoverlay" : ""}`}></a>
             <ul className={`nav-cat title-font ${leftMenu ? "openmenu" : ""}`}>
-              <li
-                className="back-btn"
-                onClick={() => {
-                  setLeftMenu(!leftMenu);
-                  document.body.style.overflow = "visible";
-                }}>
+              <li className="back-btn" onClick={() => {
+                setLeftMenu(!leftMenu);
+                document.body.style.overflow = "visible";
+              }}>
                 <a>
                   <i className="fa fa-angle-left"></i>Back
                 </a>
               </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="https://static.thenounproject.com/png/2327734-200.png" alt="category-product" className="img-fluid w-10" /> */}
-                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
-                  Programmable Controlers
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
-                  <FontAwesomeIcon icon={faShip} size="lg"/>
-                  Drives
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
-                  <FontAwesomeIcon icon={faGear} size="lg"/>
-                  Industrial Solutions
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
-                  <FontAwesomeIcon icon={faScrewdriverWrench} size="lg"/>
-                  Electric & Mechanical
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
-                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
-                  Industrial Lights & Valves
-                </a>
-              </li>
-              <li>
-                <a href="/collections/leftsidebar?category=FASHION">
-                  {/* <Media src="/images/layout-1/nav-img/01.png" alt="category-product" className="img-fluid" /> */}
-                  <FontAwesomeIcon icon={faBuilding} size="lg"/>
-                  Refurbished
-                </a>
-              </li>
-              
+              {categoryData.map((category) => (
+                <li
+                  key={category.id}
+                  onMouseEnter={() => fetchSubCategories(category.id)}
+                  onMouseLeave={() => setSubCategories({ ...subCategories, [category.id]: [] })} // Hide subcategories on mouse leave
+                >
+                  <a href={`/collections/leftsidebar?category=${category.name}`}>
+                    <span>{category.name}</span>
+                  </a>
+                  {/* Subcategories show karega agar woh fetch hui hain */}
+                  {subCategories[category.id] &&
+                    <ul>
+                      {subCategories[category.id].map(sub => (
+                        <li key={sub.id}>
+                          <a href={`/collections/leftsidebar?subCategory=${sub.name}`}>
+                            {sub.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  }
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { Container, Row, Col } from "reactstrap";
-import Breadcrumb from "../../Containers/Breadcrumb";
+import { Row, Col } from "reactstrap";
+import DashboardComponent from 'views/pages/account/acccountComponent/dashboardComponent';
+import OrderComponent from 'views/pages/account/acccountComponent/orderComponent';
+import CartPage from "./cartPage";
+import WishListPage from "views/pages/account/WishListPage";
+import ReviewPage from "../revidewPage";
+import ForgetPassword from "./forgetPasswordPage";
+import Profile from "./profilePage";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Dashboard: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentComponent, setCurrentComponent] = useState("dashboard"); // ["dashboard", "order", "address", "wishlist", "cart", "newsletter", "account", "changePassword"]
+  const router = useRouter();
+
+  // Access the current route pathname
+  const currentRoute = router.pathname;
+
+  console.log(currentRoute);
   return (
     <>
-      {/* <!-- breadcrumb start --> */}
-      <Breadcrumb title="Dashboard" parent="home" />
-      {/* <!-- breadcrumb End --> */}
-
-      {/* <!-- section start --> */}
       <section className="section-big-py-space bg-light">
-        <Container>
+        <div className="custom-container">
           <Row>
-            <Col lg="3">
+            <Col lg="2">
               <div
                 className="account-sidebar"
                 onClick={() => {
@@ -39,108 +49,83 @@ const Dashboard: NextPage = () => {
                 </div>
                 <div className="block-content ">
                   <ul>
-                    <li className="active">
-                      <a href="#">Account Info</a>
+                    <li
+                      className={currentComponent === "dashboard" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("dashboard");
+                      }}>
+                      <Link href={""}>Dashboard</Link>
                     </li>
-                    <li>
-                      <a href="#">Address Book</a>
+                    <li
+                      className={currentComponent === "order" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("order");
+                      }}>
+                      <Link href={""}>My Orders</Link>
+                     
                     </li>
-                    <li>
-                      <a href="#">My Orders</a>
+                    <li
+                      className={currentComponent === "address" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("reviews");
+                      }}>
+                      <Link href={""}>Reviews</Link>
                     </li>
-                    <li>
-                      <a href="#">My Wishlist</a>
+                    <li
+                      className={currentComponent === "wishlist" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("wishlist");
+                      }}>
+                      <Link href={""}>Wishlist</Link>
                     </li>
-                    <li>
-                      <a href="#">Newsletter</a>
+                    <li
+                      className={currentComponent === "cart" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("cart");
+                      }}>
+                      <Link href={""}>Cart</Link>
                     </li>
-                    <li>
-                      <a href="#">My Account</a>
+                    <li
+                      className={currentComponent === "newsletter" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("newsletter");
+                      }}>
+                      <Link href={""}>Newsletter</Link>
                     </li>
-                    <li>
-                      <a href="#">Change Password</a>
+                    <li
+                      className={currentComponent === "account" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("profile");
+                      }}>
+                      <Link href={""}>Profile</Link>
                     </li>
+                    <li
+                      className={currentComponent === "changePassword" ? "active" : ""}
+                      onClick={() => {
+                        setCurrentComponent("changePassword");
+                      }}>
+                      <Link href={""}>Change Password</Link>
+                    </li>
+
                   </ul>
                 </div>
               </div>
             </Col>
-            <Col lg="9">
+            <Col lg="10">
               <div className="dashboard-right">
                 <div className="dashboard">
-                  <div className="page-title">
-                    <h2>My Dashboard</h2>
-                  </div>
-                  <div className="welcome-msg">
-                    <p>Hello, MARK JECNO !</p>
-                    <p>
-                      From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit
-                      information.
-                    </p>
-                  </div>
-                  <div className="box-account box-info">
-                    <div className="box-head">
-                      <h2>Account Information</h2>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-6">
-                        <div className="box">
-                          <div className="box-title">
-                            <h3>Contact Information</h3>
-                            <a href="#">Edit</a>
-                          </div>
-                          <div className="box-content">
-                            <h6>MARK JECNO</h6>
-                            <h6>MARk-JECNO@gmail.com</h6>
-                            <h6>
-                              <a href="#">Change Password</a>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="box">
-                          <div className="box-title">
-                            <h3>Newsletters</h3>
-                            <a href="#">Edit</a>
-                          </div>
-                          <div className="box-content">
-                            <p>You are currently not subscribed to any newsletter.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="box">
-                        <div className="box-title">
-                          <h3>Address Book</h3>
-                          <a href="#">Manage Addresses</a>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-6">
-                            <h6>Default Billing Address</h6>
-                            <address>
-                              You have not set a default billing address.
-                              <br />
-                              <a href="#">Edit Address</a>
-                            </address>
-                          </div>
-                          <div className="col-sm-6">
-                            <h6>Default Shipping Address</h6>
-                            <address>
-                              You have not set a default shipping address.
-                              <br />
-                              <a href="#">Edit Address</a>
-                            </address>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {currentComponent === "dashboard" && <DashboardComponent />}
+                  {currentComponent === "order" && <OrderComponent />}
+                  {currentComponent==="cart" && <CartPage/>}
+                  {currentComponent ==="wishlist" && <WishListPage/>}
+                  {currentComponent ==="reviews" && <ReviewPage/>}
+                  {currentComponent === "changePassword" && <ForgetPassword/>}
+                  {currentComponent === "profile" && <Profile/>}
                 </div>
               </div>
             </Col>
           </Row>
-        </Container>
+        </div>
       </section>
       {/* <!-- section end --> */}
     </>

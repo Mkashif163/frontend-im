@@ -64,6 +64,7 @@ const BrandList = [
 const Brands: NextPage = () => {
   return (
     <>
+    <div className="custom-container">
       <div className="container-brands slide-6 no-arrow">
               <Slider {...settings}>
                 {BrandList.map((data, i) => (
@@ -79,6 +80,7 @@ const Brands: NextPage = () => {
                 ))}
               </Slider>
       </div>
+    </div>
     </>
   );
 };

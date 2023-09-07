@@ -6,7 +6,6 @@ import Breadcrumb from "../../Containers/Breadcrumb";
 const Profile: NextPage = () => {
   return (
     <>
-      <Breadcrumb title="Profile" parent="home" />
       {/* <!-- personal deatail section start --> */}
       <section className="contact-page register-page section-big-py-space bg-light">
         <div className="custom-container">

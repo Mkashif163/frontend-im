@@ -43,7 +43,6 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [stockState, setStockState] = useState("InStock");
-  condition = "New";
   const uniqueSize = [];
   const uniqueColor = [];
   const titleProps = title.split(" ").join("");
@@ -74,12 +73,9 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const clickProductDetail = () => {
     router.push(`/product-details/${id}` + "-" + `${titleProps}`);
   };
-  // title = "Rockwell ControlLogix 5570 PLC kashif aasbda";
-  const shortTitle = title.substring(0, 30);
   model = '1756-A7-1756-A7-1756-A7'
   const shortModel = model.substring(0,8);
-
-  // const trimedPara = para.substring(0, 10);
+  
   return (
     <Fragment>
       <div className="product-box">
@@ -132,7 +128,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
         <div className="product-detail detail-inline ">
           <div className="detail-title">
             <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
-              <h6 className="price-title">{shortTitle}...</h6>
+              <h6 className="price-title">{title}</h6>
             </Link>
             <div className="detail-left">
               <Link href={`/product-details/${id}`}>

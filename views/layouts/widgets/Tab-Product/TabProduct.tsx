@@ -175,51 +175,54 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
         })}
 
       <section className="section-pt-space">
-        <div className="tab-product-main">
-          <div className="tab-prodcut-contain">
-            <div className="category-title">
-              <h3>Top Products</h3>
-            </div>
-            <div className="top-bar-product-catogories">
-              <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
-                {collection.map((c, i) => (
-                  <CarouselItem key={i}>
-                    <ul className="product-catogories">
-                      {collection.slice(i, i + 9).map((category, index) => (
-                        <li className="top-catogories" key={index}>
-                          <a className={activeTab === category ? "active" : ""} onClick={() => setActiveTab(category)}>
-                            {category}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </CarouselItem>
-                ))}
-              </Carousel>
-            </div>
-            <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
-
-              <div className="px-2 arrows">
-                <ul className="catogories-arrows">
-                  <li>
-                    <a className="prev" onClick={previous}>
-                      <i className="fa fa-angle-left"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="next" onClick={next}>
-                      <i className="fa fa-angle-right"></i>
-                    </a>
-                  </li>
-                </ul>
+        <div className="custom-container">
+          <div className="tab-product-main">
+            <div className="tab-prodcut-contain">
+              <div className="category-title">
+                <h3>Top Products</h3>
               </div>
+              <div className="top-bar-product-catogories">
+                <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
+                  {collection.map((c, i) => (
+                    <CarouselItem key={i}>
+                      <ul className="product-catogories">
+                        {collection.slice(i, i + 9).map((category, index) => (
+                          <li className="top-catogories" key={index}>
+                            <a className={activeTab === category ? "active" : ""} onClick={() => setActiveTab(category)}>
+                              {category}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </CarouselItem>
+                  ))}
+                </Carousel>
+              </div>
+              <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
 
-              <div className="view-akk">
-                <a href="#">View all</a>
+                <div className="px-2 arrows">
+                  <ul className="catogories-arrows">
+                    <li>
+                      <a className="prev" onClick={previous}>
+                        <i className="fa fa-angle-left"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a className="next" onClick={next}>
+                        <i className="fa fa-angle-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="view-akk">
+                  <a href="#">View all</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </section>
 
 

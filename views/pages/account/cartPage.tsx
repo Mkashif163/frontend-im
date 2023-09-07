@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { CartContext } from "../../../helpers/cart/cart.context";
-import Breadcrumb from "../../../views/Containers/Breadcrumb";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 
 const CartPage: NextPage = () => {
@@ -19,7 +18,6 @@ const CartPage: NextPage = () => {
   };
   return (
     <>
-      <Breadcrumb parent="home" title="cart" />
       <section className="cart-section section-big-py-space bg-light">
         <div className="custom-container">
           {cartItems && cartItems.length > 0 ? (
