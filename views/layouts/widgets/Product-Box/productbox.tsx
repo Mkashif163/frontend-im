@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { Media, Modal, ModalBody } from "reactstrap";
+import { Media, Modal, ModalBody, Badge } from "reactstrap";
 import { CurrencyContext } from "../../../../helpers/currency/CurrencyContext";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
@@ -8,36 +8,23 @@ import Link from "next/link";
 import Img from "utils/BgImgRatio";
 
 interface productType {
-  id: Number;
-  title: string;
-  model: string;
-  newLabel: boolean;
-  sale: Boolean;
-  price: number;
-  discount: number;
-  stock: number;
-  images: any;
-  layout: string;
-  suplier: any;
-  brand: string;
-  condition: string;
+  product: any;
   addCart: Function;
   addWish: Function;
   addCompare: Function;
   hoverEffect: any;
-  item: any;
-  type: Array<string>;
 }
 
-const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, newLabel, sale, suplier, condition, model, price, discount, stock, images, addCart, addCompare, addWish, hoverEffect }) => {
+const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWish, hoverEffect }) => {
   const currencyContext = useContext(CurrencyContext);
-  const para = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took galley of type and scrambled it to make a type specimen book"
+  const para = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took galley of type and scrambled it to make a type specimen book";
   const { selectedCurr } = currencyContext;
   const [imgsrc, setImgsrc] = useState("");
   const imgChange = (src) => {
     setImgsrc(src);
   };
   const slider2 = React.useRef<Slider>();
+  const stock = 29;
 
   const router = useRouter();
   const [modal, setModal] = useState(false);
@@ -45,7 +32,6 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   const [stockState, setStockState] = useState("InStock");
   const uniqueSize = [];
   const uniqueColor = [];
-  const titleProps = title.split(" ").join("");
   const changeColorVar = (img_id) => {
     slider2.current.slickGoTo(img_id);
   };
@@ -71,73 +57,43 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
   };
 
   const clickProductDetail = () => {
-    router.push(`/product-details/${id}` + "-" + `${titleProps}`);
+    router.push(`/product-details/${product.id}`);
   };
-  model = '1756-A7-1756-A7-1756-A7'
-  const shortModel = model.substring(0,8);
-  
+
+
   return (
     <Fragment>
       <div className="product-box">
-
         <div className="product-imgbox">
           <div className="product-front" onClick={clickProductDetail}>
-            <Img src={`/images/${imgsrc || images[0].src}`} className="img-fluid" alt="product" />
+            <img src={product.url} className="img-fluid" alt="product" />
           </div>
-          <ul className="product-thumb-list">
-            {images.map((pic, i) => (
-              <li className={`grid_thumb_img ${pic.src === imgsrc ? "active" : ""}`} key={i}>
-                <a>
-                  <Img
-                    src={`/images/${pic.src}`}
-                    className="img-fluid"
-                    onMouseEnter={() => imgChange(pic.src)}
-                    alt={pic.src}
-                    onClick={() => {
-                      imgChange(pic.src);
-                    }}
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
+
           <div className={`product-icon ${hoverEffect}`}>
-            <button onClick={() => addCart()}>
+            <button onClick={() => addCart(product, quantity)}>
               <i className="ti-bag"></i>
             </button>
-            <a onClick={() => addWish()}>
+            <a onClick={() => addWish(product)}>
               <i className="ti-heart" aria-hidden="true"></i>
             </a>
             <a href="#" title="Quick View" onClick={() => QuickView()}>
               <i className="ti-search" aria-hidden="true"></i>
             </a>
-            <a href="#" title="Compare" onClick={() => addCompare()}>
+            <a href="#" title="Compare" onClick={() => addCompare(product)}>
               <i className="ti-reload" aria-hidden="true"></i>
             </a>
           </div>
-          {newLabel && (
-            <div className="new-label1">
-              <div>new</div>
-            </div>
-          )}
-          {sale && <div className="on-sale1">on sale</div>}
         </div>
 
-        {/* prouct box footer */}
-
-        <div className="product-detail detail-inline ">
+        <div className="product-detail detail-inline">
           <div className="detail-title">
-            <Link href={`/product-details/${id}` + "-" + `${titleProps}`}>
-              <h6 className="price-title">{title}</h6>
+            <Link href={`/product-details/${product.id}`}>
+              <h6 className="price-title">{product.name.substring(0, 30)}{product.name.length>30 ? "..." : ""}</h6>
             </Link>
             <div className="detail-left">
-              <Link href={`/product-details/${id}`}>
-                <h6 className="model-number">{shortModel}...</h6>
+              <Link href={`/product-details/${product.id}`}>
+                <h6 className="model-number">{product.model_no.substring(0, 12)}{product.model_no.length>8 ? "..." : ""}</h6>
               </Link>
-
-              {/* <p>
-                {trimedPara}<Link href={`/product-details/${id}` + "-" + `${titleProps}`}>...read more</Link>
-              </p> */}
               <ul className="rating-star">
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
@@ -146,39 +102,24 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                 <i className="fa fa-star"></i>
               </ul>
               <div className="condition-box">
-                <span className="condition-text">New</span>
-                <span className="condition-text">Used</span>
+                <Badge color="success" className="condition-text">New</Badge>
+                <Badge color="info" className="condition-text">Used</Badge>
               </div>
-              {/* <div className="brand-div">
-                  <img src="https://industrymall.net/root/upload/brands/small/631994900cb6crockwell-logo.png" className="img-fluid" alt="brand" width="80px"/>
-              </div> */}
             </div>
             <div className="detail-right">
-
               <div className="check-price">
                 {selectedCurr.symbol}
-                {(price * selectedCurr.value).toFixed(2)}{" "}
+                {product.new_price}{" "}
               </div>
-
               <div className="price">
                 <div className="price">
                   {selectedCurr.symbol}
-                  {((price - price * (discount / 100)) * selectedCurr.value).toFixed(2)}
+                  {product.new_sale_price}
                 </div>
               </div>
               <div className={stock > 0 ? "stock" : "out-stock"}>
                 {stock > 0 ? "In Stock" : "Out of Stock"}
               </div>
-              {/* <div>
-                  <select name="location" id="location">
-                    <option value="paksitan">Paksitan</option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                  </select>
-                </div>
-                <div className="suplier-div">
-                  <img src="https://industrymall.net/root/upload/users/im.png" className="img-fluid" alt="suplier" width="70px"/>
-                </div> */}
             </div>
           </div>
         </div>
@@ -191,28 +132,31 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
           <div className="row">
             <div className="col-lg-6 col-xs-12">
               <Slider ref={(slider) => (slider2.current = slider)}>
-                {item &&
-                  item.images.map((img: any, i: any) => {
-                    return (
-                      <div key={i}>
-                        <Media src={`/images/${img.src}`} alt="" className="img-fluid  image_zoom_cls-0" />
-                      </div>
-                    );
-                  })}
+           
+                  <div key={product.id}>
+                    <Media src={product.url} alt="" className="img-fluid image_zoom_cls-0" />
+                  </div>
               </Slider>
             </div>
             <div className="col-lg-6 rtl-text">
               <div className="product-right">
-                <h2>{item?.title}</h2>
-                <h3>${item?.price}</h3>
+                <h2>{product.name}</h2>
+                <h3>${product.new_price}</h3>
                 <ul className="color-variant">
-                  {uniqueColor.map((vari, i) => {
-                    return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
+                  {product.colors.map((vari, i) => {
+                    return (
+                      <li
+                        key={i}
+                        className={vari.color.name}
+                        title={vari.color.name}
+                        onClick={() => changeColorVar(i)}
+                      ></li>
+                    );
                   })}
                 </ul>
                 <div className="border-product">
                   <h6 className="product-title">product details</h6>
-                  <p>{item?.description}</p>
+                  <p>{product.description}</p>
                 </div>
                 <div className="product-description border-product">
                   <div className="size-box">
@@ -235,7 +179,13 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                           <i className="ti-angle-left"></i>
                         </button>
                       </span>
-                      <input type="text" name="quantity" className="form-control input-number" value={quantity} onChange={changeQty} />
+                      <input
+                        type="text"
+                        name="quantity"
+                        className="form-control input-number"
+                        value={quantity}
+                        onChange={changeQty}
+                      />
                       <span className="input-group-prepend">
                         <button type="button" className="btn quantity-right-plus" onClick={plusQty}>
                           <i className="ti-angle-right"></i>
@@ -245,7 +195,7 @@ const ProductBox: NextPage<productType> = ({ layout, id, item, title, brand, new
                   </div>
                 </div>
                 <div className="product-buttons">
-                  <a href="#" className="btn btn-normal" onClick={() => addCart(item, quantity)}>
+                  <a href="#" className="btn btn-normal" onClick={() => addCart(product, quantity)}>
                     add to cart
                   </a>
                   <a href="#" className="btn btn-normal" onClick={() => clickProductDetail()}>

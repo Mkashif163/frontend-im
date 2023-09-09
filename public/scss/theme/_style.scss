@@ -1798,7 +1798,12 @@ button {
       .product-front {
         left: 0;
         top: 0;
+        width: 250px;
+        height: 250px;
+        justify-content: center;
+        align-items: center;
         transition: all 0.5s ease;
+        background-color: #fff;
       }
       .product-back {
         position: absolute;
@@ -5579,477 +5584,92 @@ button {
 /*============================
    19.  Slider start
 ==============================*/
-.theme-slider {
-  line-height: 0;
-  .slider-banner {
-    position: relative;
-    overflow: hidden;
-    &.p-left {
-      .slider-banner-contain {
-        justify-content: flex-end;
-      }
-    }
-    &.p-right {
-      .slider-banner-contain {
-        justify-content: flex-end;
-      }
-    }
-    &.p-center {
-      .slider-banner-contain {
-        justify-content: end;
-      }
-    }
-    &.p-top {
-      .slider-banner-contain {
-        align-items: flex-start;
-      }
-    }
-    .slider-img {
-      width: fit-content;
-      height: fit-content;
-      background-color: $rich-gold;
-    }
+.slider-banner {
+  position: relative;
+  overflow: hidden;
+
+  &.p-left {
     .slider-banner-contain {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      text-align: end;
-      padding: 0 100px;
-      .transparent-bg {
-        background-color: rgba(213, 221, 223, 0.5);
-        padding: 20px;
-        border-radius: 10px;
+      justify-content: flex-end;
+    }
+  }
 
-        h4 {
-          font-size: 24px;
-          color: $black;
-          text-transform: capitalize;
-          line-height: 1;
-          padding-bottom: 8px;
-        }
-        h1 {
-          font-size: 72px;
-          color: var(--theme-color2);
-          text-transform: capitalize;
-          line-height: 1;
-          padding-bottom: 12px;
-        }
-        h2 {
-          font-size: 36px;
-          color: $icon-color;
-          text-transform: capitalize;
-          line-height: 1;
-          padding-bottom: 16px;
-        }
-        .btn-rounded {
-          display: inline-block;
-          letter-spacing: 1px;
-          padding: 15px 35px;
-          font-size: 18px;
-        }
-      }
-      .layout2-slide-1 {
-        li {
-          position: absolute;
-          bottom: -8px;
-          right: 0;
-        }
-      }
+  &.p-right {
+    .slider-banner-contain {
+      justify-content: flex-end;
     }
+  }
 
-    .layout2-slide-2 {
-      li {
-        position: absolute;
-        bottom: 55px;
-        right: 60px;
-      }
+  &.p-center {
+    .slider-banner-contain {
+      justify-content: end;
     }
-    .layout2-slide-3 {
-      li {
-        position: absolute;
-        bottom: 35px;
-        right: 55px;
-      }
+  }
+
+  &.p-top {
+    .slider-banner-contain {
+      align-items: flex-start;
     }
-    .slide-center {
-      display: flex !important;
-      align-items: center !important;
-      height: 100% !important;
-    }
-    &.slide-banner-1 {
-      .layout1-slide-1 {
-        li {
-          position: absolute;
-          bottom: -30px;
-          left: -50px;
-          &:nth-child(2) {
-            right: 60px;
-            left: unset;
-          }
-        }
-      }
-      .layout1-slide-2 {
-        li {
-          position: absolute;
-          left: 50px;
-          slider &:nth-child(2) {
-            right: 20px;
-            left: unset;
-          }
-        }
+  }
+
+  .slider-banner-contain {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: end;
+    padding: 0 100px;
+
+    .transparent-bg {
+      background-color: rgba(213, 221, 223, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+
+      h4 {
+        font-size: 24px;
+        color: $black;
+        text-transform: capitalize;
+        line-height: 1;
+        padding-bottom: 8px;
       }
 
-      .layout1-slide-3 {
-        li {
-          position: absolute;
-          bottom: -30px;
-          left: -50px;
-          &:nth-child(2) {
-            right: 100px;
-            bottom: -20px;
-            left: unset;
-          }
-        }
+      h1 {
+        font-size: 72px;
+        color: var(--theme-color2);
+        text-transform: capitalize;
+        line-height: 1;
+        padding-bottom: 12px;
       }
-      .slider-banner-contain {
-        h1 {
-          color: var(--theme-color1);
-          font-weight: 400;
-          text-transform: uppercase;
-          padding-bottom: 2px;
-          span {
-            color: var(--theme-color2);
-            text-transform: capitalize;
-            margin-left: 17px;
-          }
-        }
-        h4 {
-          font-size: 30px;
-          color: $gray-7;
-          font-weight: 400;
-          padding-bottom: 20px;
-        }
-        h2 {
-          font-size: 36px;
-          color: var(--theme-color2);
-          padding-bottom: 15px;
-        }
+
+      h2 {
+        font-size: 36px;
+        color: $icon-color;
+        text-transform: capitalize;
+        line-height: 1;
+        padding-bottom: 16px;
       }
-      .btn-normal {
-        padding: 17px 35px;
+
+      .btn-rounded {
+        display: inline-block;
+        letter-spacing: 1px;
+        padding: 15px 35px;
         font-size: 18px;
       }
-      .slider-img {
-        height: 500px;
-        background-color: #d3ecf3;
-        overflow: hidden;
-      }
     }
-    &.slide-banner-2 {
-      .layout3-slide-1 {
-        li {
-          position: absolute;
-          top: 0;
-          left: 20px;
-          display: flex;
-          align-items: center;
-          height: 100%;
-          &:last-child {
-            right: 20px;
-            left: unset;
-          }
-        }
-      }
-      .layout3-slide-2 {
-        li {
-          position: absolute;
-          top: 0;
-          left: 65px;
-          display: flex;
-          align-items: center;
-          height: 100%;
-          &:last-child {
-            right: 65px;
-            left: unset;
-          }
-        }
-      }
-      .slider-img {
-        height: 480px;
-        background-color: $gray-5;
-      }
-      .slider-banner-contain {
-        .sub-contain {
-          background-color: $white;
-          padding: 40px;
-          text-align: center;
-          min-width: 440px;
-          // .transparent-bg-collection{
-          //   background-color: rgba($black, 0.5);
-          // }
-          h4 {
-            font-size: 18px;
-            color: $dark;
-            padding-bottom: 5px;
-          }
-          h1 {
-            color: var(--theme-color2);
-            padding-bottom: 21px;
-          }
-          span {
-            display: block;
-            background-color: var(--theme-color1);
-            font-weight: 700;
-            color: $white;
-            font-size: 36px;
-            text-transform: capitalize;
-            letter-spacing: 1px;
-            line-height: 1.2;
-            padding-top: 8px;
-            padding-bottom: 10px;
-            margin-bottom: 22px;
-          }
-          a {
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--theme-color2);
-            i {
-              margin-left: 15px;
-            }
-          }
-        }
-      }
-    }
-    &.slide-banner-3 {
-      .layout4-slide-1 {
-        li {
-          position: absolute;
-          top: 0;
-          right: 170px;
-        }
-      }
-      .layout4-slide-2 {
-        li {
-          position: absolute;
-          top: 0;
-          right: 180px;
-        }
-      }
-      .layout4-slide-3 {
-        li {
-          position: absolute;
-          top: 0;
-          right: 230px;
-        }
-      }
-      .slider-img {
-        height: 455px;
-        background-color: $white;
-      }
-      .slider-banner-contain {
-        h5 {
-          font-size: 18px;
-          color: $icon-color;
-          font-weight: 400;
-          text-transform: capitalize;
-          padding-bottom: 6px;
-        }
-        h3 {
-          font-size: 42px;
-          text-transform: capitalize;
-          color: var(--theme-color1);
-          font-weight: 400;
-          padding-bottom: 10px;
-        }
-        h1 {
-          font-size: 52px;
-          color: var(--theme-color2);
-          padding-bottom: 27px;
-          text-transform: uppercase;
-        }
-        h2 {
-          font-size: 24px;
-          color: $dark;
-          padding-bottom: 25px;
-        }
-        .btn-normal {
-          text-transform: capitalize;
-          font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-          padding: 18px 45px;
-        }
-      }
-    }
-    &.slide-banner-4 {
-      .layout5-slide-1 {
-        li {
-          position: absolute;
-          right: 100px;
-          bottom: 0;
-        }
-      }
-      .layout5-slide-2 {
-        li {
-          position: absolute;
-          right: 100px;
-          bottom: 0;
-        }
-      }
-      .layout5-slide-3 {
-        li {
-          position: absolute;
-          right: 100px;
-          bottom: 0;
-        }
-      }
-      .slider-img {
-        height: 695px;
-        background: linear-gradient($solitud, $gaynsboro);
-      }
-      .slider-banner-contain {
-        text-align: center;
-        h3 {
-          color: var(--theme-color1);
-          font-size: calc(18px + (36 - 18) * ((100vw - 320px) / (1920 - 320)));
-          font-weight: 400;
-          text-transform: capitalize;
-          position: relative;
-          width: fit-content;
-          margin: 0 auto;
-          &:after {
-            position: absolute;
-            top: 50%;
-            left: 120%;
-            height: 5px;
-            width: 100px;
-            content: "";
-            background-color: var(--theme-color2);
-          }
-          &:before {
-            position: absolute;
-            top: 50%;
-            right: 120%;
-            height: 5px;
-            width: 100px;
-            content: "";
-            background-color: var(--theme-color2);
-          }
-        }
-        h1 {
-          color: var(--theme-color2);
-          text-transform: capitalize;
-          margin-top: 10px;
-          font-size: calc(24px + (72 - 24) * ((100vw - 320px) / (1920 - 320)));
-        }
-        h2 {
-          color: var(--theme-color1);
-          margin-top: 11px;
-          font-size: calc(18px + (36 - 18) * ((100vw - 320px) / (1920 - 320)));
-        }
-        .btn-normal {
-          text-transform: capitalize;
-          font-weight: 700;
-          margin-top: 15px;
-          font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-        }
-      }
-    }
-    &.slide-banner-5 {
-      .layout6-slide-1 {
-        li {
-          position: absolute;
-          bottom: 0;
-          right: 50px;
-          width: 450px;
-        }
-      }
-      .layout6-slide-2 {
-        li {
-          position: absolute;
-          top: 60%;
-          right: 17%;
-          animation: vegislide-move 2s linear infinite;
-          width: calc(25px + (55 - 25) * ((100vw - 320px) / (1920 - 320)));
-          &:nth-child(2) {
-            right: 50%;
-            animation: vegislide-move 2.8s linear infinite;
-            width: calc(20px + (55 - 20) * ((100vw - 320px) / (1920 - 320)));
-          }
-          &:nth-child(3) {
-            top: unset;
-            bottom: 10%;
-            margin-right: 26%;
-            animation: vegislide-move 3s linear infinite;
-            width: calc(20px + (55 - 20) * ((100vw - 320px) / (1920 - 320)));
-          }
-          &:nth-child(4) {
-            top: unset;
-            bottom: 20%;
-            right: 40%;
-            animation: vegislide-move 3.5s linear infinite;
-            width: calc(30px + (45 - 30) * ((100vw - 320px) / (1920 - 320)));
-          }
-        }
-      }
+  }
 
-      @keyframes vegislide-move {
-        0% {
-          transform: rotate(0deg);
-        }
-        50% {
-          transform: rotate(15deg);
-        }
-        100% {
-          transform: rotate(0deg);
-        }
-      }
-      .slider-img {
-        background-color: $gaynsboro;
-      }
-      .slider-banner-contain {
-        h5 {
-          font-size: 18px;
-          color: $icon-color;
-          font-weight: 400;
-          text-transform: capitalize;
-          padding-bottom: 6px;
-        }
-        h3 {
-          font-size: 42px;
-          text-transform: capitalize;
-          color: var(--theme-color1);
-          font-weight: 400;
-          padding-bottom: 10px;
-        }
-        h1 {
-          font-size: 52px;
-          color: var(--theme-color2);
-          padding-bottom: 27px;
-          text-transform: uppercase;
-        }
-        h2 {
-          font-size: 24px;
-          color: $dark;
-          padding-bottom: 25px;
-        }
-        .btn-rounded {
-          text-transform: capitalize;
-          &:hover {
-            background-color: var(--theme-color2);
-          }
-        }
-      }
+  .slider-img { 
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
     }
   }
 }
-.slider-layout-4 {
-  .slider-slide {
-    max-width: calc(100% - 275px);
-    margin-left: 275px;
-  }
-}
+
+
 
 /*============================
    20. Title css
@@ -6201,10 +5821,12 @@ button {
       li {
         margin: 0 15px;
         padding: 10px 0;
+        width: max-content;
         position: relative;
 
         a.active {
           color: var(--theme-color2);
+          margin-bottom: 5px;
           &:before {
             position: absolute;
             height: 5px;
@@ -6216,6 +5838,7 @@ button {
 
         a {
           color: var(--theme-color1);
+          margin-top: 10px;
           font-weight: 300;
           font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
           cursor: pointer;
@@ -6233,6 +5856,7 @@ button {
         li {
           margin: 0 8px;
           position: relative;
+          width: max-content;
           a {
             color: var(--theme-color1);
             font-weight: 300;
@@ -6983,15 +6607,16 @@ button {
       display: flex;
       padding-bottom: 0;
       background-color: $white;
+
       .product-imgbox,
       .img-block {
         width: 20%;
       }
       .product-front {
         img {
-          height: 350px;
+          height: auto;
           width: auto;
-          object-fit: cover;
+          object-fit: contain;
         }
       }
       .product-detail {
@@ -9647,7 +9272,7 @@ button {
 
 //short product
 
-.deal-title{
+.deal-title {
   color: var(--theme-color1);
 }
 

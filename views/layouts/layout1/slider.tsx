@@ -79,23 +79,13 @@ const banners = [
 ];
 
 const BannerList: React.FC<sliderProps> = ({ banner }) => {
-  const [elemOne, setElemOne] = useState({});
-
-  const onMouseHover = (e) => {
-    const pageX = e.clientX - window.innerWidth / 1;
-    const pageY = e.clientY - window.innerHeight / 1;
-    var elemOne = {
-      transform: "translateX(" + (7 + pageX / 150) + "%) translateY(" + (1 + pageY / 150) + "%)",
-    };
-    setElemOne(elemOne);
-  };
 
   return (
     <div className="slider-banner p-center slide-banner-1" >
       <div className="slider-img">
         <ul className="layout1-slide-1">
           <li id="img-1">
-            <Media src={banner.img1} className="img-fluid" alt="slider" />
+            <img src={banner.img1} className="  " alt="slider" />
           </li>
          
         </ul>

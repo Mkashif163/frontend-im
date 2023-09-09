@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { gql } from "@apollo/client";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
-import { useQuery } from "@apollo/client";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Carousel, CarouselItem, CarouselControl } from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
@@ -17,115 +15,99 @@ var settings = {
   speed: 300,
   slidesToShow: 6,
   slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1700,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        infinite: true,
-      },
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        infinite: true,
-      },
-    },
-    {
-      breakpoint: 991,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-      },
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-  ],
+  // responsive: [
+  //   {
+  //     breakpoint: 1700,
+  //     settings: {
+  //       slidesToShow: 5,
+  //       slidesToScroll: 5,
+  //       infinite: true,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 1200,
+  //     settings: {
+  //       slidesToShow: 4,
+  //       slidesToScroll: 4,
+  //       infinite: true,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 991,
+  //     settings: {
+  //       slidesToShow: 3,
+  //       slidesToScroll: 3,
+  //       infinite: true,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 576,
+  //     settings: {
+  //       slidesToShow: 2,
+  //       slidesToScroll: 2,
+  //     },
+  //   },
+  // ],
 };
 
-const GET_PRODUCTS = gql`
-  query getProducts($type: CategoryType, $limit: Int!) {
-    products(type: $type, limit: $limit) {
-      items {
-        id
-        title
-        type
-        collection {
-          collectionName
-        }
-      }
-    }
-  }
-`;
-
-const GET_COLLECTION = gql`
-  query getCollection($collection: String) {
-    collection(collec: $collection) {
-      id
-      title
-      description
-      type
-      brand
-      category
-      price
-      new
-      sale
-      discount
-      stock
-      variants {
-        id
-        sku
-        size
-        color
-        image_id
-      }
-      images {
-        image_id
-        id
-        alt
-        src
-      }
-    }
-  }
-`;
 
 type TabProductProps = {
+  menuId: number;
+  menuName: string;
   effect?: any;
 };
 
-const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
+const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => {
   const { addToWish } = React.useContext(WishlistContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToCompare } = React.useContext(CompareContext);
   const [activeTab, setActiveTab] = useState("new products");
-  const collection = [];
+  const [subCategoriesData, setSubCategoriesData] = useState([]);
+  const [productsData, setProductsData] = useState([]);
 
-  var { loading, data } = useQuery(GET_PRODUCTS, {
-    variables: {
-      limit: 235,
-    },
-  });
 
-  var { data: dataR } = useQuery(GET_COLLECTION, {
-    variables: {
-      collection: activeTab,
-    },
-  });
-  console.log("Fetched Data:", dataR)
+  useEffect(() => {
+    if (subCategoriesData.length > 0) {
+      // Set the activeTab to the ID of the first subcategory
+      setActiveTab(subCategoriesData[0].id);
+    }
+  }, [subCategoriesData]);
+
+  useEffect(() => {
+    const apiUrl = `http://18.234.66.77/api/sub_categories/${menuId}`;
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the data from the API here
+        setSubCategoriesData(data.data); // Assuming data is an array in the response
+        console.log("Fetched Data from API:", subCategoriesData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
+  }, [menuId]);
+
+  useEffect(() => {
+    const apiUrl = `http://18.234.66.77/api/products/${activeTab}`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Store the product data in a state variable
+        setProductsData(data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching product data:", error);
+      });
+  }, [activeTab]);
+
+  
+
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const next = () => {
-    if (activeIndex === collection.length - 1) {
+    if (activeIndex === subCategoriesData.length - 1) {
       setActiveIndex(0);
     } else {
       setActiveIndex(activeIndex + 1);
@@ -134,62 +116,34 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
 
   const previous = () => {
     if (activeIndex === 0) {
-      setActiveIndex(collection.length - 1);
+      setActiveIndex(subCategoriesData.length - 1);
     } else {
       setActiveIndex(activeIndex - 1);
     }
   };
 
-  if (data) {
-    data.products.items.forEach((item) => {
-      item.collection.forEach((i) => {
-        const index = collection.indexOf(i.collectionName);
-        if (index === -1 && i.collectionName !== "" && i.collectionName !== "special products") {
-          collection.push(i.collectionName);
-        }
-      });
-
-      // Add more categories
-      if (collection.length < 8) {
-        collection.push("Category 1");
-        collection.push("Category 2");
-        collection.push("Category 3");
-        collection.push("Category 4");
-        collection.push("Category 5");
-        collection.push("Category 6");
-        collection.push("Category 7");
-        collection.push("Category 8");
-        collection.push("Category 9");
-      }
-    });
-  }
-
+  console.log("productsData", productsData);
   return (
     <>
-      {data &&
-        data.products.items.map((item: any) => {
-          item.collection.map((i) => {
-            const index = collection.indexOf(i.collectionName);
-            if (index === -1 && i.collectionName !== "" && i.collectionName !== "special products") collection.push(i.collectionName);
-          });
-        })}
-
       <section className="section-pt-space">
         <div className="custom-container">
           <div className="tab-product-main">
             <div className="tab-prodcut-contain">
               <div className="category-title">
-                <h3>Top Products</h3>
+                <h3>{menuName.substring(0,15)}{menuName.length>15 ? "..." : ""}</h3>
               </div>
               <div className="top-bar-product-catogories">
                 <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
-                  {collection.map((c, i) => (
-                    <CarouselItem key={i}>
+                  {subCategoriesData.map((subCategory, i) => (
+                    <CarouselItem key={subCategory.id}>
                       <ul className="product-catogories">
-                        {collection.slice(i, i + 9).map((category, index) => (
-                          <li className="top-catogories" key={index}>
-                            <a className={activeTab === category ? "active" : ""} onClick={() => setActiveTab(category)}>
-                              {category}
+                        {subCategoriesData.slice(i, i + 6).map((subCategory) => (
+                          <li className="top-catogories">
+                            <a
+                              className={activeTab === subCategory.id ? "active" : ""}
+                              onClick={() => setActiveTab(subCategory.id)}
+                            >
+                              {subCategory.name}
                             </a>
                           </li>
                         ))}
@@ -199,7 +153,6 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
                 </Carousel>
               </div>
               <div className="view-all d-flex " style={{ marginLeft: "auto" }}>
-
                 <div className="px-2 arrows">
                   <ul className="catogories-arrows">
                     <li>
@@ -214,7 +167,6 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
                     </li>
                   </ul>
                 </div>
-
                 <div className="view-akk">
                   <a href="#">View all</a>
                 </div>
@@ -222,8 +174,8 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
             </div>
           </div>
         </div>
-
       </section>
+
 
 
       <section className="section-py-space ratio_asos product">
@@ -233,25 +185,22 @@ const TabProduct: NextPage<TabProductProps> = ({ effect }) => {
               <TabContent activeTab={activeTab}>
                 <TabPane tabId={activeTab}>
                   <div className="product product-slide-6 product-m no-arrow">
-                    <div>
-                      {!dataR || !dataR.collection.length || loading ? (
+                    <div >
+                      {!subCategoriesData || !subCategoriesData.length ? (
                         <Skeleton />
                       ) : (
                         <Slider {...settings}>
-                          {dataR &&
-                            dataR.collection.map((itm: any, i: any) => (
-                              <div key={i}>
-                                <ProductBox
-                                  hoverEffect={effect}
-                                  newLabel={itm.new}
-                                  {...itm}
-                                  item={itm}
-                                  addCart={() => addToCart(itm)}
-                                  addCompare={() => addToCompare(itm)}
-                                  addWish={() => addToWish(itm)}
-                                />
-                              </div>
-                            ))}
+                          {productsData.map((product, i) => (
+                            <div key={i}>
+                              <ProductBox
+                                hoverEffect={effect}
+                                product={product} // Pass the product data
+                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                addCompare={(product) => addToCompare(product)}
+                                addWish={(product) => addToWish(product)}
+                              />
+                            </div>
+                          ))}
                         </Slider>
                       )}
                     </div>
