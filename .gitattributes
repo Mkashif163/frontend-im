@@ -1,14 +1,13 @@
 *.largefile filter=lfs diff=lfs merge=lfs -text
 # Set default behavior to automatically detect binary or text for files
 * text=auto
-
 # Specify files that should always be treated as binary
 *.jpg binary
 *.png binary
 *.gif binary
-
 # Specify files that should be treated as text
 *.scss text
 *.css text
 *.ts text
 *.tsx text
+*.pack filter=lfs diff=lfs merge=lfs -text
