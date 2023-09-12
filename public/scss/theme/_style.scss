@@ -5660,7 +5660,7 @@ button {
     }
   }
 
-  .slider-img { 
+  .slider-img {
     img {
       width: 100%;
       height: 100%;
@@ -5668,8 +5668,6 @@ button {
     }
   }
 }
-
-
 
 /*============================
    20. Title css
@@ -5798,7 +5796,6 @@ button {
   21. Tab-product css
 ==============================*/
 .tab-product-main {
-  margin-top: 10px;
   .tab-prodcut-contain {
     display: flex;
     align-items: center;
@@ -5806,7 +5803,9 @@ button {
     .category-title {
       display: flex;
       align-items: flex-start;
-      padding-right: 160px;
+      width: 225px;
+      height: 0;
+      align-items: center;
       h3 {
         font-size: 20px;
         text-transform: capitalize;
@@ -5827,8 +5826,10 @@ button {
         a.active {
           color: var(--theme-color2);
           margin-bottom: 5px;
+          margin-top: 10px;
           &:before {
             position: absolute;
+
             height: 5px;
             background-color: var(--theme-color2);
             width: 100%;
@@ -5850,6 +5851,8 @@ button {
     .view-all {
       align-items: center;
       justify-content: end;
+      width: 200px;
+      height: 0;
       ul.catogories-arrows {
         display: flex;
         align-items: center;
@@ -9271,7 +9274,6 @@ button {
 }
 
 //short product
-
 .deal-title {
   color: var(--theme-color1);
 }
@@ -9424,7 +9426,7 @@ button {
     .offers {
       ul {
         margin-top: 5px;
-        max-height: 380px;
+        max-height: 470px;
         overflow-y: auto;
         list-style: none;
         li {
@@ -9463,7 +9465,11 @@ button {
     }
   }
 }
-
+@media (max-width: 1008px) {
+  .short-disply {
+    display: none; /* Hide the element on screens smaller than or equal to 768px */
+  }
+}
 // Quick-view //
 .quick-view {
   width: 100%;

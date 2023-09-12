@@ -15,39 +15,39 @@ var settings = {
   speed: 300,
   slidesToShow: 6,
   slidesToScroll: 1,
-  // responsive: [
-  //   {
-  //     breakpoint: 1700,
-  //     settings: {
-  //       slidesToShow: 5,
-  //       slidesToScroll: 5,
-  //       infinite: true,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 1200,
-  //     settings: {
-  //       slidesToShow: 4,
-  //       slidesToScroll: 4,
-  //       infinite: true,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 991,
-  //     settings: {
-  //       slidesToShow: 3,
-  //       slidesToScroll: 3,
-  //       infinite: true,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 576,
-  //     settings: {
-  //       slidesToShow: 2,
-  //       slidesToScroll: 2,
-  //     },
-  //   },
-  // ],
+  responsive: [
+    {
+      breakpoint: 1700,
+      settings: {
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+  ],
 };
 
 
@@ -125,8 +125,8 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
   console.log("productsData", productsData);
   return (
     <>
-      <section className="section-pt-space">
-        <div className="custom-container">
+      <section className="section-pt-space bg-white mt-2">
+        <div className="custom-container ">
           <div className="tab-product-main">
             <div className="tab-prodcut-contain">
               <div className="category-title">
@@ -137,13 +137,13 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
                   {subCategoriesData.map((subCategory, i) => (
                     <CarouselItem key={subCategory.id}>
                       <ul className="product-catogories">
-                        {subCategoriesData.slice(i, i + 6).map((subCategory) => (
+                        {subCategoriesData.slice(i, i + 7).map((subCategory) => (
                           <li className="top-catogories">
                             <a
                               className={activeTab === subCategory.id ? "active" : ""}
                               onClick={() => setActiveTab(subCategory.id)}
                             >
-                              {subCategory.name}
+                              {subCategory.name.substring(0,12)}{subCategory.name.length>12 ? "..." : ""}
                             </a>
                           </li>
                         ))}

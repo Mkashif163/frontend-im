@@ -51,7 +51,7 @@ const Home: NextPage = () => {
             </>
           )}
 
-          <ShortDisplay />
+          <ShortDisplay  />
           <section className="rounded-category">
             <Brands />
           </section>

@@ -193,7 +193,7 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect }) => {
   });
   return (
     <>
-      <section className="section-py-space ratio_asos product">
+      <section className="short-disply section-py-space ratio_asos product">
         <div className="custom-container bg-white">
           <div className="row">
             <div className="col-lg-7 mb-4 pb-3">

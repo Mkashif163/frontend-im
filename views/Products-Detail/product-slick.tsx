@@ -3,7 +3,7 @@ import { Col, Row, Media } from "reactstrap";
 import Slider from "react-slick";
 import ProductDetail from "./product-detail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faFileArrowDown, faFilePdf, faHeadset } from "@fortawesome/free-solid-svg-icons";
+import { faFileArrowDown, faFilePdf, faHeadset } from "@fortawesome/free-solid-svg-icons";
 
 interface ProductSlickProps {
   item: any;
@@ -25,9 +25,11 @@ const productImages = [
 const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => {
   const [state, setState] = useState({ nav1: null, nav2: null });
 
+  const data = item[0];
+
+  console.log("iamge", data)
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();
-
   React.useEffect(() => {
     setState({
       nav1: slider1.current,
@@ -40,55 +42,57 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
   };
   return (
     <>
-      <Col lg="5">
-        <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
-          {item &&
-            productImages.map((img: any, i: any) => {
-              return (
-                <div key={i}>
-                  <Media src={img.img} alt="" className="img-fluid  image_zoom_cls-0" />
+      {data && <>
+        <Col lg="5">
+          <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
+            {data &&
+              data.product_images.map((img: any, i: any) => {
+                return (
+                  <div key={i}>
+                    <Media src={img.url} alt="" className="img-fluid  image_zoom_cls-0" />
+                  </div>
+                );
+              })}
+          </Slider>
+          <Row>
+            <Col>
+              <Slider className="slider-nav" asNavFor={nav1} ref={(slider) => (slider2.current = slider)} slidesToShow={3} swipeToSlide={true} focusOnSelect={true} arrows={false} adaptiveHeight={true}>
+                {data &&
+                  data.product_images.map((img: any, i: any) => {
+                    return (
+                      <div key={i}>
+                        <Media src={img.url} alt="" className="img-fluid  image_zoom_cls-0" />
+                      </div>
+                    );
+                  })}
+              </Slider>
+            </Col>
+            <Col>
+              <div className="support-div">
+                <div className="product-contact">
+                  <FontAwesomeIcon icon={faHeadset} size="2xl" />
+                  <h6>support</h6>
                 </div>
-              );
-            })}
-        </Slider>
-        <Row>
-          <Col>
-            <Slider className="slider-nav" asNavFor={nav1} ref={(slider) => (slider2.current = slider)} slidesToShow={3} swipeToSlide={true} focusOnSelect={true} arrows={false} adaptiveHeight={true}>
-              {item &&
-                productImages.map((img: any, i: any) => {
-                  return (
-                    <div key={i}>
-                      <Media src={img.img} alt="" className="img-fluid  image_zoom_cls-0" />
-                    </div>
-                  );
-                })}
-            </Slider>
-          </Col>
-          <Col>
-            <div className="support-div">
-              <div className="product-contact">
-                <FontAwesomeIcon icon={faHeadset} size="2xl" />
-                <h6>support</h6>
-              </div>
-              <div className="product-contact">
-                <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
-                <h6>Download pdf</h6>
-              </div>
-              <div className="product-contact">
-                <FontAwesomeIcon icon={faFilePdf} size="2xl" />
-                <h6>Detail Document</h6>
-              </div>
-              {/* <div className="product-contact">
+                <div className="product-contact">
+                  <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
+                  <h6>Download pdf</h6>
+                </div>
+                <div className="product-contact">
+                  <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                  <h6>Detail Document</h6>
+                </div>
+                {/* <div className="product-contact">
                 <FontAwesomeIcon icon={faCartPlus} size="2xl" />
                 <h6>support</h6>
               </div> */}
-            </div>
-          </Col>
-        </Row>
-      </Col>
-      <Col lg="7" className="rtl-text">
-        <ProductDetail item={item} changeColorVar={changeColorVar} bundle={bundle} swatch={swatch} totalReview={0} offers={0} />
-      </Col>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <Col lg="7" className="rtl-text">
+          <ProductDetail item={item} changeColorVar={changeColorVar} bundle={bundle} swatch={swatch} totalReview={0} offers={0} />
+        </Col>
+      </>}
     </>
   );
 };

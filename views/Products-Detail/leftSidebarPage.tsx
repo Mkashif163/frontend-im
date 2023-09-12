@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NextPage } from "next";
 import { Row, Col } from "reactstrap";
 import Sidebar from "../../views/Products-Detail/sidebar";
@@ -6,8 +6,6 @@ import ProductService from "../../views/Products-Detail/product-service";
 import NewProduct from "../Collections/NewProduct";
 import TabProduct from "../../views/Products-Detail/tab-product";
 import ProductSlick from "../../views/Products-Detail/product-slick";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
 import { FilterContext } from "helpers/filter/filter.context";
 import CustomerMessageForm from "./CustomerMessageForm";
 
@@ -15,46 +13,31 @@ interface LeftSidebar {
   pathId: any;
 }
 
-const GET_SINGLE_PRODUCTS = gql`
-  query getProducts($id: Float!) {
-    product(id: $id) {
-      id
-      title
-      description
-      type
-      brand
-      category
-      price
-      new
-      sale
-      discount
-      stock
-      variants {
-        id
-        sku
-        size
-        color
-        image_id
-      }
-      images {
-        alt
-        src
-      }
-    }
-  }
-`;
+
 
 const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
   const filterContext = useContext(FilterContext);
   const { filterOpen, setFilterOpen } = filterContext;
-  var { loading, data } = useQuery(GET_SINGLE_PRODUCTS, {
-    variables: {
-      id: parseInt(pathId),
-    },
-  });
+  const [product, setProduct] = React.useState<any>({});
+  
+  useEffect(() => {
+    const apiUrl = `http://18.234.66.77/api/single-product/${pathId}`;
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the data from the API here
+        setProduct(data.data); // Assuming data is an array in the response
+        console.log("Fetched Data from API:", setProduct);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
+  }, [pathId]);
+  
   return (
     <div className="collection-wrapper">
-      {data && data.product && !loading && (
+      {product && (
         <div className="custom-container">
           <Row>
             <Col
@@ -63,7 +46,6 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
               style={{
                 left: filterOpen ? "-15px" : "",
               }}>
-              <Sidebar />
               <ProductService />
               <NewProduct />
             </Col>
@@ -78,7 +60,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
                 </Col>
               </Row>
               <Row>
-                <ProductSlick item={data.product} bundle={false} swatch={false} />
+                <ProductSlick item={product} bundle={false} swatch={false} />
               </Row>
               <TabProduct />
               <CustomerMessageForm/>
