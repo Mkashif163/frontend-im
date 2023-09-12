@@ -1,0 +1,143 @@
+[33mcommit 5db7022e85b3267bbfa6831b396ca861f2f11621[m[33m ([m[1;36mHEAD -> [m[1;32mkashif-test[m[33m, [m[1;32mmain[m[33m)[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Sep 12 10:31:14 2023 +0500
+
+    prodcut working fine
+
+[33mcommit 5f6ca6355249e0c91f49d65e34980d0d9de01385[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Sat Sep 9 16:29:44 2023 +0500
+
+    product box done
+
+[33mcommit cacd5e8038ec2ac1a05fd62bc73271fa33129b65[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Sep 7 11:49:58 2023 +0500
+
+    menu fetched and displayed from the api
+
+[33mcommit fa4ad2251541595e27bf01fa963227b455b4c209[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Aug 31 12:20:36 2023 +0500
+
+    product short display added
+
+[33mcommit e2ed8cf7336b3577be20fe325c7aba97b3379e12[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 29 13:03:26 2023 +0500
+
+    gitignore updated 2x
+
+[33mcommit aa14d74f31dcee2fcdfda006bb716a9c6debcce6[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 29 12:40:15 2023 +0500
+
+    Remove .next from version control
+
+[33mcommit 3b219cb8f6b4696eef989d2b371512c76c5ac973[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 29 12:28:56 2023 +0500
+
+    don't know waht happening
+
+[33mcommit 5212908342f2c5d0666326e55bbb9ce76940a4bb[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 29 12:27:48 2023 +0500
+
+    gitignore updated and produc icons added
+
+[33mcommit 730610bfb1b5ba7e41000f75b8794a7af9f2d81b[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 29 12:06:50 2023 +0500
+
+    git ingnore file updated and product page changes
+
+[33mcommit 99b301f6825a05a38acb5f4062c342f397599f03[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Mon Aug 28 11:32:24 2023 +0500
+
+    updated
+
+[33mcommit 529fdf0d88d6c5a48680b9790fabd489dcfadbf1[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Mon Aug 28 11:31:46 2023 +0500
+
+    product page complete 98%
+
+[33mcommit 18d39238630d39597507c39c1603595a4f9df0bb[m
+Author: Muhammad Kashif <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Aug 24 17:58:21 2023 +0500
+
+    product detail page 90% complete
+
+[33mcommit 5d9a24cb1b7b8f9d0c48d22eb93968aced1eb249[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Wed Aug 23 15:22:31 2023 +0500
+
+    y
+
+[33mcommit 56dc4e1798695aa2a9de2c86ecab42912881e435[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Wed Aug 23 15:22:21 2023 +0500
+
+    brand size fixed 90 %
+
+[33mcommit d6d941de44f8c7aa984d51e995cab1ed2121977b[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Wed Aug 23 11:41:51 2023 +0500
+
+    home page 90% done
+
+[33mcommit f4cf0f7b328a75169c879b80861c641ecde8764e[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 22 14:50:30 2023 +0500
+
+    bannners added
+
+[33mcommit 0456b1037ef37f50ae66da53dbea4c8c6594477d[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Tue Aug 22 12:47:07 2023 +0500
+
+    banner sliders added
+
+[33mcommit 17fcb5f79a7cbab8da2ce405254ad12f2a7929ef[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Mon Aug 21 13:06:05 2023 +0500
+
+    limited to 8 categories
+
+[33mcommit 510e9e3af90be6de599b1d102a48d3bffb673816[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Mon Aug 21 13:04:16 2023 +0500
+
+    cotegories added
+
+[33mcommit 53411857098c0b71550d60f118a1a3fa420cf21a[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Aug 17 13:36:44 2023 +0500
+
+    stock chek created
+
+[33mcommit b43f1b6e6192fbe6f710488611147084c16e0230[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Aug 17 13:30:53 2023 +0500
+
+    stock added in product card
+
+[33mcommit e280564318ac5eddf23222c95b44e1ec35ca6e5c[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Thu Aug 17 11:13:56 2023 +0500
+
+    productbox
+
+[33mcommit e7f67ca0cdec14abce4471da9a033b24f0808b9b[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Wed Aug 16 15:43:57 2023 +0500
+
+    navbar created
+
+[33mcommit fa213a4a8e3ca50b71c0a82770c9523884894a8c[m
+Author: Mkashif163 <muhammadkashifbhatti70@gmail.com>
+Date:   Wed Aug 16 12:28:13 2023 +0500
+
+    menu bar created and nad extra things are removed from the home page
