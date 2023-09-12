@@ -33,11 +33,6 @@ const Login: NextPage = () => {
 
   return (
     <>
-      {/* <!-- breadcrumb start --> */}
-      <Breadcrumb title="login" parent="home" />
-      {/* <!-- breadcrumb End --> */}
-
-      {/* <!--section start--> */}
       <section className="login-page section-big-py-space bg-light">
         <div className="custom-container">
           <Row className="row">

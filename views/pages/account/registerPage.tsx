@@ -6,8 +6,6 @@ import Breadcrumb from "../../Containers/Breadcrumb";
 const RegisterPage: NextPage = () => {
   return (
     <>
-      <Breadcrumb title="Register" parent="home" />
-      {/* <!--section start--> */}
       <section className="login-page section-big-py-space bg-light">
         <div className="custom-container">
           <Row className="row">
