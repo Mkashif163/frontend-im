@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Layout1 from "../../views/layouts/layout1";
 import Breadcrumb from "../../views/Containers/Breadcrumb";
 import TabProduct from "../../views/Products-Detail/tab-product";
-import RelatedProducts from "../../views/Products-Detail/related products";
+import RelatedProducts from "../../views/Products-Detail/related-products";
 import LeftImagePage from "../../views/Products-Detail/leftImagePage";
 
 const LeftImage: NextPage = () => {

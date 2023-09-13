@@ -30,6 +30,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [stockState, setStockState] = useState("InStock");
+  const [selectedCondition, setSelectedCondition] = useState("New");
   const uniqueSize = [];
   const uniqueColor = [];
   const changeColorVar = (img_id) => {
@@ -65,9 +66,9 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
   return (
     <>
       {product && <Fragment>
-        <div className="product-box" onClick={clickProductDetail}>
+        <div className="product-box" >
           <div className="product-imgbox bg-white">
-            <div className="product-front " >
+            <div className="product-front " onClick={clickProductDetail}>
               <img src={product.url} className="img-fluid" alt="product" />
             </div>
 
@@ -90,7 +91,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
           <div className="product-detail detail-inline">
             <div className="detail-title">
 
-              <h6 className="price-title">{product.name.substring(0, 25)}{product.name.length >25 ? " ..." : ""}</h6>
+              <h6 className="price-title">{product.name.substring(0, 25)}{product.name.length > 25 ? " ..." : ""}</h6>
 
               <div className="detail-left">
                 {product.model && <h6 className="model-number">{product.model_no.substring(0, 12)}{product.model_no.length > 8 ? "..." : ""}</h6>}
@@ -101,20 +102,36 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
                   <i className="fa fa-star"></i>
                   <i className="fa fa-star"></i>
                 </ul>
-                <div className="condition-box">
-                  <Badge color="success" className="condition-text">New</Badge>
-                  <Badge color="info" className="condition-text">Used</Badge>
+                <div className="condition-box d-flex mt-3">
+                  <div>
+                    <span
+                      className={`condition-text rounded ${selectedCondition === "New" ? "active bg-black" : ""
+                        }`}
+                      onClick={() => setSelectedCondition("New")}
+                    >
+                      New
+                    </span>
+                  </div>
+                  <div>
+                    <span
+                      className={`condition-text rounded ${selectedCondition === "Used" ? "active bg-black" : ""
+                        }`}
+                      onClick={() => setSelectedCondition("Used")}
+                    >
+                      Used
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="detail-right">
                 <div className="check-price">
                   {selectedCurr.symbol}
-                  {product.new_price}{" "}
+                  {selectedCondition === "New" ? product.new_sale_price : product.refurnished_sale_price}{" "}
                 </div>
                 <div className="price">
                   <div className="price">
                     {selectedCurr.symbol}
-                    {product.new_sale_price}
+                    {selectedCondition === "New" ? product.new_sale_price : product.refurnished_sale_price}
                   </div>
                 </div>
                 <div className={stock > 0 ? "stock" : "out-stock"}>

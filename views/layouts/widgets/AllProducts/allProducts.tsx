@@ -1,93 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { Col, Button } from 'reactstrap'; 
+import { Col, Button } from 'reactstrap';
 import Link from "next/link";
+import ProductBox from "../Product-Box/productbox";
+import { CartContext } from "helpers/cart/cart.context";
+import { WishlistContext } from "helpers/wishlist/wish.context";
+import { CompareContext } from "helpers/compare/compare.context";
 
-
-interface productsProps {
-    product: any;
-  }
-  
-  const Product: React.FC<productsProps> = ({ product }) => {
-
-    return (
-        <Col xl="3" md="6" sm="6">
-            <div className="product">
-                    <div className="product-box w-75 h-75 bg-white">
-                        <div className="product-imgbox">
-                            <div className="product-front justify-content-center align-items-center d-flex"> {/* Add d-flex and justify-content-center classes */}
-                                <img src={product.url} className="img-fluid" alt="product" style={{ objectFit: 'fill' }} /> {/* Remove the unnecessary class and add inline styles */}
-                            </div>
-                            
-                        </div>
-                        <div className="product-detail detail-center ">
-                            <div className="detail-title">
-                                <div className="detail-left">
-                                    <a href="">
-                                        <h6 className="price-title">{product.name.substring(0,20)}</h6>
-                                    </a>
-                                    <a href="">
-                                        <h6 className="price-title"><span className="text-primary">Model:</span> {product.model_no}</h6>
-                                    </a>
-                                    <div className="rating-star">
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                    </div>
-                                    
-                                </div>
-                                <div className="detail-right">
-                                    <div className="check-price">{product.new_price}</div>
-                                    <div className="price">
-                                        <div className="price">{product.new_sale_price}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="icon-detail">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
-                                    <i className="ti-bag"></i>
-                                </button>
-                                <a href="" title="Add to Wishlist">
-                                    <i className="ti-heart" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View">
-                                    <i className="ti-search" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" title="Compare">
-                                    <i className="fa fa-exchange" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-
-        </Col>
-    )
-}
+const PRODUCTS_PER_PAGE = 12; // Number of products to show per page
 
 const AllProducts = () => {
     const [productsData, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true); // Track loading state
+    const { addToCart } = React.useContext(CartContext);
+    const { addToWish } = React.useContext(WishlistContext);
+    const { addToCompare } = React.useContext(CompareContext);
 
     useEffect(() => {
         fetch('http://18.234.66.77/api/products')
             .then(response => response.json())
-            .then(data => setProducts(data[0]))
-            .catch(error => console.error('Error fetching products:', error));
+            .then(data => {
+                setProducts(data[0]);
+                setLoading(false); // Set loading to false when data is fetched
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+                setLoading(false); // Set loading to false on error
+            });
     }, []);
+
+    const startIndex = 0;
+    const endIndex = currentPage * PRODUCTS_PER_PAGE;
+    const productsToDisplay = productsData.slice(startIndex, endIndex);
+
+    const loadMoreProducts = () => {
+        setCurrentPage(currentPage + 1);
+    };
 
     return (
         <section className="section-big-py-space ratio_asos bg-light">
-        <div className="custom-container">
-          <div className="row search-product">
-            {productsData.map((prodct, i) => (
-              <Link href={`/product-details/${prodct.id}`} key={i}>
-                <Product product={prodct} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+            <div className="text-center mx-auto mb-5 bg-white">
+                <h1>All Products</h1>
+            </div>
+            <div className="custom-container">
+                {loading ? ( // Render loader while loading is true
+                    <div className="d-flex justify-content-center">
+                        <button className="btn btn-dark" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                ) : (
+                    <>
+                        <div className="row search-product">
+                            {productsToDisplay.map((product, i) => (
+                                <div className="col-xl-2 col-md-5 col-5" key={i}>
+                                    <div className="product">
+                                        <div>
+                                            <ProductBox
+                                                hoverEffect={true}
+                                                product={product} // Pass the product data
+                                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                                addCompare={(product) => addToCompare(product)}
+                                                addWish={(product) => addToWish(product)} />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="d-flex justify-content-center mt-5">
+                            <Button
+                                className="btn btn-primary"
+                                type="button"
+                                onClick={loadMoreProducts}
+                            >
+                                Load More
+                            </Button>
+                        </div>
+                    </>
+                )}
+            </div>
+        </section>
     );
 };
 

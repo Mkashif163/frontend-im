@@ -220,11 +220,11 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                 </Row>
               </div>
               {/* Pagination */}
-              {/* <div className="product-pagination loadmore-pagination">
+              <div className="product-pagination loadmore-pagination">
                 <div className="theme-paggination-block">
                   <Row>
                     <Col xl="12" md="12" sm="12">
-                      {data && data.products.hasMore && (
+                      {allProductData && allProductData.hasMore && (
                         <Button onClick={() => handlePagination()}>
                           {isLoading && (
                             <Spinner size="sm" color="light">
@@ -237,7 +237,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                     </Col>
                   </Row>
                 </div>
-              </div> */}
+              </div>
             </div>
           </Col>
         </Row>

@@ -3,7 +3,7 @@ import React from "react";
 import { NextPage } from "next";
 import Layout1 from "../../views/layouts/layout1";
 import Breadcrumb from "../../views/Containers/Breadcrumb";
-import RelatedProducts from "../../views/Products-Detail/related products";
+import RelatedProducts from "../../views/Products-Detail/related-products";
 import ThumbnailLeftPage from "../../views/Products-Detail/thumbnailLeftPage";
 
 const ThumbnailLeft: NextPage = () => {

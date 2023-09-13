@@ -99,7 +99,6 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const { addToCart } = useContext(CartContext);
 
   totalReview = 28;
-  const model = '1756-A7X-Plus-Enhanced-2023-NextGen-XYZ';
 
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol, value } = selectedCurr;
@@ -232,15 +231,15 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
               {changeColorVar === undefined
                 ? !!uniqueColor.length && (
                   <ul className="color-variant">
-                    {uniqueColor.map((vari, i) => {
-                      return <li className={vari.color} key={i} title={vari.color}></li>;
+                    {productData.colors.map((vari, i) => {
+                      return <li className={vari.color.color_code} key={i} title={vari.color.name}></li>;
                     })}
                   </ul>
                 )
                 : !!uniqueColor.length && (
                   <ul className="color-variant">
-                    {uniqueColor.map((vari, i) => {
-                      return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
+                    {productData.colors.map((vari, i) => {
+                      return <li className={vari.color.color_code} key={i} title={vari.color.name} onClick={() => changeColorVar(i)}></li>;
                     })}
                   </ul>
                 )}
@@ -359,8 +358,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
         <div className="border-product">
           <h6 className="product-title">product details</h6>
           <p>
-            Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae
-            vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,
+            {productData.description}
           </p>
         </div>
         <div className="border-product">
@@ -407,7 +405,11 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
         <div className="product-description border-product">
           <div className="payment-methods d-flex gap-5">
             <div ><h6>Return</h6></div>
-            <div>Return or Exchange this product within 15-Days | See details</div>
+            <div>Return or Exchange this product within {selectedCondition === "New" ? productData.new_return_days : productData.refurnished_return_days}-Days | See details</div>
+          </div>
+          <div className="payment-methods d-flex gap-5">
+            <div ><h6>Warranty</h6></div>
+            <div>{selectedCondition === "New" ? productData.new_warranty_days : productData.refurnished_warranty_days} Days Manufacturer Warranty</div>
           </div>
           <div className="payment-methods d-flex gap-4  ">
             <div ><h6>Payment methods</h6></div>

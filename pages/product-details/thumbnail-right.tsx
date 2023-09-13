@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import Breadcrumb from "../../views/Containers/Breadcrumb";
 import Layout1 from "../../views/layouts/layout1";
-import RelatedProducts from "../../views/Products-Detail/related products";
+import RelatedProducts from "../../views/Products-Detail/related-products";
 import ThumbnailRightSlick from "../../views/Products-Detail/thumbnail-right-slick";
 
 const GET_SINGLE_PRODUCTS = gql`

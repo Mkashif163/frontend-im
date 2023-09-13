@@ -3,7 +3,7 @@ import React from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Layout1 from "../../views/layouts/layout1";
-import RelatedProducts from "../../views/Products-Detail/related products";
+import RelatedProducts from "../../views/Products-Detail/related-products";
 import LeftSidebarPage from "../../views/Products-Detail/leftSidebarPage";
 
 const LeftSidebar: NextPage = () => {

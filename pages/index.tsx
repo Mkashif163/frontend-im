@@ -66,11 +66,11 @@ const Home: NextPage = () => {
               <section className="rounded-category">
                 <Suplier />
               </section>
-              
+              <AllProducts />
               <ContactBanner />
             </>
           )}
-          <AllProducts />
+          
         </div>
       </Layouts>
     </>
