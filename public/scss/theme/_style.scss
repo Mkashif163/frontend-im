@@ -12211,3 +12211,25 @@ button {
   top: 20px;
   z-index: 1;
 }
+
+.industry {
+  cursor: pointer;
+}
+
+.industry::before {
+  content: attr(data-hover-text);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  text-color: black;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.industry:hover::before {
+  visibility: visible;
+  opacity: 1;
+}

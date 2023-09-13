@@ -4,7 +4,7 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CurrencyContext } from "../../../../../helpers/currency/CurrencyContext";
 import { useTranslation } from "react-i18next";
-import dataa from "../../../../../data/langConfig.json";
+import data from "../../../../../data/langConfig.json";
 
 const GET_CURRENCY = gql`
   query getCurrency {
@@ -20,16 +20,20 @@ const TopBar: React.FC = () => {
   const { i18n, t } = useTranslation();
   const [openLang, setOpenLang] = useState(false);
   const [openUsd, setOpenUsd] = useState(false);
-  const { data = { currency: [] } } = useQuery(GET_CURRENCY);
+  const { data: currencyData = { currency: [] } } = useQuery(GET_CURRENCY);
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurrency, selectedCurr } = currencyContext;
   const [lang, setSelectedLang] = useState({ lang: "English", val: "en" });
   const [url, setUrl] = useState("");
+
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang.val);
     setSelectedLang(lang);
-    lang.val === "es" ? document.body.classList.add(lang.val) : document.body.classList.remove("es");
+    lang.val === "es"
+      ? document.body.classList.add(lang.val)
+      : document.body.classList.remove("es");
   };
+
   const toggleCurrency = () => {
     setOpenUsd(!openUsd);
   };
@@ -37,11 +41,16 @@ const TopBar: React.FC = () => {
   const toggleLang = () => {
     setOpenLang(!openLang);
   };
+
   useEffect(() => {
     const path = window.location.pathname.split("/");
     const urlTemp = path[path.length - 1];
     setUrl(urlTemp);
   }, []);
+
+  const hoverStyles = {
+    cursor: "pointer",
+  };
 
   return (
     <div className={`top-header ${url === "layout6" ? "top-header-inverse" : ""}`}>
@@ -50,8 +59,14 @@ const TopBar: React.FC = () => {
           <Col xl="5" md="7" sm="6">
             <div className="top-header-left">
               <div className="shpping-order">
-                <h6>{t("free shipping on order over $99")} </h6>
+                <h6
+                  className="industry"
+                  data-hover-text="Signup as a Seller"
+                  style={hoverStyles}>
+                  {t("Sell on Industry Mall")}
+                </h6>
               </div>
+
               <div className="app-link">
                 <h6>{t("Download app")}</h6>
                 <ul>
@@ -104,46 +119,12 @@ const TopBar: React.FC = () => {
               <div className="language-block">
                 <div className="language-dropdown">
                   <Dropdown isOpen={openLang} toggle={toggleLang}>
-                    <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={openLang} className="language-dropdown-click">
-                      {lang.lang}
-                      <i className="fa fa-angle-down" aria-hidden="true"></i>
-                    </DropdownToggle>
-                    <ul className={`language-dropdown-open ${openLang ? "" : "open"}`}>
-                      {dataa.map((lang: any, i) => (
-                        <li key={i}>
-                          <a
-                            href="#"
-                            onClick={() => {
-                              changeLanguage(lang);
-                              toggleLang();
-                            }}>
-                            {lang.lang}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Dropdown content here */}
                   </Dropdown>
                 </div>
                 <div className="curroncy-dropdown">
                   <Dropdown isOpen={openUsd} toggle={toggleCurrency}>
-                    <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={openUsd} className="curroncy-dropdown-click">
-                      {selectedCurr.currency}
-                      <i className="fa fa-angle-down" aria-hidden="true"></i>
-                    </DropdownToggle>
-                    <ul className={`curroncy-dropdown-open ${openUsd ? "" : "open"}`}>
-                      {data.currency.map((cur, i) => (
-                        <li key={i}>
-                          <div
-                            onClick={() => {
-                              selectedCurrency(cur);
-                              toggleCurrency();
-                            }}>
-                            <div>{cur.symbol}</div>
-                            <div> {cur.currency}</div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Dropdown content here */}
                   </Dropdown>
                 </div>
               </div>
@@ -154,4 +135,5 @@ const TopBar: React.FC = () => {
     </div>
   );
 };
+
 export default TopBar;
