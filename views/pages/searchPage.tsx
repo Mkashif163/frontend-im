@@ -1,91 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Container, Row, Col } from "reactstrap";
-import Breadcrumb from "../../views/Containers/Breadcrumb";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-interface products {
-  img1: string;
-  img2: string;
-  title: string;
-  price: string;
-  discount: string;
-}
 
 interface productsProps {
-  product: products;
+  product: any;
 }
-
-const productData = [
-  {
-    img1: "/images/layout-2/product/1.jpg",
-    img2: "/images/layout-2/product/a1.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/2.jpg",
-    img2: "/images/layout-2/product/a2.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/3.jpg",
-    img2: "/images/layout-2/product/a3.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/4.jpg",
-    img2: "/images/layout-2/product/a4.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/5.jpg",
-    img2: "/images/layout-2/product/a5.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/6.jpg",
-    img2: "/images/layout-2/product/a6.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/7.jpg",
-    img2: "/images/layout-2/product/a7.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-  {
-    img1: "/images/layout-2/product/8.jpg",
-    img2: "/images/layout-2/product/a8.jpg",
-    title: "reader will be distracted.",
-    price: "$ 56.21",
-    discount: "$ 24.05",
-  },
-];
 
 const ProductList: React.FC<productsProps> = ({ product }) => {
   return (
     <Col xl="3" md="4" sm="6">
       <div className="product">
-        <div className="product-box">
+        <div className="product-box bg-white">
           <div className="product-imgbox">
-            <div className="product-front">
-              <img src={product.img1} className="img-fluid  " alt="product" />
+            <div className="product-front justify-content-center align-items-center d-flex"> {/* Add d-flex and justify-content-center classes */}
+              <img src={product.url} className="img-fluid" alt="product" style={{ objectFit: 'fill' }} /> {/* Remove the unnecessary class and add inline styles */}
             </div>
-            <div className="product-back">
-              <img src={product.img2} className="img-fluid  " alt="product" />
-            </div>
+            {/* <div className="product-back">
+        <img src={product.img2} className="img-fluid" alt="product" />
+      </div> */}
           </div>
           <div className="product-detail detail-center ">
             <div className="detail-title">
@@ -98,13 +33,13 @@ const ProductList: React.FC<productsProps> = ({ product }) => {
                   <i className="fa fa-star"></i>
                 </div>
                 <a href="">
-                  <h6 className="price-title">{product.title}</h6>
+                  <h6 className="price-title">{product.name}</h6>
                 </a>
               </div>
               <div className="detail-right">
-                <div className="check-price">{product.price}</div>
+                <div className="check-price">{product.new_price}</div>
                 <div className="price">
-                  <div className="price">{product.discount}</div>
+                  <div className="price">{product.new_sale_price}</div>
                 </div>
               </div>
             </div>
@@ -128,26 +63,54 @@ const ProductList: React.FC<productsProps> = ({ product }) => {
     </Col>
   );
 };
-
 const SearchPage: NextPage = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Get the search query from the URL and update the state
+  useEffect(() => {
+    const { search } = router.query;
+    
+    if (search) {
+      setSearchQuery(search as string); // Cast to string if necessary
+      // Fetch data based on the search query
+      fetch(`http://18.234.66.77/api/search/product/${search}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setSearchResults(data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+        });
+    }
+  }, [router.query]);
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchQuery(e.currentTarget.searchQuery.value);
+    router.push(`/pages/search?${e.currentTarget.searchQuery.value}`);
+  };
+
   return (
     <>
-      {/* <!-- breadcrumb start --> */}
-      <Breadcrumb title="search" parent="home" />
-      {/* <!-- breadcrumb End --> */}
-
-      {/* <!--section start--> */}
       <section className="authentication-page section-big-pt-space bg-light">
         <div className="custom-containe">
           <section className="search-block">
             <Container>
               <Row>
                 <Col lg="6" className="offset-lg-3">
-                  <form className="form-header">
+                  <form className="form-header" onSubmit={handleSearch}>
                     <div className="input-group">
-                      <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Search Products......" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                        placeholder="Search Products......"
+                        name="searchQuery"
+                      />
                       <div className="input-group-append">
-                        <button className="btn btn-normal">
+                        <button type="submit" className="btn btn-normal">
                           <i className="fa fa-search"></i>Search
                         </button>
                       </div>
@@ -159,13 +122,14 @@ const SearchPage: NextPage = () => {
           </section>
         </div>
       </section>
-      {/* <!-- section end --> */}
 
       <section className="section-big-py-space ratio_asos bg-light">
         <div className="custom-container">
-          <div className="row search-product related-pro1">
-            {productData.map((product, i) => (
-              <ProductList product={product} key={i} />
+          <div className="row search-product">
+            {searchResults.map((product, i) => (
+              <Link href={`/product-details/${product.id}`} key={i}>
+                <ProductList product={product} />
+              </Link>
             ))}
           </div>
         </div>

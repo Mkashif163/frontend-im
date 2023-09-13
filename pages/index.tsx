@@ -11,6 +11,7 @@ import ContactBanner from "../views/layouts/widgets/contact-us";
 import Brands from "../views/layouts/widgets/roundedCategory";
 import Suplier from "views/layouts/layout2/suplierCategory";
 import ShortDisplay from "views/layouts/layout2/ShortDisplay";
+import AllProducts from "../views/layouts/widgets/AllProducts/allProducts";
 
 
 
@@ -65,9 +66,11 @@ const Home: NextPage = () => {
               <section className="rounded-category">
                 <Suplier />
               </section>
+              
               <ContactBanner />
             </>
           )}
+          <AllProducts />
         </div>
       </Layouts>
     </>

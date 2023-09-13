@@ -17,7 +17,7 @@ import { MenuContext } from "helpers/menu/MenuContext";
 interface header {
   cartPopupPosition: string;
   display: string;
-  category: boolean;
+  category: any;
   layoutLogo: string;
 }
 

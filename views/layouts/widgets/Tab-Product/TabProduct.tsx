@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Carousel, CarouselItem, CarouselControl } from "reactstrap";
+import { TabContent, TabPane, Row, Col, Carousel, CarouselItem, } from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
 import { CartContext } from "../../../../helpers/cart/cart.context";
@@ -190,17 +190,17 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
                         <Skeleton />
                       ) : (
                         <Slider {...settings}>
-                          {productsData.map((product, i) => (
-                            <div key={i}>
-                              <ProductBox
-                                hoverEffect={effect}
-                                product={product} // Pass the product data
-                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
-                                addCompare={(product) => addToCompare(product)}
-                                addWish={(product) => addToWish(product)}
-                              />
-                            </div>
-                          ))}
+                        {productsData.map((product, i) => (
+                          <div key={i}>
+                            <ProductBox
+                              hoverEffect={effect}
+                              product={product} // Pass the product data
+                              addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                              addCompare={(product) => addToCompare(product)}
+                              addWish={(product) => addToWish(product)}
+                            />
+                          </div>
+                        ))}
                         </Slider>
                       )}
                     </div>

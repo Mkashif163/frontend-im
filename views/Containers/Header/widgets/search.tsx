@@ -1,36 +1,25 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { Input, DropdownToggle, DropdownMenu, InputGroupText, DropdownItem, InputGroup, ButtonDropdown } from "reactstrap";
-import { useTranslation } from "react-i18next";
+import { Input, InputGroupText,  InputGroup, } from "reactstrap";
+import { useRouter } from "next/router";
 
 const Search: NextPage = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
-  const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const searchValue = event.currentTarget.search.value;
+    router.push(`/pages/search?${encodeURIComponent(searchValue)}`);
+  };
 
   return (
     <div className="input-block">
       <div className="input-box">
-        <form className="big-deal-form">
+        <form className="big-deal-form" onSubmit={handleSearch}>
           <InputGroup>
-            <InputGroupText>
-              <span className="search">
-                <i
-                  className="fa 
-                       fa-search"></i>
-              </span>
-            </InputGroupText>
-            <Input />
-            <ButtonDropdown isOpen={dropdownOpen} toggle={toggleDropDown}>
-              <DropdownToggle key={"search-menu-toggle"} caret>
-                {t("All Category")}
-              </DropdownToggle>
-              <DropdownMenu key={"search-menu"}>
-                <DropdownItem>All Category</DropdownItem>
-                <DropdownItem>indurstrial</DropdownItem>
-                <DropdownItem>sports</DropdownItem>
-              </DropdownMenu>
-            </ButtonDropdown>
+           
+            <Input name="search" />
+            <button type="submit" className="btn btn-normal"><i className="fa fa-search"></i> Search</button>
           </InputGroup>
         </form>
       </div>

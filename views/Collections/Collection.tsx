@@ -1,8 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Row, Col, Spinner, Button } from "reactstrap";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
 import ProductBox from "../layouts/widgets/Product-Box/productbox";
 import CollectionBanner from "./CollectionBanner";
 import { FilterContext } from "../../helpers/filter/filter.context";
@@ -11,39 +9,9 @@ import { WishlistContext } from "../../helpers/wishlist/wish.context";
 import { Skeleton } from "../../common/skeleton";
 import { CompareContext } from "helpers/compare/compare.context";
 
-const GET_PRODUCTS = gql`
-  query getProducts($type: CategoryType!, $color: String!, $brand: [String!], $priceMax: Int!, $priceMin: Int!, $sortBy: ProductSort, $indexFrom: Int!, $limit: Int!) {
-    products(type: $type, color: $color, brand: $brand, priceMax: $priceMax, priceMin: $priceMin, sortBy: $sortBy, indexFrom: $indexFrom, limit: $limit) {
-      total
-      hasMore
-      items {
-        id
-        title
-        description
-        type
-        brand
-        category
-        price
-        new
-        sale
-        discount
-        variants {
-          id
-          sku
-          size
-          color
-          image_id
-        }
-        images {
-          image_id
-          id
-          alt
-          src
-        }
-      }
-    }
-  }
-`;
+
+
+
 
 type CollectionProps = {
   cols: any;
@@ -61,19 +29,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const [pageLimit, setPageLimit] = useState(10);
   const [layout, setLayout] = useState(layoutList);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { loading, data, fetchMore } = useQuery(GET_PRODUCTS, {
-    variables: {
-      type: selectedCategory,
-      color: selectedColor,
-      indexFrom: 0,
-      limit: pageLimit,
-      priceMax: selectedPrice.max,
-      priceMin: selectedPrice.min,
-      brand: selectedBrands,
-      sortBy: sortBy,
-    },
-  });
+  const [allProductData, setAllProductData] = useState([])
 
   const handlePagination = () => {
     setIsLoading(true);
@@ -81,7 +37,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
       () =>
         fetchMore({
           variables: {
-            indexFrom: data.products.items.length,
+            indexFrom: allProductData.length,
           },
           updateQuery: (prev: any, { fetchMoreResult }) => {
             if (!fetchMoreResult) return prev;
@@ -108,7 +64,15 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const removeColor = () => {
     setSelectedColor("");
   };
-  
+
+  useEffect(() => {
+    fetch("http://18.234.66.77/api/products")
+      .then(response => response.json())
+      .then(data => setAllProductData(data[0]))
+      .catch(error => console.log(error))
+  })
+
+  console.log(allProductData)
 
   return (
     <Col className="collection-content">
@@ -159,7 +123,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                   <Col xs="12">
                     <div className="product-filter-content">
                       <div className="search-count">
-                        <h5>{data ? `Showing Products 1-${data.products.items.length} of ${data.products.total}` : "loading"} Result</h5>
+                        <h5>{allProductData ? `Showing Products 1-${allProductData.length} ` : "loading"} Result</h5>
                       </div>
                       <div className="collection-view">
                         <ul>
@@ -218,8 +182,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
               <div className={`product-wrapper-grid ${layout}`}>
                 <Row>
                   {/* Product Box */}
-                  {!data || !data.products || !data.products.items || data.products.items.length === 0 || loading ? (
-                    data && data.products && data.products.items && data.products.items.length === 0 ? (
+                  {!allProductData || allProductData.length === 0 ? (
+                    allProductData && allProductData.length === 0 ? (
                       <Col xs="12">
                         <div>
                           <div className="col-sm-12 empty-cart-cls text-center">
@@ -237,20 +201,17 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                       </>
                     )
                   ) : (
-                    data &&
-                    data.products.items.map((item: any, i: any) => (
+                    allProductData &&
+                    allProductData.map((product, i) => (
                       <div className={grid} key={i}>
                         <div className="product">
                           <div>
                             <ProductBox
-                              newLabel={item.new}
-                              {...item}
-                              layout={layout}
-                              item={item}
-                              addCompare={() => addToCompare(item)}
-                              addWish={() => addToWish(item)}
-                              addCart={() => addToCart(item)}
-                            />
+                            hoverEffect={true}
+                              product={product} // Pass the product data
+                              addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                              addCompare={(product) => addToCompare(product)}
+                              addWish={(product) => addToWish(product)} />
                           </div>
                         </div>
                       </div>
@@ -259,7 +220,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                 </Row>
               </div>
               {/* Pagination */}
-              <div className="product-pagination loadmore-pagination">
+              {/* <div className="product-pagination loadmore-pagination">
                 <div className="theme-paggination-block">
                   <Row>
                     <Col xl="12" md="12" sm="12">
@@ -276,7 +237,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                     </Col>
                   </Row>
                 </div>
-              </div>
+              </div> */}
             </div>
           </Col>
         </Row>
@@ -286,3 +247,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
 };
 
 export default Collection;
+function fetchMore(arg0: { variables: { indexFrom: any; }; updateQuery: (prev: any, { fetchMoreResult }: { fetchMoreResult: any; }) => any; }): void {
+  throw new Error("Function not implemented.");
+}
+

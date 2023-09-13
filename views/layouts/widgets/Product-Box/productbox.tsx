@@ -66,8 +66,8 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
     <>
       {product && <Fragment>
         <div className="product-box" onClick={clickProductDetail}>
-          <div className="product-imgbox">
-            <div className="product-front" >
+          <div className="product-imgbox bg-white">
+            <div className="product-front " >
               <img src={product.url} className="img-fluid" alt="product" />
             </div>
 

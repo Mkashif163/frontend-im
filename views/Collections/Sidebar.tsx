@@ -58,7 +58,7 @@ const Sidebar: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push(`${window.location.pathname}?brand=${selectedBrands}&color=${selectedColor}&category=${selectedCategory}&pricemin=${selectedPrice.min}&pricemax=${selectedPrice.max}`, undefined, {
+    router.push(`${window.location.pathname}`, undefined, {
       shallow: true,
     });
   }, [selectedCategory, selectedPrice, selectedBrands, selectedColor]);
@@ -97,6 +97,18 @@ const Sidebar: NextPage = () => {
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
               <ul className="category-list">
+                <li>
+                  <Link href="#!">
+                    <a
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedCategory("");
+                        resetFilter();
+                      }}>
+                      All Products
+                    </a>
+                  </Link>
+                </li>
                 {categories.map(category => (
                   <li key={category}>
                     <Link href="#!">

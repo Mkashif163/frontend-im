@@ -70,7 +70,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                   </a>
                   {/* Subcategories show karega agar woh fetch hui hain */}
                   {subCategories[category.id] &&
-                    <ul>
+                    <ul className="text-primary">
                       {subCategories[category.id].map(sub => (
                         <li key={sub.id}>
                           <a href={`/collections/leftsidebar?subCategory=${sub.name}`}>
