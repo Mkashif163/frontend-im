@@ -8,7 +8,7 @@ interface byCategory {
 }
 const ByCategory: NextPage<byCategory> = ({ category }) => {
   const [showState, setShowState] = useState(category || false);
-  const [categoryData, setCategoryData] = useState([]);
+  const [menuData, setMenuData] = useState([]);
   const { t } = useTranslation();
   const menuContext = useContext(MenuContext);
   const { leftMenu, setLeftMenu } = menuContext;
@@ -17,17 +17,20 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
     fetch("http://18.234.66.77/api/menus")
       .then((res) => res.json())
       .then((data) => {
-        setCategoryData(data);
+        setMenuData(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
-  const [subCategories, setSubCategories] = useState({});
+  const [categories, setCategories] = useState({});
 
   // Function to fetch subcategories for a category
-  const fetchSubCategories = async (menuId) => {
+  const fetchCategories = async (menuId) => {
     const response = await fetch(`http://18.234.66.77/api/categories/${menuId}`);
     const data = await response.json();
-    setSubCategories(prev => ({ ...prev, [menuId]: data.data }));
+    setCategories(prev => ({ ...prev, [menuId]: data.data }));
   }
 
   return (
@@ -59,19 +62,19 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                   <i className="fa fa-angle-left"></i>Back
                 </a>
               </li>
-              {categoryData.map((category) => (
+              {menuData.map((menu) => (
                 <li
-                  key={category.id}
-                  onMouseEnter={() => fetchSubCategories(category.id)}
-                  onMouseLeave={() => setSubCategories({ ...subCategories, [category.id]: [] })} // Hide subcategories on mouse leave
+                  key={menu.id}
+                  onMouseEnter={() => fetchCategories(menu.id)}
+                  onMouseLeave={() => setCategories({ ...categories, [menu.id]: [] })} // Hide subcategories on mouse leave
                 >
-                  <a href={`/collections/leftsidebar?category=${category.name}`}>
-                    <span>{category.name}</span>
+                  <a href={`/collections/leftsidebar?category=${menu.name}`}>
+                    <span>{menu.name}</span>
                   </a>
                   {/* Subcategories show karega agar woh fetch hui hain */}
-                  {subCategories[category.id] &&
+                  {categories[menu.id] &&
                     <ul className="text-primary">
-                      {subCategories[category.id].map(sub => (
+                      {categories[menu.id].map(sub => (
                         <li key={sub.id}>
                           <a href={`/collections/leftsidebar?subCategory=${sub.name}`}>
                             {sub.name}

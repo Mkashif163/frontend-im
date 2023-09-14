@@ -1,5 +1,4 @@
-import React from "react";
-import { gql } from "@apollo/client";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import Slider from "react-slick";
@@ -52,47 +51,27 @@ var settings = {
   ],
 };
 
-const GET_PRODUCTS = gql`
-  query getProducts($type: String!, $id: Int!) {
-    relatedProducts(type: $type, id: $id) {
-      id
-      title
-      description
-      type
-      brand
-      category
-      price
-      new
-      sale
-      discount
-      variants {
-        id
-        sku
-        size
-        color
-        image_id
-      }
-      images {
-        image_id
-        id
-        alt
-        src
-      }
-    }
-  }
-`;
-
 const RelatedProducts: NextPage = () => {
   const { addToWish } = React.useContext(WishlistContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToCompare } = React.useContext(CompareContext);
-  var { loading, data } = useQuery(GET_PRODUCTS, {
-    variables: {
-      type: "fashion",
-      id: 1,
-    },
-  });
+  const [loading, setLoading] = useState(true); // Track loading state
+  const [productsData, setProducts] = useState([]);
 
+  useEffect(() => {
+    fetch('http://18.234.66.77/api/products')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data[0]);
+        setLoading(false); // Set loading to false when data is fetched
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        setLoading(false); // Set loading to false on error
+      });
+  }, []);
+
+  console.log("releted data", productsData)
   return (
     <section className="section-big-py-space  ratio_asos bg-light">
       <div className="custom-container">
@@ -101,23 +80,30 @@ const RelatedProducts: NextPage = () => {
             <h2>related products</h2>
           </Col>
         </Row>
-
-        {!data || !data.relatedProducts || data.relatedProducts.length === 0 || loading ? (
-          <Skeleton />
-        ) : (
-          <Row>
-            <Col className="product">
-              <Slider {...settings}>
-                {data &&
-                  data.relatedProducts.map((item: any, i: any) => (
-                    <div key={i}>
-                      <ProductBox newLabel={item.new} {...item} item={item} addCart={() => addToCart(item)} addCompare={() => addToCompare(item)} addWish={() => addToWish(item)} />
+        {
+          loading ? (
+            <Skeleton />
+          ) : (
+            <Row>
+              <Col className="product">
+                <Slider {...settings}>
+                  {productsData.map((product, i) => (
+                    <div>
+                      <ProductBox
+                        hoverEffect={true}
+                        product={product} // Pass the product data
+                        addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                        addCompare={(product) => addToCompare(product)}
+                        addWish={(product) => addToWish(product)} />
                     </div>
                   ))}
-              </Slider>
-            </Col>
-          </Row>
-        )}
+                </Slider>
+              </Col>
+            </Row>
+          )
+        }
+
+
       </div>
     </section>
   );

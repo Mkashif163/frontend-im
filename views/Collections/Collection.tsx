@@ -185,14 +185,11 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                   {!allProductData || allProductData.length === 0 ? (
                     allProductData && allProductData.length === 0 ? (
                       <Col xs="12">
-                        <div>
-                          <div className="col-sm-12 empty-cart-cls text-center">
-                            <img src={`/images/empty-search.jpg`} className="img-fluid mb-4" alt="" />
-                            <h3>
-                              <strong>Your Cart is Empty</strong>
-                            </h3>
-                            <h4>Explore more shortlist some items.</h4>
-                          </div>
+                        <div className="d-flex justify-content-center mt-5">
+                          <button className="btn btn-dark" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                          </button>
                         </div>
                       </Col>
                     ) : (
@@ -207,7 +204,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                         <div className="product">
                           <div>
                             <ProductBox
-                            hoverEffect={true}
+                              hoverEffect={true}
                               product={product} // Pass the product data
                               addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
                               addCompare={(product) => addToCompare(product)}

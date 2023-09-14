@@ -44,17 +44,17 @@ const Wishlist: NextPage = () => {
                         <li key={index}>
                           <div className="media">
                             <a href="#">
-                              <Media alt="" className="me-3" src={`/images/${item.images[0].src}`} />
+                              <Media alt="" className="me-3" src={item.url} />
                             </a>
                             <div className="media-body">
                               <a href="#">
-                                <h4>{item.title}</h4>
+                                <h4>{item.name}</h4>
                               </a>
-                              <h4 className="theme-color">
+                              {/* <h4 className="theme-color">
                                 <span>{item.type}</span>
-                              </h4>
+                              </h4> */}
                               <h5>
-                                <span> ${item.price}</span>
+                                <span> ${item.new_sale_price}</span>
                               </h5>
                             </div>
                           </div>

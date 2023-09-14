@@ -4,18 +4,27 @@ import { CartContext } from "../../../helpers/cart/cart.context";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 
 const CartPage: NextPage = () => {
-  const { cartItems, updateQty, removeFromCart, cartTotal } = React.useContext(CartContext);
+  const { cartItems, updateQty, removeFromCart } = React.useContext(CartContext);
   const { selectedCurr } = React.useContext(CurrencyContext);
-  const { symbol, value } = selectedCurr;
+  const { symbol } = selectedCurr;
   const [quantityError, setQuantityError] = useState<Boolean>(false);
+
+
+  const cartTotal = cartItems.reduce((total, item) => {
+    return total + item.new_sale_price * item.qty;
+  }, 0);  
+
+
   const handleQtyUpdate = (item, quantity) => {
-    if (quantity >= 1) {
+    const parsedQty = parseInt(quantity, 10);
+    if (parsedQty >= 1) {
       setQuantityError(false);
-      updateQty(item, quantity);
+      updateQty(item, parsedQty); // parsedQty is used to ensure we are working with an integer
     } else {
       setQuantityError(true);
     }
   };
+
   return (
     <>
       <section className="cart-section section-big-py-space bg-light">
@@ -40,12 +49,12 @@ const CartPage: NextPage = () => {
                         <tr>
                           <td>
                             <a href="#" onClick={(e) => e.preventDefault()}>
-                              <img src={`/images/${item.images[0].src}`} alt="cart" className=" " />
+                              <img src={item.url} alt="cart" className=" " />
                             </a>
                           </td>
                           <td>
                             <a href="#" onClick={(e) => e.preventDefault()}>
-                              {item.title}
+                              {item.name}
                             </a>
                             <div className="mobile-cart-content row">
                               <div className="col-xs-3 col-3">
@@ -58,7 +67,7 @@ const CartPage: NextPage = () => {
                               <div className="col-xs-3 col-3">
                                 <h2 className="td-color">
                                   {symbol}
-                                  {item.price}
+                                  {item.new_sale_price}
                                 </h2>
                               </div>
                               <div className="col-xs-3 col-3">
@@ -73,7 +82,7 @@ const CartPage: NextPage = () => {
                           <td>
                             <h2>
                               {symbol}
-                              {item.price}
+                              {item.new_sale_price}
                             </h2>
                           </td>
                           <td>
@@ -86,7 +95,9 @@ const CartPage: NextPage = () => {
                                   className="form-control input-number"
                                   defaultValue={item.qty}
                                   style={{ borderColor: quantityError && "red" }}
+                                  min="1"
                                 />
+
                               </div>
                             </div>
                           </td>
@@ -104,7 +115,7 @@ const CartPage: NextPage = () => {
                           <td>
                             <h2 className="td-color">
                               {symbol}
-                              {(item.total * value).toFixed(2)}
+                              {(item.new_sale_price * item.qty).toFixed(2)}
                             </h2>
                           </td>
                         </tr>

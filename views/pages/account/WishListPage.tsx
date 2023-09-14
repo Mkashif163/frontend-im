@@ -4,7 +4,6 @@ import { CartContext } from "../../../helpers/cart/cart.context";
 import { WishlistContext } from "../../../helpers/wishlist/wish.context";
 import { Row, Col, Table } from "reactstrap";
 import Link from "next/link";
-import Breadcrumb from "../../Containers/Breadcrumb";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 
 const WishListPage: NextPage = () => {
@@ -44,7 +43,7 @@ const WishListPage: NextPage = () => {
                               onClick={(e) => {
                                 e.preventDefault();
                               }}>
-                              <img src={`/images/${item.images[0].src}`} alt="product" className="img-fluid" />
+                              <img src={item.url} alt="product" className="img-fluid" />
                             </a>
                           </td>
                           <td>
@@ -53,7 +52,7 @@ const WishListPage: NextPage = () => {
                               onClick={(e) => {
                                 e.preventDefault();
                               }}>
-                              {item.title}
+                              {item.name}
                             </a>
                             <Row className="mobile-cart-content row">
                               <Col xs="3" className="col-xs-3 col-3">
@@ -62,7 +61,7 @@ const WishListPage: NextPage = () => {
                               <Col xs="3" className="col-xs-3 col-3">
                                 <h2 className="td-color">
                                   {symbol}
-                                  {item.price * value}
+                                  {item.new_sale_price}
                                 </h2>
                               </Col>
                               <Col xs="3" className="col-xs-3 col-3">
@@ -90,7 +89,7 @@ const WishListPage: NextPage = () => {
                           <td>
                             <h2>
                               {symbol}
-                              {item.price * value}
+                              {item.new_sale_price}
                             </h2>
                           </td>
                           <td>

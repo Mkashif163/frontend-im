@@ -1161,7 +1161,6 @@ button {
     padding-left: 65px;
     .category-contain {
       .img-wrapper {
-        filter: grayscale(100%);
         align-items: center;
         width: 110px;
         margin: 10px 0 0;
@@ -1173,13 +1172,9 @@ button {
           mix-blend-mode: color-burn;
         }
       }
-      &:hover {
-        .img-wrapper {
-          filter: none;
-        }
-        .btn-rounded {
-          background-color: var(--theme-color1);
-        }
+
+      .btn-rounded {
+        background-color: var(--theme-color1);
       }
     }
   }
@@ -1718,6 +1713,19 @@ button {
   background-color: red;
 }
 
+
+
+/* All product page */
+
+.allproduct-text{
+  background-color:  var(--theme-color1) ;
+  padding: 10px 0;
+  h2{
+    font-size: 3rem;
+    color: white;
+  }
+}
+
 /*============================
   14. Product CSS start
 ==============================*/
@@ -1770,7 +1778,6 @@ button {
 
 .product {
   .product-box {
-
     padding-right: 15px;
 
     .product-imgbox {

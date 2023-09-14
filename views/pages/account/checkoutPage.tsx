@@ -79,7 +79,6 @@ const CheckoutPage: NextPage = () => {
 
   return (
     <>
-      <Breadcrumb title="checkout" parent="home" />
       {/* <!-- section start --> */}
       <section className="section-big-py-space bg-light">
         <div className="custom-container">

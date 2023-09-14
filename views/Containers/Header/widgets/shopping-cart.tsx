@@ -13,6 +13,10 @@ const ShoppingCart = ({ position, cartDisplay, layout }) => {
   const symbol = selectedCurr.symbol;
   const { t } = useTranslation();
 
+  const calculatedCartTotal = cartItems.reduce((total, item) => {
+    return total + item.new_sale_price * item.qty;
+  }, 0);
+
   return (
     <Fragment>
       {layout === "layout3" ? (
@@ -80,15 +84,15 @@ const ShoppingCart = ({ position, cartDisplay, layout }) => {
                   <li key={`cart-popup-${index}`}>
                     <div className="media">
                       <a href="#">
-                        <Media alt="" className="me-3" src={`/images/${item.images[0].src}`} />
+                        <Media alt="" className="me-3" src={item.url} />
                       </a>
                       <div className="media-body">
                         <a href="#">
-                          <h4>{item.title}</h4>
+                          <h4>{item.name}</h4>
                         </a>
                         <h4>
                           <span>
-                            {item.qty} x {symbol} {item.price}
+                            {item.qty} x {symbol} {item.new_sale_price}
                           </span>
                         </h4>
                       </div>
@@ -111,7 +115,7 @@ const ShoppingCart = ({ position, cartDisplay, layout }) => {
                     <h5>
                       subtotal :{" "}
                       <span>
-                        {symbol} {cartTotal * selectedCurr.value}
+                        {symbol} {calculatedCartTotal}
                       </span>
                     </h5>
                   </div>

@@ -62,7 +62,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
               <Row>
                 <ProductSlick item={product} bundle={false} swatch={false} />
               </Row>
-              <TabProduct />
+              <TabProduct  item={product}/>
               <CustomerMessageForm/>
             </Col>
           </Row>
