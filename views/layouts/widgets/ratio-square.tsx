@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Media, Modal, ModalBody } from "reactstrap";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import { WishlistContext } from "helpers/wishlist/wish.context";
 import { CompareContext } from "helpers/compare/compare.context";
 import { useRouter } from "next/router";
+import { set } from "react-hook-form";
 
 var settings = {
   dots: false,
@@ -54,36 +55,7 @@ var settings = {
   ],
 };
 
-const GET_PRODUCTS = gql`
-  query getProducts($type: CategoryType, $limit: Int!) {
-    products(type: $type, limit: $limit) {
-      items {
-        id
-        title
-        collection {
-          collectionName
-        }
-      }
-    }
-  }
-`;
 
-const GET_COLLECTION = gql`
-  query getCollection($collection: String) {
-    collection(collec: $collection) {
-      id
-      title
-      price
-      discount
-      images {
-        image_id
-        id
-        alt
-        src
-      }
-    }
-  }
-`;
 
 const RatioSquare: NextPage = () => {
   const currencyContext = useContext(CurrencyContext);
@@ -92,10 +64,13 @@ const RatioSquare: NextPage = () => {
   const [modal, setModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [stockState, setStockState] = useState("InStock");
-  const router = useRouter();
   const { addToWish } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
   const { addToCompare } = useContext(CompareContext);
+  const router = useRouter();
+  const [selected, setSelected] = useState("motors");
+  const [dataR, setDataR] = useState([]);
+  const [loading, setLoading] = useState(true);
   const uniqueSize = [];
   const uniqueColor = [];
 
@@ -125,21 +100,24 @@ const RatioSquare: NextPage = () => {
   const QuickView = () => {
     setModal(!modal);
   };
+ 
+  useEffect(() => {  
+    const apiUrl = `http://18.234.66.77/api/search/product/${selected}`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the data from the API here
+        setDataR(data.data); // Assuming data is an array in the response
+        setLoading(false);
+        console.log("Fetched Data from API:", dataR);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+        setLoading(false);
+      });
+  }
+  , [selected]);
 
-  const clickProductDetail = (item) => {
-    router.push(`/product-details/${item.id}` + "-" + `${item.titleProps}`);
-  };
-  var { loading, data } = useQuery(GET_PRODUCTS, {
-    variables: {
-      type: "ALL",
-      limit: 235,
-    },
-  });
-  var { data: dataR } = useQuery(GET_COLLECTION, {
-    variables: {
-      collection: activeTab,
-    },
-  });
 
 
   
@@ -147,26 +125,25 @@ const RatioSquare: NextPage = () => {
     <section className="ratio_square">
       <div className="custom-container  section-pb-space">
         <div className="b-g-white px-3 pb-3">
-          {data &&
-            !loading &&
-            data.products.items.map((item: any) => {
-              item.collection.map((i) => {
-                const index = collection.indexOf(i.collectionName);
-                if (index === -1) collection.push(i.collectionName);
-              });
-            })}
-            
           <Row>
             <Col className="p-0">
               <div className="theme-tab product">
                 <Nav tabs className="tab-title media-tab">
-                  {collection.slice(0, 4).map((c, i) => (
-                    <NavItem key={i}>
+                    <NavItem >
                       <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                        {c}
+                        Featured
                       </NavLink>
                     </NavItem>
-                  ))}
+                    <NavItem >
+                      <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
+                        Popular
+                      </NavLink>
+                    </NavItem>
+                    <NavItem >
+                      <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
+                        On Sale
+                      </NavLink>
+                    </NavItem>
                 </Nav>
               </div>
               <div className="tab-content-cls">
@@ -174,13 +151,13 @@ const RatioSquare: NextPage = () => {
                   <TabPane tabId={activeTab}>
                     <Slider {...settings}>
                       {dataR &&
-                        dataR.collection.map((item, i) => (
+                        dataR.map((item, i) => (
                           <div key={i}>
                             <div className="media-banner media-banner-1 border-0">
                               <div className="media-banner-box">
                                 <div className="media">
-                                  <Link href={`/product-details/${item.id}-${item.title.split(" ").join("")}`}>
-                                    <img src={`/images/${item.images[0] ? item.images[0].src : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
+                                  <Link href={`/product-details/${item.id}`}>
+                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
                                   </Link>
                                   <div className="media-body">
                                     <div className="media-contant">
@@ -193,16 +170,16 @@ const RatioSquare: NextPage = () => {
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                           </ul>
-                                          <Link href={`/product-details/${item.id}-${item.title.split(" ").join("")}`}>
-                                            <p>{item.title}</p>
+                                          <Link href={`/product-details/${item.id}`}>
+                                            <p>{item.name}</p>
                                           </Link>
                                           <h6>
                                             {" "}
                                             {selectedCurr.symbol}
-                                            {((item.price - item.price * (item.discount / 100)) * selectedCurr.value).toFixed(2)}{" "}
+                                            {(item.new_sale_price).toFixed(2)}{" "}
                                             <span>
                                               {selectedCurr.symbol}
-                                              {(item.price * selectedCurr.value).toFixed(2)}
+                                              {(item.new_price).toFixed(2)}
                                             </span>
                                           </h6>
                                         </div>
@@ -227,29 +204,47 @@ const RatioSquare: NextPage = () => {
                               </div>
                               <div className="media-banner-box">
                                 <div className="media">
-                                  <Media src={`/images/${item.images[1] ? item.images[1].src : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
+                                  <Link href={`/product-details/${item.id}`}>
+                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
+                                  </Link>
                                   <div className="media-body">
                                     <div className="media-contant">
                                       <div>
-                                        <div className="rating">
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                        </div>
-                                        <a href={`/product-details/${item.id}-${item.title.split(" ").join("")}`}>
-                                          <p>{item.title}</p>
-                                        </a>
-                                        <h6>
-                                          {" "}
-                                          {selectedCurr.symbol}
-                                          {((item.price - item.price * (item.discount / 100)) * selectedCurr.value).toFixed(2)}{" "}
-                                          <span>
+                                        <div className="product-detail">
+                                          <ul className="rating">
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                          </ul>
+                                          <Link href={`/product-details/${item.id}`}>
+                                            <p>{item.name}</p>
+                                          </Link>
+                                          <h6>
+                                            {" "}
                                             {selectedCurr.symbol}
-                                            {(item.price * selectedCurr.value).toFixed(2)}
-                                          </span>
-                                        </h6>
+                                            {(item.new_sale_price).toFixed(2)}{" "}
+                                            <span>
+                                              {selectedCurr.symbol}
+                                              {(item.new_price).toFixed(2)}
+                                            </span>
+                                          </h6>
+                                        </div>
+                                        <div className="cart-info">
+                                          <button onClick={() => addToCart(item)}>
+                                            <i className="ti-bag"></i>
+                                          </button>
+                                          <a onClick={() => addToWish(item)}>
+                                            <i className="ti-heart" aria-hidden="true"></i>
+                                          </a>
+                                          <a href="#" title="Quick View" onClick={() => QuickView()}>
+                                            <i className="ti-search" aria-hidden="true"></i>
+                                          </a>
+                                          <a href="#" title="Compare" onClick={() => addToCompare(item)}>
+                                            <i className="fa fa-exchange" aria-hidden="true"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -257,29 +252,47 @@ const RatioSquare: NextPage = () => {
                               </div>
                               <div className="media-banner-box">
                                 <div className="media">
-                                  <Media src={`/images/${item.images[2] ? item.images[2].src : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
+                                  <Link href={`/product-details/${item.id}`}>
+                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
+                                  </Link>
                                   <div className="media-body">
                                     <div className="media-contant">
                                       <div>
-                                        <div className="rating">
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                          <i className="fa fa-star"></i>
-                                        </div>
-                                        <a href={`/product-details/${item.id}-${item.title.split(" ").join("")}`}>
-                                          <p>{item.title}</p>
-                                        </a>
-                                        <h6>
-                                          {" "}
-                                          {selectedCurr.symbol}
-                                          {((item.price - item.price * (item.discount / 100)) * selectedCurr.value).toFixed(2)}{" "}
-                                          <span>
+                                        <div className="product-detail">
+                                          <ul className="rating">
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                          </ul>
+                                          <Link href={`/product-details/${item.id}`}>
+                                            <p>{item.name}</p>
+                                          </Link>
+                                          <h6>
+                                            {" "}
                                             {selectedCurr.symbol}
-                                            {(item.price * selectedCurr.value).toFixed(2)}
-                                          </span>
-                                        </h6>
+                                            {(item.new_sale_price).toFixed(2)}{" "}
+                                            <span>
+                                              {selectedCurr.symbol}
+                                              {(item.new_price).toFixed(2)}
+                                            </span>
+                                          </h6>
+                                        </div>
+                                        <div className="cart-info">
+                                          <button onClick={() => addToCart(item)}>
+                                            <i className="ti-bag"></i>
+                                          </button>
+                                          <a onClick={() => addToWish(item)}>
+                                            <i className="ti-heart" aria-hidden="true"></i>
+                                          </a>
+                                          <a href="#" title="Quick View" onClick={() => QuickView()}>
+                                            <i className="ti-search" aria-hidden="true"></i>
+                                          </a>
+                                          <a href="#" title="Compare" onClick={() => addToCompare(item)}>
+                                            <i className="fa fa-exchange" aria-hidden="true"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -352,9 +365,9 @@ const RatioSquare: NextPage = () => {
                                         <a href="#" className="btn btn-normal" onClick={() => addToCart(item, quantity)}>
                                           add to cart
                                         </a>
-                                        <a href="#" className="btn btn-normal" onClick={() => clickProductDetail(item)}>
+                                        {/* <a href="#" className="btn btn-normal" onClick={() => clickProductDetail(item)}>
                                           view detail
-                                        </a>
+                                        </a> */}
                                       </div>
                                     </div>
                                   </div>

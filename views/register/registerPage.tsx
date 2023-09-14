@@ -1,7 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { Label, Input, Row, Col, Form, FormGroup } from "reactstrap";
-import Breadcrumb from "../../Containers/Breadcrumb";
+import Breadcrumb from "../Containers/Breadcrumb";
 
 const RegisterPage: NextPage = () => {
   return (

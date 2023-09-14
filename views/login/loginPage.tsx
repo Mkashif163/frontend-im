@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Row, Col, Input, Label } from "reactstrap";
 import { useRouter } from "next/router";
-import firebase from "../../../config/base";
+import firebase from "../../config/base";
 import { toast } from "react-toastify";
 
 const Login: NextPage = () => {

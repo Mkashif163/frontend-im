@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { Container, Row, Col } from "reactstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Skeleton } from "common/skeleton";
 
 
 interface productsProps {
@@ -67,24 +68,22 @@ const SearchPage: NextPage = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Get the search query from the URL and update the state
   useEffect(() => {
-    const { search } = router.query;
-    
-    if (search) {
-      setSearchQuery(search as string); // Cast to string if necessary
       // Fetch data based on the search query
-      fetch(`http://18.234.66.77/api/search/product/${search}`)
+      fetch(`http://18.234.66.77/api/search/product/${searchQuery}`)
         .then((response) => response.json())
         .then((data) => {
           setSearchResults(data.data);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching products:", error);
+          setLoading(false);
         });
-    }
-  }, [router.query]);
+  },);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -124,14 +123,14 @@ const SearchPage: NextPage = () => {
       </section>
 
       <section className="section-big-py-space ratio_asos bg-light">
-        <div className="custom-container">
-          <div className="row search-product">
+        <div className="custom-container">  
+          {loading ? <Skeleton/> :<div className="row search-product">
             {searchResults.map((product, i) => (
               <Link href={`/product-details/${product.id}`} key={i}>
                 <ProductList product={product} />
               </Link>
             ))}
-          </div>
+          </div>}
         </div>
       </section>
     </>

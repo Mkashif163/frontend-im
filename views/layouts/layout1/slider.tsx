@@ -24,15 +24,14 @@ interface slider {
 interface sliderProps {
   banner: slider;
 }
-
 const banners = [
   {
     img1: "/images/layout-2/slider/s1.jpg",
     img2: "/images/layout-2/slider/s1.jpg",
     title1: "Valves",
     title2: "Lights",
-    subTitle1: "now start at $99",
-    subTitle2: "50% off",
+    subTitle1: "Upto 20% off", // Updated
+    subTitle2: "Switchgear & Industrial Automation", // Updated
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
@@ -41,8 +40,8 @@ const banners = [
     img2: "/images/layout-2/slider/s2.jpg",
     title1: "big",
     title2: "Sale",
-    subTitle1: "now start at $99",
-    subTitle2: "50% off",
+    subTitle1: "Upto 25% off", // Updated
+    subTitle2: "LED Explosion Proof Light", // Updated
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
@@ -51,8 +50,8 @@ const banners = [
     img2: "/images/layout-2/slider/s3.jpg",
     title1: "camera",
     title2: "Sale",
-    subTitle1: "now start at $79",
-    subTitle2: "70% off today",
+    subTitle1: "Upto 20% off", // Updated
+    subTitle2: "Electric Industrial Motors", // Updated
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
@@ -61,8 +60,8 @@ const banners = [
     img2: "/images/layout-2/slider/s4.jpg",
     title1: "ALL",
     title2: "Sale",
-    subTitle1: "now start at $79",
-    subTitle2: "70% off today",
+    subTitle1: "Upto 15% off", // Updated
+    subTitle2: "Industrial Valves", // Updated
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
@@ -71,12 +70,13 @@ const banners = [
     img2: "/images/layout-2/slider/s5.jpg",
     title1: "weekend",
     title2: "Offers",
-    subTitle1: "now start at $79",
-    subTitle2: "70% off today",
+    subTitle1: "Upto 20% off (VFD)", // Updated
+    subTitle2: "Energy-efficient solution", // Updated
     category: "ELECTRONICS",
     btn: "Shop Now",
   },
 ];
+
 
 const BannerList: React.FC<sliderProps> = ({ banner }) => {
 
