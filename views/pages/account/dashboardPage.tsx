@@ -13,13 +13,8 @@ import Link from "next/link";
 
 const Dashboard: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentComponent, setCurrentComponent] = useState("dashboard"); // ["dashboard", "order", "address", "wishlist", "cart", "newsletter", "account", "changePassword"]
-  const router = useRouter();
-
-  // Access the current route pathname
-  const currentRoute = router.pathname;
-
-  console.log(currentRoute);
+  const [currentComponent, setCurrentComponent] = useState("dashboard"); 
+  
   return (
     <>
       <section className="section-big-py-space bg-light">

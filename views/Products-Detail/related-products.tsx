@@ -70,8 +70,6 @@ const RelatedProducts: NextPage = () => {
         setLoading(false); // Set loading to false on error
       });
   }, []);
-
-  console.log("releted data", productsData)
   return (
     <section className="section-big-py-space  ratio_asos bg-light">
       <div className="custom-container">

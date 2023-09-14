@@ -123,7 +123,6 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   };
   const productData = item[0];
 
-  console.log("product page", productData)
 
 
   const calculateDiscountPercentage = (originalPrice, salePrice) => {

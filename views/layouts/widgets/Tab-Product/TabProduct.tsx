@@ -81,8 +81,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
       .then((response) => response.json())
       .then((data) => {
         // Handle the data from the API here
-        setSubCategoriesData(data.data); // Assuming data is an array in the response
-        console.log("Fetched Data from API:", subCategoriesData);
+        setSubCategoriesData(data.data); 
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);
@@ -151,9 +150,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
     }
     setLoading(true);
   };
-  
 
-  console.log("productsData", productsData);
   return (
     <>
       <section className="section-pt-space bg-white mt-2">

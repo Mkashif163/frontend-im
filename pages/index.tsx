@@ -27,8 +27,7 @@ const Home: NextPage = () => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the data from the API here
-        setCategoriesData(data.data); // Assuming data is an array in the response
-        console.log("Fetched Data from API:", categoriesData);
+        setCategoriesData(data.data);
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);

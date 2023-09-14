@@ -17,7 +17,6 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
 
   const data = item[0];
 
-  console.log("image", data)
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();
 

@@ -27,8 +27,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the data from the API here
-        setProduct(data.data); // Assuming data is an array in the response
-        console.log("Fetched Data from API:", setProduct);
+        setProduct(data.data);
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);

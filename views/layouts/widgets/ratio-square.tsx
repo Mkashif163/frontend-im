@@ -7,8 +7,8 @@ import Slider from "react-slick";
 import { CurrencyContext } from "../../../helpers/currency/CurrencyContext";
 import { CartContext } from "../../../helpers/cart/cart.context";
 import Link from "next/link";
-import { WishlistContext } from "helpers/wishlist/wish.context";
-import { CompareContext } from "helpers/compare/compare.context";
+import { WishlistContext } from "../../../helpers/wishlist/wish.context";
+import { CompareContext } from "../../../helpers/compare/compare.context";
 import { useRouter } from "next/router";
 import { set } from "react-hook-form";
 
@@ -55,8 +55,6 @@ var settings = {
   ],
 };
 
-
-
 const RatioSquare: NextPage = () => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
@@ -100,8 +98,8 @@ const RatioSquare: NextPage = () => {
   const QuickView = () => {
     setModal(!modal);
   };
- 
-  useEffect(() => {  
+
+  useEffect(() => {
     const apiUrl = `http://18.234.66.77/api/search/product/${selected}`;
     fetch(apiUrl)
       .then((response) => response.json())
@@ -109,18 +107,13 @@ const RatioSquare: NextPage = () => {
         // Handle the data from the API here
         setDataR(data.data); // Assuming data is an array in the response
         setLoading(false);
-        console.log("Fetched Data from API:", dataR);
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);
         setLoading(false);
       });
-  }
-  , [selected]);
+  }, [selected]);
 
-
-
-  
   return (
     <section className="ratio_square">
       <div className="custom-container  section-pb-space">
@@ -129,21 +122,21 @@ const RatioSquare: NextPage = () => {
             <Col className="p-0">
               <div className="theme-tab product">
                 <Nav tabs className="tab-title media-tab">
-                    <NavItem >
-                      <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                        Featured
-                      </NavLink>
-                    </NavItem>
-                    <NavItem >
-                      <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                        Popular
-                      </NavLink>
-                    </NavItem>
-                    <NavItem >
-                      <NavLink className={activeTab === c ? "active" : ""} onClick={() => setActiveTab(c)}>
-                        On Sale
-                      </NavLink>
-                    </NavItem>
+                  <NavItem>
+                    <NavLink className={activeTab === "featured" ? "active" : ""} onClick={() => setActiveTab("featured")}>
+                      Featured
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink className={activeTab === "popular" ? "active" : ""} onClick={() => setActiveTab("popular")}>
+                      Popular
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink className={activeTab === "onsale" ? "active" : ""} onClick={() => setActiveTab("onsale")}>
+                      On Sale
+                    </NavLink>
+                  </NavItem>
                 </Nav>
               </div>
               <div className="tab-content-cls">
@@ -174,7 +167,6 @@ const RatioSquare: NextPage = () => {
                                             <p>{item.name}</p>
                                           </Link>
                                           <h6>
-                                            {" "}
                                             {selectedCurr.symbol}
                                             {(item.new_sale_price).toFixed(2)}{" "}
                                             <span>
@@ -222,7 +214,6 @@ const RatioSquare: NextPage = () => {
                                             <p>{item.name}</p>
                                           </Link>
                                           <h6>
-                                            {" "}
                                             {selectedCurr.symbol}
                                             {(item.new_sale_price).toFixed(2)}{" "}
                                             <span>
@@ -270,7 +261,6 @@ const RatioSquare: NextPage = () => {
                                             <p>{item.name}</p>
                                           </Link>
                                           <h6>
-                                            {" "}
                                             {selectedCurr.symbol}
                                             {(item.new_sale_price).toFixed(2)}{" "}
                                             <span>
@@ -361,7 +351,6 @@ const RatioSquare: NextPage = () => {
                                         </div>
                                       </div>
                                       <div className="product-buttons">
-                                        s
                                         <a href="#" className="btn btn-normal" onClick={() => addToCart(item, quantity)}>
                                           add to cart
                                         </a>

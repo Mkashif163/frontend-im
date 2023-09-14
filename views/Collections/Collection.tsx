@@ -70,9 +70,9 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
       .then(response => response.json())
       .then(data => setAllProductData(data[0]))
       .catch(error => console.log(error))
-  })
+  });
 
-  console.log(allProductData)
+  
 
   return (
     <Col className="collection-content">
