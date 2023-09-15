@@ -42,7 +42,7 @@ const Layout2 = () => {
         <MediaSection />
         <DiscountBanner />
         <CollectionBanner />
-        <TabProduct effect="icon-inline" />
+        <TabProduct effect="icon-inline" menuId={0} menuName={""} />
         <section className="deal-banner">
           <DealBanner />
         </section>

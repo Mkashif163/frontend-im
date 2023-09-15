@@ -32,11 +32,11 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <section className="login-page section-big-py-space bg-light">
+      <section className="login-page section-big-py-space">
         <div className="custom-container">
           <Row className="row">
             <Col xl="4" lg="6" md="8" className="offset-xl-4 offset-lg-3 offset-md-2">
-              <div className="theme-card">
+              <div className="theme-card bg-light">
                 <h3 className="text-center">Login</h3>
                 <form className="theme-form">
                   <div className="form-group">

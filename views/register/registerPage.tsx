@@ -30,11 +30,15 @@ const RegisterPage: NextPage = () => {
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="review">Password</Label>
-                      <Input type="password" className="form-control" id="review" placeholder="Enter your password" required />
+                      <Input type="password" className="form-control" id="password" placeholder="Enter your password" required />
+                    </FormGroup>
+                    <FormGroup className="col-md-12">
+                      <Label htmlFor="review">Confirm Password</Label>
+                      <Input type="password" className="form-control" id="confirm-password" placeholder="Enter your password" required />
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <a href="#" className="btn btn-normal">
-                        create Account
+                        Sign Up
                       </a>
                     </FormGroup>
                   </div>
