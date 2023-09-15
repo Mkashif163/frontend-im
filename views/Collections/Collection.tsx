@@ -66,13 +66,11 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   };
 
   useEffect(() => {
-    fetch("http://18.234.66.77/api/products")
+    fetch("http://18.235.14.45/api/products")
       .then(response => response.json())
       .then(data => setAllProductData(data[0]))
       .catch(error => console.log(error))
   });
-
-  
 
   return (
     <Col className="collection-content">

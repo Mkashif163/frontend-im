@@ -8197,6 +8197,15 @@ button {
   }
 }
 
+// Load more page //
+.load-more-product {
+  > div {
+    &:nth-child(n + 7) {
+      margin-top: 30px;
+    }
+  }
+}
+
 // blog-page //
 .blog-page {
   .order-sec {

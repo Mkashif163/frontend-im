@@ -70,6 +70,14 @@ const MenuBar1: NextPage<MenuBarState> = ({ menuData = data }) => {
         </a>
         <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>
       </li>
+      <li className="mega home">
+        <a href="/blog/right-sidebar"
+          className="dark-menu-item has-submenu"
+          >
+          Blog
+        </a>
+        <span className={`sub-arrow ${(path === "/Layouts/layout3" || mobileSize) && (isOpen ? "minus" : "plus")}`}></span>
+      </li>
       {menuData.map((menuItem, i) => {
         return (
           // Main Menu title

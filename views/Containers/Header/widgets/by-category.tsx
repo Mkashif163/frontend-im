@@ -14,7 +14,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
   const { leftMenu, setLeftMenu } = menuContext;
 
   useEffect(() => {
-    fetch("http://18.234.66.77/api/menus")
+    fetch("http://18.235.14.45/api/menus")
       .then((res) => res.json())
       .then((data) => {
         setMenuData(data);
@@ -28,7 +28,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
 
   // Function to fetch subcategories for a category
   const fetchCategories = async (menuId) => {
-    const response = await fetch(`http://18.234.66.77/api/categories/${menuId}`);
+    const response = await fetch(`http://18.235.14.45/api/categories/${menuId}`);
     const data = await response.json();
     setCategories(prev => ({ ...prev, [menuId]: data.data }));
   }

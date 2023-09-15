@@ -121,31 +121,5 @@
         "type": "link"
       }
     ]
-  },
-  {
-    "title": "blog",
-    "type": "sub",
-    "children": [
-      {
-        "path": "/blog/left-sidebar",
-        "title": "Left Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/blog/right-sidebar",
-        "title": "right Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/blog/no-sidebar",
-        "title": "no Sidebar",
-        "type": "link"
-      },
-      {
-        "path": "/blog/blog-details",
-        "title": "blog-details",
-        "type": "link"
-      }
-    ]
   }
 ]

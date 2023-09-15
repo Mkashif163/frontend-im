@@ -100,7 +100,7 @@ const RatioSquare: NextPage = () => {
   };
 
   useEffect(() => {
-    const apiUrl = `http://18.234.66.77/api/search/product/${selected}`;
+    const apiUrl = `http://18.235.14.45/api/search/product/${selected}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -168,10 +168,10 @@ const RatioSquare: NextPage = () => {
                                           </Link>
                                           <h6>
                                             {selectedCurr.symbol}
-                                            {(item.new_sale_price).toFixed(2)}{" "}
+                                            {(item.new_sale_price)}{" "}
                                             <span>
                                               {selectedCurr.symbol}
-                                              {(item.new_price).toFixed(2)}
+                                              {(item.new_price)}
                                             </span>
                                           </h6>
                                         </div>
@@ -215,10 +215,10 @@ const RatioSquare: NextPage = () => {
                                           </Link>
                                           <h6>
                                             {selectedCurr.symbol}
-                                            {(item.new_sale_price).toFixed(2)}{" "}
+                                            {(item.new_sale_price)}{" "}
                                             <span>
                                               {selectedCurr.symbol}
-                                              {(item.new_price).toFixed(2)}
+                                              {(item.new_price)}
                                             </span>
                                           </h6>
                                         </div>
@@ -262,10 +262,10 @@ const RatioSquare: NextPage = () => {
                                           </Link>
                                           <h6>
                                             {selectedCurr.symbol}
-                                            {(item.new_sale_price).toFixed(2)}{" "}
+                                            {(item.new_sale_price)}{" "}
                                             <span>
                                               {selectedCurr.symbol}
-                                              {(item.new_price).toFixed(2)}
+                                              {(item.new_price)}
                                             </span>
                                           </h6>
                                         </div>
@@ -297,11 +297,11 @@ const RatioSquare: NextPage = () => {
                                 <div className="row">
                                   <div className="col-lg-6 col-xs-12">
                                     <Slider ref={(slider) => (slider2.current = slider)}>
-                                      {item &&
-                                        item.images.map((img: any, i: any) => {
+                                      {dataR &&
+                                        dataR.map((img: any, i: any) => {
                                           return (
                                             <div key={i}>
-                                              <Media src={`/images/${img.src}`} alt="" className="img-fluid  image_zoom_cls-0" />
+                                              <Media src={`${item.url ? item.url : "pro3/3.jpg"}`} alt="" className="img-fluid  image_zoom_cls-0" />
                                             </div>
                                           );
                                         })}
@@ -309,19 +309,19 @@ const RatioSquare: NextPage = () => {
                                   </div>
                                   <div className="col-lg-6 rtl-text">
                                     <div className="product-right">
-                                      <h2>{item?.title}</h2>
-                                      <h3>${item?.price}</h3>
-                                      <ul className="color-variant">
+                                      <h2>{item?.new_price}</h2>
+                                      <h3>${item?.new_sale_price}</h3>
+                                      {/* <ul className="color-variant">
                                         {uniqueColor.map((vari, i) => {
                                           return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
                                         })}
-                                      </ul>
+                                      </ul> */}
                                       <div className="border-product">
                                         <h6 className="product-title">product details</h6>
                                         <p>{item?.description}</p>
                                       </div>
                                       <div className="product-description border-product">
-                                        <div className="size-box">
+                                        {/* <div className="size-box">
                                           <ul>
                                             {uniqueSize.map((size, i) => (
                                               <li key={i}>
@@ -331,7 +331,7 @@ const RatioSquare: NextPage = () => {
                                               </li>
                                             ))}
                                           </ul>
-                                        </div>
+                                        </div> */}
                                         {stockState !== "InStock" ? <span className="instock-cls">{stockState}</span> : ""}
                                         <h6 className="product-title">quantity</h6>
                                         <div className="qty-box">

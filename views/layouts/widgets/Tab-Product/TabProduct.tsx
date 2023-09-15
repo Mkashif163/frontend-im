@@ -75,7 +75,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
   }, [subCategoriesData]);
 
   useEffect(() => {
-    const apiUrl = `http://18.234.66.77/api/sub_categories/${menuId}`;
+    const apiUrl = `http://18.235.14.45/api/sub_categories/${menuId}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -89,7 +89,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
   }, [menuId]);
 
   useEffect(() => {
-    const apiUrl = `http://18.234.66.77/api/products/${activeTab}`;
+    const apiUrl = `http://18.235.14.45/api/products/${activeTab}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {

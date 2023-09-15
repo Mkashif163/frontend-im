@@ -21,7 +21,7 @@ const Home: NextPage = () => {
   const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = `http://18.234.66.77/api/categories/13`;
+    const apiUrl = `http://18.235.14.45/api/categories/13`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
             </>
           )}
 
-          <ShortDisplay  />
+          <ShortDisplay />
           <section className="rounded-category">
             <Brands />
           </section>
@@ -60,16 +60,15 @@ const Home: NextPage = () => {
           {categoriesData.length > 3 && (
             <>
               <TabProduct menuId={categoriesData[3].id} menuName={categoriesData[3].name} effect="icon-inline" />
-              <RatioSquare />
-              <CollectionBannerThree />
-              <section className="rounded-category">
-                <Suplier />
-              </section>
-              <AllProducts />
-              <ContactBanner />
             </>
           )}
-          
+          <RatioSquare />
+          <CollectionBannerThree />
+          <section className="rounded-category">
+            <Suplier />
+          </section>
+          <AllProducts />
+          <ContactBanner />
         </div>
       </Layouts>
     </>

@@ -21,7 +21,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
   const [product, setProduct] = React.useState<any>({});
   
   useEffect(() => {
-    const apiUrl = `http://18.234.66.77/api/single-product/${pathId}`;
+    const apiUrl = `http://18.235.14.45/api/single-product/${pathId}`;
 
     fetch(apiUrl)
       .then((response) => response.json())

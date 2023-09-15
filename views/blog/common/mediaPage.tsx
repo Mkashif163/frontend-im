@@ -1,6 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { Row, Col, Media } from "reactstrap";
+import Link from "next/link";
 
 interface medias {
   img: string;
@@ -70,7 +71,9 @@ const MediaList: React.FC<mediaProps> = ({ media }) => {
       <Col xl="6">
         <div className="blog-left">
           <a href="#">
+          <Link href="/blog/blog-details">
             <Media src={media.img} className="img-fluid" alt="" />
+          </Link>
           </a>
           <div className="date-label">{media.date}</div>
         </div>

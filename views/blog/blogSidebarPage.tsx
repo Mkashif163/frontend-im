@@ -6,7 +6,6 @@ import Breadcrumb from "../Containers/Breadcrumb";
 const LeftSidebar: NextPage = () => {
   return (
     <div className="bg-light">
-      <Breadcrumb title="blog-detail" parent="home" />
       {/* <!-- section start --> */}
       <section className="blog-detail-page section-big-py-space ratio2_3">
         <Container>

@@ -17,7 +17,7 @@ const AllProducts = () => {
     const { addToCompare } = React.useContext(CompareContext);
 
     useEffect(() => {
-        fetch('http://18.234.66.77/api/products')
+        fetch('http://18.235.14.45/api/products')
             .then(response => response.json())
             .then(data => {
                 setProducts(data[0]);
@@ -52,7 +52,7 @@ const AllProducts = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="row search-product">
+                        <div className="row load-more-product">
                             {productsToDisplay.map((product, i) => (
                                 <div className="col-xl-2 col-md-5 col-5" key={i}>
                                     <div className="product">
@@ -70,7 +70,7 @@ const AllProducts = () => {
                         </div>
                         <div className="d-flex justify-content-center mt-5">
                             <Button
-                                className="btn btn-primary"
+                                className="btn btn-normal"
                                 type="button"
                                 onClick={loadMoreProducts}
                             >
