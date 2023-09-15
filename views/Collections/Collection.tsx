@@ -11,8 +11,6 @@ import { CompareContext } from "helpers/compare/compare.context";
 
 
 
-
-
 type CollectionProps = {
   cols: any;
   layoutList: string;
@@ -26,35 +24,20 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const { addToCompare } = React.useContext(CompareContext);
   const [grid, setGrid] = useState(cols);
   const [sortBy, setSortBy] = useState("ASC_ORDER");
-  const [pageLimit, setPageLimit] = useState(10);
+  const [pageLimit, setPageLimit] = useState(12);
   const [layout, setLayout] = useState(layoutList);
   const [isLoading, setIsLoading] = useState(false);
   const [allProductData, setAllProductData] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(allProductData.length / pageLimit);
 
-  const handlePagination = () => {
-    setIsLoading(true);
-    setTimeout(
-      () =>
-        fetchMore({
-          variables: {
-            indexFrom: allProductData.length,
-          },
-          updateQuery: (prev: any, { fetchMoreResult }) => {
-            if (!fetchMoreResult) return prev;
-            setIsLoading(false);
-            return {
-              products: {
-                __typename: prev.products.__typename,
-                total: prev.products.total,
-                items: [...prev.products.items, ...fetchMoreResult.products.items],
-                hasMore: fetchMoreResult.products.hasMore,
-              },
-            };
-          },
-        }),
-      1000,
-    );
+
+
+  const handlePagination = (page) => {
+    setCurrentPage(page);
   };
+
+
   const removeBrand = (val) => {
     const temp = [...selectedBrands];
     temp.splice(selectedBrands.indexOf(val), 1);
@@ -121,8 +104,13 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                   <Col xs="12">
                     <div className="product-filter-content">
                       <div className="search-count">
-                        <h5>{allProductData ? `Showing Products 1-${allProductData.length} ` : "loading"} Result</h5>
+                        <h5>
+                          {allProductData
+                            ? `Showing Products ${Math.min(currentPage * pageLimit, allProductData.length)} of ${allProductData.length}`
+                            : "loading"} Result
+                        </h5>
                       </div>
+
                       <div className="collection-view">
                         <ul>
                           <li
@@ -156,8 +144,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                       </div>
                       <div className="product-page-per-view">
                         <select onChange={(e) => setPageLimit(parseInt(e.target.value))}>
-                          <option value="10">10 Products Par Page</option>
-                          <option value="15">15 Products Par Page</option>
+                          <option value="12">12 Products Par Page</option>
+                          <option value="16">16 Products Par Page</option>
                           <option value="20">20 Products Par Page</option>
                         </select>
                       </div>
@@ -171,6 +159,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                           <option value="DESC_ORDER">Desc Order</option>
                         </select>
                       </div>
+
                     </div>
                   </Col>
                 </Row>
@@ -184,7 +173,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                     allProductData && allProductData.length === 0 ? (
                       <Col xs="12">
                         <div className="d-flex justify-content-center mt-5">
-                          <button className="btn btn-dark" type="button" disabled>
+                          <button className="btn btn-normal" type="button" disabled>
                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                           </button>
@@ -196,43 +185,95 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                       </>
                     )
                   ) : (
-                    allProductData &&
-                    allProductData.map((product, i) => (
-                      <div className={grid} key={i}>
-                        <div className="product">
-                          <div>
-                            <ProductBox
-                              hoverEffect={true}
-                              product={product} // Pass the product data
-                              addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
-                              addCompare={(product) => addToCompare(product)}
-                              addWish={(product) => addToWish(product)} />
+                    allProductData
+                      .slice() // First, we slice the full list so we don't mutate the original
+                      .sort((a, b) => {
+                        switch (sortBy) {
+                          case "HIGH_TO_LOW":
+                            return b.new_price - a.new_price;
+                          case "LOW_TO_HIGH":
+                            return a.new_price - b.new_price;
+                          case "NEWEST":
+                            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+                          case "ASC_ORDER": // This might depend on what you want to sort by in Ascending order
+                            return a.name.localeCompare(b.name); // Assuming products have a "name" field
+                          case "DESC_ORDER":
+                            return b.name.localeCompare(a.name);
+                          default: 
+                            return 0;
+                        }
+                      })
+                      .slice((currentPage - 1) * pageLimit, currentPage * pageLimit)
+                      .map((product, i) => (
+                        <div className={grid} key={i}>
+                          <div className="product">
+                            <div>
+                              <ProductBox
+                                hoverEffect={true}
+                                product={product} // Pass the product data
+                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                addCompare={(product) => addToCompare(product)}
+                                addWish={(product) => addToWish(product)} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))
+                      ))
                   )}
                 </Row>
               </div>
+
               {/* Pagination */}
               <div className="product-pagination loadmore-pagination">
                 <div className="theme-paggination-block">
-                  <Row>
-                    <Col xl="12" md="12" sm="12">
-                      {allProductData && allProductData.hasMore && (
-                        <Button onClick={() => handlePagination()}>
-                          {isLoading && (
-                            <Spinner size="sm" color="light">
-                              {" "}
-                            </Spinner>
-                          )}
-                          Load More
-                        </Button>
-                      )}
-                    </Col>
-                  </Row>
+                  <ul className="pagination">
+                    <li className={`page-item ${currentPage <= 1 ? "disabled" : ""}`}>
+                      <a className="page-link" href="#" onClick={(e) => {
+                        e.preventDefault();
+                        if (currentPage > 1) handlePagination(currentPage - 1);
+                      }} aria-label="Previous">
+                        <span aria-hidden="true">
+                          <i className="fa fa-chevron-left" aria-hidden="true"></i>
+                        </span>
+                        <span className="sr-only">Previous</span>
+                      </a>
+                    </li>
+
+                    {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                      const page = currentPage <= 5
+                        ? i + 1
+                        : currentPage >= totalPages - 4
+                          ? totalPages - 4 + i
+                          : currentPage - 2 + i;
+
+                      return (
+                        <li className={`page-item ${page === currentPage ? "active" : ""}`} key={page}>
+                          <a className="page-link" href="#" onClick={(e) => {
+                            e.preventDefault();
+                            handlePagination(page);
+                          }}>
+                            {page}
+                          </a>
+                        </li>
+                      );
+                    })}
+
+                    <li className={`page-item ${currentPage >= totalPages ? "disabled" : ""}`}>
+                      <a className="page-link" href="#" onClick={(e) => {
+                        e.preventDefault();
+                        if (currentPage < totalPages) handlePagination(currentPage + 1);
+                      }} aria-label="Next">
+                        <span aria-hidden="true">
+                          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+                        </span>
+                        <span className="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+
                 </div>
               </div>
+
+
             </div>
           </Col>
         </Row>

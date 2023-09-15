@@ -7039,7 +7039,7 @@ button {
     .page-item.active {
       a {
         color: var(--theme-color1);
-        background-color: $white;
+        background-color: var(--theme-color2);
         border-color: $light-border;
       }
     }
