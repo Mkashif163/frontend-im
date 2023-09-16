@@ -47,9 +47,9 @@ const Dashboard: NextPage = () => {
                     <li
                       className={currentComponent === "dashboard" ? "active" : ""}
                       onClick={() => {
-                        setCurrentComponent("dashboard");
+                        setCurrentComponent("Account");
                       }}>
-                      <Link href={""}>Dashboard</Link>
+                      <Link href={""}>Account</Link>
                     </li>
                     <li
                       className={currentComponent === "order" ? "active" : ""}
@@ -109,7 +109,7 @@ const Dashboard: NextPage = () => {
             <Col lg="10">
               <div className="dashboard-right">
                 <div className="dashboard">
-                  {currentComponent === "dashboard" && <DashboardComponent />}
+                  {currentComponent === "Account" && <DashboardComponent />}
                   {currentComponent === "order" && <OrderComponent />}
                   {currentComponent==="cart" && <CartPage/>}
                   {currentComponent ==="wishlist" && <WishListPage/>}

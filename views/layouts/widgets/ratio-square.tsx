@@ -11,6 +11,8 @@ import { WishlistContext } from "../../../helpers/wishlist/wish.context";
 import { CompareContext } from "../../../helpers/compare/compare.context";
 import { useRouter } from "next/router";
 import { set } from "react-hook-form";
+import { Skeleton } from "common/skeleton";
+import Loader from "common/Loader";
 
 var settings = {
   dots: false,
@@ -99,6 +101,12 @@ const RatioSquare: NextPage = () => {
     setModal(!modal);
   };
 
+  const handleTabClick = (tabName) => {
+    // Update the selected state based on the tab clicked
+    setSelected(tabName);
+    setLoading(true);
+  };
+
   useEffect(() => {
     const apiUrl = `http://18.235.14.45/api/search/product/${selected}`;
     fetch(apiUrl)
@@ -123,17 +131,17 @@ const RatioSquare: NextPage = () => {
               <div className="theme-tab product">
                 <Nav tabs className="tab-title media-tab">
                   <NavItem>
-                    <NavLink className={activeTab === "featured" ? "active" : ""} onClick={() => setActiveTab("featured")}>
+                    <NavLink className={activeTab === "featured" ? "active" : ""} onClick={() => handleTabClick("motors")}>
                       Featured
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className={activeTab === "popular" ? "active" : ""} onClick={() => setActiveTab("popular")}>
+                    <NavLink className={activeTab === "popular" ? "active" : ""} onClick={() => handleTabClick("vfds")}>
                       Popular
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className={activeTab === "onsale" ? "active" : ""} onClick={() => setActiveTab("onsale")}>
+                    <NavLink className={activeTab === "onsale" ? "active" : ""} onClick={() => handleTabClick("lights")}>
                       On Sale
                     </NavLink>
                   </NavItem>
@@ -143,7 +151,11 @@ const RatioSquare: NextPage = () => {
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId={activeTab}>
                     <Slider {...settings}>
-                      {dataR &&
+                      {loading ? (
+                        <div className="spinner-grow" style={{ width: "3rem", height: "3rem" }} role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                      ) : (
                         dataR.map((item, i) => (
                           <div key={i}>
                             <div className="media-banner media-banner-1 border-0">
@@ -364,7 +376,7 @@ const RatioSquare: NextPage = () => {
                               </ModalBody>
                             </Modal>
                           </div>
-                        ))}
+                        )))}
                     </Slider>
                   </TabPane>
                 </TabContent>

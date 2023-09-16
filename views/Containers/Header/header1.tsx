@@ -65,7 +65,10 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
                     </a>
                   </div>
                   <Search />
+                  <User />
                   <ShoppingCart position={cartPopupPosition} cartDisplay={display} layout="layout2" />
+
+                  <WishList />
                 </div>
               </Col>
             </Row>
@@ -103,7 +106,7 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
 
         {/* Nav bar end */}
 
-        
+
       </header>
     </Fragment>
   );
