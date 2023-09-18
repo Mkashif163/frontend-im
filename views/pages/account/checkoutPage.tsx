@@ -37,6 +37,8 @@ const CheckoutPage: NextPage = () => {
   const checkhandle = (value) => {
     setPayment(value);
   };
+  console.log("Cart Items:", cartItems);
+
 
   const onSuccess = (data, actions) => {
     return actions.order.capture().then(() => {
@@ -76,6 +78,8 @@ const CheckoutPage: NextPage = () => {
   const paypalOptions = {
     clientId: "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
   };
+  const subtotal = cartItems.reduce((acc, item) => acc + item.new_sale_price * item.qty, 0);
+
 
   return (
     <>
@@ -142,7 +146,7 @@ const CheckoutPage: NextPage = () => {
                         <FormGroup className="col-md-12 col-sm-12 col-xs-12">
                           <Label className="field-label">Country</Label>
                           <select id="country" name="country" {...register("country", { required: true })}>
-                            <option>India</option>
+                            <option>Pakistan</option>
                             <option>South Africa</option>
                             <option>United State</option>
                             <option>Australia</option>
@@ -225,10 +229,10 @@ const CheckoutPage: NextPage = () => {
                           <ul className="qty">
                             {cartItems.map((item, index) => (
                               <li key={index}>
-                                {item.title} × {item.qty}{" "}
+                                {item.name} × {item.qty}{" "}
                                 <span>
                                   {symbol}
-                                  {item.total * value}
+                                  {item.new_sale_price * item.qty}
                                 </span>
                               </li>
                             ))}
@@ -238,7 +242,7 @@ const CheckoutPage: NextPage = () => {
                               Subtotal{" "}
                               <span className="count">
                                 {symbol}
-                                {(cartTotal * value).toFixed(2)}
+                                {(subtotal * value).toFixed(2)}
                               </span>
                             </li>
                             <li>
@@ -260,7 +264,7 @@ const CheckoutPage: NextPage = () => {
                               Total{" "}
                               <span className="count">
                                 {symbol}
-                                {(cartTotal * value).toFixed(2)}
+                                {(subtotal).toFixed(2)}
                               </span>
                             </li>
                           </ul>
@@ -274,17 +278,17 @@ const CheckoutPage: NextPage = () => {
                             <ul>
                               <li>
                                 <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-1" defaultChecked={true} onClick={() => checkhandle("stripe")} />
-                                  <label htmlFor="payment-1">
-                                    Check Payments<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
+                                  <input type="radio" name="payment-group" id="payment-2" onClick={() => checkhandle("stripe")} />
+                                  <label htmlFor="payment-2">
+                                    Cash On Delivery<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
                                   </label>
                                 </div>
                               </li>
                               <li>
                                 <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-2" onClick={() => checkhandle("stripe")} />
-                                  <label htmlFor="payment-2">
-                                    Cash On Delivery<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
+                                  <input type="radio" name="payment-group" id="payment-1" defaultChecked={true} onClick={() => checkhandle("stripe")} />
+                                  <label htmlFor="payment-1">
+                                    Check Payments<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
                                   </label>
                                 </div>
                               </li>

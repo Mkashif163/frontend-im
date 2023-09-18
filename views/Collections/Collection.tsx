@@ -8,6 +8,7 @@ import { CartContext } from "../../helpers/cart/cart.context";
 import { WishlistContext } from "../../helpers/wishlist/wish.context";
 import { Skeleton } from "../../common/skeleton";
 import { CompareContext } from "helpers/compare/compare.context";
+import { set } from "react-hook-form";
 
 
 
@@ -26,7 +27,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const [sortBy, setSortBy] = useState("ASC_ORDER");
   const [pageLimit, setPageLimit] = useState(12);
   const [layout, setLayout] = useState(layoutList);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [allProductData, setAllProductData] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(allProductData.length / pageLimit);
@@ -51,8 +52,13 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   useEffect(() => {
     fetch("http://18.235.14.45/api/products")
       .then(response => response.json())
-      .then(data => setAllProductData(data[0]))
-      .catch(error => console.log(error))
+      .then(data => {
+        setAllProductData(data[0])
+        setIsLoading(false)
+      })
+      .catch(error =>{ console.log(error)
+        setIsLoading(false)
+      })
   });
 
   return (
@@ -199,7 +205,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                             return a.name.localeCompare(b.name); // Assuming products have a "name" field
                           case "DESC_ORDER":
                             return b.name.localeCompare(a.name);
-                          default: 
+                          default:
                             return 0;
                         }
                       })

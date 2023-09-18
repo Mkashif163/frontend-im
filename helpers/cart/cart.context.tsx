@@ -9,4 +9,12 @@ interface ContextProps {
   emptyCart: Function;
 }
 
-export const CartContext = createContext({} as ContextProps);
+export const CartContext = createContext({
+  cartItems: [],
+  cartTotal: 0,
+  addToCart: () => {},
+  updateQty: () => {},
+  removeFromCart: () => {},
+  emptyCart: () => {},
+} as ContextProps);
+

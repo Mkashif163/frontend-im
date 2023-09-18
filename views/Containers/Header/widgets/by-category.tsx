@@ -68,7 +68,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                   onMouseEnter={() => fetchCategories(menu.id)}
                   onMouseLeave={() => setCategories({ ...categories, [menu.id]: [] })} // Hide subcategories on mouse leave
                 >
-                  <a href={`/collections/leftsidebar?category=${menu.name}`}>
+                  <a href={`/collections/leftsidebar?menu=${menu.name}`}>
                     <span>{menu.name}</span>
                   </a>
                   {/* Subcategories show karega agar woh fetch hui hain */}
@@ -76,7 +76,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                     <ul className="text-primary">
                       {categories[menu.id].map(sub => (
                         <li key={sub.id}>
-                          <a href={`/collections/leftsidebar?subCategory=${sub.name}`}>
+                          <a href={`/collections/leftsidebar?category=${sub.name}`}>
                             {sub.name}
                           </a>
                         </li>
