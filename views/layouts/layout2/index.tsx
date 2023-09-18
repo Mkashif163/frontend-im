@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { NextPage } from "next";
-import HeaderContainer from "../../Containers/Header/header2";
 import Footer from "./common/footer";
 import { FilterProvider } from "../../../helpers/filter/filter.provider";
 import { CartProvider } from "../../../helpers/cart/cart.provider";
@@ -14,7 +13,6 @@ const Layout2Section: NextPage<Props> = ({ children }) => (
     <Loader>
       <div>
         <CartProvider>
-          <HeaderContainer category={true} cartPopupPosition="bottom" display="d-none" categoryHeaderClass={null} layoutLogo="layout-1" />
           <FilterProvider>{children}</FilterProvider>
           <Footer />
         </CartProvider>
