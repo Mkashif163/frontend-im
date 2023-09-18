@@ -5137,13 +5137,13 @@ button {
 .footer-1 {
   background-color: $white;
   .logo-contain {
-    padding: 35px 0;
+    padding: 15px 0;
     .logo-block {
-      padding: 25px 0;
+      padding: 15px 0;
     }
     .logo-detail {
       position: relative;
-      padding: 30px 0;
+      padding: 10px 0;
       &:before {
         position: absolute;
         left: 0;
@@ -5158,9 +5158,9 @@ button {
         color: $icon-color;
         text-transform: capitalize;
         margin-bottom: 0;
-        margin-left: 45px;
-        letter-spacing: 0.5px;
-        line-height: 1.8;
+        margin-left: 20px;
+        letter-spacing: 0.3px;
+        line-height: 1;
       }
     }
   }
@@ -5169,26 +5169,31 @@ button {
     padding: 45px 0;
   }
   .footer-box {
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 5px;
+    padding-top: 10px;
     .footer-sub-box {
       &.account {
-        margin-bottom: 40px;
+        margin-bottom: 5px;
       }
       &.footer-contant-box {
-        margin-left: 80px;
-        padding: 20px 0;
+        margin-left: 0px;
+        padding: 0px 0;
+        column-gap: 4px; 
+font-size: 5px;
       }
       .footer-title {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
       .footer-contant {
         ul {
+          margin: 0;
+          padding: 0;
           li {
-            font-family: $font-2;
+            font-family: $font-1;
             display: inline;
-            line-height: 1.8;
-            margin-right: 15px;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
           }
         }
         .contact-list {
@@ -5198,6 +5203,7 @@ button {
             margin-right: 0;
             span {
               font-family: $font-1;
+              font-size: 8px;
             }
             i {
               top: 4px;
@@ -5210,24 +5216,27 @@ button {
 }
 .footer-2 {
   background-color: $white;
-  padding: calc(20px + (50 - 20) * ((100vw - 320px) / (1920 - 320))) 0 0 0;
-  .footer-main-contian {
+  font-size: 12px;
+  gap: 0; 
+  width: 100%;
+  .footer-main-contian{
     border-bottom: 1px solid $light-border;
-    padding-bottom: 30px;
-    .footer-left {
-      padding-right: 60px;
-      padding-top: 10px;
+    padding-bottom: 0px;
+  
+    .footer-center {
+      padding-top: 0px;
+    
       .footer-detail {
         p {
-          padding: 40px 0;
-          font-family: $font-2, $font_1;
+          padding: 0px 0;
+          font-family: $font-1, $font_1;
           text-transform: capitalize;
-          line-height: 1.8;
+          line-height: 1;
           color: $icon-color;
+          margin-top: 0px;
         }
         .paymant-bottom {
           li {
-            margin-right: 15px;
             &:last-child {
               margin-right: 0;
             }
@@ -5236,11 +5245,11 @@ button {
       }
     }
     .footer-right {
-      padding-top: 25px;
-      padding-left: 50px;
+      padding-top: 10px;
+      padding-left: 5px;
       border-left: 1px solid $light-border;
       .subscribe-section {
-        padding-bottom: 45px;
+        padding-bottom: 10px;
         border-bottom: 1px solid $light-border;
         .subscribe-block {
           height: 100%;
@@ -5258,6 +5267,7 @@ button {
                 background-color: transparent;
                 border-radius: inherit;
                 border-right: none;
+                font-size: 14px;
                 i {
                   color: $gray-4;
                 }
@@ -5270,8 +5280,8 @@ button {
                 }
               }
               input {
-                padding-top: 10px;
-                padding-bottom: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px;
                 border-top: 1px solid $light-border;
                 border-bottom: 1px solid $light-border;
                 border-left: none;
@@ -5288,32 +5298,41 @@ button {
           }
         }
       }
-      .account-right {
-        padding: 50px 0 30px 15px;
-        .footer-box {
+      .account-right{
+        padding: 1px 1px 1px 1px;
+          .footer-box {
           .footer-title {
-            padding-bottom: 15px;
+            padding-bottom: 0px;
             position: relative;
             &:before {
               content: "";
               position: absolute;
               bottom: 0;
-              width: 50px;
-              height: 2px;
+              width: 10px;
+              height: 1px;
               background-color: var(--theme-color1);
             }
           }
           .footer-contant {
-            margin-top: 30px;
+            margin-top: 0px;
+            font-size: 12px;
+            column-gap: 0;
+  row-gap: 0;
             .contact-list {
               li {
                 color: $gray-3;
+                font-size: 8px;
+                column-gap: 0;
+  row-gap: 0;
                 i {
                   top: 0;
                 }
+                a {
+                  font-size: 8px;
+                }
                 &:first-child {
                   i {
-                    margin-top: 4px;
+                    margin-top: 0px;
                   }
                 }
               }
@@ -5323,10 +5342,15 @@ button {
       }
     }
   }
+  .footer-contact-box{
+    margin-top: 0px;
+    column-gap: 0;
+  row-gap: 0;
+  }
   .sub-footer {
     background-color: $body-back;
     .sub-footer-contain {
-      padding: 20px 0;
+      padding: 5px 0;
       ul {
         li {
           a {
@@ -5340,19 +5364,20 @@ button {
         text-transform: uppercase;
         letter-spacing: 0.05em;
         text-align: center;
-        font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
+        font-size: calc(10px + (10 - 8) * ((100vw - 220px) / (1020 - 320)));
         span {
           font-family: $font-1;
+          font-size: 12px;
         }
-      }
+      }  
     }
   }
 }
 .footer-3 {
   background-color: $white;
-  padding: 40px 0 0 0;
+  padding: 20px 0 0 0;
   .social-footer {
-    padding-bottom: 45px;
+    padding-bottom: 25px;
     border-bottom: 1px solid $light-border;
     .app-link-group {
       display: flex;
@@ -5379,6 +5404,7 @@ button {
             background-color: transparent;
             border-radius: inherit;
             border-right: none;
+            font-size: 12px;
             i {
               color: $gray-4;
             }
@@ -5417,6 +5443,7 @@ button {
   }
   .footer-logo {
     padding: 40px 0;
+    margin-top: 10px;
     .footer-box {
       .footer-title {
         padding-bottom: 15px;
@@ -5439,9 +5466,9 @@ button {
       .footer-mobile-title {
         display: none;
       }
-      .footer-contant {
+      .footer-content {
         margin-top: 30px;
-        &.mobile-contant {
+        &.mobile-content {
           margin-top: 0;
         }
         &.footer-contant-1 {
@@ -5487,6 +5514,7 @@ button {
       font-family: $font-2;
       span {
         font-family: $font-1;
+        font-size: 12px;
       }
     }
   }
@@ -5496,7 +5524,8 @@ button {
   padding-top: 40px;
   .footer-logo {
     text-align: center;
-  }
+    justify-content: center;
+    }  
   .logo-detail {
     text-align: center;
     padding-top: 30px;
@@ -5519,6 +5548,7 @@ button {
         li {
           a {
             color: $icon-color;
+
           }
         }
       }
@@ -5571,6 +5601,7 @@ button {
       }
       span {
         font-family: $font-1;
+        font-size: 12px;
       }
       i {
         position: absolute;
@@ -5632,7 +5663,7 @@ button {
         color: $black;
         text-transform: capitalize;
         line-height: 1;
-        padding-bottom: 8px;
+        padding-bottom: 12px;
       }
 
       h1 {
@@ -5742,6 +5773,7 @@ button {
     line-height: 1;
     span {
       color: var(--theme-color1);
+      font-size: 12px;
     }
   }
 }
@@ -5910,11 +5942,12 @@ button {
       text-transform: uppercase;
       color: $dark;
       line-height: 1;
-      font-weight: 700;
-      margin-left: 25px;
+      font-weight: 500;
+      margin-left: 15px;
       span {
         display: block;
         margin-top: 6px;
+        font-size: 8px;
       }
     }
   }
@@ -5930,7 +5963,7 @@ button {
           color: $light-gray;
           font-family: $font-2;
           letter-spacing: 1px;
-          font-size: 12px;
+          font-size: 16px;
         }
         &:focus {
           border: none;
@@ -5943,7 +5976,7 @@ button {
         border: none;
         padding: 0 45px;
         i {
-          font-size: 20px;
+          font-size: px;
           color: var(--theme-color2);
         }
       }
@@ -11875,7 +11908,11 @@ button {
                         height: 18px;
                         line-height: 18px;
                         border-radius: 50%;
-                      }
+                        -webkit-border-radius: 50%;
+                        -moz-border-radius: 50%;
+                        -ms-border-radius: 50%;
+                        -o-border-radius: 50%;
+}
                     }
                   }
                   .buttons {
@@ -11960,6 +11997,7 @@ button {
       > div {
         width: 100%;
         padding: 50px;
+        
       }
       p {
         text-align: center;
@@ -12185,13 +12223,18 @@ button {
   border-radius: 50%;
   animation: spinner-border 0.75s linear infinite;
   margin-right: 8px !important;
+  -webkit-animation: spinner-border 0.75s linear infinite;
 }
 
 @keyframes loading {
   0% {
     border: 0 solid white;
     transition: all 0.3s ease;
-  }
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
   20% {
     border: 8px solid white;
     width: 0;
@@ -12226,6 +12269,10 @@ button {
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
 }
 
 .industry:hover::before {

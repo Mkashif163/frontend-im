@@ -17,7 +17,7 @@ const Footer: NextPage = () => (
             </div>
             <div className="app-item-group ">
               <div className="social-block">
-                <h6>follow us</h6>
+                <h6>Follow us</h6>
                 <ul className="social">
                   <li>
                     <a href="#">
@@ -79,36 +79,24 @@ const Footer: NextPage = () => (
             <div className="col-md-8 pe-md-0">
               <div className="footer-link">
                 <div className="row">
-                  <div className="col-md-12 ">
+                  <div className="col-md-12">
                     <div className="footer-sub-box account">
                       <div className="footer-title">
-                        <h5>my account</h5>
+                        <h5>For Seller</h5>
                       </div>
                       <div className="footer-contant">
-                        <ul>
-                          <li>
-                            <a href="#">about us</a>
-                          </li>
-                          <li>
-                            <a href="#">contact us</a>
-                          </li>
-                          <li>
-                            <a href="#">terms & conditions</a>
-                          </li>
-                          <li>
-                            <a href="#">returns & exchanges</a>
-                          </li>
-                          <li>
-                            <a href="#">shipping & delivery</a>
-                          </li>
-                        </ul>
+                            <a href="#">How to become a seller?</a>
+                            <a href="#">How to post a product?</a>
+                            <a href="#">How to become a verified Supplier?</a>
+                            <a href="#">How to become a trusted Suppliers?</a>
+                            <a href="#">How to give a discount on Product?</a>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-12">
                     <div className="footer-sub-box">
                       <div className="footer-title">
-                        <h5>quick link</h5>
+                        <h5>For Buyer</h5>
                       </div>
                       <div className="footer-contant">
                         <ul>

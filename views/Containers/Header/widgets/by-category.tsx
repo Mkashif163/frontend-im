@@ -18,7 +18,8 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
       .then((res) => res.json())
       .then((data) => {
         setCategoryData(data);
-      });
+      })
+      .catch(error =>{console.log(error)});
   }, []);
 
   const [subCategories, setSubCategories] = useState({});
