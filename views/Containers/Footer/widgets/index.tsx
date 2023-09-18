@@ -89,11 +89,11 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>For Buyer</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <a href="#" style={{ fontSize: '12px' }}>How to Buy?</a><br/>
-                                      <a href="#" style={{ fontSize: '12px' }}>How to get discount?</a><br/>
-                                      <a href="#" style={{ fontSize: '12px' }}>How to get in touch with Supplier?</a><br/>
-                                      <a href="#" style={{ fontSize: '12px' }}>We have trusted Suppliers?</a><br/>
-                                      <a href="#" style={{ fontSize: '12px' }}>We have verified Suppliers?</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray' }}>How to Buy?</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>How to get discount?</a><br/>
+                                      <a href="#" style={{ fontSize: '12px', color: 'gray' }}>How to get in touch with Supplier?</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>We have trusted Suppliers?</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>We have verified Suppliers?</a><br/>
                                 </div>
                               </div>
                             </div>
@@ -106,11 +106,11 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                       {/* <i className="fa fa-file-contract" style={{ fontSize: '16px' }}></i> */}
                                       <span className="footer-contant" style={{ fontSize: '12px' }}>
                                         All Terms & Conditions
-                                      </span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Member Signing up</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Buying and Selling Advertisement</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Confidential & Personals</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Warrenty</span><br/>
+                                      </span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px', color: 'gray' }}>Member Signing up</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px', color: 'gray' }}>Buying and Selling Advertisement</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Confidential & Personals</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Warrenty</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -120,10 +120,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Dispute & Resolution</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Payments Resolution</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Orders Resolution</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}> Shipment Resolution</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Taxes Resolution</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray' }}>Payments Resolution</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px', color: 'gray' }}>Orders Resolution</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}> Shipment Resolution</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Taxes Resolution</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -135,9 +135,9 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                 <div className="footer-contant">
                                       <span className="footer-contant" style={{ fontSize: '12px' }}>
                                         Also available on Android</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Also available on IOS</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Latest News</span><br/>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Support 24/7</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray' }}>Also available on IOS</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray' }}>Latest News</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray' }}>Support 24/7</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -154,13 +154,13 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                 </div>
                                 <div className="footer-contant">
                                       <i className="fa fa-map-marker" style={{ fontSize: '16px' }}></i>
-        <span className="footer-contant" style={{ fontSize: '12px' }}>big deal store demo store</span><br/>
+        <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>big deal store demo store</span><br/>
                                       <i className="fa fa-phone" style={{ fontSize: '16px' }}></i>
-    <span className="footer-contant" style={{ fontSize: '12px' }}>call us: 123-456-7898</span><br/>
+    <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>call us: 123-456-7898</span><br/>
                                       <i className="fa fa-envelope-o" style={{ fontSize: '16px' }}></i>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>email us: support@bigdeal.com</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray' }}>email us: support@bigdeal.com</span><br/>
                                       <i className="fa fa-fax" style={{ fontSize: '16px' }}></i>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>fax 123456</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>fax 123456</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -179,10 +179,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Contact Us</h5>
                                 </div>
                                 <div className="footer-contant" style={{ fontSize: '12px' }}>
-                                      <a href="#" style={{ fontSize: '12px' }}>Who we are</a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Industry Mall Training Institute (IMTI)</a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Why Trust on Industry Mall</a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Our key Features</a>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Who we are</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Industry Mall Training Institute (IMTI)</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Why Trust on Industry Mall</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Our key Features</a><br/>
                                 </div>
                               </div>
                             </div>
@@ -192,11 +192,11 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Our key Features</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <a href="#" style={{ fontSize: '12px' }}>We are specific in Industrial Sectors</a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Connect wholesalers | Industrials directly</a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Competitive price </a>
-                                      <a href="#" style={{ fontSize: '12px' }}>Regular discounted price </a>
-                                      <a href="#" style={{ fontSize: '12px' }}>User friendly payment method </a>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>We are specific in Industrial Sectors</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Connect wholesalers | Industrials directly</a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Competitive price </a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>Regular discounted price </a><br/>
+                                      <a href="#" style={{ fontSize: '12px' , color: 'gray'}}>User friendly payment method </a><br/>
                                 </div>
                               </div>
                             </div>
@@ -206,11 +206,11 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Member Signing up</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Member’s undertakings</span>
-                                      <span className="footer-contant" style={{ fontSize: '10px' }}>When you agreed terms & conditions </span>
-                                      <span className="footer-contant" style={{ fontSize: '10px' }}>Agreed all rules & regulations</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Being a member liability</span>
-                                      <span className="footer-contant" style={{ fontSize: '10px' }}>Member’s undertakings | Breach of Contract</span>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Member’s undertakings</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '10px' , color: 'gray'}}>When you agreed terms & conditions </span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '10px' , color: 'gray'}}>Agreed all rules & regulations</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Being a member liability</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '10px' , color: 'gray'}}>Member’s undertakings | Breach of Contract</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -220,10 +220,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Advertisements</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Buying Advertisements</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Selling Advertisements</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Store Exception Advertisements</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>All Advertisements</span>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Buying Advertisements</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Selling Advertisements</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Store Exception Advertisements</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>All Advertisements</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -233,10 +233,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>Information</h5>
                                 </div>
                                 <div className="footer-contant">
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Confidential Information</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Personal Information</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Confidential and Personal</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Other Declarations</span>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Confidential Information</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Personal Information</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Confidential and Personal</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' , color: 'gray'}}>Other Declarations</span><br/>
                                 </div>
                               </div>
                             </div>
@@ -248,10 +248,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                 <div className="footer-contant">
                                       <span className="footer-contant" style={{ fontSize: '12px' }}>
                                         Secure Payment Integrations
-                                      </span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>VISA Card</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Master Card</span>
-                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Direct Bank Transfer</span>
+                                      </span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' }}>VISA Card</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Master Card</span><br/>
+                                      <span className="footer-contant" style={{ fontSize: '12px' }}>Direct Bank Transfer</span><br/>
                                 </div>
                               </div>
                             </div>
