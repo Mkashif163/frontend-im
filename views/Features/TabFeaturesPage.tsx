@@ -15,7 +15,7 @@ const TabFeaturesPage: NextPage = () => {
         <div className="title6 pt-0">
           <h4>with slider</h4>
         </div>
-        <TabProduct />
+        <TabProduct menuId={0} menuName={""} />
       </div>
     </Fragment>
   );
