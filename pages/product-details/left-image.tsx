@@ -16,7 +16,7 @@ const LeftImage: NextPage = () => {
           <LeftImagePage />
         </section>
         <div className="custom-container">
-          <TabProduct />
+          <TabProduct item={undefined} />
         </div>
         <RelatedProducts />
       </Layout1>
