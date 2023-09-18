@@ -249,8 +249,8 @@ const CheckoutPage: NextPage = () => {
                               Shipping
                               <div className="shipping">
                                 <div className="shopping-option">
-                                  <input type="checkbox" name="free-shipping" id="free-shipping" />
-                                  <label htmlFor="free-shipping">Free Shipping</label>
+                                  <input type="checkbox" defaultChecked={true} name="free-shipping" id="free-shipping" />
+                                  <label htmlFor="free-shipping" >Free Shipping</label>
                                 </div>
                                 <div className="shopping-option">
                                   <input type="checkbox" name="local-pickup" id="local-pickup" />
@@ -278,7 +278,7 @@ const CheckoutPage: NextPage = () => {
                             <ul>
                               <li>
                                 <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-2" onClick={() => checkhandle("stripe")} />
+                                  <input type="radio" name="payment-group" id="payment-2" defaultChecked={true} onClick={() => checkhandle("stripe")} />
                                   <label htmlFor="payment-2">
                                     Cash On Delivery<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
                                   </label>
@@ -286,7 +286,7 @@ const CheckoutPage: NextPage = () => {
                               </li>
                               <li>
                                 <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-1" defaultChecked={true} onClick={() => checkhandle("stripe")} />
+                                  <input type="radio" name="payment-group" id="payment-1"  onClick={() => checkhandle("stripe")} />
                                   <label htmlFor="payment-1">
                                     Check Payments<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
                                   </label>

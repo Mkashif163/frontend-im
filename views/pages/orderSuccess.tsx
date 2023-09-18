@@ -5,9 +5,9 @@ import Breadcrumb from "../../views/Containers/Breadcrumb";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 
 const OrderSuccessPage: NextPage = () => {
-  const items = JSON.parse(localStorage.getItem("order-sucess-items"));
+  const items = JSON.parse(localStorage.getItem("order-sucess-items"))
   let subtotal = 0;
-  items && items?.map((item) => (subtotal += parseInt(item.price)));
+  items && items?.map((item) => (subtotal += item.new_price * item.qty));
   const shippingCharge = 12;
   const taxRate = 5;
   const { selectedCurr } = React.useContext(CurrencyContext);
@@ -21,11 +21,9 @@ const OrderSuccessPage: NextPage = () => {
     var temp = new Date(currentDate.setDate(currentDate.getDate() + 1));
     return temp.getDate() + "/" + (temp.getMonth() + 1) + "/" + temp.getFullYear();
   };
+
   return (
     <>
-      {/* <!-- thank-you section start --> */}
-      <Breadcrumb title="order-success" parent="home" />
-      {/* <!-- Section ends --> */}
 
       {/* <!-- order-detail section start --> */}
       <section className="section-big-py-space mt--5 bg-light">
@@ -40,12 +38,12 @@ const OrderSuccessPage: NextPage = () => {
                       return (
                         <Fragment key={i}>
                           <Col xs="3">
-                            <Media src={`/images/${item.images[0].src}`} alt="" className="img-fluid " />
+                            <Media src={item.url} alt="" className="img-fluid " />
                           </Col>
                           <Col xs="3" className="order_detail">
                             <div>
                               <h4>product name</h4>
-                              <h5>{item.title}</h5>
+                              <h5>{item.name}</h5>
                             </div>
                           </Col>
                           <Col xs="3" className="order_detail">
@@ -59,7 +57,7 @@ const OrderSuccessPage: NextPage = () => {
                               <h4>price</h4>
                               <h5>
                                 {symbol}
-                                {item.price * value}
+                                {item.new_price * item.qty}
                               </h5>
                             </div>
                           </Col>
@@ -74,7 +72,7 @@ const OrderSuccessPage: NextPage = () => {
                         subtotal{" "}
                         <span>
                           {symbol}
-                          {(subtotal * value).toFixed(2)}
+                          {(subtotal).toFixed(2)}
                         </span>
                       </li>
                       <li>
