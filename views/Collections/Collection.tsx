@@ -59,7 +59,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
       .catch(error =>{ console.log(error)
         setIsLoading(false)
       })
-  });
+  },[]);
 
   return (
     <Col className="collection-content">

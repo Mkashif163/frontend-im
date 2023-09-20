@@ -2,30 +2,64 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Row, Col, Input, Label } from "reactstrap";
 import { useRouter } from "next/router";
-import firebase from "../../config/base";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("test@123");
-  const [name, setName] = useState(localStorage.getItem("Name"));
+  const [email, setEmail] = useState("mk21@gmail.com");
+  const [password, setPassword] = useState("12357890");
 
   useEffect(() => {
-    localStorage.setItem("Name", name);
-  }, [name]);
+    // Check if the user is already authenticated
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      // User is authenticated, redirect to the dashboard or another authenticated page
+      router.push(`/pages/account/dashboard`);
+    }
+  }, []);
 
   const loginAuth = async (email, password) => {
     try {
-      await firebase.signInWithEmailAndPassword(email, password).then(function () {
-        setName("Emay Walter");
-        setTimeout(() => {
-          router.push(`/pages/account/checkout`);
-        }, 200);
+      // Define the data to be sent in the request body
+      const requestData = {
+        email: email,
+        password: password,
+      };
+
+      // Make a POST request to the API endpoint
+      const response = await axios.post("http://18.235.14.45/api/login", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      // Check if the login was successful
+      if (response.status === 200 && response.data.success) {
+        // Store the token and user ID in localStorage
+        localStorage.setItem("token", response.data.success.token);
+        localStorage.setItem("customer_id", response.data.customer_id);
+
+        // Set the user's name in localStorage
+        localStorage.setItem("Name", "Emay Walter");
+
+        // Simulate a delay and then redirect to the dashboard
+        setTimeout(() => {
+          router.push(`/pages/account/dashboard`);
+        }, 200);
+      } else {
+        toast.error("Login failed. Please check your credentials.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
     } catch (error) {
       setTimeout(() => {
-        toast.error("error", error);
+        toast.error("Network error. Please try again later.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }, 200);
     }
   };
@@ -41,15 +75,31 @@ const Login: NextPage = () => {
                 <form className="theme-form">
                   <div className="form-group">
                     <Label htmlFor="email">Email</Label>
-                    <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="email" placeholder="Email" required />
+                    <Input
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="form-control"
+                      id="email"
+                      placeholder="Email"
+                      required
+                    />
                   </div>
                   <div className="form-group">
-                    <Label htmlFor="review">Password</Label>
-                    <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="review" placeholder="Enter your password" required />
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      required
+                    />
                   </div>
-                  <a href="#" className="btn btn-normal" onClick={() => loginAuth(email, password)}>
+                  <button type="button" className="btn btn-normal" onClick={() => loginAuth(email, password)}>
                     Login
-                  </a>
+                  </button>
                   <a className="float-end txt-default mt-2" href="/pages/account/forget-password" id="fgpwd">
                     Forgot your password?
                   </a>
@@ -63,7 +113,6 @@ const Login: NextPage = () => {
           </Row>
         </div>
       </section>
-      {/* <!--Section ends--> */}
     </>
   );
 };

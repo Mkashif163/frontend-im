@@ -190,7 +190,7 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect }) => {
       nav1: slider1.current,
       nav2: slider2.current,
     });
-  });
+  },[]);
   return (
     <>
       <section className="short-disply section-py-space ratio_asos product">

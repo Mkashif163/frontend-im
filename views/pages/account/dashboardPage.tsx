@@ -15,17 +15,6 @@ const Dashboard: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentComponent, setCurrentComponent] = useState("dashboard");
 
-
-  const token = localStorage.getItem('token');
-
-  if (token) {
-    // Token is present, you can perform actions here
-    console.log('Token exists:', token);
-  } else {
-    // Token is not present, you can handle this case here
-    console.log('Token does not exist');
-  }
-
   return (
     <>
       <section className="section-big-py-space bg-light">

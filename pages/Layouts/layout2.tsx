@@ -20,11 +20,6 @@ import DiscountCoupon from "../../views/layouts/widgets/discountCoupon";
 import NewsLatter from "views/Containers/news-letter";
 
 const Layout2 = () => {
-  useEffect(() => {
-    document.documentElement.classList.remove(localStorage.getItem("color"));
-    localStorage.setItem("color", "color-2");
-    document.documentElement.classList.add(localStorage.getItem("color"));
-  }, []);
   return (
     <>
       <NewsLatter />

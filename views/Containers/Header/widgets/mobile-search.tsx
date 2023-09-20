@@ -5,7 +5,7 @@ import { NextPage } from "next";
 const MobileSearch: NextPage = () => {
   useEffect(() => {
     document.getElementById("search-overlay").style.display = "none";
-  });
+  },[]);
   const closeSearch = () => {
     document.getElementById("search-overlay").style.display = "none";
   };

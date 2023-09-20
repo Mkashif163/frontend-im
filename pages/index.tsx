@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       .catch((error) => {
         console.error("Error fetching data from API:", error);
       });
-  }, []);
+  }, [TabProduct]);
 
   return (
     <>

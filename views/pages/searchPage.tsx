@@ -83,7 +83,7 @@ const SearchPage: NextPage = () => {
           console.error("Error fetching products:", error);
           setLoading(false);
         });
-  },);
+  },[]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
