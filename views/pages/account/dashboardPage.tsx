@@ -13,8 +13,19 @@ import Link from "next/link";
 
 const Dashboard: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentComponent, setCurrentComponent] = useState("dashboard"); 
-  
+  const [currentComponent, setCurrentComponent] = useState("dashboard");
+
+
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    // Token is present, you can perform actions here
+    console.log('Token exists:', token);
+  } else {
+    // Token is not present, you can handle this case here
+    console.log('Token does not exist');
+  }
+
   return (
     <>
       <section className="section-big-py-space bg-light">
@@ -47,12 +58,10 @@ const Dashboard: NextPage = () => {
                     <li
                       className={currentComponent === "dashboard" ? "active" : ""}
                       onClick={() => {
-                        setCurrentComponent("Account");
+                        setCurrentComponent("dashboard");
                       }}>
                       <Link href={""}>Account</Link>
-                      <ul>
-                        <li></li>
-                      </ul>
+                      
                     </li>
                     <li
                       className={currentComponent === "order" ? "active" : ""}
@@ -60,7 +69,7 @@ const Dashboard: NextPage = () => {
                         setCurrentComponent("order");
                       }}>
                       <Link href={""}>My Orders</Link>
-                     
+
                     </li>
                     <li
                       className={currentComponent === "address" ? "active" : ""}
@@ -112,13 +121,13 @@ const Dashboard: NextPage = () => {
             <Col lg="10">
               <div className="dashboard-right">
                 <div className="dashboard">
-                  {currentComponent === "Account" && <DashboardComponent />}
+                  {currentComponent === "dashboard" && <DashboardComponent />}
                   {currentComponent === "order" && <OrderComponent />}
-                  {currentComponent==="cart" && <CartPage/>}
-                  {currentComponent ==="wishlist" && <WishListPage/>}
-                  {currentComponent ==="reviews" && <ReviewPage/>}
-                  {currentComponent === "changePassword" && <ForgetPassword/>}
-                  {currentComponent === "profile" && <Profile/>}
+                  {currentComponent === "cart" && <CartPage />}
+                  {currentComponent === "wishlist" && <WishListPage />}
+                  {currentComponent === "reviews" && <ReviewPage />}
+                  {currentComponent === "changePassword" && <ForgetPassword />}
+                  {currentComponent === "profile" && <Profile />}
                 </div>
               </div>
             </Col>

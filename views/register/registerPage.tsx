@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Label, Input, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import router from "next/router";
 
 const RegisterPage: NextPage = () => {
 
@@ -31,18 +32,19 @@ const RegisterPage: NextPage = () => {
       "gender": gender,
     };
 
-    try {
+    try { 
       const response = await axios.post("http://18.235.14.45/api/register", formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      if (response.status === 200 && response.data.success) {
+        // Store the token and user ID in localStorage
+        localStorage.setItem('token', response.data.success.token);
+        localStorage.setItem('customer_id', response.data.customer_id);
 
-      if (response.status === 200) {
-        toast.success("Registration successful!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        // Redirect to the dashboard page
+        router.push("/pages/account/dashboard");
       } else {
         toast.error("Registration failed. Please try again.", {
           position: "top-right",
@@ -57,9 +59,19 @@ const RegisterPage: NextPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Check if the token is available in localStorage
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      // Token is available, redirect to the dashboard
+      router.push("/pages/account/dashboard");
+    }
+  }, []);
 
 
   return (
+
     <>
       <ToastContainer />
       <section className="login-page section-big-py-space bg-light">
