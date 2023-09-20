@@ -11,10 +11,6 @@ const Compare: NextPage = () => {
 
   return (
     <>
-      {/* // <!-- breadcrumb start --> */}
-      <Breadcrumb title="compare" parent="home" />
-      {/* // <!-- breadcrumb End --> */}
-
       {/* // <!-- section start --> */}
       <section className="compare-padding section-big-py-space bg-light">
         <div className="custom-container">
@@ -41,7 +37,7 @@ const Compare: NextPage = () => {
                           <th className="product-name">Product Name</th>
                           {compareItems.map((item, i) => (
                             <td className="item-row" key={i}>
-                              {item.title}
+                              {item.name}
                             </td>
                           ))}
                         </tr>
@@ -49,10 +45,10 @@ const Compare: NextPage = () => {
                           <th className="product-name">Product Image</th>
                           {compareItems.map((item, i) => (
                             <td className="item-row" key={i}>
-                              <Media src={`/images/${item.images[0].src}`} alt="product" className="featured-image" />
+                              <Media src={item.url} alt="product" className="featured-image" />
                               <div className="product-price product_price">
                                 <strong>On Sale: </strong>
-                                <span>$89,00</span>
+                                <span>{item.new_sale_price}</span>
                               </div>
                               <form className="variants clearfix">
                                 <Input type="hidden" />
@@ -65,7 +61,7 @@ const Compare: NextPage = () => {
                                   Add to Cart
                                 </Button>
                               </form>
-                              <p className="grid-link__title hidden">Cut Dress</p>
+                              <p className="grid-link__title hidden">{item.name}</p>
                             </td>
                           ))}
                         </tr>

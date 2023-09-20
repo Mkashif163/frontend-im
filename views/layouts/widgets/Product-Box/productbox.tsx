@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import Slider from "react-slick";
 import Link from "next/link";
-import Img from "utils/BgImgRatio";
 
 interface productType {
   product: any;
@@ -17,12 +16,7 @@ interface productType {
 
 const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWish, hoverEffect }) => {
   const currencyContext = useContext(CurrencyContext);
-  const para = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took galley of type and scrambled it to make a type specimen book";
   const { selectedCurr } = currencyContext;
-  const [imgsrc, setImgsrc] = useState("");
-  const imgChange = (src) => {
-    setImgsrc(src);
-  };
   const slider2 = React.useRef<Slider>();
   const stock = 29;
 
@@ -57,20 +51,18 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
     setModal(!modal);
   };
 
-  const pathId = product && product.id
-  const clickProductDetail = () => {
-    router.push(`/product-details/${pathId}`);
-  };
-
+  const pathId = product && product.id;
 
   return (
     <>
       {product && <Fragment>
         <div className="product-box" >
           <div className="product-imgbox bg-white">
-            <div className="product-front " onClick={clickProductDetail}>
-              <img src={product.url} className="img-fluid" alt="product" />
-            </div>
+            <Link href={`/product-details/${pathId}`}>
+              <div className="product-front ">
+                <Media src={product.url} className="img-fluid" alt="product" />
+              </div>
+            </Link>
 
             <div className={`product-icon `}>
               <button onClick={() => addCart(product, quantity)}>

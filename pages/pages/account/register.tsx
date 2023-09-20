@@ -5,7 +5,9 @@ import RegisterPage from "../../../views/register/registerPage";
 
 const Register: NextPage = () => {
   return (
+    <Layout1>
       <RegisterPage />
+    </Layout1>
   );
 };
 

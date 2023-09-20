@@ -33,7 +33,7 @@ const CartPage: NextPage = () => {
             <>
               <div className="row">
                 <div className="col-sm-12">
-                  <table className="table cart-table table-responsive-xs">
+                  <table className="table cart-table table-responsive-xs p-5">
                     <thead>
                       <tr className="table-head">
                         <th scope="col">image</th>

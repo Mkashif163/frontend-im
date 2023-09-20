@@ -12,7 +12,7 @@ const Wishlist: NextPage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <li className="mobile-wishlist" onClick={() => setOpenWishlist(!openWishlist)}>
+      <li className="mobile-wishlist " onClick={() => setOpenWishlist(!openWishlist)}>
         <a>
           <i className="icon-heart"></i>
           <div className="cart-item">

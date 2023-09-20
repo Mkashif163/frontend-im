@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Button } from 'reactstrap';
-import Link from "next/link";
 import ProductBox from "../Product-Box/productbox";
 import { CartContext } from "helpers/cart/cart.context";
 import { WishlistContext } from "helpers/wishlist/wish.context";

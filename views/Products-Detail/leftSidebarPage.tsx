@@ -46,7 +46,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
                 left: filterOpen ? "-15px" : "",
               }}>
               <ProductService />
-              <NewProduct />
+              <NewProduct  item={product}/>
             </Col>
             <Col sm="12" lg="9" xs="12">
               <Row>

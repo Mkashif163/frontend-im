@@ -16,6 +16,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
   const data = item[0];
+  console.log("product detail image",data)
 
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();
@@ -56,7 +57,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
                   data.product_images.map((img: any, i: any) => {
                     return (
                       <div key={i}>
-                        <Media src={img.url} alt="" className="img-fluid  image_zoom_cls-0" />
+                        <Media src={data.url} alt="" className="img-fluid  image_zoom_cls-0" />
                       </div>
                     );
                   })}

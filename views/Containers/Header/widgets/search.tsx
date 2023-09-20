@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { Input, InputGroupText,  InputGroup, } from "reactstrap";
+import { Input,  InputGroup, } from "reactstrap";
 import { useRouter } from "next/router";
 
 const Search: NextPage = () => {

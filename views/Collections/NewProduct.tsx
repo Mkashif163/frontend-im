@@ -1,6 +1,12 @@
 import { NextPage } from "next";
+import React from "react";
 import Slider from "react-slick";
 import { Media } from "reactstrap";
+
+
+interface NewProductData {
+  item: any;
+}
 
 var bestSellerSetting = {
   dots: false,
@@ -20,15 +26,20 @@ var bestSellerSetting = {
   ],
 };
 
-const NewProduct: NextPage = () => (
-  <div className="theme-card creative-card creative-inner">
+const NewProduct: React.FC<NewProductData> = ({ item }) => {
+
+  console.log(item)
+  
+  return (
+    <>
+  { item && <div className="theme-card creative-card creative-inner">
     <h5 className="title-border">new product</h5>
     <div className="offer-slider slide-1">
       <Slider {...bestSellerSetting}>
         <div>
           <div className="media">
             <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/001.jpg" alt="" />
+              <Media className="img-fluid " src={item.url} alt="" />
             </a>
             <div className="media-body align-self-center">
               <div className="rating">
@@ -39,87 +50,36 @@ const NewProduct: NextPage = () => (
                 <i className="fa fa-star"></i>
               </div>
               <a href="/collections/no-sidebar">
-                <h6>Slim Fit Cotton Shirt</h6>
+                <h6>{item.name}</h6>
               </a>
-              <h4>$500.00</h4>
-            </div>
-          </div>
-          <div className="media">
-            <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/002.jpg" alt="" />
-            </a>
-            <div className="media-body align-self-center">
-              <div className="rating">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-              </div>
-              <a href="#">
-                <h6>Slim Fit Cotton Shirt</h6>
-              </a>
-              <h4>$500.00</h4>
-            </div>
-          </div>
-          <div className="media ">
-            <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/003.jpg" alt="" />
-            </a>
-            <div className="media-body align-self-center">
-              <div className="rating">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-              </div>
-              <a href="#">
-                <h6>Slim Fit Cotton Shirt</h6>
-              </a>
-              <h4>$500.00</h4>
+              <h4>{item.new_sale_price}</h4>
             </div>
           </div>
         </div>
         <div>
           <div className="media">
             <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/003.jpg" alt="" />
+              <Media className="img-fluid " src={item.url} alt="" />
             </a>
             <div className="media-body align-self-center">
               <div className="rating">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
               </div>
-              <a href="#">
-                <h6>Slim Fit Cotton Shirt</h6>
+              <a href="/collections/no-sidebar">
+                <h6>{item.name}</h6>
               </a>
-              <h4>$500.00</h4>
-            </div>
-          </div>
-          <div className="media">
-            <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/001.jpg" alt="" />
-            </a>
-            <div className="media-body align-self-center">
-              <div className="rating">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-              </div>
-              <a href="#">
-                <h6>Slim Fit Cotton Shirt</h6>
-              </a>
-              <h4>$500.00</h4>
-            </div>
-          </div>
-          <div className="media">
-            <a href="">
-              <Media className="img-fluid " src="/images/product-sidebar/002.jpg" alt="" />
-            </a>
-            <div className="media-body align-self-center">
-              <div className="rating">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-              </div>
-              <a href="#">
-                <h6>Slim Fit Cotton Shirt</h6>
-              </a>
-              <h4>$500.00</h4>
+              <h4>{item.new_sale_price}</h4>
             </div>
           </div>
         </div>
       </Slider>
     </div>
-  </div>
-);
+  </div>}
+  </>
+)};
 
 export default NewProduct;

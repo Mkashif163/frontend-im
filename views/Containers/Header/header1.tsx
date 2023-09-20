@@ -66,10 +66,7 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
                   </div>
                   <Search />
                   <ShoppingCart position={cartPopupPosition} cartDisplay={display} layout="layout2" />
-                  <div className="d-flex">
-                    <User />
-                    <WishList />
-                  </div>
+                  
                 </div>
               </Col>
             </Row>
@@ -106,8 +103,6 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
         </div>
 
         {/* Nav bar end */}
-
-
       </header>
     </Fragment>
   );

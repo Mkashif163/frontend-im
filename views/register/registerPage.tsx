@@ -3,46 +3,42 @@ import { NextPage } from "next";
 import { Label, Input, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const RegisterPage: NextPage = () => {
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    phone_number: "",
-    email: "",
-    password: "",
-    c_password: "",
-    gender: "",
-  });
 
-  const [token, setToken] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [first_name, setFirtName] = useState("")
+  const [last_name, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [password, setPassword] = useState("")
+  const [c_password, setCpassword] = useState("")
+  const [gender, setGGender] = useState("")
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Form data to be sent
+    const formData = {
+      "first_name": first_name,
+      "last_name": last_name,
+      "email": email,
+      "phone_number": phone,
+      "password": password,
+      "c_password": c_password,
+      "gender": gender,
+    };
+
     try {
-      const response = await fetch("http://18.235.14.45/api/register", {
-        method: "POST",
+      const response = await axios.post("http://18.235.14.45/api/register", formData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const { token } = data;
-
-        setToken(token);
-
+      if (response.status === 200) {
         toast.success("Registration successful!", {
           position: "top-right",
           autoClose: 3000,
@@ -60,6 +56,8 @@ const RegisterPage: NextPage = () => {
       });
     }
   };
+
+
 
   return (
     <>
@@ -81,8 +79,8 @@ const RegisterPage: NextPage = () => {
                         name="first_name"
                         placeholder="First Name"
                         required
-                        value={formData.first_name}
-                        onChange={handleChange}
+                        value={first_name}
+                        onChange={(e) => { setFirtName(e.target.value) }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">
@@ -94,8 +92,8 @@ const RegisterPage: NextPage = () => {
                         name="last_name"
                         placeholder="Last Name"
                         required
-                        value={formData.last_name}
-                        onChange={handleChange}
+                        value={last_name}
+                        onChange={(e) => { setLastName(e.target.value) }}
                       />
                     </FormGroup>
                   </div>
@@ -109,8 +107,21 @@ const RegisterPage: NextPage = () => {
                         name="email"
                         placeholder="Email"
                         required
-                        value={formData.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value) }}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label htmlFor="phone_number">Phone Number</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="phone_number"
+                        name="phone_number"
+                        placeholder="Enter your Phone Number"
+                        required
+                        value={phone}
+                        onChange={(e) => { setPhone(e.target.value) }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">
@@ -122,8 +133,8 @@ const RegisterPage: NextPage = () => {
                         name="password"
                         placeholder="Enter your password"
                         required
-                        value={formData.password}
-                        onChange={handleChange}
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value) }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">
@@ -135,8 +146,8 @@ const RegisterPage: NextPage = () => {
                         name="c_password"
                         placeholder="Enter your password"
                         required
-                        value={formData.c_password}
-                        onChange={handleChange}
+                        value={c_password}
+                        onChange={(e) => { setCpassword(e.target.value) }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">
@@ -148,8 +159,8 @@ const RegisterPage: NextPage = () => {
                         name="gender"
                         placeholder="Gender"
                         required
-                        value={formData.gender}
-                        onChange={handleChange}
+                        value={gender}
+                        onChange={(e) => { setGGender(e.target.value) }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">

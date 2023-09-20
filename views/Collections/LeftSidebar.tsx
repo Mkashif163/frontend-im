@@ -20,7 +20,7 @@ const LeftSidebarCollection: NextPage = () => {
         className="collection-filter category-page-side">
         <div className="sticky-sidebar">
           <Sidebar />
-          <NewProduct />
+          <NewProduct item={undefined}/>
           <div className="collection-sidebar-banner">
             <a href="#">
               <img src="/images/category/side-banner.png" className="img-fluid " alt="" />

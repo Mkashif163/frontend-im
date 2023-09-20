@@ -79,6 +79,8 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
                           <a href={`/collections/leftsidebar?category=${sub.name}`}>
                             {sub.name}
                           </a>
+
+                          
                         </li>
                       ))}
                     </ul>
