@@ -207,7 +207,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
                     <a href="#" className="btn btn-normal" onClick={() => addCart(product, quantity)}>
                       add to cart
                     </a>
-                    <a href="#" className="btn btn-normal" onClick={() => clickProductDetail()}>
+                    <a href="#" className="btn btn-normal" >
                       view detail
                     </a>
                   </div>
