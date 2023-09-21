@@ -4,7 +4,7 @@ import { Media } from "reactstrap";
 const CollectionBanner: NextPage = () => (
   <div className="top-banner-wrapper">
     <a href="#">
-      <Media src="/images/category/1.jpg" className="img-fluid " alt="" />
+      <Media src="/images/category/1.webp" className="img-fluid " alt="" />
     </a>
     <div className="top-banner-content small-section">
       <h1>Programmable Controlers</h1>

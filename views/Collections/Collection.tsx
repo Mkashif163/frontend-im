@@ -8,15 +8,11 @@ import { CartContext } from "../../helpers/cart/cart.context";
 import { WishlistContext } from "../../helpers/wishlist/wish.context";
 import { Skeleton } from "../../common/skeleton";
 import { CompareContext } from "helpers/compare/compare.context";
-import { set } from "react-hook-form";
-
-
 
 type CollectionProps = {
   cols: any;
   layoutList: string;
 };
-
 
 const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
@@ -28,16 +24,24 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const [pageLimit, setPageLimit] = useState(12);
   const [layout, setLayout] = useState(layoutList);
   const [isLoading, setIsLoading] = useState(true);
-  const [allProductData, setAllProductData] = useState([])
+  const [allProductData, setAllProductData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(allProductData.length / pageLimit);
 
-
-
   const handlePagination = (page) => {
-    setCurrentPage(page);
-  };
+    // Set the loading state to true
+    setIsLoading(true);
 
+    // Wait for 0.5 seconds before changing the page
+    setTimeout(() => {
+      setCurrentPage(page);
+
+      // Ideally, you'd also fetch your products here for the new page
+      // Once products are fetched, set the loading state to false
+      // For the sake of this example, I'll set it to false after another 0.5s
+      setTimeout(() => setIsLoading(false), 500);
+    }, 500);
+  };
 
   const removeBrand = (val) => {
     const temp = [...selectedBrands];
@@ -165,7 +169,6 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                           <option value="DESC_ORDER">Desc Order</option>
                         </select>
                       </div>
-
                     </div>
                   </Col>
                 </Row>
@@ -175,24 +178,17 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
               <div className={`product-wrapper-grid ${layout}`}>
                 <Row>
                   {/* Product Box */}
-                  {!allProductData || allProductData.length === 0 ? (
-                    allProductData && allProductData.length === 0 ? (
-                      <Col xs="12">
-                        <div className="d-flex justify-content-center mt-5">
-                          <button className="btn btn-normal" type="button" disabled>
-                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
-                          </button>
-                        </div>
-                      </Col>
-                    ) : (
-                      <>
-                        <Skeleton />
-                      </>
-                    )
+                  {isLoading ? (
+                    <Col xs="12">
+                      <div className="d-flex justify-content-center mt-5">
+                        <Spinner type="grow" color="primary" />
+                      </div>
+                    </Col>
+                  ) : (!allProductData || allProductData.length === 0) ? (
+                    <Skeleton />
                   ) : (
                     allProductData
-                      .slice() // First, we slice the full list so we don't mutate the original
+                      .slice()
                       .sort((a, b) => {
                         switch (sortBy) {
                           case "HIGH_TO_LOW":
@@ -201,8 +197,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                             return a.new_price - b.new_price;
                           case "NEWEST":
                             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-                          case "ASC_ORDER": // This might depend on what you want to sort by in Ascending order
-                            return a.name.localeCompare(b.name); // Assuming products have a "name" field
+                          case "ASC_ORDER":
+                            return a.name.localeCompare(b.name);
                           case "DESC_ORDER":
                             return b.name.localeCompare(a.name);
                           default:
@@ -216,8 +212,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                             <div>
                               <ProductBox
                                 hoverEffect={true}
-                                product={product} // Pass the product data
-                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                product={product}
+                                addCart={(product) => addToCart(product, 1)}
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)} />
                             </div>
@@ -275,11 +271,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
                       </a>
                     </li>
                   </ul>
-
                 </div>
               </div>
-
-
             </div>
           </Col>
         </Row>
@@ -289,7 +282,3 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
 };
 
 export default Collection;
-function fetchMore(arg0: { variables: { indexFrom: any; }; updateQuery: (prev: any, { fetchMoreResult }: { fetchMoreResult: any; }) => any; }): void {
-  throw new Error("Function not implemented.");
-}
-

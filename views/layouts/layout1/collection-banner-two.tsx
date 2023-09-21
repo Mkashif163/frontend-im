@@ -17,7 +17,7 @@ interface Banners {
 
 const banners = [
   {
-    img: "/images/layout-2/collection-banner/7.jpg",
+    img: "/images/layout-2/collection-banner/7.webp",
     title: "save up to 30% off",
     subTitle: `Electric<span>Motors</span>`,
     btn: "shop now",
@@ -29,8 +29,8 @@ const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
   return (
     <Col>
       <div className="collection-banner-main banner-5 p-center">
-        <div className="collection-img">
-          <Media src={banner.img} className="bg-img  " alt="banner" />
+        <div className="collection-img" style={{width:"100%"}}>
+          <Media src={banner.img} className="bg-img  " style={{width:"100%"}} alt="banner" />
         </div>
         <div className="collection-banner-contain ">
           <div className="sub-contain">

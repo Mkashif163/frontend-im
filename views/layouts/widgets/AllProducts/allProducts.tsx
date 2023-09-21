@@ -54,7 +54,7 @@ const AllProducts = () => {
                         <div className="row load-more-product">
                             {productsToDisplay.map((product, i) => (
                                 <div className="col-xl-2 col-md-5 col-5" key={i}>
-                                    <div className="product">
+                                    <div className="product w-100">
                                         <div>
                                             <ProductBox
                                                 hoverEffect={true}

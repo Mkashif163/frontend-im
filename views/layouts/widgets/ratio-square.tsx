@@ -1,8 +1,5 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Media, Modal, ModalBody } from "reactstrap";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
-import { NextPage } from "next";
+import React, { useState, useContext, useEffect } from "react";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Media, Spinner } from "reactstrap";
 import Slider from "react-slick";
 import { CurrencyContext } from "../../../helpers/currency/CurrencyContext";
 import { CartContext } from "../../../helpers/cart/cart.context";
@@ -10,9 +7,6 @@ import Link from "next/link";
 import { WishlistContext } from "../../../helpers/wishlist/wish.context";
 import { CompareContext } from "../../../helpers/compare/compare.context";
 import { useRouter } from "next/router";
-import { set } from "react-hook-form";
-import { Skeleton } from "common/skeleton";
-import Loader from "common/Loader";
 
 var settings = {
   dots: false,
@@ -57,49 +51,30 @@ var settings = {
   ],
 };
 
-const RatioSquare: NextPage = () => {
+const chunkArray = (array, size) => {
+  const result = [];
+  for (let value of array) {
+    let lastArray = result[result.length - 1];
+    if (!lastArray || lastArray.length === size) {
+      result.push([value]);
+    } else {
+      lastArray.push(value);
+    }
+  }
+  return result;
+};
+
+const RatioSquare = () => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
   const [activeTab, setActiveTab] = useState("new products");
-  const [modal, setModal] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [stockState, setStockState] = useState("InStock");
+  const [selected, setSelected] = useState("motors");
+  const [dataR, setDataR] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { addToWish } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
   const { addToCompare } = useContext(CompareContext);
   const router = useRouter();
-  const [selected, setSelected] = useState("motors");
-  const [dataR, setDataR] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const uniqueSize = [];
-  const uniqueColor = [];
-
-  const slider2 = useRef<Slider>();
-  const collection = [];
-
-  const changeColorVar = (img_id) => {
-    slider2.current.slickGoTo(img_id);
-  };
-
-  const minusQty = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      setStockState("InStock");
-    }
-  };
-
-  const plusQty = (stock) => {
-    if (stock > quantity) setQuantity(quantity + 1);
-    else setStockState("Out of Stock !");
-  };
-
-  const changeQty = (e) => {
-    setQuantity(parseInt(e.target.value));
-  };
-
-  const QuickView = () => {
-    setModal(!modal);
-  };
 
   const handleTabClick = (tabName) => {
     // Update the selected state based on the tab clicked
@@ -131,18 +106,27 @@ const RatioSquare: NextPage = () => {
               <div className="theme-tab product">
                 <Nav tabs className="tab-title media-tab">
                   <NavItem>
-                    <NavLink className={activeTab === "featured" ? "active" : ""} onClick={() => handleTabClick("motors")}>
+                    <NavLink className={activeTab === "featured" ? "active" : ""} onClick={() => {
+                      setActiveTab("featured")
+                      handleTabClick("motors")
+                    }}>
                       Featured
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className={activeTab === "popular" ? "active" : ""} onClick={() => handleTabClick("vfds")}>
-                      Popular
+                    <NavLink className={activeTab === "sponserd" ? "active" : ""} onClick={() => {
+                      setActiveTab("sponserd")
+                      handleTabClick("vfds")
+                    }}>
+                      Sponserd
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className={activeTab === "onsale" ? "active" : ""} onClick={() => handleTabClick("lights")}>
-                      On Sale
+                    <NavLink className={activeTab === "onsale" ? "active" : ""} onClick={() => {
+                      setActiveTab("onsale")
+                      handleTabClick("lights")
+                    }}>
+                      Coupens
                     </NavLink>
                   </NavItem>
                 </Nav>
@@ -150,234 +134,53 @@ const RatioSquare: NextPage = () => {
               <div className="tab-content-cls">
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId={activeTab}>
-                    <Slider {...settings}>
-                      {loading ? (
-                        <div className="spinner-grow" style={{ width: "3rem", height: "3rem" }} role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                      ) : (
-                        dataR.map((item, i) => (
-                          <div key={i}>
-                            <div className="media-banner media-banner-1 border-0">
-                              <div className="media-banner-box">
-                                <div className="media">
-                                  <Link href={`/product-details/${item.id}`}>
-                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
-                                  </Link>
-                                  <div className="media-body">
-                                    <div className="media-contant">
-                                      <div>
-                                        <div className="product-detail">
-                                          <ul className="rating">
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                          </ul>
-                                          <Link href={`/product-details/${item.id}`}>
-                                            <p>{item.name}</p>
-                                          </Link>
-                                          <h6>
+                    {loading ? (
+                      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+                        <Spinner type="grow" color="primary" />
+                      </div>
+                    ) : (
+                      <Slider {...settings}>
+                        {chunkArray(dataR, 3).map((chunk, chunkIndex) => (
+                          <div key={chunkIndex}>
+                            {chunk.map((item, itemIndex) => (
+                              <div key={itemIndex}>
+                                <div className="media-banner media-banner-1 border-0">
+                                  <div className="media-banner-box">
+                                    <div className="media gap-2">
+                                      <div style={{ width: "80", height: "80" }}>
+                                        <Link href={`/product-details/${item.id}`}>
+                                          <img src={`${item.url ? item.url : "pro3/3.jpg"}`} className="img-fluid mr-2" alt="banner" />
+                                        </Link>
+                                      </div>
+                                      <div className="media-body">
+                                        <Link href={`/product-details/${item.id}`}>
+                                          <p>{item.name}</p>
+                                        </Link>
+                                        <h6>
+                                          {selectedCurr.symbol}
+                                          {item.new_sale_price}{" "}
+                                          <span>
                                             {selectedCurr.symbol}
-                                            {(item.new_sale_price)}{" "}
-                                            <span>
-                                              {selectedCurr.symbol}
-                                              {(item.new_price)}
-                                            </span>
-                                          </h6>
-                                        </div>
-                                        <div className="cart-info">
-                                          <button onClick={() => addToCart(item)}>
-                                            <i className="ti-bag"></i>
-                                          </button>
-                                          <a onClick={() => addToWish(item)}>
-                                            <i className="ti-heart" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Quick View" onClick={() => QuickView()}>
-                                            <i className="ti-search" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Compare" onClick={() => addToCompare(item)}>
-                                            <i className="fa fa-exchange" aria-hidden="true"></i>
-                                          </a>
-                                        </div>
+                                            {item.new_price}
+                                          </span>
+                                        </h6>
+                                        <ul className="rating">
+                                          <i className="fa fa-star"></i>
+                                          <i className="fa fa-star"></i>
+                                          <i className="fa fa-star"></i>
+                                          <i className="fa fa-star"></i>
+                                          <i className="fa fa-star"></i>
+                                        </ul>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                              <div className="media-banner-box">
-                                <div className="media">
-                                  <Link href={`/product-details/${item.id}`}>
-                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
-                                  </Link>
-                                  <div className="media-body">
-                                    <div className="media-contant">
-                                      <div>
-                                        <div className="product-detail">
-                                          <ul className="rating">
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                          </ul>
-                                          <Link href={`/product-details/${item.id}`}>
-                                            <p>{item.name}</p>
-                                          </Link>
-                                          <h6>
-                                            {selectedCurr.symbol}
-                                            {(item.new_sale_price)}{" "}
-                                            <span>
-                                              {selectedCurr.symbol}
-                                              {(item.new_price)}
-                                            </span>
-                                          </h6>
-                                        </div>
-                                        <div className="cart-info">
-                                          <button onClick={() => addToCart(item)}>
-                                            <i className="ti-bag"></i>
-                                          </button>
-                                          <a onClick={() => addToWish(item)}>
-                                            <i className="ti-heart" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Quick View" onClick={() => QuickView()}>
-                                            <i className="ti-search" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Compare" onClick={() => addToCompare(item)}>
-                                            <i className="fa fa-exchange" aria-hidden="true"></i>
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="media-banner-box">
-                                <div className="media">
-                                  <Link href={`/product-details/${item.id}`}>
-                                    <img src={`${item.url ? item.url : "pro3/3.jpg"}`} width="80" height="80" className="img-fluid " alt="banner" />
-                                  </Link>
-                                  <div className="media-body">
-                                    <div className="media-contant">
-                                      <div>
-                                        <div className="product-detail">
-                                          <ul className="rating">
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
-                                          </ul>
-                                          <Link href={`/product-details/${item.id}`}>
-                                            <p>{item.name}</p>
-                                          </Link>
-                                          <h6>
-                                            {selectedCurr.symbol}
-                                            {(item.new_sale_price)}{" "}
-                                            <span>
-                                              {selectedCurr.symbol}
-                                              {(item.new_price)}
-                                            </span>
-                                          </h6>
-                                        </div>
-                                        <div className="cart-info">
-                                          <button onClick={() => addToCart(item)}>
-                                            <i className="ti-bag"></i>
-                                          </button>
-                                          <a onClick={() => addToWish(item)}>
-                                            <i className="ti-heart" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Quick View" onClick={() => QuickView()}>
-                                            <i className="ti-search" aria-hidden="true"></i>
-                                          </a>
-                                          <a href="#" title="Compare" onClick={() => addToCompare(item)}>
-                                            <i className="fa fa-exchange" aria-hidden="true"></i>
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <Modal className="fade bd-example-modal-lg theme-modal show quick-view-modal" isOpen={modal} toggle={() => setModal(!modal)} centered size="lg">
-                              <ModalBody>
-                                <button type="button" className="close" onClick={() => setModal(!modal)}>
-                                  <span>&times;</span>
-                                </button>
-                                <div className="row">
-                                  <div className="col-lg-6 col-xs-12">
-                                    <Slider ref={(slider) => (slider2.current = slider)}>
-                                      {dataR &&
-                                        dataR.map((img: any, i: any) => {
-                                          return (
-                                            <div key={i}>
-                                              <Media src={`${item.url ? item.url : "pro3/3.jpg"}`} alt="" className="img-fluid  image_zoom_cls-0" />
-                                            </div>
-                                          );
-                                        })}
-                                    </Slider>
-                                  </div>
-                                  <div className="col-lg-6 rtl-text">
-                                    <div className="product-right">
-                                      <h2>{item?.new_price}</h2>
-                                      <h3>${item?.new_sale_price}</h3>
-                                      {/* <ul className="color-variant">
-                                        {uniqueColor.map((vari, i) => {
-                                          return <li className={vari.color} key={i} title={vari.color} onClick={() => changeColorVar(i)}></li>;
-                                        })}
-                                      </ul> */}
-                                      <div className="border-product">
-                                        <h6 className="product-title">product details</h6>
-                                        <p>{item?.description}</p>
-                                      </div>
-                                      <div className="product-description border-product">
-                                        {/* <div className="size-box">
-                                          <ul>
-                                            {uniqueSize.map((size, i) => (
-                                              <li key={i}>
-                                                <a href="#" onClick={(e) => e.preventDefault()}>
-                                                  {size}
-                                                </a>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div> */}
-                                        {stockState !== "InStock" ? <span className="instock-cls">{stockState}</span> : ""}
-                                        <h6 className="product-title">quantity</h6>
-                                        <div className="qty-box">
-                                          <div className="input-group">
-                                            <span className="input-group-prepend">
-                                              <button type="button" className="btn quantity-left-minus" onClick={minusQty}>
-                                                <i className="ti-angle-left"></i>
-                                              </button>
-                                            </span>
-                                            <input type="text" name="quantity" className="form-control input-number" value={quantity} onChange={changeQty} />
-                                            <span className="input-group-prepend">
-                                              <button type="button" className="btn quantity-right-plus" onClick={() => plusQty(item.stock)}>
-                                                <i className="ti-angle-right"></i>
-                                              </button>
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div className="product-buttons">
-                                        <a href="#" className="btn btn-normal" onClick={() => addToCart(item, quantity)}>
-                                          add to cart
-                                        </a>
-                                        {/* <a href="#" className="btn btn-normal" onClick={() => clickProductDetail(item)}>
-                                          view detail
-                                        </a> */}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </ModalBody>
-                            </Modal>
+                            ))}
                           </div>
-                        )))}
-                    </Slider>
+                        ))}
+                      </Slider>
+                    )}
                   </TabPane>
                 </TabContent>
               </div>

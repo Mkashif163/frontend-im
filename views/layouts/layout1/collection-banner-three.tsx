@@ -31,7 +31,7 @@ const banners = [
     category: "SHOES",
   },
   {
-    img: "/images/layout-2/collection-banner/6.jpg",
+    img: "/images/layout-2/collection-banner/6.webp",
     title: "Printing 3D",
     subTitle: "USB Moon",
     btn: "shop now",
@@ -42,9 +42,9 @@ const banners = [
 const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
   return (
     <Col md="4">
-      <div className="collection-banner-main banner-1 p-left">
-        <div className="collection-img">
-          <Media src={banner.img} className="img-fluid bg-img " alt="banner" />
+      <div className="collection-banner-main banner-1 p-left ">
+        <div className="collection-img ">
+          <Media src={banner.img} className="img-fluid bg-img" style={{objectFit:"cover"}} alt="banner" />
         </div>
       </div>
     </Col>

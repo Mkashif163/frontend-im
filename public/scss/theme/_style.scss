@@ -1167,9 +1167,13 @@ button {
         transition: 0.5s ease;
         .brands-img {
           width: 100%;
+          filter: grayscale(1);
           aspect-ratio: 3/2;
           object-fit: contain;
           mix-blend-mode: color-burn;
+        }:hover{
+            filter: none;
+        
         }
       }
 
@@ -1341,12 +1345,12 @@ button {
     position: relative;
     overflow: hidden;
     .collection-img {
-      width: 100%;
+      width: 547px;
       height: 272px;
       transition: all 0.5s ease;
       img {
-        width: 100%;
-        object-fit: contain;
+        width:547px;
+        object-fit: fill;
       }
     }
     &.p-left {
