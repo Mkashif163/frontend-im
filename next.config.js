@@ -21,4 +21,18 @@ const nextConfig = {
   },
 };
 
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: 'How to become a Seller?',
+        destination: '/views/Containers/Footer/widgets/seller',
+        permanent: false,
+      },
+    ]
+  },
+}
 module.exports = nextConfig;
+
+
+

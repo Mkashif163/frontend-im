@@ -20,3 +20,14 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 export default firebase.auth();
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/how-to-become-seller',
+        destination: '/views/Containers/Footer/widgets/seller',
+        permanent: false,
+      },
+    ]
+  },
+}
