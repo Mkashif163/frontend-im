@@ -12,9 +12,12 @@ const Wishlist: NextPage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <li className="mobile-wishlist " onClick={() => setOpenWishlist(!openWishlist)}>
-        <a>
-          <i className="icon-heart"></i>
+      <li
+        className="mobile-wishlist "
+        onClick={() => setOpenWishlist(!openWishlist)}
+      >
+        <a className="d-flex mt-4" style={{ cursor: "pointer" }}>
+          <i className="icon-heart me-3"></i>
           <div className="cart-item">
             <div>
               {totalItem} {t("item")} <span>{t("wishlist")}</span>
@@ -23,12 +26,22 @@ const Wishlist: NextPage = () => {
         </a>
       </li>
 
-      <div id="wishlist_side" className={`add_to_cart right ${openWishlist ? "open-side" : ""}`}>
-        <a href="#" className="overlay" onClick={() => setOpenWishlist(!openWishlist)}></a>
+      <div
+        id="wishlist_side"
+        className={`add_to_cart right ${openWishlist ? "open-side" : ""}`}
+      >
+        <a
+          href="#"
+          className="overlay"
+          onClick={() => setOpenWishlist(!openWishlist)}
+        ></a>
         <div className="cart-inner">
           <div className="cart_top">
             <h3>my wishlist</h3>
-            <div className="close-cart" onClick={() => setOpenWishlist(!openWishlist)}>
+            <div
+              className="close-cart"
+              onClick={() => setOpenWishlist(!openWishlist)}
+            >
               <a href="#">
                 <i className="fa fa-times" aria-hidden="true"></i>
               </a>
@@ -71,7 +84,9 @@ const Wishlist: NextPage = () => {
                   <li>
                     <div className="buttons">
                       <Link href="/pages/account/wishlist">
-                        <a className="btn btn-normal btn-block  view-cart">view wislist</a>
+                        <a className="btn btn-normal btn-block  view-cart">
+                          view wislist
+                        </a>
                       </Link>
                     </div>
                   </li>
@@ -80,7 +95,11 @@ const Wishlist: NextPage = () => {
             </>
           ) : (
             <div className="empty-cart-cls text-center">
-              <img src="/images/empty-wishlist.png" className="img-fluid mb-4" alt="" />
+              <img
+                src="/images/empty-wishlist.png"
+                className="img-fluid mb-4"
+                alt=""
+              />
               <h3>
                 <strong>Your wishlist is Empty</strong>
               </h3>

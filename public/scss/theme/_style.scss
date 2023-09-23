@@ -9381,6 +9381,7 @@ button {
 
 // Dashboard page
 .dashboard-left {
+  width: 16rem;
   background-color: $white;
   .block-title h2 {
     font-size: 24px;
@@ -11852,4 +11853,15 @@ button {
   position: sticky;
   top: 20px;
   z-index: 1;
+}
+
+// styles from israr rashid
+
+.custom-container {
+  margin-left: 25px !important;
+  margin-right: 25px !important;
+}
+
+#user-wish {
+  background-color: #fff;
 }
