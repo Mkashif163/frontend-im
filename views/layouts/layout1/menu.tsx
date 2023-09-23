@@ -21,12 +21,10 @@ const Menu = () => {
 
   return (
     <div className="custom-container">
-      <div className="custom-menus bg-white mb-3">
-        <span className="custom-input-group-text">
-          <span className="fw-bold m-2">
-            <FontAwesomeIcon icon={faBars} size="xl" /> <span> <h4>Our Menu & Categories</h4></span> 
-          </span>
-        </span>
+      <div className="custom-menus mb-3">
+        <div className="custom-input-group-text">
+          <h4>Our Menu & Categories</h4>
+        </div>
         {Object.keys(menuData).map((menuKey, index) => (
           <DropdownButton
             key={index}
@@ -41,20 +39,23 @@ const Menu = () => {
               </div>
             }
           >
-            {menuData[menuKey].categories?.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="custom-side-menu-category">
-                <Dropdown.Header className="custom-dropdown-menu-heading">
-                  {category.name}
-                </Dropdown.Header>
-                {category.sub_categories?.map((subcategory, subcategoryIndex) => (
-                  <Dropdown.Item key={subcategoryIndex} href={subcategory.link}>
-                    {subcategory.name}
+            <div className='side-menu-box'>
+              {menuData[menuKey].categories?.map((category, categoryIndex) => (
+                <div className="custom-side-menu-category">
+                  <Dropdown.Item key={categoryIndex} href={category.link}>
+                    <h5>{category.name}</h5>
                   </Dropdown.Item>
-                ))}
-              </div>
-            ))}
+                  {category.sub_categories?.map((subcategory, subcategoryIndex) => (
+                    <Dropdown.Item key={subcategoryIndex} href={subcategory.link}>
+                      {subcategory.name}
+                    </Dropdown.Item>
+                  ))}
+                </div>
+              ))}
+            </div>
           </DropdownButton>
         ))}
+
       </div>
     </div>
   );

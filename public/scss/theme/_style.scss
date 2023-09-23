@@ -1731,47 +1731,42 @@ button {
 ////////////////  Menus    //////////////////////
 ///
 .custom-menus {
+  margin-top: 10px;
   width: 20%;
-
-  .custom-dropdown-menu {
-    width: 100%;
-
-    // Hide the dropdown toggle arrow
-    &::after {
-      display: none;
-    }
-    
-    // Change color of dropdown button
-    // You can modify the background-color to your desired color
-    background-color: #f2f2f2;
+  background-color: white;
+  .custom-input-group-text{
+    background-color: var(--theme-color1);
+    color: white;
     border: none;
 
-    &:hover, &:focus {
-      background-color: #e6e6e6; // Slightly darker color on hover and focus for a subtle effect
+    padding: 20px;
+  }
+  .dropdown-toggle {
+    width: 100%;
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    &::after {
+     display: none;
+    }
+    &:hover {
+      border:1px solid var(--theme-color1);
     }
   }
+  .side-menu-box{
+    height: 500px;
+    overflow-y: auto;
 
   .custom-side-menu-category {
-    // Display only 10 sub-categories in one column
-    // then display the rest in the next column
-    column-count: 2; // Split into 2 columns
+    column-count: 4; 
     column-gap: 15px; // Space between columns
-
-    .custom-dropdown-menu-heading {
-      break-inside: avoid; // Try to avoid breaking inside dropdown headers
-    }
-
-    .dropdown-item {
-      display: inline-block; // Display as inline-block
-      width: 100%; // Full width of column
-      break-inside: avoid; // Try to avoid breaking inside items
-    }
+    border: 1px solid #ccc; // Add a border
   }
 }
 
-// Show the dropdown on hover
-.custom-menus .dropdown:hover .dropdown-menu {
-  display: block;
 }
 //////////////////////////////
 
