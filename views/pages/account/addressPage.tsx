@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { NextPage } from "next";
 import { Input, Label, Row, Col, Form, FormGroup } from "reactstrap";
 import Breadcrumb from "../../Containers/Breadcrumb";
 
-const Profile: NextPage = () => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
+const Address: NextPage = () => {
   return (
     <>
-      {/* <!-- personal detail section start --> */}
+      {/* <!-- personal deatail section start --> */}
       <section className="contact-page register-page section-big-py-space bg-light">
         <div className="custom-container">
           <Row className="row">
             <Col lg="6">
-              <h3 className="mb-3">PERSONAL DETAIL</h3>
+              <h3 className="mb-3">ADDRESS DETAIL</h3>
               <Form className="theme-form">
                 <div className="form-row row">
                   <Col md="6">
@@ -33,7 +23,6 @@ const Profile: NextPage = () => {
                         id="name"
                         placeholder="Enter Your name"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -46,7 +35,6 @@ const Profile: NextPage = () => {
                         id="last-name"
                         placeholder="Last Name"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -59,7 +47,6 @@ const Profile: NextPage = () => {
                         id="review"
                         placeholder="Enter your number"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -73,46 +60,13 @@ const Profile: NextPage = () => {
                           id="email"
                           placeholder="Email"
                           required
-                          disabled={!isEditing}
                         />
                       </FormGroup>
                     </div>
                   </Col>
-                  <Col className="col-md-12">
-                    <div>
-                      <Label htmlFor="review">Write Your Message</Label>
-                      <textarea
-                        className="form-control mb-0"
-                        placeholder="Write Your Message"
-                        id="exampleFormControlTextarea1"
-                        disabled={!isEditing}
-                      ></textarea>
-                    </div>
-                  </Col>
-                  <Col md="12">
-                    {isEditing ? (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5 mt-3"
-                        onClick={handleSaveClick}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5 mt-3"
-                        onClick={handleEditClick}
-                      >
-                        Edit
-                      </button>
-                    )}
-                  </Col>
                 </div>
-              </Form>
-            </Col>
-            <Col lg="6">
-              <h3 className="mb-3 spc-responsive">SHIPPING ADDRESS</h3>
-              <Form className="theme-form">
-                <div className="form-row row">
+                {/* update */}
+                <div className="form-row row mt-3">
                   <Col md="6">
                     <FormGroup>
                       <Label htmlFor="home-ploat">flat / plot</Label>
@@ -122,7 +76,6 @@ const Profile: NextPage = () => {
                         id="home-ploat"
                         placeholder="company name"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -135,7 +88,6 @@ const Profile: NextPage = () => {
                         id="address-two"
                         placeholder="Address"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -148,15 +100,14 @@ const Profile: NextPage = () => {
                         id="zip-code"
                         placeholder="zip-code"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6" className="select_input">
                     <FormGroup>
                       <Label>Country *</Label>
-                      <select className="form-control" disabled={!isEditing}>
-                        <option value="India">India</option>
+                      <select className="form-control">
+                        <option value="Pakistan">Pakistan</option>
                         <option value="UAE">UAE</option>
                         <option value="U.K">U.K</option>
                         <option value="US">US</option>
@@ -172,7 +123,6 @@ const Profile: NextPage = () => {
                         id="city"
                         placeholder="City"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
@@ -185,29 +135,97 @@ const Profile: NextPage = () => {
                         id="region-state"
                         placeholder="Region/state"
                         required
-                        disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="12">
-                    {isEditing ? (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5"
-                        onClick={handleSaveClick}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5"
-                        onClick={handleEditClick}
-                      >
-                        Edit
-                      </button>
-                    )}
+                    <button
+                      className="btn btn-sm btn-normal mb-lg-5"
+                      type="submit"
+                    >
+                      Save setting
+                    </button>
                   </Col>
                 </div>
               </Form>
+            </Col>
+            <Col lg="6">
+              <h3 className="mb-3 spc-responsive">SAVED ADDRESS</h3>
+              <>
+                {/* ================= */}
+                <section className="contact-page register-page section-big-py-space bg-light">
+                  <div className="custom-container">
+                    <Row className="row">
+                      <Col lg="12">
+                        <div className="theme-form">
+                          <div>
+                            <Label>
+                              Full Name:{" "}
+                              <span className="fw-normal">John Doe</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Flat / Plot:{" "}
+                              <span className="fw-normal">123 Main St.</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Address:{" "}
+                              <span className="fw-normal">
+                                Apt 4B, Street Name
+                              </span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Zip Code: <span className="fw-normal">12345</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Country:{" "}
+                              <span className="fw-normal">Pakistan</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              City: <span className="fw-normal">Lahore</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Region/State:{" "}
+                              <span className="fw-normal">Punjab</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Phone Number:{" "}
+                              <span className="fw-normal">+929487534</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Email:{" "}
+                              <span className="fw-normal">abc@gmail.com</span>
+                            </Label>
+                          </div>
+                          <div>
+                            <Label>
+                              Address:{" "}
+                              <span className="fw-normal">
+                                Apt 4B, Street Name
+                              </span>
+                            </Label>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                </section>
+              </>
             </Col>
           </Row>
         </div>
@@ -217,4 +235,4 @@ const Profile: NextPage = () => {
   );
 };
 
-export default Profile;
+export default Address;

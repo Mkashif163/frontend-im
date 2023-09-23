@@ -11,6 +11,7 @@ const UserProfile: NextPage = () => {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("test@123");
   const [user, setUser] = useState("");
+
   const signout = () => {
     firebase.signOut().then(() => {
       emptyCart();
@@ -22,26 +23,41 @@ const UserProfile: NextPage = () => {
 
   const loginAuth = async (email, password) => {
     try {
-      await firebase.signInWithEmailAndPassword(email, password).then(function () {
-        setUser(firebase.currentUser.email);
-        setOpenAccount(!openAccount);
-      });
+      await firebase
+        .signInWithEmailAndPassword(email, password)
+        .then(function () {
+          setUser(firebase.currentUser.email);
+          setOpenAccount(!openAccount);
+        });
     } catch (error) {
       setTimeout(() => {
         toast.error("error", error);
       }, 200);
     }
   };
+
   return (
     <>
-      <li className="mobile-user onhover-dropdown" onClick={() => setOpenAccount(!openAccount)}>
+      <li
+        className="mobile-user onhover-dropdown"
+        onClick={() => setOpenAccount(!openAccount)}
+      >
         <a href="#">
           <i className="icon-user"></i>
         </a>
       </li>
 
-      <div id="myAccount" className={`add_to_cart right account-bar ${openAccount ? "open-side" : ""}`}>
-        <a href="#" className="overlay" onClick={() => setOpenAccount(!openAccount)}></a>
+      <div
+        id="myAccount"
+        className={`add_to_cart right account-bar ${
+          openAccount ? "open-side" : ""
+        }`}
+      >
+        <a
+          href="#"
+          className="overlay"
+          onClick={() => setOpenAccount(!openAccount)}
+        ></a>
         <div className="cart-inner">
           <>
             <div className="cart_top">
@@ -55,7 +71,16 @@ const UserProfile: NextPage = () => {
             <Form className="userForm">
               <FormGroup>
                 <Label htmlFor="email">Email</Label>
-                <Input type="text" disabled={user ? true : false} className="form-control d-inherit" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input
+                  type="text"
+                  disabled={user ? true : false}
+                  className="form-control d-inherit"
+                  id="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="review">Password</Label>
@@ -72,11 +97,19 @@ const UserProfile: NextPage = () => {
               </FormGroup>
               <FormGroup>
                 {!user ? (
-                  <a href="#" className="btn btn-rounded btn-block" onClick={() => loginAuth(email, password)}>
+                  <a
+                    href="#"
+                    className="btn btn-rounded btn-block"
+                    onClick={() => loginAuth(email, password)}
+                  >
                     Login
                   </a>
                 ) : (
-                  <a href="#" className="btn btn-rounded btn-block" onClick={signout}>
+                  <a
+                    href="#"
+                    className="btn btn-rounded btn-block"
+                    onClick={signout}
+                  >
                     Logout
                   </a>
                 )}
@@ -84,7 +117,10 @@ const UserProfile: NextPage = () => {
               {!user && (
                 <FormGroup>
                   <h5 className="forget-class">
-                    <a href="/pages/account/forget-password" className="d-block">
+                    <a
+                      href="/pages/account/forget-password"
+                      className="d-block"
+                    >
                       forget password?
                     </a>
                   </h5>
