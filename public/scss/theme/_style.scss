@@ -1776,42 +1776,7 @@ button {
 }
 .slider-top{
 
-  .transparent-bg {
-    background-color: rgba(213, 221, 223, 0.5);
-    padding: 10px; /* Reduce padding to fit within the 500px width */
-    border-radius: 10px;
-
-    h4 {
-      font-size: 18px; /* Reduce font size to fit within the 500px width */
-      color: $black;
-      text-transform: capitalize;
-      line-height: 1;
-      padding-bottom: 8px;
-    }
-
-    h1 {
-      font-size: 36px; /* Reduce font size to fit within the 500px width */
-      color: var(--theme-color2);
-      text-transform: capitalize;
-      line-height: 1;
-      padding-bottom: 12px;
-    }
-
-    h2 {
-      font-size: 24px; /* Reduce font size to fit within the 500px width */
-      color: $icon-color;
-      text-transform: capitalize;
-      line-height: 1;
-      padding-bottom: 16px;
-    }
-
-    .btn-rounded {
-      display: inline-block;
-      letter-spacing: 1px;
-      padding: 10px 20px; /* Reduce padding to fit within the 500px width */
-      font-size: 16px; /* Reduce font size to fit within the 500px width */
-    }
-  }
+  
 }
 
 //////////////////////////////

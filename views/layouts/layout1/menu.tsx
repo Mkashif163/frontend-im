@@ -129,7 +129,7 @@ const Menu = () => {
                   src={banner.img1}
                   alt={`Banner ${index + 1}`}
                 />
-                <Carousel.Caption>
+                {/* <Carousel.Caption>
                   <div className="slider-banner-contain">
                     <div className="transparent-bg">
                       <h1>
@@ -149,7 +149,7 @@ const Menu = () => {
                       </Link>
                     </div>
                   </div>
-                </Carousel.Caption>
+                </Carousel.Caption> */}
               </Carousel.Item>
             ))}
           </Carousel>
