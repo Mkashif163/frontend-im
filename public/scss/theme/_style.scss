@@ -1171,9 +1171,9 @@ button {
           aspect-ratio: 3/2;
           object-fit: contain;
           mix-blend-mode: color-burn;
-        }:hover{
-            filter: none;
-        
+        }
+        :hover {
+          filter: none;
         }
       }
 
@@ -1349,7 +1349,7 @@ button {
       height: 272px;
       transition: all 0.5s ease;
       img {
-        width:547px;
+        width: 547px;
         object-fit: fill;
       }
     }
@@ -5202,13 +5202,13 @@ button {
     align-items: center; /* Center vertically */
     height: 100%;
     position: relative;
-  
+
     img {
       max-width: 100%;
       max-height: 100%;
       object-fit: cover; /* Fill the container while maintaining aspect ratio */
     }
-  }  
+  }
 }
 
 /*============================
@@ -9291,6 +9291,7 @@ button {
 
 // Dashboard page
 .dashboard-left {
+  width: 16rem;
   background-color: $white;
   .block-title h2 {
     font-size: 24px;
@@ -11762,4 +11763,15 @@ button {
   position: sticky;
   top: 20px;
   z-index: 1;
+}
+
+// styles from israr rashid
+
+.custom-container {
+  margin-left: 25px !important;
+  margin-right: 25px !important;
+}
+
+#user-wish {
+  background-color: #fff;
 }

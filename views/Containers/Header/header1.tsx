@@ -1,10 +1,11 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Media } from "reactstrap";
 import TopBar from "./widgets/TopBar";
 import Search from "./widgets/search";
 import ShoppingCart from "./widgets/shopping-cart";
 import Category from "./widgets/by-category";
 import User from "./widgets/user-profile";
+import UserOptions from "./widgets/user-signedInOption";
 import WishList from "./widgets/whishlist";
 import ContactUs from "./widgets/contact-us";
 import Gift from "./widgets/gift";
@@ -21,13 +22,25 @@ interface header {
   layoutLogo: string;
 }
 
-const Header: NextPage<header> = ({ cartPopupPosition, display, category, layoutLogo }) => {
+const Header: NextPage<header> = ({
+  cartPopupPosition,
+  display,
+  category,
+  layoutLogo,
+}) => {
   const menuContext = useContext(MenuContext);
+  const [userLoggedOut, setUserLoggedOut] = useState(false);
+
   const { setLeftMenu, leftMenu } = menuContext;
   const handleScroll = () => {
-    let number = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    let number =
+      window.pageXOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
     if (number >= 300) {
-      if (window.innerWidth < 581) document.getElementById("stickyHeader").classList.remove("sticky");
+      if (window.innerWidth < 581)
+        document.getElementById("stickyHeader").classList.remove("sticky");
       else document.getElementById("stickyHeader").classList.add("sticky");
     } else document.getElementById("stickyHeader").classList.remove("sticky");
   };
@@ -39,6 +52,12 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (userLoggedOut) {
+      setUserLoggedOut(false);
+    }
+  }, [userLoggedOut]);
   return (
     <Fragment>
       <header id="stickyHeader">
@@ -54,19 +73,52 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
                       setLeftMenu(!leftMenu);
                       document.body.style.overflow = "hidden";
                     }}
-                    className="sm-nav-block">
+                    className="sm-nav-block"
+                  >
                     <span className="sm-nav-btn">
                       <i className="fa fa-bars"></i>
                     </span>
                   </div>
                   <div className="logo-block">
                     <a href="/#">
-                      <Media src={`/images/layout-2/logo/im-logo.png`} className="img-fluid logo" width="150px" alt="logo" />
+                      <Media
+                        src={`/images/layout-2/logo/im-logo.png`}
+                        className="img-fluid logo"
+                        width="150px"
+                        alt="logo"
+                      />
                     </a>
                   </div>
                   <Search />
-                  <ShoppingCart position={cartPopupPosition} cartDisplay={display} layout="layout2" />
-                  
+                  <ShoppingCart
+                    position={cartPopupPosition}
+                    cartDisplay={display}
+                    layout="layout2"
+                  />
+                  {/* israr */}
+                  <div className="category-header-2" id="user-wish">
+                    <div>
+                      <Row>
+                        <Col>
+                          <div className="navbar-menu">
+                            <div className="category-left">
+                              <div className="icon-block mt-3 ">
+                                <ul>
+                                  <span className="ms-2 d-flex">
+                                    {/* <User /> */}
+                                    <UserOptions />
+                                    <WishList />
+                                    <MobileSearch />
+                                    <MobileSetting />
+                                  </span>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  </div>
                 </div>
               </Col>
             </Row>
@@ -74,8 +126,8 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
         </div>
 
         {/* Nav bar */}
-
-        <div className="category-header-2">
+        {/* commented by israr */}
+        {/* <div className="category-header-2">
           <div className="custom-container">
             <Row>
               <Col>
@@ -100,7 +152,7 @@ const Header: NextPage<header> = ({ cartPopupPosition, display, category, layout
               </Col>
             </Row>
           </div>
-        </div>
+        </div> */}
 
         {/* Nav bar end */}
       </header>
