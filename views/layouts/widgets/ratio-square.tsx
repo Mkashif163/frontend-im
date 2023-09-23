@@ -147,9 +147,9 @@ const RatioSquare = () => {
                                 <div className="media-banner media-banner-1 border-0">
                                   <div className="media-banner-box">
                                     <div className="media gap-2">
-                                      <div style={{ width: "80", height: "80" }}>
+                                      <div style={{ width: "200", height: "200" }}>
                                         <Link href={`/product-details/${item.id}`}>
-                                          <img src={`${item.url ? item.url : "pro3/3.jpg"}`} className="img-fluid mr-2 object-fit-fill" alt="banner" />
+                                          <img src={`${item.url ? item.url : "pro3/3.jpg"}`} className="img-fluid mr-2 object-fit-contain" alt="banner" />
                                         </Link>
                                       </div>
                                       <div className="media-body">

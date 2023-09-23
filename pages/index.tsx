@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Layouts from "../views/layouts/layout1";
-import SliderBanner from "../views/layouts/layout1/slider";
+// import SliderBanner from "../views/layouts/layout1/slider";
 import CollectionBanner from "../views/layouts/layout1/collection-banner";
 import TabProduct from "../views/layouts/widgets/Tab-Product/TabProduct";
 import CollectionBannerTwo from "../views/layouts/layout1/collection-banner-two";
@@ -12,6 +12,7 @@ import Brands from "../views/layouts/widgets/roundedCategory";
 import Suplier from "views/layouts/layout2/suplierCategory";
 import ShortDisplay from "views/layouts/layout2/ShortDisplay";
 import AllProducts from "../views/layouts/widgets/AllProducts/allProducts";
+import Menu from "views/layouts/layout1/menu";
 
 
 
@@ -34,11 +35,14 @@ const Home: NextPage = () => {
       });
   }, [TabProduct]);
 
+
+
   return (
     <>
       <Layouts>
         <div className="bg-light">
-          <SliderBanner />
+          <Menu/>
+          {/* <SliderBanner /> */}
           <CollectionBanner />
 
           {/* Check if categoriesData has elements before rendering */}

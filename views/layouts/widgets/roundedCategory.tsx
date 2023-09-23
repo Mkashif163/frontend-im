@@ -68,7 +68,7 @@ const Brands: NextPage = () => {
       <div className="container-brands slide-6 no-arrow">
               <Slider {...settings}>
                 {BrandList.map((data, i) => (
-                    <div className="category-contain">
+                    <div className="category-contain" key={i}>
                 
                         <div className="img-wrapper">
                           <Media src={data.img} alt="category" className="img-fluid brands-img" />

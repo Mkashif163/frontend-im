@@ -27,8 +27,6 @@ var bestSellerSetting = {
 };
 
 const NewProduct: React.FC<NewProductData> = ({ item }) => {
-
-  console.log(item)
   
   return (
     <>

@@ -16,7 +16,6 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
   const data = item[0];
-  console.log("product detail image",data)
 
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();

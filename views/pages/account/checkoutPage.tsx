@@ -37,7 +37,6 @@ const CheckoutPage: NextPage = () => {
   const checkhandle = (value) => {
     setPayment(value);
   };
-  console.log("Cart Items:", cartItems);
 
 
   const onSuccess = (data, actions) => {

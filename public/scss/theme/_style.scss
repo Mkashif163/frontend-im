@@ -1171,9 +1171,9 @@ button {
           aspect-ratio: 3/2;
           object-fit: contain;
           mix-blend-mode: color-burn;
-        }:hover{
-            filter: none;
-        
+        }
+        :hover {
+          filter: none;
         }
       }
 
@@ -1349,7 +1349,7 @@ button {
       height: 272px;
       transition: all 0.5s ease;
       img {
-        width:547px;
+        width: 547px;
         object-fit: fill;
       }
     }
@@ -1727,6 +1727,53 @@ button {
     color: white;
   }
 }
+
+////////////////  Menus    //////////////////////
+///
+.custom-menus {
+  width: 20%;
+
+  .custom-dropdown-menu {
+    width: 100%;
+
+    // Hide the dropdown toggle arrow
+    &::after {
+      display: none;
+    }
+    
+    // Change color of dropdown button
+    // You can modify the background-color to your desired color
+    background-color: #f2f2f2;
+    border: none;
+
+    &:hover, &:focus {
+      background-color: #e6e6e6; // Slightly darker color on hover and focus for a subtle effect
+    }
+  }
+
+  .custom-side-menu-category {
+    // Display only 10 sub-categories in one column
+    // then display the rest in the next column
+    column-count: 2; // Split into 2 columns
+    column-gap: 15px; // Space between columns
+
+    .custom-dropdown-menu-heading {
+      break-inside: avoid; // Try to avoid breaking inside dropdown headers
+    }
+
+    .dropdown-item {
+      display: inline-block; // Display as inline-block
+      width: 100%; // Full width of column
+      break-inside: avoid; // Try to avoid breaking inside items
+    }
+  }
+}
+
+// Show the dropdown on hover
+.custom-menus .dropdown:hover .dropdown-menu {
+  display: block;
+}
+//////////////////////////////
 
 /*============================
   14. Product CSS start
@@ -5202,13 +5249,13 @@ button {
     align-items: center; /* Center vertically */
     height: 100%;
     position: relative;
-  
+
     img {
       max-width: 100%;
       max-height: 100%;
       object-fit: cover; /* Fill the container while maintaining aspect ratio */
     }
-  }  
+  }
 }
 
 /*============================

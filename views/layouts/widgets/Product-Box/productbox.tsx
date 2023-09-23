@@ -18,7 +18,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
   const slider2 = React.useRef<Slider>();
-  const stock = 29;
+  const stock = 10;
 
   const router = useRouter();
   const [modal, setModal] = useState(false);
@@ -27,6 +27,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
   const [selectedCondition, setSelectedCondition] = useState("New");
   const uniqueSize = [];
   const uniqueColor = [];
+
   const changeColorVar = (img_id) => {
     slider2.current.slickGoTo(img_id);
   };
