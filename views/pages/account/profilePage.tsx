@@ -39,7 +39,7 @@ const Profile: NextPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="email">Last Name</Label>
+                      <Label htmlFor="last-name">Last Name</Label>
                       <Input
                         type="text"
                         className="form-control"
@@ -52,12 +52,12 @@ const Profile: NextPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="review">Phone number</Label>
+                      <Label htmlFor="username">Username</Label>
                       <Input
                         type="text"
                         className="form-control"
-                        id="review"
-                        placeholder="Enter your number"
+                        id="username"
+                        placeholder="Enter Your username"
                         required
                         disabled={!isEditing}
                       />
@@ -78,16 +78,72 @@ const Profile: NextPage = () => {
                       </FormGroup>
                     </div>
                   </Col>
-                  <Col className="col-md-12">
+                  <Col md="6">
                     <div>
-                      <Label htmlFor="review">Write Your Message</Label>
-                      <textarea
-                        className="form-control mb-0"
-                        placeholder="Write Your Message"
-                        id="exampleFormControlTextarea1"
-                        disabled={!isEditing}
-                      ></textarea>
+                      <FormGroup>
+                        <Label htmlFor="website">Website</Label>
+                        <Input
+                          type="text"
+                          className="form-control"
+                          id="website"
+                          placeholder="Website"
+                          required
+                          disabled={!isEditing}
+                        />
+                      </FormGroup>
                     </div>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="companyName">Company Name</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="CompanyName"
+                        placeholder="Company Name"
+                        required
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="contactNumber">Contact number</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="contactNumber"
+                        placeholder="Enter your Contact number"
+                        required
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="mobileNumber">Moible number</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="mobileNumber"
+                        placeholder="Enter your Mobile number"
+                        required
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="password"
+                        placeholder="Enter your Password"
+                        required
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
                   </Col>
                   <Col md="12">
                     {isEditing ? (
@@ -115,12 +171,12 @@ const Profile: NextPage = () => {
                 <div className="form-row row">
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="home-ploat">flat / plot</Label>
+                      <Label htmlFor="homePloat">flat / plot</Label>
                       <Input
                         type="text"
                         className="form-control"
-                        id="home-ploat"
-                        placeholder="company name"
+                        id="homePloat"
+                        placeholder="Flat / Plot"
                         required
                         disabled={!isEditing}
                       />
@@ -128,11 +184,11 @@ const Profile: NextPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="address-two">Address *</Label>
+                      <Label htmlFor="address">Address *</Label>
                       <Input
                         type="text"
                         className="form-control"
-                        id="address-two"
+                        id="address"
                         placeholder="Address"
                         required
                         disabled={!isEditing}
@@ -141,12 +197,12 @@ const Profile: NextPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="zip-code">Zip Code *</Label>
+                      <Label htmlFor="zipCode">Zip Code *</Label>
                       <Input
                         type="text"
                         className="form-control"
-                        id="zip-code"
-                        placeholder="zip-code"
+                        id="zipCode"
+                        placeholder="Zip Code"
                         required
                         disabled={!isEditing}
                       />
@@ -156,7 +212,7 @@ const Profile: NextPage = () => {
                     <FormGroup>
                       <Label>Country *</Label>
                       <select className="form-control" disabled={!isEditing}>
-                        <option value="India">India</option>
+                        <option value="India">Pakistan</option>
                         <option value="UAE">UAE</option>
                         <option value="U.K">U.K</option>
                         <option value="US">US</option>
@@ -178,11 +234,11 @@ const Profile: NextPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <Label htmlFor="region-state">Region/State *</Label>
+                      <Label htmlFor="regionState">Region/State *</Label>
                       <Input
                         type="text"
                         className="form-control"
-                        id="region-state"
+                        id="regionState"
                         placeholder="Region/state"
                         required
                         disabled={!isEditing}
