@@ -6,6 +6,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import Link from 'next/link';
 import { Media } from 'reactstrap';
 
+
+type MenuProps = {
+  meneData: any;
+};
+
 const banners = [
   {
     img1: "/images/layout-2/slider/s1.jpg",
@@ -24,7 +29,7 @@ const banners = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({ meneData }: MenuProps) => {
   const [menuData, setMenuData] = useState([]);
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
 
@@ -37,14 +42,7 @@ const Menu = () => {
   };
 
   useEffect(() => {
-    axios
-      .get('http://18.235.14.45/api/homeapi')
-      .then((response) => {
-        setMenuData(response.data.menus);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    setMenuData(meneData.menus);
   }, []);
 
   return (

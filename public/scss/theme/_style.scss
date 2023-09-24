@@ -1762,18 +1762,17 @@ button {
     .custom-side-menu-category {
       column-count: 4;
       column-gap: 15px;
-
-      padding: 10px; // Add padding to side menu items
-      transition: background-color 0.3s; // Smooth hover effect transition
+      padding: 10px; 
+      transition: background-color 0.3s; 
 
       &:hover {
         background-color: rgb(
           232,
           231,
           231
-        ); // Change background color on hover
-        color: white; // Change text color on hover
-        cursor: pointer; // Show pointer cursor on hover
+        );
+        color: white;
+        cursor: pointer; 
       }
     }
   }

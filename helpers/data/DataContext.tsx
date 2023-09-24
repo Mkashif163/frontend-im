@@ -1,43 +1,50 @@
-// DataContext.tsx
-import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
- 
+const ApiDataContext = createContext({});
 
-interface AppData {
-    homeData : any
-}
+export const ApiDataProvider = ({ children }) => {
+  const [apiData, setApiData] = useState(() => {
+    // Try to retrieve cached data from localStorage
+    const cachedData = localStorage.getItem("apiDataCache");
+    return cachedData ? JSON.parse(cachedData) : null;
+  });
 
-// Create a context for your data
-const DataContext = createContext<AppData | undefined>(undefined);
+  useEffect(() => {
+    const fetchAndCacheData = async () => {
+      try {
+        const response = await fetch("http://18.235.14.45/api/homeapi");
+        if (response.ok) {
+          const data = await response.json();
 
-// Create a data provider component
-export function DataProvider({ children }: { children: ReactNode }) {
-    const [data, setData] = useState<AppData | undefined>(undefined);
+          // Set the fetched data in state
+          setApiData(data);
 
-    // Fetch data from your API when the component mounts
-    useEffect(() => {
-        fetch('http://18.235.14.45/api/homeapi')
-            .then((response) => response.json())
-            .then((responseData) => {
-                // Assuming the API response matches the AppData structure
-                setData(responseData);
-                
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+          // Cache the fetched data in localStorage
+          localStorage.setItem("apiDataCache", JSON.stringify(data));
+        } else {
+          console.error("Error fetching API data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching API data:", error);
+      }
+    };
 
-    console.log("home api",data)
+    // Fetch and cache data on component mount
+    fetchAndCacheData();
 
-    return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
-}
+    // Set up a timer to refresh the data every 25 minutes
+    const refreshInterval = 25 * 60 * 1000; // 25 minutes in milliseconds
+    const refreshDataInterval = setInterval(fetchAndCacheData, refreshInterval);
 
-// Create a custom hook to access the data
-export function useAppData() {
-    const context = useContext(DataContext);
-    if (!context) {
-        throw new Error('useAppData must be used within a DataProvider');
-    }
-    return context;
-}
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(refreshDataInterval);
+  }, []);
+
+  return (
+    <ApiDataContext.Provider value={apiData}>
+      {children}
+    </ApiDataContext.Provider>
+  );
+};
+
+export const useApiData = () => useContext(ApiDataContext);

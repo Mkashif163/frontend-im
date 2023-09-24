@@ -13,6 +13,7 @@ import ShortDisplay from "views/layouts/layout2/ShortDisplay";
 import AllProducts from "../views/layouts/widgets/AllProducts/allProducts";
 import Menu from "views/layouts/layout1/menu";
 import TopCategory from "views/layouts/widgets/topCategory";
+import { useApiData } from "helpers/data/DataContext";
 
 
 
@@ -20,6 +21,7 @@ import TopCategory from "views/layouts/widgets/topCategory";
 const Home: NextPage = () => {
 
   const [categoriesData, setCategoriesData] = useState([]);
+  const apiData = useApiData();
 
   useEffect(() => {
     const apiUrl = `http://18.235.14.45/api/categories/13`;
@@ -41,7 +43,7 @@ const Home: NextPage = () => {
     <>
       <Layouts>
         <div className="bg-light">
-          <Menu/>
+          <Menu meneData={apiData}/>
           
           {/* <TopCategory /> */}
           <CollectionBanner />
