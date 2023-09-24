@@ -76,7 +76,9 @@ const OrderComponent = () => {
                     <td className="col">Write a Review</td>
                     <td className="col">Status</td>
                     <td>
-                      <a href="#" className="btn btn-sm btn-primary">Status</a>
+                      <a href="#" className="btn btn-sm btn-primary text-white">
+                        Status
+                      </a>
                       <span className="me-2 ms-2">|</span>
                       <a href="#" className="btn btn-sm btn-info text-white">
                         Invoice
