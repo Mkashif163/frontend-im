@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { CartContext } from "helpers/cart/cart.context";
+import styles from "./UserSignInOption.module.css";
 import { useRouter } from "next/router";
 
 const UserSignedInOption: NextPage = () => {
@@ -39,51 +38,50 @@ const UserSignedInOption: NextPage = () => {
   return (
     <>
       <li className="mobile-user onhover-dropdown mt-2">
-        <Dropdown>
-          <Dropdown.Toggle variant="light" id="dropdown-basic">
+        <div className={styles.dropdown}>
+          <button className={styles.dropbtn}>
             <i className="icon-user"></i>
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.ItemText>
+          </button>
+          <div className={styles.dropdownContent}>
+            <span className="text-center">
               <p>Welcome to</p>
               <p>
                 <span className="text-primary fw-bold">Industry</span>{" "}
                 <span className="text-danger fw-bold">Mall</span>!
               </p>
-            </Dropdown.ItemText>
+            </span>
             {userLoggedIn ? (
               <>
-                <Dropdown.Item href="#">Manage My Account</Dropdown.Item>
-                <Dropdown.Item href="#">My Orders</Dropdown.Item>
-                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                <a href="#">Manage My Account</a>
+                <a href="#">My Orders</a>
+                <a href="#" onClick={handleLogout}>
+                  Logout
+                </a>
               </>
             ) : (
-              <>
-                <Dropdown.Item>
-                  <a
-                    href="/pages/account/register"
-                    className="text-white m-0 p-1 d-flex justify-content-center test"
-                  >
-                    <Button variant="danger" size="sm">
-                      Register
-                    </Button>
-                  </a>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <a
-                    href="/pages/account/login"
-                    className="text-white m-0 p-1 d-flex justify-content-center test"
-                  >
-                    <Button variant="primary" size="sm">
-                      Login In
-                    </Button>
-                  </a>
-                </Dropdown.Item>
-              </>
+              <span>
+                <a
+                  href="/pages/account/register"
+                  className=" text-white m-0 p-1 d-flex justify-content-center test"
+                  id="test"
+                >
+                  <button className="btn btn-danger btn-sm">Register</button>
+                </a>
+                <span>&nbsp;</span>
+                <a
+                  href="/pages/account/login"
+                  className="text-white m-0 p-1 d-flex justify-content-center test"
+                >
+                  <button className="btn btn-primary btn-sm">Login In</button>
+                </a>
+              </span>
+              // <a href="/pages/account/login">
+              //   <button className="btn btn-sm btn-primary ">Login</button>
+              //   <button className="btn btn-sm btn-primary ">SignUp</button>
+              // </a>
             )}
-          </Dropdown.Menu>
-        </Dropdown>
+          </div>
+        </div>
       </li>
     </>
   );

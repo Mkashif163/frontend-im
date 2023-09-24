@@ -9,58 +9,32 @@ import { Media } from 'reactstrap';
 const banners = [
   {
     img1: "/images/layout-2/slider/s1.jpg",
-    img2: "/images/layout-2/slider/s1.jpg",
-    title1: "Valves",
-    title2: "Lights",
-    subTitle1: "Upto 20% off", // Updated
-    subTitle2: "Switchgear & Industrial Automation", // Updated
-    category: "ELECTRONICS",
-    btn: "Shop Now",
   },
   {
     img1: "/images/layout-2/slider/s2.jpg",
-    img2: "/images/layout-2/slider/s2.jpg",
-    title1: "big",
-    title2: "Sale",
-    subTitle1: "Upto 25% off", // Updated
-    subTitle2: "LED Explosion Proof Light", // Updated
-    category: "ELECTRONICS",
-    btn: "Shop Now",
   },
   {
     img1: "/images/layout-2/slider/s3.jpg",
-    img2: "/images/layout-2/slider/s3.jpg",
-    title1: "camera",
-    title2: "Sale",
-    subTitle1: "Upto 20% off", // Updated
-    subTitle2: "Electric Industrial Motors", // Updated
-    category: "ELECTRONICS",
-    btn: "Shop Now",
   },
   {
     img1: "/images/layout-2/slider/s4.jpg",
-    img2: "/images/layout-2/slider/s4.jpg",
-    title1: "ALL",
-    title2: "Sale",
-    subTitle1: "Upto 15% off", // Updated
-    subTitle2: "Industrial Valves", // Updated
-    category: "ELECTRONICS",
-    btn: "Shop Now",
   },
   {
     img1: "/images/layout-2/slider/s5.jpg",
-    img2: "/images/layout-2/slider/s5.jpg",
-    title1: "weekend",
-    title2: "Offers",
-    subTitle1: "Upto 20% off (VFD)", // Updated
-    subTitle2: "Energy-efficient solution", // Updated
-    category: "ELECTRONICS",
-    btn: "Shop Now",
   },
 ];
 
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);
+  const [openMenuIndex, setOpenMenuIndex] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    setOpenMenuIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenMenuIndex(null);
+  };
 
   useEffect(() => {
     axios
@@ -77,7 +51,7 @@ const Menu = () => {
     <div className="custom-container">
       <div className='d-flex gap-3'>
         <div className=''>
-          <div className="custom-menus mb-3">
+          <div className="custom-menus mb-3" onMouseLeave={handleMouseLeave}>
             <div className="custom-input-group-text">
               <h4>Our Menu & Categories</h4>
             </div>
@@ -86,15 +60,12 @@ const Menu = () => {
                 key={index}
                 drop="end"
                 className='custom-dropdown-menu'
+                show={openMenuIndex === index} // Control the visibility of the dropdown menu for this menu item
                 title={
-                  <div className="custom-text-black">
-                    {/* <div>
-                      <Media
-                        src={menuData[menuKey].menu_image}
-                        alt={menuData[menuKey].menu_name}
-                        className="img-fluid"
-                      />
-                    </div> */}
+                  <div
+                    className="custom-text-black"
+                    onMouseEnter={() => handleMouseEnter(index)} // Set the index when mouse enters
+                  >
                     <div>
                       {menuData[menuKey].menu_name.substring(0, 23)}
                       {menuData[menuKey].menu_name.length > 25 ? '...' : ''}
@@ -129,30 +100,17 @@ const Menu = () => {
                   src={banner.img1}
                   alt={`Banner ${index + 1}`}
                 />
-                {/* <Carousel.Caption>
-                  <div className="slider-banner-contain">
-                    <div className="transparent-bg">
-                      <h1>
-                        {banner.title1}
-                        <span>{banner.title2}</span>
-                      </h1>
-                      <h4>{banner.subTitle1}</h4>
-                      <h2>{banner.subTitle2}</h2>
-                      <Link
-                        href={{
-                          pathname: "/collections/leftsidebar/",
-                          query: {
-                            category: banner.category,
-                          },
-                        }}>
-                        <a className="btn btn-normal">{banner.btn}</a>
-                      </Link>
-                    </div>
-                  </div>
-                </Carousel.Caption> */}
               </Carousel.Item>
             ))}
           </Carousel>
+        </div>
+        <div className='menu-banners'>
+          <div className='m-banner'>
+
+          </div>
+          <div className='m-banner'>
+
+          </div>
         </div>
       </div>
     </div>

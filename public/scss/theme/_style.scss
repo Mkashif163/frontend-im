@@ -1733,7 +1733,7 @@ button {
 .custom-menus {
   width: 315px;
   height: 100%;
-  background-color: white;
+  background-color: rgb(240, 239, 239);
   .custom-input-group-text {
     background-color: var(--theme-color1);
     color: white;
@@ -1762,21 +1762,73 @@ button {
     .custom-side-menu-category {
       column-count: 4;
       column-gap: 15px;
-        
+
       padding: 10px; // Add padding to side menu items
       transition: background-color 0.3s; // Smooth hover effect transition
-      
+
       &:hover {
-        background-color: rgb(232, 231, 231); // Change background color on hover
+        background-color: rgb(
+          232,
+          231,
+          231
+        ); // Change background color on hover
         color: white; // Change text color on hover
         cursor: pointer; // Show pointer cursor on hover
       }
     }
   }
 }
-.slider-top{
+.slider-top {
+  .carousel-control-prev {
+    background-color: transparent;
+  }
 
-  
+  .carousel-control-prev-icon {
+    background-color: var(--theme-color1);
+  }
+
+  /* Change the color of the right arrow */
+  .carousel-control-next {
+    background-color: transparent;
+  }
+
+  .carousel-control-next-icon {
+    background-color: var(--theme-color1);
+  }
+
+  /* Customize the slider navigator bullets */
+  .carousel-indicators {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .carousel-indicators li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border: 1px solid var(--theme-color1);
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .carousel-indicators .active {
+    background-color: var(--theme-color1);
+  }
+}
+
+.menu-banners {
+  background-color: yellow;
+  display: grid;
+  gap: 3px;
+  .m-banner {
+    width: 500px;
+    height: 126px;
+    background-color: rgba($black, 0.4);
+  }
 }
 
 //////////////////////////////
@@ -5264,7 +5316,6 @@ button {
     }
   }
 }
-
 
 /*============================
    20. Title css
