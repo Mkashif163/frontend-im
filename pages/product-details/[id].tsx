@@ -12,12 +12,30 @@ const LeftSidebar: NextPage = () => {
   const apiData = useApiData();
   const [pro, setProduct] = useState(null);
 
+  interface ApiData {
+    menus: {
+      [key: string]: {
+        categories: {
+          sub_categories: {
+            products: {
+              id: number;
+              name: string;
+              price: number;
+              image: string;
+            }[];
+          }[];
+        }[];
+      };
+    };
+  }
+
   useEffect(() => {
     if (id && apiData) {
-      for (const menuName in apiData.menus) {
-        for (const category of apiData.menus[menuName].categories) {
+      const data = apiData as ApiData;
+      for (const menuName in data.menus) {
+        for (const category of data.menus[menuName].categories) {
           for (const subCategory of category.sub_categories) {
-            const foundProduct = subCategory.products.find(prod => prod.id === id);
+            const foundProduct = subCategory.products.find((prod: { id: number }) => prod.id === id);
             if (foundProduct) {
               setProduct(foundProduct);
               break;

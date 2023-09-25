@@ -46,41 +46,28 @@ var settings = {
   ],
 };
 
-const BrandList = [
-  { img: "/images/layout-2/rounded-cat/1.png", category: "Flower" },
-  { img: "/images/layout-2/rounded-cat/2.png", category: "Furniture" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-  { img: "/images/layout-2/rounded-cat/3.png", category: "Bag" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-  { img: "/images/layout-2/rounded-cat/5.png", category: "Grocery" },
-  { img: "/images/layout-2/rounded-cat/6.png", category: "Camera" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-  { img: "/images/layout-2/rounded-cat/7.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/8.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-];
+
 
 const TopCategory: NextPage = () => {
   return (
     <>
-    <div className="custom-container">
-      <div className="container-brands slide-6 no-arrow">
-              <Slider {...settings}>
-                {BrandList.map((data, i) => (
-                    <div className="category-contain" key={i}>
-                
-                        <div className="img-wrapper">
-                          <Media src={data.img} alt="category" className="img-fluid brands-img" />
-                        </div>
-                        {/* <div>
-                          <div className="btn-rounded">{data.category}</div>
-                </div> */}
-                    </div>
-                ))}
-              </Slider>
+      <div className="custom-container">
+        <div className="container-brands slide-6 no-arrow">
+          {/* <Slider {...settings}>
+            {BrandList.map((data, i) => (
+              <div className="category-contain" key={i}>
+
+                <div className="img-wrapper">
+                  <Media src={data.img} alt="category" className="img-fluid brands-img" />
+                </div>
+                <div>
+                  <div className="btn-rounded">{data.category}</div>
+                </div>
+              </div>
+            ))}
+          </Slider> */}
+        </div>
       </div>
-    </div>
     </>
   );
 };

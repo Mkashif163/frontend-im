@@ -16,11 +16,12 @@ const AllProducts = () => {
     const { addToWish } = React.useContext(WishlistContext);
     const { addToCompare } = React.useContext(CompareContext);
 
+
     const apiData = useApiData();
 
     useEffect(() => {
         const allProducts = [];
-    
+
         // Loop through each menu
         for (const menuName in apiData.menus) {
             // Loop through each category in the current menu
@@ -34,13 +35,13 @@ const AllProducts = () => {
                 }
             }
         }
-    
+
         // Set the productsData state with all fetched products
         setProducts(allProducts);
         setLoading(false);  // Set loading to false once data is fetched
-    
+
     }, [apiData]);
-    
+
     const startIndex = 0;
     const endIndex = currentPage * PRODUCTS_PER_PAGE;
     const productsToDisplay = productsData.slice(startIndex, endIndex);
@@ -67,13 +68,13 @@ const AllProducts = () => {
                         <div className="row load-more-product">
                             {productsToDisplay.map((product, i) => (
                                 <div className="col-xl-2 col-md-5 col-5" key={i}>
-                                    <div className="product" style={{height:'378PX',width:"248px"}}>                                      
-                                            <ProductBox
-                                                hoverEffect={true}
-                                                product={product} // Pass the product data
-                                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
-                                                addCompare={(product) => addToCompare(product)}
-                                                addWish={(product) => addToWish(product)} />                                     
+                                    <div className="product" style={{ height: '378PX', width: "248px" }}>
+                                        <ProductBox
+                                            hoverEffect={true}
+                                            product={product} // Pass the product data
+                                            addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                            addCompare={(product) => addToCompare(product)}
+                                            addWish={(product) => addToWish(product)} />
                                     </div>
                                 </div>
                             ))}

@@ -71,9 +71,9 @@ const RatioSquare = () => {
   const [selected, setSelected] = useState("motors");
   const [dataR, setDataR] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToWish } = useContext(WishlistContext);
-  const { addToCart } = useContext(CartContext);
-  const { addToCompare } = useContext(CompareContext);
+  // const { addToWish } = useContext(WishlistContext);
+  // const { addToCart } = useContext(CartContext);
+  // const { addToCompare } = useContext(CompareContext);
   const router = useRouter();
 
   const handleTabClick = (tabName) => {
@@ -160,8 +160,10 @@ const RatioSquare = () => {
                                           {selectedCurr.symbol}
                                           {item.new_sale_price}{" "}
                                           <span>
+                                            <del>
                                             {selectedCurr.symbol}
                                             {item.new_price}
+                                            </del>
                                           </span>
                                         </h6>
                                         <ul className="rating">

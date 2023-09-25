@@ -9,7 +9,7 @@ interface ProductDeskProps {
 const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
   const [activeTab, setActiveTab] = useState("1");
 
-  const product = item[0];
+  const product = item;
 
   return (
     <>
