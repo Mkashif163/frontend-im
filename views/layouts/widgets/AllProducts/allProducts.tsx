@@ -19,18 +19,28 @@ const AllProducts = () => {
     const apiData = useApiData();
 
     useEffect(() => {
-        fetch('http://18.235.14.45/api/products')
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data[0]);
-                setLoading(false); // Set loading to false when data is fetched
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-                setLoading(false); // Set loading to false on error
-            });
-    }, []);
-
+        const allProducts = [];
+    
+        // Loop through each menu
+        for (const menuName in apiData.menus) {
+            // Loop through each category in the current menu
+            for (const category of apiData.menus[menuName].categories) {
+                // Loop through each sub_category in the current category
+                for (const subCategory of category.sub_categories) {
+                    // Loop through each product in the current sub_category and add it to allProducts
+                    for (const product of subCategory.products) {
+                        allProducts.push(product);
+                    }
+                }
+            }
+        }
+    
+        // Set the productsData state with all fetched products
+        setProducts(allProducts);
+        setLoading(false);  // Set loading to false once data is fetched
+    
+    }, [apiData]);
+    
     const startIndex = 0;
     const endIndex = currentPage * PRODUCTS_PER_PAGE;
     const productsToDisplay = productsData.slice(startIndex, endIndex);
@@ -57,15 +67,13 @@ const AllProducts = () => {
                         <div className="row load-more-product">
                             {productsToDisplay.map((product, i) => (
                                 <div className="col-xl-2 col-md-5 col-5" key={i}>
-                                    <div className="product w-100">
-                                        <div>
+                                    <div className="product" style={{height:'378PX',width:"248px"}}>                                      
                                             <ProductBox
                                                 hoverEffect={true}
                                                 product={product} // Pass the product data
                                                 addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
                                                 addCompare={(product) => addToCompare(product)}
-                                                addWish={(product) => addToWish(product)} />
-                                        </div>
+                                                addWish={(product) => addToWish(product)} />                                     
                                     </div>
                                 </div>
                             ))}

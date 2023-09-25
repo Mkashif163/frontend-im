@@ -36,11 +36,13 @@ const Home: NextPage = () => {
           <Menu meneData={apiData} />
 
           {/* <TopCategory /> */}
-          <CollectionBanner />
+          <CollectionBanner banner1={categoriesData.f_s_banner_1}
+            banner2={categoriesData.f_s_banner_2}
+            banner3={categoriesData.f_s_banner_3} />
 
           <TabProduct catId={categoriesData.category1} effect="icon-inline" />
           <TabProduct catId={categoriesData.category2} effect="icon-inline" />
-          <CollectionBannerTwo />
+          <CollectionBannerTwo banner = {categoriesData.center_image1}/>
           <TabProduct catId={categoriesData.category3} effect="icon-inline" />
 
 
@@ -52,7 +54,9 @@ const Home: NextPage = () => {
           <TabProduct catId={categoriesData.category4} effect="icon-inline" />
 
           <RatioSquare />
-          <CollectionBannerThree />
+          <CollectionBannerThree ban1={categoriesData.f_s_banner_1}
+            ban2={categoriesData.f_s_banner_2}
+            ban3={categoriesData.f_s_banner_3}/>
           <section className="rounded-category">
             <Suplier />
           </section>

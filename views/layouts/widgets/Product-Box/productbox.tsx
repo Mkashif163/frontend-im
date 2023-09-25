@@ -119,7 +119,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
               <div className="detail-right">
                 <div className="check-price">
                   {selectedCurr.symbol}
-                  {selectedCondition === "New" ? product.new_sale_price : product.refurnished_sale_price}{" "}
+                  {selectedCondition === "New" ? product.new_price : product.refurnished_price}{" "}
                 </div>
                 <div className="price">
                   <div className="price">

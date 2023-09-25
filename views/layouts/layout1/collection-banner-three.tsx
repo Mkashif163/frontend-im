@@ -1,67 +1,41 @@
 import React from "react";
-import { NextPage } from "next";
 import { Col, Row, Media } from "reactstrap";
-import Link from "next/link";
 
 interface CollectionBannerProps {
-  img: string;
-  title: string;
-  subTitle: string;
-  btn: string;
-  category: string;
+  ban1: any;
+  ban2: any;
+  ban3:any
 }
 
-interface Banners {
-  banner: CollectionBannerProps;
-}
 
-const banners = [
-  {
-    img: "/images/layout-2/collection-banner/4.jpg",
-    title: "Leather",
-    subTitle: "new bag",
-    btn: "shop now",
-    category: "BAGS",
-  },
-  {
-    img: "/images/layout-2/collection-banner/5.jpg",
-    title: "Nike",
-    subTitle: "breeze",
-    btn: "shop now",
-    category: "SHOES",
-  },
-  {
-    img: "/images/layout-2/collection-banner/6.webp",
-    title: "Printing 3D",
-    subTitle: "USB Moon",
-    btn: "shop now",
-    category: "ELECTRONICS",
-  },
-];
-
-const CollectionBannerList: React.FC<Banners> = ({ banner }) => {
+const CollectionBannerList= ({ banner }) => {
+  function transformImageUrl(apiImageUrl) {
+    return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
+  }
+  const apiImageUrl = banner;
+  const transformedImageUrl = transformImageUrl(apiImageUrl);
   return (
     <Col md="4">
       <div className="collection-banner-main banner-1 p-left ">
         <div className="collection-img ">
-          <Media src={banner.img} className="img-fluid bg-img" style={{objectFit:"cover"}} alt="banner" />
+          <Media src={transformedImageUrl} className="img-fluid bg-img" style={{objectFit:"cover"}} alt="banner" />
         </div>
       </div>
     </Col>
   );
 };
 
-const CollectionBannerThree: NextPage = () => {
+const CollectionBannerThree: React.FC<CollectionBannerProps> = ({ban1,ban2,ban3}) => {
   return (
-    <section className="collection-banner section-py-space">
-      <div className="custom-container">
-        <Row className="collection2">
-          {banners.map((banner, i) => (
-            <CollectionBannerList banner={banner} key={i} />
-          ))}
-        </Row>
-      </div>
-    </section>
+    <section className="collection-banner section-pt-space b-g-white ">
+        <div className="custom-container">
+          <Row className="collection2">
+            <CollectionBannerList banner={ban1} />
+            <CollectionBannerList banner={ban2} />
+            <CollectionBannerList banner={ban3} />
+          </Row>
+        </div>
+      </section>
   );
 };
 

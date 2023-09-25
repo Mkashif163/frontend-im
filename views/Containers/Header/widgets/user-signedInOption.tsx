@@ -52,8 +52,12 @@ const UserSignedInOption: NextPage = () => {
             </span>
             {userLoggedIn ? (
               <>
-                <a href="#">Manage My Account</a>
-                <a href="#">My Orders</a>
+                <a href="pages/account/dashboard">Manage My Account</a>
+                <a href="/pages/account/wishlist">My Wishlist</a>
+                <a href="/pages/account/cart">My Cart</a>
+                <a href="pages/account/dashboard">E-walet</a>
+                <a href="">Coupens Earned</a>
+                <a href="/pages/order-history">My Orders</a>
                 <a href="#" onClick={handleLogout}>
                   Logout
                 </a>

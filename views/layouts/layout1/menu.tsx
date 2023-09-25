@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Carousel from 'react-bootstrap/Carousel';
-import Link from 'next/link';
 import { Media } from 'reactstrap';
 
 
@@ -11,27 +9,10 @@ type MenuProps = {
   meneData: any;
 };
 
-const banners = [
-  {
-    img1: "/images/layout-2/slider/s1.jpg",
-  },
-  {
-    img1: "/images/layout-2/slider/s2.jpg",
-  },
-  {
-    img1: "/images/layout-2/slider/s3.jpg",
-  },
-  {
-    img1: "/images/layout-2/slider/s4.jpg",
-  },
-  {
-    img1: "/images/layout-2/slider/s5.jpg",
-  },
-];
-
 const Menu = ({ meneData }: MenuProps) => {
   const [menuData, setMenuData] = useState([]);
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
+  const [banners , setBanners] = useState([])
 
   const handleMouseEnter = (index) => {
     setOpenMenuIndex(index);
@@ -41,8 +22,14 @@ const Menu = ({ meneData }: MenuProps) => {
     setOpenMenuIndex(null);
   };
 
+  function transformImageUrl(apiImageUrl) {
+    return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
+  }
+  
+
   useEffect(() => {
     setMenuData(meneData.menus);
+    setBanners(meneData.banners);
   }, []);
 
   return (
@@ -95,7 +82,7 @@ const Menu = ({ meneData }: MenuProps) => {
               <Carousel.Item key={index}>
                 <Media
                   className="d-block w-100"
-                  src={banner.img1}
+                  src={transformImageUrl(banner.image)}
                   alt={`Banner ${index + 1}`}
                 />
               </Carousel.Item>
@@ -103,12 +90,11 @@ const Menu = ({ meneData }: MenuProps) => {
           </Carousel>
         </div>
         <div className='menu-banners'>
-          <div className='m-banner'>
-
-          </div>
-          <div className='m-banner'>
-
-          </div>
+          <Media
+            className="d-block w-100 b-img"
+            src='/images/layout-2/slider/nextimg.jpeg'
+            alt="Banner 1"
+          />
         </div>
       </div>
     </div>
