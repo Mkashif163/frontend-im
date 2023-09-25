@@ -10,29 +10,19 @@ import { FilterContext } from "helpers/filter/filter.context";
 import CustomerMessageForm from "./CustomerMessageForm";
 
 interface LeftSidebar {
-  pathId: any;
+  product: any;
 }
 
 
 
-const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
+const LeftSidebarPage: NextPage<LeftSidebar> = ({ product }) => {
   const filterContext = useContext(FilterContext);
   const { filterOpen, setFilterOpen } = filterContext;
-  const [product, setProduct] = React.useState<any>({});
+  const [productData, setProduct] = React.useState<any>({});
   
   useEffect(() => {
-    const apiUrl = `http://18.235.14.45/api/single-product/${pathId}`;
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the data from the API here
-        setProduct(data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data from API:", error);
-      });
-  }, [pathId]);
+    setProduct(product);
+  }, [product]);
   
   return (
     <div className="collection-wrapper">
@@ -46,7 +36,7 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
                 left: filterOpen ? "-15px" : "",
               }}>
               <ProductService />
-              <NewProduct  item={product}/>
+              <NewProduct  item={productData}/>
             </Col>
             <Col sm="12" lg="9" xs="12">
               <Row>
@@ -59,9 +49,9 @@ const LeftSidebarPage: NextPage<LeftSidebar> = ({ pathId }) => {
                 </Col>
               </Row>
               <Row>
-                <ProductSlick item={product} bundle={false} swatch={false} />
+                <ProductSlick item={productData} bundle={false} swatch={false} />
               </Row>
-              <TabProduct  item={product}/>
+              <TabProduct  item={productData}/>
               <CustomerMessageForm/>
             </Col>
           </Row>

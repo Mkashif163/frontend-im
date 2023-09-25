@@ -14,18 +14,15 @@ interface ProductSlickProps {
 const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => {
   const [state, setState] = useState({ nav1: null, nav2: null });
   const [isLoading, setIsLoading] = useState(true); // Track loading state
-
-  const data = item[0];
+  const data = item;
 
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();
 
   useEffect(() => {
-    // Simulate an API call with setTimeout
-    setTimeout(() => {
-      setIsLoading(false); // Set loading to false when data is fetched
-    }, 2000); // Adjust the time accordingly based on your API response time
-
+    if (data) {
+      setIsLoading(false);
+    }
     setState({
       nav1: slider1.current,
       nav2: slider2.current,
@@ -51,7 +48,8 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
         data && (
           <>
             <Col lg="5">
-              <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
+            <Media src={data.url} alt="" className="img-fluid  image_zoom_cls-0" />
+              {/* <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
                 {data &&
                   data.product_images.map((img: any, i: any) => {
                     return (
@@ -60,11 +58,12 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
                       </div>
                     );
                   })}
-              </Slider>
+              </Slider> */}
               <Row>
                 <Col>
                   <div style={{ width: "500px" }}>
-                    <Slider
+                    
+                    {/* <Slider
                       className="slider-nav"
                       asNavFor={nav1}
                       ref={(slider) => (slider2.current = slider)}
@@ -82,7 +81,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
                             </div>
                           );
                         })}
-                    </Slider>
+                    </Slider> */}
                   </div>
                 </Col>
                 <Col>

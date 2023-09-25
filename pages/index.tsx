@@ -24,17 +24,7 @@ const Home: NextPage = () => {
   const apiData = useApiData();
 
   useEffect(() => {
-    const apiUrl = `http://18.235.14.45/api/categories/13`;
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the data from the API here
-        setCategoriesData(data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data from API:", error);
-      });
+    setCategoriesData(apiData.Homesetting[0]);
   }, [TabProduct]);
 
 
@@ -43,32 +33,24 @@ const Home: NextPage = () => {
     <>
       <Layouts>
         <div className="bg-light">
-          <Menu meneData={apiData}/>
-          
+          <Menu meneData={apiData} />
+
           {/* <TopCategory /> */}
           <CollectionBanner />
 
-          {/* Check if categoriesData has elements before rendering */}
-          {categoriesData.length > 0 && (
-            <>
-              <TabProduct menuId={categoriesData[0].id} menuName={categoriesData[0].name} effect="icon-inline" />
-              <TabProduct menuId={categoriesData[1].id} menuName={categoriesData[1].name} effect="icon-inline" />
-              <CollectionBannerTwo />
-              <TabProduct menuId={categoriesData[2].id} menuName={categoriesData[2].name} effect="icon-inline" />
-            </>
-          )}
+          <TabProduct catId={categoriesData.category1} effect="icon-inline" />
+          <TabProduct catId={categoriesData.category2} effect="icon-inline" />
+          <CollectionBannerTwo />
+          <TabProduct catId={categoriesData.category3} effect="icon-inline" />
+
 
           <ShortDisplay />
           <section className="rounded-category">
             <Brands />
           </section>
 
-          {/* Check if categoriesData has enough elements before rendering */}
-          {categoriesData.length > 3 && (
-            <>
-              <TabProduct menuId={categoriesData[3].id} menuName={categoriesData[3].name} effect="icon-inline" />
-            </>
-          )}
+          <TabProduct catId={categoriesData.category4} effect="icon-inline" />
+
           <RatioSquare />
           <CollectionBannerThree />
           <section className="rounded-category">

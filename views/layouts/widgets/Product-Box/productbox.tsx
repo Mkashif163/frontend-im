@@ -18,7 +18,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
   const slider2 = React.useRef<Slider>();
-  const stock = 10;
+  const stock = product.stock;
 
   const router = useRouter();
   const [modal, setModal] = useState(false);
@@ -52,14 +52,14 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
     setModal(!modal);
   };
 
-  const pathId = product && product.id;
+  const productId = product && product.id;
 
   return (
     <>
       {product && <Fragment>
         <div className="product-box" >
           <div className="product-imgbox bg-white">
-            <Link href={`/product-details/${pathId}`}>
+            <Link href={`/product-details/${productId}`}>
               <div className="product-front ">
                 <Media src={product.url} className="img-fluid" alt="product" />
               </div>
@@ -153,7 +153,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
                   <h2>{product.name}</h2>
                   <h3>${product.new_price}</h3>
                   <ul className="color-variant">
-                    {product.colors.map((vari, i) => {
+                    {product.color && product.colors.map((vari, i) => {
                       return (
                         <li
                           key={i}

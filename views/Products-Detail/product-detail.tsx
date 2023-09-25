@@ -121,7 +121,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   const changeQty = (e: any) => {
     setQty(parseInt(e.target.value));
   };
-  const productData = item[0];
+  const productData = item;
 
   console.log("productData", productData);
 

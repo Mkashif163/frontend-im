@@ -4,6 +4,7 @@ import ProductBox from "../Product-Box/productbox";
 import { CartContext } from "helpers/cart/cart.context";
 import { WishlistContext } from "helpers/wishlist/wish.context";
 import { CompareContext } from "helpers/compare/compare.context";
+import { useApiData } from "helpers/data/DataContext";
 
 const PRODUCTS_PER_PAGE = 12; // Number of products to show per page
 
@@ -14,6 +15,8 @@ const AllProducts = () => {
     const { addToCart } = React.useContext(CartContext);
     const { addToWish } = React.useContext(WishlistContext);
     const { addToCompare } = React.useContext(CompareContext);
+
+    const apiData = useApiData();
 
     useEffect(() => {
         fetch('http://18.235.14.45/api/products')

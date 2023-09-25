@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
-import { TabContent, TabPane, Row, Col, Carousel, CarouselItem, } from "reactstrap";
+import { TabContent, TabPane, Row, Col, Carousel, CarouselItem } from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
 import { CartContext } from "../../../../helpers/cart/cart.context";
 import { WishlistContext } from "../../../../helpers/wishlist/wish.context";
 import { CompareContext } from "../../../../helpers/compare/compare.context";
 import { Skeleton } from "../../../../common/skeleton";
+import { useApiData } from "helpers/data/DataContext"; // Make sure to provide the correct path
 
 var settings = {
   arrows: true,
@@ -50,67 +51,56 @@ var settings = {
   ],
 };
 
-
 type TabProductProps = {
-  menuId: number;
-  menuName: string;
+  catId: number;
   effect?: any;
 };
 
-const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => {
+const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const { addToWish } = React.useContext(WishlistContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToCompare } = React.useContext(CompareContext);
   const [activeTab, setActiveTab] = useState("new products");
+  const [categoryName, setCategoryName] = useState('');
   const [subCategoriesData, setSubCategoriesData] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const apiData = useApiData(); // Use the context hook to access apiData
 
   useEffect(() => {
-    if (subCategoriesData.length > 0) {
-      // Set the activeTab to the ID of the first subcategory
-      setActiveTab(subCategoriesData[0].id);
+    for (let menuKey in apiData.menus) {
+      let category = apiData.menus[menuKey].categories.find((cat) => cat.id === catId);
+
+      if (category) {
+        setSubCategoriesData(category.sub_categories);
+        setCategoryName(category.name); // Set the category name when found
+
+        // Check if the category has subcategories
+        if (category.sub_categories.length > 0) {
+          setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
+        }
+        break; // Break out of the loop once we found the category
+      }
     }
-  }, [subCategoriesData]);
+  }, [catId, apiData]);
 
+  // Use this effect to update the productsData when the activeTab changes
   useEffect(() => {
-    const apiUrl = `http://18.235.14.45/api/sub_categories/${menuId}`;
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the data from the API here
-        setSubCategoriesData(data.data); 
-      })
-      .catch((error) => {
-        console.error("Error fetching data from API:", error);
-      });
-  }, [menuId]);
-
-  useEffect(() => {
-    const apiUrl = `http://18.235.14.45/api/products/${activeTab}`;
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        // Store the product data in a state variable
-        setProductsData(data.data);
+    if (activeTab) {
+      const activeSubCategory = subCategoriesData.find((subCategory) => subCategory.id === activeTab);
+      if (activeSubCategory) {
+        setProductsData(activeSubCategory.products);
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching product data:", error);
-      });
-  }, [activeTab]);
-
-  
-
+      }
+    }
+  }, [activeTab, subCategoriesData]);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const next = () => {
     // Find the index of the currently active tab
     const currentIndex = subCategoriesData.findIndex((subCategory) => subCategory.id === activeTab);
-  
+
     // If on the 7th category (index 6) and there's an 8th category, just move to the next category (8th)
     if (currentIndex === 6 && subCategoriesData.length > 7) {
       setActiveTab(subCategoriesData[9].id); // Directly set to the 8th category
@@ -118,7 +108,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
     } else {
       const nextIndex = (currentIndex + 1) % subCategoriesData.length;
       setActiveTab(subCategoriesData[nextIndex].id);
-  
+
       // Check if the carousel needs to be moved to display the newly active category
       const visibleCategories = currentIndex % 7; // Check which set of 7 categories we are viewing
       if (visibleCategories === 6) {
@@ -127,12 +117,11 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
     }
     setLoading(true);
   };
-  
 
   const previous = () => {
     // Find the index of the currently active tab
     const currentIndex = subCategoriesData.findIndex((subCategory) => subCategory.id === activeTab);
-  
+
     // If on the 1st category of the next slide (e.g., the 8th category if each slide displays 7 categories)
     if (currentIndex % 7 === 0 && currentIndex !== 0) {
       setActiveTab(subCategoriesData[currentIndex - 1].id); // Directly move to the previous category (e.g., 7th)
@@ -141,7 +130,7 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
       // Calculate the index of the previous tab (cyclically)
       const previousIndex = (currentIndex - 1 + subCategoriesData.length) % subCategoriesData.length;
       setActiveTab(subCategoriesData[previousIndex].id);
-  
+
       // Check if the carousel needs to be moved to display the newly active category
       const visibleCategories = (currentIndex - 1) % 7; // Check which set of 7 categories we are viewing
       if (visibleCategories === 6) {
@@ -158,10 +147,11 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
           <div className="tab-product-main">
             <div className="tab-prodcut-contain">
               <div className="category-title">
-                <h3>{menuName.substring(0,15)}{menuName.length>15 ? "..." : ""}</h3>
+                <h3>{categoryName.substring(0, 15)}{categoryName.length > 15 ? "..." : ""}</h3>
               </div>
+
               <div className="top-bar-product-catogories">
-              <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
+                <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
                   {subCategoriesData.map((subCategory, i) => (
                     <CarouselItem key={subCategory.id}>
                       <ul className="product-catogories">
@@ -169,11 +159,13 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
                           <li className="top-catogories">
                             <a
                               className={activeTab === subCategory.id ? "active" : ""}
-                              onClick={() =>{ 
-                                setLoading(true)
-                                setActiveTab(subCategory.id)}}
+                              onClick={() => {
+                                setLoading(true);
+                                setActiveTab(subCategory.id);
+                              }}
                             >
-                              {subCategory.name.substring(0,12)}{subCategory.name.length>12 ? "..." : ""}
+                              {subCategory.name.substring(0, 12)}
+                              {subCategory.name.length > 12 ? "..." : ""}
                             </a>
                           </li>
                         ))}
@@ -206,8 +198,6 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
         </div>
       </section>
 
-
-
       <section className="section-py-space ratio_asos product">
         <div className="custom-container">
           <Row>
@@ -215,22 +205,22 @@ const TabProduct: NextPage<TabProductProps> = ({ menuId, menuName, effect }) => 
               <TabContent activeTab={activeTab}>
                 <TabPane tabId={activeTab}>
                   <div className="product product-slide-6 product-m no-arrow">
-                    <div >
-                      { loading ? (
+                    <div>
+                      {loading ? (
                         <Skeleton />
                       ) : (
                         <Slider {...settings}>
-                        {productsData.map((product, i) => (
-                          <div key={i}>
-                            <ProductBox
-                              hoverEffect={effect}
-                              product={product} // Pass the product data
-                              addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
-                              addCompare={(product) => addToCompare(product)}
-                              addWish={(product) => addToWish(product)}
-                            />
-                          </div>
-                        ))}
+                          {productsData.map((product, i) => (
+                            <div key={i}>
+                              <ProductBox
+                                hoverEffect={effect}
+                                product={product} // Pass the product data
+                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                addCompare={(product) => addToCompare(product)}
+                                addWish={(product) => addToWish(product)}
+                              />
+                            </div>
+                          ))}
                         </Slider>
                       )}
                     </div>
