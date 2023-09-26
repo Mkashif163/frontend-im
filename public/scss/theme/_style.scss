@@ -4853,24 +4853,27 @@ button {
 }
 .footer-2 {
   background-color: $white;
-  padding: calc(20px + (50 - 20) * ((100vw - 320px) / (1920 - 320))) 0 0 0;
-  .footer-main-contian {
+  font-size: 12px;
+  gap: 0; 
+  width: 100%;
+  .footer-main-contian{
     border-bottom: 1px solid $light-border;
-    padding-bottom: 30px;
-    .footer-left {
-      padding-right: 60px;
-      padding-top: 10px;
+    padding-bottom: 0px;
+  
+    .footer-center {
+      padding-top: 0px;
+    
       .footer-detail {
         p {
-          padding: 40px 0;
-          font-family: $font-2, $font_1;
+          padding: 0px 0;
+          font-family: $font-1, $font_1;
           text-transform: capitalize;
-          line-height: 1.8;
+          line-height: 1;
           color: $icon-color;
+          margin-top: 0px;
         }
         .paymant-bottom {
           li {
-            margin-right: 15px;
             &:last-child {
               margin-right: 0;
             }
@@ -4879,11 +4882,11 @@ button {
       }
     }
     .footer-right {
-      padding-top: 25px;
-      padding-left: 50px;
+      padding-top: 10px;
+      padding-left: 5px;
       border-left: 1px solid $light-border;
       .subscribe-section {
-        padding-bottom: 45px;
+        padding-bottom: 10px;
         border-bottom: 1px solid $light-border;
         .subscribe-block {
           height: 100%;
@@ -4901,6 +4904,7 @@ button {
                 background-color: transparent;
                 border-radius: inherit;
                 border-right: none;
+                font-size: 14px;
                 i {
                   color: $gray-4;
                 }
@@ -4913,8 +4917,8 @@ button {
                 }
               }
               input {
-                padding-top: 10px;
-                padding-bottom: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px;
                 border-top: 1px solid $light-border;
                 border-bottom: 1px solid $light-border;
                 border-left: none;
@@ -4931,32 +4935,41 @@ button {
           }
         }
       }
-      .account-right {
-        padding: 50px 0 30px 15px;
-        .footer-box {
+      .account-right{
+        padding: 1px 1px 1px 1px;
+          .footer-box {
           .footer-title {
-            padding-bottom: 15px;
+            padding-bottom: 0px;
             position: relative;
             &:before {
               content: "";
               position: absolute;
               bottom: 0;
-              width: 50px;
-              height: 2px;
+              width: 10px;
+              height: 1px;
               background-color: var(--theme-color1);
             }
           }
           .footer-contant {
-            margin-top: 30px;
+            margin-top: 0px;
+            font-size: 12px;
+            column-gap: 0;
+  row-gap: 0;
             .contact-list {
               li {
                 color: $gray-3;
+                font-size: 8px;
+                column-gap: 0;
+  row-gap: 0;
                 i {
                   top: 0;
                 }
+                a {
+                  font-size: 8px;
+                }
                 &:first-child {
                   i {
-                    margin-top: 4px;
+                    margin-top: 0px;
                   }
                 }
               }
@@ -4966,12 +4979,17 @@ button {
       }
     }
   }
+  .footer-contact-box{
+    margin-top: 0px;
+    column-gap: 0;
+  row-gap: 0;
+  }
   .sub-footer {
     background-color: $body-back;
     .sub-footer-contain {
-      padding: 20px 0;
+      padding: 5px 0;
       ul {
-        li {
+ li {
           a {
             color: $icon-color;
           }
@@ -4983,11 +5001,12 @@ button {
         text-transform: uppercase;
         letter-spacing: 0.05em;
         text-align: center;
-        font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
+        font-size: calc(10px + (10 - 8) * ((100vw - 220px) / (1020 - 320)));
         span {
           font-family: $font-1;
+          font-size: 12px;
         }
-      }
+      }  
     }
   }
 }
