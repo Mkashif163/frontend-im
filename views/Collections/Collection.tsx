@@ -9,12 +9,14 @@ import { WishlistContext } from "../../helpers/wishlist/wish.context";
 import { Skeleton } from "../../common/skeleton";
 import { CompareContext } from "helpers/compare/compare.context";
 
+
 type CollectionProps = {
   cols: any;
   layoutList: string;
+  products: any;
 };
 
-const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
+const Collection: NextPage<CollectionProps> = ({ cols, layoutList,products }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToWish } = React.useContext(WishlistContext);
@@ -29,18 +31,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   const totalPages = Math.ceil(allProductData.length / pageLimit);
 
   const handlePagination = (page) => {
-    // Set the loading state to true
-    setIsLoading(true);
-
-    // Wait for 0.5 seconds before changing the page
-    setTimeout(() => {
-      setCurrentPage(page);
-
-      // Ideally, you'd also fetch your products here for the new page
-      // Once products are fetched, set the loading state to false
-      // For the sake of this example, I'll set it to false after another 0.5s
-      setTimeout(() => setIsLoading(false), 500);
-    }, 500);
+     console.log(page);
   };
 
   const removeBrand = (val) => {
@@ -54,16 +45,13 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList }) => {
   };
 
   useEffect(() => {
-    fetch("http://18.235.14.45/api/products")
-      .then(response => response.json())
-      .then(data => {
-        setAllProductData(data[0])
-        setIsLoading(false)
-      })
-      .catch(error =>{ console.log(error)
-        setIsLoading(false)
-      })
-  },[]);
+
+    if(products){
+      setAllProductData(products);
+      setIsLoading(false);
+    }
+  
+  },[products]);
 
   return (
     <Col className="collection-content">

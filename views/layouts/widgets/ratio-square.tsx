@@ -2,10 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Media, Spinner } from "reactstrap";
 import Slider from "react-slick";
 import { CurrencyContext } from "../../../helpers/currency/CurrencyContext";
-import { CartContext } from "../../../helpers/cart/cart.context";
 import Link from "next/link";
-import { WishlistContext } from "../../../helpers/wishlist/wish.context";
-import { CompareContext } from "../../../helpers/compare/compare.context";
 import { useRouter } from "next/router";
 
 var settings = {

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { Input, Label, Form, Row, Col, FormGroup } from "reactstrap";
 import { CartContext } from "../../../helpers/cart/cart.context";
-import Breadcrumb from "../../../views/Containers/Breadcrumb";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";

@@ -1,31 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { NextPage } from "next";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
 import { Input, Label, Collapse } from "reactstrap";
 import { FilterContext } from "../../helpers/filter/filter.context";
 import { useRouter } from "next/router";
+import { useApiData } from "helpers/data/DataContext";
 
-const GET_BRANDS = gql`
-  query getAllBrands($type: String) {
-    getBrands(type: $type) {
-      brand
-    }
-    getColors(type: $type) {
-      colors
-    }
-  }
-`;
-
-const categories = [
-  "Programmable Controlers",
-  "Drives",
-  "Industrial Solutions",
-  "Electric & Mechanical",
-  "Industrial Lights & Valves",
-  "Refurbished"
-]
 
 const Sidebar: NextPage = () => {
   const {
@@ -41,11 +21,7 @@ const Sidebar: NextPage = () => {
     leftSidebarOpen,
     setLeftSidebarOpen,
   } = useContext(FilterContext);
-  var { loading, data } = useQuery(GET_BRANDS, {
-    variables: {
-      type: selectedCategory.toLowerCase(),
-    },
-  });
+  
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   const toggleCategory = () => setIsCategoryOpen(!isCategoryOpen);
   const [isBrandOpen, setIsBrandOpen] = useState(true);
@@ -57,11 +33,11 @@ const Sidebar: NextPage = () => {
   const [radioChecked, setRadioChecked] = useState(null);
   const router = useRouter();
 
-  useEffect(() => {
-    router.push(`${window.location.pathname}`, undefined, {
-      shallow: true,
-    });
-  }, [selectedCategory, selectedPrice, selectedBrands, selectedColor]);
+  // useEffect(() => {
+  //   router.push(`${window.location.pathname}`, undefined, {
+  //     shallow: true,
+  //   });
+  // }, [selectedCategory, selectedPrice, selectedBrands, selectedColor]);
 
   useEffect(() => {
     const { min, max } = selectedPrice;
@@ -80,6 +56,8 @@ const Sidebar: NextPage = () => {
     setSelectedPrice({ min: 0, max: 500 });
     setRadioChecked(null);
   };
+  const apiData = useApiData();
+
   return (
     <div className="collection-filter-block creative-card creative-inner category-side">
       {/* <!-- brand filter start --> */}
@@ -91,12 +69,13 @@ const Sidebar: NextPage = () => {
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block open">
         <h3 className="collapse-block-title mt-0" onClick={toggleCategory}>
-          Category
+          Our Menu & Categories
         </h3>
         <Collapse isOpen={isCategoryOpen}>
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
               <ul className="category-list">
+                {/* All Products */}
                 <li>
                   <Link href="#!">
                     <a
@@ -109,20 +88,57 @@ const Sidebar: NextPage = () => {
                     </a>
                   </Link>
                 </li>
-                {categories.map(category => (
-                  <li key={category}>
-                    <Link href="#!">
-                      <a
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSelectedCategory(category);
-                          resetFilter();
-                        }}>
-                        {category}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
+
+                {/* Map the menus, categories, and sub-categories */}
+                {apiData &&
+                  Object.entries(apiData.menus).map(([menuName, menu]) => (
+                    <li key={menuName}>
+                      <Link href="#!">
+                        <a
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSelectedCategory(""); // Clear selected category
+                            resetFilter(); // Reset other filters
+                          }}>
+                          {menuName}
+                        </a>
+                      </Link>
+
+                      <ul className="subcategory-list">
+                        {menu.categories.map((category) => (
+                          <li key={category.id}>
+                            <Link href="#!">
+                              <a
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setSelectedCategory(category.name); // Set selected category
+                                  resetFilter(); // Reset other filters
+                                }}>
+                                {category.name}
+                              </a>
+                            </Link>
+
+                            <ul className="subcategory-list">
+                              {category.sub_categories.map((subCategory) => (
+                                <li key={subCategory.id}>
+                                  <Link href="#!">
+                                    <a
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSelectedCategory(subCategory.name); // Set selected category
+                                        resetFilter(); // Reset other filters
+                                      }}>
+                                      {subCategory.name}
+                                    </a>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -166,7 +182,7 @@ const Sidebar: NextPage = () => {
           </Collapse>
         </div>
       {/* <!-- color filter start here --> */}
-      {!data || !data.getColors || data.getColors.colors.length === 0 || loading ? (
+      {/* {!data || !data.getColors || data.getColors.colors.length === 0 || loading ? (
         loading && <h4>Loading</h4>
       ) : (
         <div className="collection-collapse-block open">
@@ -190,7 +206,7 @@ const Sidebar: NextPage = () => {
             </div>
           </Collapse>
         </div>
-      )}
+      )} */}
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block border-0 open">
         <h3 className="collapse-block-title" onClick={togglePrice}>

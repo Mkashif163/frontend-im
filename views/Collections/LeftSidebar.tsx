@@ -4,11 +4,42 @@ import Sidebar from "./Sidebar";
 import NewProduct from "./NewProduct";
 import Collection from "./Collection";
 import { FilterContext } from "helpers/filter/filter.context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useApiData } from "helpers/data/DataContext";
 
-const LeftSidebarCollection: NextPage = () => {
+
+type LeftSidebarCollectionProps = {
+  sub_cat: number;
+};
+
+const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
+  const [subCategoryProducts, setSubCategoryProducts] = useState([]);
+  
+  const apiData = useApiData();
 
+  useEffect(() => {
+    if (apiData && apiData.menus) {
+        // Iterate through each menu
+        for (const menuName in apiData.menus) {
+            const menu = apiData.menus[menuName];
+            // Iterate through each category in the menu
+            for (const category of menu.categories) {
+                // Iterate through each sub-category in the category
+                for (const subCat of category.sub_categories) {
+                    
+                    // Check if sub-category ID matches
+                    if (subCat.id === +sub_cat) {
+                        setSubCategoryProducts(subCat.products);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}, [apiData, sub_cat]);
+
+console.log(subCategoryProducts);
   return (
     <Row>
       <Col
@@ -19,7 +50,7 @@ const LeftSidebarCollection: NextPage = () => {
         id="filter"
         className="collection-filter category-page-side">
         <div className="sticky-sidebar">
-          <Sidebar />
+          <Sidebar  sub_cat={sub_cat}/>
           <NewProduct item={undefined}/>
           <div className="collection-sidebar-banner">
             <a href="#">
@@ -29,7 +60,7 @@ const LeftSidebarCollection: NextPage = () => {
         </div>
       </Col>
       {/* Collection */}
-      <Collection cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      <Collection products={subCategoryProducts} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
     </Row>
   );
 };

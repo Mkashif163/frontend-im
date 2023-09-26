@@ -3,6 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Carousel from 'react-bootstrap/Carousel';
 import { Media } from 'reactstrap';
+import { useRouter } from 'next/router';
 
 
 type MenuProps = {
@@ -10,6 +11,7 @@ type MenuProps = {
 };
 
 const Menu = ({ meneData }: MenuProps) => {
+  const router = useRouter();
   const [menuData, setMenuData] = useState([]);
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
   const [banners , setBanners] = useState([])
@@ -25,6 +27,11 @@ const Menu = ({ meneData }: MenuProps) => {
   function transformImageUrl(apiImageUrl) {
     return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
   }
+
+  const handleClick = (id) => (e) => {
+    e.preventDefault();
+    window.location.href = `/collections/leftsidebar?sub_category=${id}`;
+  };
   
 
   useEffect(() => {
@@ -65,7 +72,7 @@ const Menu = ({ meneData }: MenuProps) => {
                         <h5>{category.name}</h5>
                       </Dropdown.Item>
                       {category.sub_categories?.map((subcategory, subcategoryIndex) => (
-                        <Dropdown.Item key={subcategoryIndex} href={subcategory.link}>
+                        <Dropdown.Item key={subcategoryIndex} href={subcategory.link} onClick={handleClick(subcategory.id)}>
                           {subcategory.name}
                         </Dropdown.Item>
                       ))}
