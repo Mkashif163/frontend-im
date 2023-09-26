@@ -74,7 +74,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                                   <h5>For Seller</h5>
                                 </div>
                                 <div className="footer-contant">
-                                  <Link href="/">
+                                  <Link href="/collections/leftsidebar?sub_category=122">
                                     <a style={{ fontSize: '12px', color: 'gray' }}>How to become a Seller?</a>
                                   </Link><br />
                                   {/* <a href="/views/Containers/Footer/widgets/seller.tsx" style={{ fontSize: '12px', color: 'gray' }}>How to become a Seller?</a><br /> */}

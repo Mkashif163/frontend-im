@@ -5,9 +5,15 @@ import { Input, Label, Collapse } from "reactstrap";
 import { FilterContext } from "../../helpers/filter/filter.context";
 import { useRouter } from "next/router";
 import { useApiData } from "helpers/data/DataContext";
+import Accordion from 'react-bootstrap/Accordion';
 
 
-const Sidebar: NextPage = () => {
+
+type SideBarProps = {
+  sub_cat: number;
+}
+
+const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
   const {
     handleBrands,
     selectedBrands,
@@ -21,7 +27,7 @@ const Sidebar: NextPage = () => {
     leftSidebarOpen,
     setLeftSidebarOpen,
   } = useContext(FilterContext);
-  
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   const toggleCategory = () => setIsCategoryOpen(!isCategoryOpen);
   const [isBrandOpen, setIsBrandOpen] = useState(true);
@@ -38,6 +44,12 @@ const Sidebar: NextPage = () => {
   //     shallow: true,
   //   });
   // }, [selectedCategory, selectedPrice, selectedBrands, selectedColor]);
+  const handleSubClick = (id)=>{
+    setSelectedCategory(id);
+    router.push(`${window.location.pathname}?sub_category=${id}`, undefined, {
+      shallow: true,
+      });
+  }
 
   useEffect(() => {
     const { min, max } = selectedPrice;
@@ -71,116 +83,72 @@ const Sidebar: NextPage = () => {
         <h3 className="collapse-block-title mt-0" onClick={toggleCategory}>
           Our Menu & Categories
         </h3>
-        <Collapse isOpen={isCategoryOpen}>
+        <Accordion defaultActiveKey="0" flush>
+          {apiData &&
+            Object.entries(apiData.menus).map(([menuName, menu], menuIndex) => (
+              <Accordion.Item key={menuName} eventKey={menuIndex.toString()}>
+                <Accordion.Header>{menuName}</Accordion.Header>
+
+                <Accordion.Body>
+                  <Accordion defaultActiveKey="0" flush>
+                    {menu.categories.map((category) => (
+                      <Accordion.Item key={category.id} eventKey={category.id.toString()}>
+                        <Accordion.Header>{category.name}</Accordion.Header>
+
+                        <Accordion.Body>
+                          <ul>
+                            {category.sub_categories.map((subCategory) => (
+                              <div className="p-2 ">
+                              <li className="font-weight-bold" onClick={() => handleSubClick(subCategory.id)}>{subCategory.name}</li>
+                              </div>
+                            ))}
+                          </ul>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    ))}
+                  </Accordion>
+                </Accordion.Body>
+              </Accordion.Item>
+            ))}
+        </Accordion>
+      </div>
+
+      <div className="collection-collapse-block open">
+        <h3 className="collapse-block-title mt-0" onClick={toggleBrand}>
+          brand
+        </h3>
+        <Collapse isOpen={isBrandOpen}>
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
-              <ul className="category-list">
-                {/* All Products */}
-                <li>
-                  <Link href="#!">
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedCategory("");
-                        resetFilter();
-                      }}>
-                      All Products
-                    </a>
-                  </Link>
-                </li>
-
-                {/* Map the menus, categories, and sub-categories */}
-                {apiData &&
-                  Object.entries(apiData.menus).map(([menuName, menu]) => (
-                    <li key={menuName}>
-                      <Link href="#!">
-                        <a
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setSelectedCategory(""); // Clear selected category
-                            resetFilter(); // Reset other filters
-                          }}>
-                          {menuName}
-                        </a>
-                      </Link>
-
-                      <ul className="subcategory-list">
-                        {menu.categories.map((category) => (
-                          <li key={category.id}>
-                            <Link href="#!">
-                              <a
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setSelectedCategory(category.name); // Set selected category
-                                  resetFilter(); // Reset other filters
-                                }}>
-                                {category.name}
-                              </a>
-                            </Link>
-
-                            <ul className="subcategory-list">
-                              {category.sub_categories.map((subCategory) => (
-                                <li key={subCategory.id}>
-                                  <Link href="#!">
-                                    <a
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        setSelectedCategory(subCategory.name); // Set selected category
-                                        resetFilter(); // Reset other filters
-                                      }}>
-                                      {subCategory.name}
-                                    </a>
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-              </ul>
+              {[
+                "BCST",
+                "ROCKWELL",
+                "SUPCON",
+                "TRITECH",
+                "VENAS",
+                "WEG",
+                "WESDOM"
+              ].map((brand, i) => (
+                <div
+                  className="custom-control custom-checkbox collection-filter-checkbox"
+                  key={`brand-${i}`}
+                >
+                  <Input
+                    checked={selectedBrands.includes(brand)}
+                    onChange={() => {
+                      handleBrands(brand);
+                    }}
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={brand}
+                  />
+                  <label className="custom-control-label">{brand}</label>
+                </div>
+              ))}
             </div>
           </div>
         </Collapse>
       </div>
-    
-        <div className="collection-collapse-block open">
-          <h3 className="collapse-block-title mt-0" onClick={toggleBrand}>
-            brand
-          </h3>
-          <Collapse isOpen={isBrandOpen}>
-            <div className="collection-collapse-block-content">
-              <div className="collection-brand-filter">
-                {[
-                  "BCST",
-                  "ROCKWELL",
-                  "SUPCON",
-                  "TRITECH",
-                  "VENAS",
-                  "WEG",
-                  "WESDOM"
-                ].map((brand, i) => (
-                  <div
-                    className="custom-control custom-checkbox collection-filter-checkbox"
-                    key={`brand-${i}`}
-                  >
-                    <Input
-                      checked={selectedBrands.includes(brand)}
-                      onChange={() => {
-                        handleBrands(brand);
-                      }}
-                      type="checkbox"
-                      className="custom-control-input"
-                      id={brand}
-                    />
-                    <label className="custom-control-label">{brand}</label>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Collapse>
-        </div>
       {/* <!-- color filter start here --> */}
       {/* {!data || !data.getColors || data.getColors.colors.length === 0 || loading ? (
         loading && <h4>Loading</h4>
