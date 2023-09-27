@@ -11,9 +11,38 @@ import Accordion from 'react-bootstrap/Accordion';
 
 type SideBarProps = {
   sub_cat: number;
+  brand: any;
 }
 
-const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
+
+
+const colors = [
+  { id: '1', name: 'Red', value: '#FF0000' },
+  { id: '2', name: 'Blue', value: '#0000FF' },
+  { id: '3', name: 'LightYellow', value: '#FFFFE0' },
+  { id: '4', name: 'Yellow', value: '#FFFF00' },
+  { id: '5', name: 'DarkGreen', value: '#006400' },
+  { id: '6', name: 'White', value: '#FFFFFF' },
+  { id: '7', name: 'Orange', value: '#FF6600' },
+  { id: '8', name: 'Brown', value: '#964B00' },
+  { id: '9', name: 'Black', value: '#000000' },
+  { id: '10', name: 'Blue', value: '#007FFF' },
+  { id: '11', name: 'Ivory', value: '#FFFFF0' },
+  { id: '12', name: 'Purple', value: '#A020F0' },
+  { id: '13', name: 'Khaki', value: '#C3B091' },
+  { id: '14', name: 'Pink', value: '#FFC0CB' },
+  { id: '15', name: 'Gold', value: '#FFD700' },
+  { id: '16', name: 'Olive', value: '#808000' },
+  { id: '17', name: 'Cyan', value: '#00FFFF' },
+  { id: '18', name: 'Silver', value: '#C0C0C0' },
+  { id: '19', name: 'Gray', value: '#808080' },
+  { id: '20', name: 'Silver', value: '#C0C0C0' },
+  { id: '21', name: 'Navy', value: '#000080' },
+  { id: '22', name: 'AntiqueWhite', value: '#FAF9F6' },
+];
+
+
+const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand }) => {
   const {
     handleBrands,
     selectedBrands,
@@ -39,17 +68,13 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
   const [radioChecked, setRadioChecked] = useState(null);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   router.push(`${window.location.pathname}`, undefined, {
-  //     shallow: true,
-  //   });
-  // }, [selectedCategory, selectedPrice, selectedBrands, selectedColor]);
-  const handleSubClick = (id)=>{
+  const handleSubClick = (id) => {
     setSelectedCategory(id);
     router.push(`${window.location.pathname}?sub_category=${id}`, undefined, {
       shallow: true,
-      });
+    });
   }
+
 
   useEffect(() => {
     const { min, max } = selectedPrice;
@@ -80,7 +105,12 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
       </div>
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block open">
-        <h3 className="collapse-block-title mt-0" onClick={toggleCategory}>
+        <h3 className="collapse-block-title mt-0" onClick={
+          ()=>{
+            toggleCategory
+            handleSubClick(0)
+          }
+          }>
           Our Menu & Categories
         </h3>
         <Accordion defaultActiveKey="0" flush>
@@ -99,7 +129,7 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
                           <ul>
                             {category.sub_categories.map((subCategory) => (
                               <div className="p-2 ">
-                              <li className="font-weight-bold" onClick={() => handleSubClick(subCategory.id)}>{subCategory.name}</li>
+                                <li className="font-weight-bold" onClick={() => handleSubClick(subCategory.id)}>{subCategory.name}</li>
                               </div>
                             ))}
                           </ul>
@@ -120,61 +150,52 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat }) => {
         <Collapse isOpen={isBrandOpen}>
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
-              {[
-                "BCST",
-                "ROCKWELL",
-                "SUPCON",
-                "TRITECH",
-                "VENAS",
-                "WEG",
-                "WESDOM"
-              ].map((brand, i) => (
+              {brand.map((brand) => (
                 <div
                   className="custom-control custom-checkbox collection-filter-checkbox"
-                  key={`brand-${i}`}
+                  key={brand.id}
                 >
                   <Input
-                    checked={selectedBrands.includes(brand)}
+                    checked={selectedBrands.includes(brand.brand_name)}
                     onChange={() => {
-                      handleBrands(brand);
+                      handleBrands(brand.brand_name);
                     }}
                     type="checkbox"
                     className="custom-control-input"
-                    id={brand}
+                    id={brand.id}
                   />
-                  <label className="custom-control-label">{brand}</label>
+                  <label className="custom-control-label">{brand.brand_name}</label>
                 </div>
               ))}
             </div>
           </div>
         </Collapse>
       </div>
+
       {/* <!-- color filter start here --> */}
-      {/* {!data || !data.getColors || data.getColors.colors.length === 0 || loading ? (
-        loading && <h4>Loading</h4>
-      ) : (
-        <div className="collection-collapse-block open">
-          <h3 className="collapse-block-title" onClick={toggleColor}>
-            colors
-          </h3>
-          <Collapse isOpen={isColorOpen}>
-            <div className="collection-collapse-block-content">
-              <div className="color-selector">
-                <ul>
-                  {data.getColors.colors.map((color: string, i: number) => (
-                    <li
-                      className={`${color} ${selectedColor === color ? "active" : ""}`}
-                      onClick={() => {
-                        setSelectedColor(color);
-                      }}
-                      key={i}></li>
-                  ))}
-                </ul>
-              </div>
+      <div className="collection-collapse-block open">
+        <h3 className="collapse-block-title" onClick={toggleColor}>
+          Colors
+        </h3>
+        <Collapse isOpen={isColorOpen}>
+          <div className="collection-collapse-block-content">
+            <div className="color-selector">
+              <ul>
+                {colors.map((color) => (
+                  <li
+                    key={color.id}
+                    className={`color-swatch ${selectedColor === color.value ? "active" : ""}`}
+                    onClick={() => setSelectedColor(color.value)}
+                    style={{ backgroundColor: color.value }}
+                  >
+                    {/* {color.name} */}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Collapse>
-        </div>
-      )} */}
+          </div>
+        </Collapse>
+      </div>
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block border-0 open">
         <h3 className="collapse-block-title" onClick={togglePrice}>

@@ -15,6 +15,7 @@ type LeftSidebarCollectionProps = {
 const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
   const [subCategoryProducts, setSubCategoryProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
   
   const apiData = useApiData();
 
@@ -36,10 +37,11 @@ const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) =
                 }
             }
         }
+        setBrands(apiData.brands);
     }
 }, [apiData, sub_cat]);
 
-console.log(subCategoryProducts);
+console.log(brands);
   return (
     <Row>
       <Col
@@ -50,7 +52,7 @@ console.log(subCategoryProducts);
         id="filter"
         className="collection-filter category-page-side">
         <div className="sticky-sidebar">
-          <Sidebar  sub_cat={sub_cat}/>
+          <Sidebar  sub_cat={sub_cat} brand={brands}/>
           <NewProduct item={undefined}/>
           <div className="collection-sidebar-banner">
             <a href="#">

@@ -16,7 +16,7 @@ type CollectionProps = {
   products: any;
 };
 
-const Collection: NextPage<CollectionProps> = ({ cols, layoutList,products }) => {
+const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToWish } = React.useContext(WishlistContext);
@@ -30,9 +30,32 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList,products }) =>
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(allProductData.length / pageLimit);
 
+
+  useEffect(() => {
+    if (products) {
+      setAllProductData(products);
+      setIsLoading(false);
+    }
+  }, [products]);
+
+
+
   const handlePagination = (page) => {
-     console.log(page);
+    page
   };
+
+
+  const filteredProducts = () => {
+    return allProductData.filter(product =>
+      (!selectedBrands.length || selectedBrands.includes(product.brand.brand_name)) &&
+      (!selectedColor || product.colors.some(color => color.color.color_code === selectedColor))
+    );
+  };
+
+  // Use the filteredProducts function to get the current list of products
+  const currentProducts = filteredProducts();
+
+  console.log(currentProducts);
 
   const removeBrand = (val) => {
     const temp = [...selectedBrands];
@@ -46,12 +69,12 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList,products }) =>
 
   useEffect(() => {
 
-    if(products){
+    if (products) {
       setAllProductData(products);
       setIsLoading(false);
     }
-  
-  },[products]);
+
+  }, [products]);
 
   return (
     <Col className="collection-content">
@@ -172,10 +195,10 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList,products }) =>
                         <Spinner type="grow" color="primary" />
                       </div>
                     </Col>
-                  ) : (!allProductData || allProductData.length === 0) ? (
+                  ) : (!currentProducts || currentProducts.length === 0) ? (
                     <Skeleton />
                   ) : (
-                    allProductData
+                    currentProducts
                       .slice()
                       .sort((a, b) => {
                         switch (sortBy) {

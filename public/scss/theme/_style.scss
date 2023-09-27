@@ -1743,11 +1743,12 @@ button {
   .dropdown-toggle {
     width: 100%;
     background-color: transparent;
-    padding: 10px;
+    padding: 10px 0;
     border: none;
     color: black;
-    font-weight: bold;
-    text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
     &::after {
       display: none;
     }
@@ -1762,17 +1763,13 @@ button {
     .custom-side-menu-category {
       column-count: 4;
       column-gap: 15px;
-      padding: 10px; 
-      transition: background-color 0.3s; 
+      padding: 10px;
+      transition: background-color 0.3s;
 
       &:hover {
-        background-color: rgb(
-          232,
-          231,
-          231
-        );
+        background-color: rgb(232, 231, 231);
         color: white;
-        cursor: pointer; 
+        cursor: pointer;
       }
     }
   }
@@ -1821,16 +1818,15 @@ button {
 
 .menu-banners {
   background-color: blue;
-  width:500px;
+  width: 500px;
   height: 258px;
   display: grid;
   gap: 3px;
-  .b-img{
+  .b-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
 }
 
 //////////////////////////////
@@ -4854,15 +4850,15 @@ button {
 .footer-2 {
   background-color: $white;
   font-size: 12px;
-  gap: 0; 
+  gap: 0;
   width: 100%;
-  .footer-main-contian{
+  .footer-main-contian {
     border-bottom: 1px solid $light-border;
     padding-bottom: 0px;
-  
+
     .footer-center {
       padding-top: 0px;
-    
+
       .footer-detail {
         p {
           padding: 0px 0;
@@ -4935,9 +4931,9 @@ button {
           }
         }
       }
-      .account-right{
+      .account-right {
         padding: 1px 1px 1px 1px;
-          .footer-box {
+        .footer-box {
           .footer-title {
             padding-bottom: 0px;
             position: relative;
@@ -4954,13 +4950,13 @@ button {
             margin-top: 0px;
             font-size: 12px;
             column-gap: 0;
-  row-gap: 0;
+            row-gap: 0;
             .contact-list {
               li {
                 color: $gray-3;
                 font-size: 8px;
                 column-gap: 0;
-  row-gap: 0;
+                row-gap: 0;
                 i {
                   top: 0;
                 }
@@ -4979,17 +4975,17 @@ button {
       }
     }
   }
-  .footer-contact-box{
+  .footer-contact-box {
     margin-top: 0px;
     column-gap: 0;
-  row-gap: 0;
+    row-gap: 0;
   }
   .sub-footer {
     background-color: $body-back;
     .sub-footer-contain {
       padding: 5px 0;
       ul {
- li {
+        li {
           a {
             color: $icon-color;
           }
@@ -5006,7 +5002,7 @@ button {
           font-family: $font-1;
           font-size: 12px;
         }
-      }  
+      }
     }
   }
 }
@@ -8967,7 +8963,7 @@ button {
     background-color: #0072bb;
   }
   .short-product-images {
-    width: 50%;
+    width: 83%;
   }
   .short-product-discription {
     width: auto;
@@ -9089,6 +9085,7 @@ button {
 .single-producty {
   margin-top: 64px;
   margin-right: 25px;
+
   .coupens {
     border: 1px solid rgba($black, 0.18);
     border-radius: 5px;
@@ -9105,7 +9102,7 @@ button {
     .offers {
       ul {
         margin-top: 5px;
-        max-height: 460px;
+        max-height: 350px;
         overflow-y: auto;
         list-style: none;
         li {
@@ -11892,6 +11889,7 @@ button {
   z-index: 1;
 }
 
+
 // styles from israr rashid
 
 .custom-container {
@@ -11901,4 +11899,123 @@ button {
 
 #user-wish {
   background-color: #fff;
+}
+
+// DisplayItem css
+
+.imgContainer {
+  // width: "15rem";
+  // height: "15rem";
+  // position: "relative";
+  // overflow: "hidden";
+}
+.miniImgContainer {
+  // width: "10rem";
+  // height: "10rem";
+}
+.imgContainerImg {
+  // position: "absolute";
+  // top: "0";
+  // left: "0";
+  // width: "100%";
+  // height: "100%";
+  // object-fit: "cover";
+  // margin: "0";
+  // padding: "0";
+}
+.selectedThumbnail {
+  // border: "2px solid #007bff";
+}
+
+// user-signInOption css
+
+.dropbtn {
+  background-color: #fff;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.dropdownContent a {
+  color: #2e2e2e;
+  font-size: 14px;
+  padding: 8px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  /* background-color: #3e8e41; */
+}
+
+/* for buttons - login, register */
+.btnDropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.btnDropdownContent a {
+  color: #0272bc;
+  font-size: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.myLink {
+  color: #2e2e2e;
+  font-size: 14px;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+
+.myLink:hover {
+  background-color: #ddd;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btnDropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.btnDropdown:hover .dropdownContent {
+  display: block;
+}
+
+.userImage {
+  border-radius: 50%;
 }

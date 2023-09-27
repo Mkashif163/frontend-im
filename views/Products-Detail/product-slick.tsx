@@ -48,7 +48,10 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
         data && (
           <>
             <Col lg="5">
-            <Media src={data.url} alt="" className="img-fluid  image_zoom_cls-0" />
+              <div style={{ width: "500px" }}>
+                <Media src={data.url} alt="" className="img-fluid w-100 image_zoom_cls-0" />
+              </div>
+
               {/* <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
                 {data &&
                   data.product_images.map((img: any, i: any) => {
@@ -62,7 +65,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
               <Row>
                 <Col>
                   <div style={{ width: "500px" }}>
-                    
+
                     {/* <Slider
                       className="slider-nav"
                       asNavFor={nav1}
