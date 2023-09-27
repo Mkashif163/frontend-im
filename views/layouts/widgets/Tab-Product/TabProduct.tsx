@@ -215,7 +215,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
                               <ProductBox
                                 hoverEffect={effect}
                                 product={product} // Pass the product data
-                                addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                addCart={(product) => addToCart(product, 1,condition)} // Example: pass the product and quantity
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)}
                               />

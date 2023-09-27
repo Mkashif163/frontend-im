@@ -3,12 +3,13 @@ import { NextPage } from "next";
 import { Row, Col, Input, Label } from "reactstrap";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("mk21@gmail.com");
-  const [password, setPassword] = useState("12357890");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error state
 
   useEffect(() => {
     // Check if the user is already authenticated
@@ -21,6 +22,8 @@ const Login: NextPage = () => {
   }, []);
 
   const loginAuth = async (email, password) => {
+    setIsLoading(true); // Set loading to true when making the request
+
     try {
       // Define the data to be sent in the request body
       const requestData = {
@@ -48,19 +51,18 @@ const Login: NextPage = () => {
         setTimeout(() => {
           router.push(`/pages/account/dashboard`);
         }, 200);
+        
       } else {
-        toast.error("Login failed. Please check your credentials.", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      setTimeout(() => {
-        toast.error("Network error. Please try again later.", {
-          position: "top-right",
-          autoClose: 3000,
-        });
-      }, 200);
+      if (error.response && error.response.data && error.response.data.error === "Unauthorised") {
+        setError("Password or email is invalid.");
+      } else {
+        setError("Network error. Please try again later.");
+      }
+    } finally {
+      setIsLoading(false); // Set loading to false after the request is complete
     }
   };
 
@@ -97,9 +99,10 @@ const Login: NextPage = () => {
                       required
                     />
                   </div>
-                  <button type="button" className="btn btn-normal" onClick={() => loginAuth(email, password)}>
-                    Login
+                  <button type="button" className="btn btn-normal" onClick={() => loginAuth(email, password)} disabled={isLoading}>
+                    {isLoading ? "Logging In..." : "Login"}
                   </button>
+                  {error && <p className="text-danger mt-2">{error}</p>}
                   <a className="float-end txt-default mt-2" href="/pages/account/forget-password" id="fgpwd">
                     Forgot your password?
                   </a>

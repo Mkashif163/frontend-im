@@ -7,32 +7,69 @@ import axios from "axios";
 import router from "next/router";
 
 const RegisterPage: NextPage = () => {
-
-
-  const [first_name, setFirtName] = useState("")
-  const [last_name, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
-  const [password, setPassword] = useState("")
-  const [c_password, setCpassword] = useState("")
-  const [gender, setGGender] = useState("")
-
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
+  const [gender, setGender] = useState("Male"); // Default to "Male"
+  const [phoneError, setPhoneError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [cPasswordError, setCPasswordError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [emailError, setEmailError] = useState(""); // Email error state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation checks
+    let isFormValid = true;
+
+    // Phone validation: must be a number and 11 digits
+    if (!/^\d{11}$/.test(phone)) {
+      setPhoneError("Phone number must be 11 digits");
+      isFormValid = false;
+    } else {
+      setPhoneError(""); // Clear phone error if valid
+    }
+
+    // Password validation: must have 8 characters with alphabets and special characters
+    if (!/^(?=.*[A-Za-z])(?=.*[@#$%^&+=!])(?=.{8,})/.test(password)) {
+      setPasswordError("Password must have 8 characters with alphabets and special characters");
+      isFormValid = false;
+    } else {
+      setPasswordError(""); // Clear password error if valid
+    }
+
+    // Confirm password validation: must match the password
+    if (password !== cPassword) {
+      setCPasswordError("Passwords do not match");
+      isFormValid = false;
+    } else {
+      setCPasswordError(""); // Clear confirm password error if valid
+    }
+
+    // If any validation failed, don't make the API request
+    if (!isFormValid) {
+      return;
+    }
+
     // Form data to be sent
     const formData = {
-      "first_name": first_name,
-      "last_name": last_name,
-      "email": email,
-      "phone_number": phone,
-      "password": password,
-      "c_password": c_password,
-      "gender": gender,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      phone_number: phone,
+      password: password,
+      c_password: cPassword,
+      gender: gender,
     };
 
-    try { 
+    // Set loading to true while waiting for the response
+    setIsLoading(true);
+
+    try {
       const response = await axios.post("http://18.235.14.45/api/register", formData, {
         headers: {
           "Content-Type": "application/json",
@@ -40,8 +77,8 @@ const RegisterPage: NextPage = () => {
       });
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
-        localStorage.setItem('token', response.data.success.token);
-        localStorage.setItem('customer_id', response.data.customer_id);
+        localStorage.setItem("token", response.data.success.token);
+        localStorage.setItem("customer_id", response.data.customer_id);
 
         // Redirect to the dashboard page
         router.push("/pages/account/dashboard");
@@ -52,26 +89,32 @@ const RegisterPage: NextPage = () => {
         });
       }
     } catch (error) {
-      toast.error("Network error. Please try again later.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      if (error.response && error.response.data && error.response.data.error && error.response.data.error.email) {
+        // Handle email error
+        setEmailError(error.response.data.error.email[0]);
+      } else {
+        toast.error("Network error. Please try again later.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+    } finally {
+      // Set loading to false when the response is received
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     // Check if the token is available in localStorage
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       // Token is available, redirect to the dashboard
       router.push("/pages/account/dashboard");
     }
   }, []);
 
-
   return (
-
     <>
       <ToastContainer />
       <section className="login-page section-big-py-space bg-light">
@@ -92,7 +135,9 @@ const RegisterPage: NextPage = () => {
                         placeholder="First Name"
                         required
                         value={first_name}
-                        onChange={(e) => { setFirtName(e.target.value) }}
+                        onChange={(e) => {
+                          setFirstName(e.target.value);
+                        }}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-12">
@@ -105,7 +150,9 @@ const RegisterPage: NextPage = () => {
                         placeholder="Last Name"
                         required
                         value={last_name}
-                        onChange={(e) => { setLastName(e.target.value) }}
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                        }}
                       />
                     </FormGroup>
                   </div>
@@ -120,10 +167,14 @@ const RegisterPage: NextPage = () => {
                         placeholder="Email"
                         required
                         value={email}
-                        onChange={(e) => { setEmail(e.target.value) }}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          setEmailError(""); // Clear email error on input change
+                        }}
                       />
+                      {emailError && <div className="text-danger">{emailError}</div>}
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="col-md-12">
                       <Label htmlFor="phone_number">Phone Number</Label>
                       <Input
                         type="text"
@@ -133,8 +184,12 @@ const RegisterPage: NextPage = () => {
                         placeholder="Enter your Phone Number"
                         required
                         value={phone}
-                        onChange={(e) => { setPhone(e.target.value) }}
+                        onChange={(e) => {
+                          setPhone(e.target.value);
+                          setPhoneError(""); // Clear phone error on input change
+                        }}
                       />
+                      {phoneError && <div className="text-danger">{phoneError}</div>}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="password">Password</Label>
@@ -146,8 +201,12 @@ const RegisterPage: NextPage = () => {
                         placeholder="Enter your password"
                         required
                         value={password}
-                        onChange={(e) => { setPassword(e.target.value) }}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          setPasswordError(""); // Clear password error on input change
+                        }}
                       />
+                      {passwordError && <div className="text-danger">{passwordError}</div>}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="c_password">Confirm Password</Label>
@@ -158,26 +217,31 @@ const RegisterPage: NextPage = () => {
                         name="c_password"
                         placeholder="Enter your password"
                         required
-                        value={c_password}
-                        onChange={(e) => { setCpassword(e.target.value) }}
+                        value={cPassword}
+                        onChange={(e) => {
+                          setCPassword(e.target.value);
+                          setCPasswordError(""); // Clear confirm password error on input change
+                        }}
                       />
+                      {cPasswordError && <div className="text-danger">{cPasswordError}</div>}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="gender">Gender</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
+                      <select
                         id="gender"
                         name="gender"
-                        placeholder="Gender"
-                        required
+                        className="form-control"
                         value={gender}
-                        onChange={(e) => { setGGender(e.target.value) }}
-                      />
+                        onChange={(e) => setGender(e.target.value)} // Update the selected gender
+                        required
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
                     </FormGroup>
                     <FormGroup className="col-md-12">
-                      <Button className="btn btn-normal" type="submit">
-                        Sign Up
+                      <Button className="btn btn-normal" type="submit" disabled={isLoading}>
+                        {isLoading ? "Signing Up..." : "Sign Up"}
                       </Button>
                     </FormGroup>
                   </div>
