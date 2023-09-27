@@ -14,9 +14,10 @@ type CollectionProps = {
   cols: any;
   layoutList: string;
   products: any;
+  cat:any
 };
 
-const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products }) => {
+const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToWish } = React.useContext(WishlistContext);
@@ -82,7 +83,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products }) =
         <Row>
           <Col sm="12">
             {/* Collection Banner */}
-            <CollectionBanner />
+            <CollectionBanner cat={cat}/>
             <div className="collection-product-wrapper">
               <Row>
                 <Col xs="12">
@@ -191,12 +192,15 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products }) =
                   {/* Product Box */}
                   {isLoading ? (
                     <Col xs="12">
-                      <div className="d-flex justify-content-center mt-5">
-                        <Spinner type="grow" color="primary" />
-                      </div>
+                      <Skeleton />
                     </Col>
                   ) : (!currentProducts || currentProducts.length === 0) ? (
-                    <Skeleton />
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: '300px' }}>
+                      <div>
+                        <h1>No products 🛑</h1>
+                      </div>
+                    </div>
+
                   ) : (
                     currentProducts
                       .slice()

@@ -9,12 +9,13 @@ import { useApiData } from "helpers/data/DataContext";
 
 
 type LeftSidebarCollectionProps = {
-  sub_cat: number;
+  sub_cat: any;
 };
 
 const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
   const [subCategoryProducts, setSubCategoryProducts] = useState([]);
+  const [category,setCategory] = useState("");
   const [brands, setBrands] = useState([]);
   
   const apiData = useApiData();
@@ -26,12 +27,14 @@ const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) =
             const menu = apiData.menus[menuName];
             // Iterate through each category in the menu
             for (const category of menu.categories) {
+
                 // Iterate through each sub-category in the category
                 for (const subCat of category.sub_categories) {
                     
                     // Check if sub-category ID matches
                     if (subCat.id === +sub_cat) {
                         setSubCategoryProducts(subCat.products);
+                        setCategory(category.name);
                         break;
                     }
                 }
@@ -41,7 +44,6 @@ const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) =
     }
 }, [apiData, sub_cat]);
 
-console.log(brands);
   return (
     <Row>
       <Col
@@ -62,7 +64,7 @@ console.log(brands);
         </div>
       </Col>
       {/* Collection */}
-      <Collection products={subCategoryProducts} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      <Collection products={subCategoryProducts} cat = {category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
     </Row>
   );
 };

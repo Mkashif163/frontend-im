@@ -105,12 +105,7 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand }) => {
       </div>
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block open">
-        <h3 className="collapse-block-title mt-0" onClick={
-          ()=>{
-            toggleCategory
-            handleSubClick(0)
-          }
-          }>
+        <h3 className="collapse-block-title mt-0" onClick={toggleCategory}>
           Our Menu & Categories
         </h3>
         <Accordion defaultActiveKey="0" flush>
@@ -118,18 +113,16 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand }) => {
             Object.entries(apiData.menus).map(([menuName, menu], menuIndex) => (
               <Accordion.Item key={menuName} eventKey={menuIndex.toString()}>
                 <Accordion.Header>{menuName}</Accordion.Header>
-
                 <Accordion.Body>
                   <Accordion defaultActiveKey="0" flush>
                     {menu.categories.map((category) => (
                       <Accordion.Item key={category.id} eventKey={category.id.toString()}>
                         <Accordion.Header>{category.name}</Accordion.Header>
-
                         <Accordion.Body>
                           <ul>
                             {category.sub_categories.map((subCategory) => (
-                              <div className="p-2 ">
-                                <li className="font-weight-bold" onClick={() => handleSubClick(subCategory.id)}>{subCategory.name}</li>
+                              <div className={`p-2 ${subCategory.id === sub_cat ? "active" : ""}`} onClick={() => handleSubClick(subCategory.id)}>
+                                <li className="font-weight-bold">{subCategory.name}</li>
                               </div>
                             ))}
                           </ul>
