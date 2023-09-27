@@ -13,6 +13,7 @@ const UserSignedInOption: NextPage = () => {
   const handleLogout = async (e) => {
     // Remove the token from local storage
     localStorage.removeItem("token");
+    localStorage.removeItem("customer_id");
     setUserLoggedIn(false);
     router.push("/");
     // Perform any additional logout actions if needed

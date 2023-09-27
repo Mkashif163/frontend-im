@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { NextPage } from "next";
 
-const DashboardComponent = () => {
+type PropsUser = {
+  userData :any;
+}
+
+const DashboardComponent: NextPage<PropsUser> = ({userData}) => {
+  console.log("user data", userData);
   return (
     <>
       <div className="Account-right">
@@ -10,7 +16,7 @@ const DashboardComponent = () => {
             <h4>Profile</h4>
           </div>
           <div className="welcome-msg">
-            <p>Hi, Saliha Kazmi</p>
+            <p>Hi, {userData.first_name} {userData.last_name}</p>
             <p>
               My Account Dashboard, you have the ability to view a snapshot of
               your recent account activity and update your account information.
@@ -28,7 +34,7 @@ const DashboardComponent = () => {
                     <h3>First Name</h3>
                   </div>
                   <div className="box-content">
-                    <h6>Saliha</h6>
+                    <h6>{userData.first_name}</h6>
                   </div>
                 </div>
               </div>
@@ -38,7 +44,7 @@ const DashboardComponent = () => {
                     <h3>Last Name</h3>
                   </div>
                   <div className="box-content">
-                    <p>Kazmi</p>
+                    <p>{userData.last_name}</p>
                   </div>
                 </div>
               </div>
@@ -60,13 +66,13 @@ const DashboardComponent = () => {
                     <h3>E-mail</h3>
                   </div>
                   <div className="box-content">
-                    <p>Kazmi123@gmail.com</p>
+                    <p>{userData.email ? userData.email : "N/A"}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-sm-6">
+              {/* <div className="col-sm-6">
                 <div className="box">
                   <div className="box-title">
                     <h3>Website</h3>
@@ -75,52 +81,41 @@ const DashboardComponent = () => {
                     <h6>Industry MALL</h6>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-sm-6">
                 <div className="box">
                   <div className="box-title">
                     <h3>Address</h3>
                   </div>
                   <div className="box-content">
-                    <p>Wapda Town, E-Block #74</p>
+                    <p>{userData.address ? userData.address : "N/A"}</p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="row">
               <div className="col-sm-6">
                 <div className="box">
                   <div className="box-title">
                     <h3>Contact Number</h3>
                   </div>
                   <div className="box-content">
-                    <h6>0321-6656589</h6>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="box">
-                  <div className="box-title">
-                    <h3>Mobile Number</h3>
-                  </div>
-                  <div className="box-content">
-                    <p>0306-5151694</p>
+                    <h6>{userData.phone}</h6>
                   </div>
                 </div>
               </div>
             </div>
+           
             <div className="row">
               <div className="col-sm-6">
                 <div className="box">
                   <div className="box-title">
-                    <h3>Username</h3>
+                    <h3>Gender</h3>
                   </div>
                   <div className="box-content">
-                    <h6>Saliha10</h6>
+                    <h6>{userData.gender}</h6>
                   </div>
                 </div>
               </div>
-              <div className="col-sm-6">
+              {/* <div className="col-sm-6">
                 <div className="box">
                   <div className="box-title">
                     <h3>Password</h3>
@@ -129,16 +124,16 @@ const DashboardComponent = () => {
                     <input
                       type="password"
                       id="inputPassword"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Password"
-                      required=""
+                  
                     />
                     <h6>
                       <a href="#">Reset Password</a>
                     </h6>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

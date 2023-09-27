@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
-import { Row, Col } from "reactstrap";
-import DashboardComponent from "views/pages/account/acccountComponent/dashboardComponent";
+import { Row, Col, Button } from "reactstrap";
+import DashboardComponent from "./acccountComponent/dashboardComponent";
 import OrderComponent from "views/pages/account/acccountComponent/orderComponent";
 import CartPage from "./cartPage";
 import WishListPage from "views/pages/account/WishListPage";
@@ -10,12 +10,32 @@ import ForgetPassword from "./forgetPasswordPage";
 import Profile from "./profilePage";
 import Address from "./addressPage";
 import PaymentMethod from "./paymentPage";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import axios from "axios";
 
-const Dashboard: NextPage = () => {
+
+type Props = {
+  userId: any,
+}
+
+const Dashboard: NextPage<Props> = ({ userId }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [userData , setUserData] = useState({});
   const [currentComponent, setCurrentComponent] = useState("dashboard");
+
+
+  useEffect(() => {
+      // Fetch user data from the API
+      axios.get(`http://18.235.14.45/api/profile/${userId}`)
+        .then((response) => {
+            setUserData(response.data.success);
+        })
+        .catch((error) => {
+          // Handle request error
+          console.error("Error fetching user data:", error);
+        });
+    }
+  , [userId]);
 
   return (
     <>
@@ -141,8 +161,8 @@ const Dashboard: NextPage = () => {
             </Col>
             <Col lg="10">
               <div className="dashboard-right">
-                <div className="dashboard">
-                  {currentComponent === "dashboard" && <DashboardComponent />}
+                {userId ? <div className="dashboard">
+                  {currentComponent === "dashboard" && <DashboardComponent userData = {userData}/>}
                   {currentComponent === "order" && <OrderComponent />}
                   {currentComponent === "cart" && <CartPage />}
                   {currentComponent === "wishlist" && <WishListPage />}
@@ -151,7 +171,18 @@ const Dashboard: NextPage = () => {
                   {currentComponent === "profile" && <Profile />}
                   {currentComponent === "address" && <Address />}
                   {currentComponent === "payment" && <PaymentMethod />}
+                </div> : <div className="text-center">
+                  <h2 className="p-5">Please Login or Signup First 😴</h2>
+                  <div className="pb-5">
+                    <Link href="/pages/account/login">
+                      <Button className="m-2" color="btn btn-rounded">Login</Button>
+                    </Link>
+                    <Link href="/pages/account/register">
+                      <Button className="m-2" color="btn  btn-rounded btn-outline">Signup</Button>
+                    </Link>
+                  </div>
                 </div>
+                }
               </div>
             </Col>
           </Row>
