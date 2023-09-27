@@ -7,42 +7,57 @@ import { FilterContext } from "helpers/filter/filter.context";
 import { useContext, useEffect, useState } from "react";
 import { useApiData } from "helpers/data/DataContext";
 
-
 type LeftSidebarCollectionProps = {
   sub_cat: any;
 };
 
-const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) => {
+const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
   const [subCategoryProducts, setSubCategoryProducts] = useState([]);
-  const [category,setCategory] = useState("");
+  const [category, setCategory] = useState("");
   const [brands, setBrands] = useState([]);
-  
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+
   const apiData = useApiData();
 
   useEffect(() => {
     if (apiData && apiData.menus) {
-        // Iterate through each menu
-        for (const menuName in apiData.menus) {
-            const menu = apiData.menus[menuName];
-            // Iterate through each category in the menu
-            for (const category of menu.categories) {
+      let minPrice = Infinity;
+      let maxPrice = 0;
 
-                // Iterate through each sub-category in the category
-                for (const subCat of category.sub_categories) {
-                    
-                    // Check if sub-category ID matches
-                    if (subCat.id === +sub_cat) {
-                        setSubCategoryProducts(subCat.products);
-                        setCategory(category.name);
-                        break;
-                    }
+      // Iterate through each menu
+      for (const menuName in apiData.menus) {
+        const menu = apiData.menus[menuName];
+        // Iterate through each category in the menu
+        for (const category of menu.categories) {
+          // Iterate through each sub-category in the category
+          for (const subCat of category.sub_categories) {
+            // Check if sub-category ID matches
+            if (subCat.id === +sub_cat) {
+              setSubCategoryProducts(subCat.products);
+              setCategory(category.name);
+
+              // Calculate min and max prices
+              for (const product of subCat.products) {
+                const productPrice = parseFloat(product.price);
+                if (productPrice < minPrice) {
+                  minPrice = productPrice;
                 }
+                if (productPrice > maxPrice) {
+                  maxPrice = productPrice;
+                }
+              }
+
+              break;
             }
+          }
         }
-        setBrands(apiData.brands);
+      }
+
+      setBrands(apiData.brands);
+      setPriceRange({ min: minPrice, max: maxPrice });
     }
-}, [apiData, sub_cat]);
+  }, [apiData, sub_cat]);
 
   return (
     <Row>
@@ -52,10 +67,11 @@ const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) =
           left: leftSidebarOpen ? "-15px" : "",
         }}
         id="filter"
-        className="collection-filter category-page-side">
+        className="collection-filter category-page-side"
+      >
         <div className="sticky-sidebar">
-          <Sidebar  sub_cat={sub_cat} brand={brands}/>
-          <NewProduct item={undefined}/>
+          <Sidebar sub_cat={sub_cat} brand={brands} priceRange={priceRange} />
+          <NewProduct item={undefined} />
           <div className="collection-sidebar-banner">
             <a href="#">
               <img src="/images/category/side-banner.png" className="img-fluid " alt="" />
@@ -64,7 +80,7 @@ const LeftSidebarCollection:NextPage<LeftSidebarCollectionProps> = ({sub_cat}) =
         </div>
       </Col>
       {/* Collection */}
-      <Collection products={subCategoryProducts} cat = {category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      <Collection products={subCategoryProducts} cat={category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
     </Row>
   );
 };

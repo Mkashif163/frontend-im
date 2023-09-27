@@ -20,6 +20,8 @@ export const CartProvider = (props: any) => {
   const [cartItems, setCartItems] = useState(getLocalCartItems() as product[]);
   const [cartTotal, setCartTotal] = useState(0);
 
+  console.log(cartItems)
+
   useEffect(() => {
     const Total = cartItems.reduce((a, b) => +a + +b.total, 0);
     setCartTotal(Total);
@@ -27,20 +29,40 @@ export const CartProvider = (props: any) => {
   }, [cartItems]);
 
   // Add Product To Cart
-  const addToCart = (item) => {
+  const addToCart = (item,qty, condition) => {
     toast.success("Product Added to Cart Successfully !");
     const index = cartItems.findIndex((itm) => itm.id === item.id);
-
+    console.log("condition", condition)
+  
     if (index !== -1) {
       const product = cartItems[index];
       const quantity = product.qty ? product.qty + 1 : 1;
-      cartItems[index] = { ...product, ...item, qty: quantity, total: item.price * quantity };
+  
+      // Determine the price based on the selected condition
+      const selectedPrice = condition === "New" ? item.new_sale_price: item.refurnished_sale_price;
+  
+      cartItems[index] = {
+        ...product,
+        ...item,
+        qty: quantity,
+        total: selectedPrice * quantity,
+        condition: condition,
+        selectedPrice: selectedPrice, // Store the selected price in the cart item
+      };
       setCartItems([...cartItems]);
     } else {
-      const product = { ...item, qty: 1, total: item.price };
+      const selectedPrice = condition === "New" ? item.new_sale_price : item.refurnished_sale_price;
+      const product = {
+        ...item,
+        qty: 1,
+        total: selectedPrice,
+        condition: condition,
+        selectedPrice: selectedPrice, // Store the selected price in the cart item
+      };
       setCartItems([...cartItems, product]);
     }
   };
+  
 
   // Update Product Quantity
   const updateQty = (item, quantity) => {

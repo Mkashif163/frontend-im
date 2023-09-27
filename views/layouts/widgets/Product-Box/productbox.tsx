@@ -22,7 +22,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
 
   const router = useRouter();
   const [modal, setModal] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const [stockState, setStockState] = useState("InStock");
   const [selectedCondition, setSelectedCondition] = useState("New");
   const uniqueSize = [];
@@ -66,7 +66,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
             </Link>
 
             <div className={`product-icon `}>
-              <button onClick={() => addCart(product, quantity)}>
+              <button onClick={() => addCart(product, quantity, selectedCondition)}>
                 <i className="ti-bag"></i>
               </button>
               <a onClick={() => addWish(product)}>
@@ -84,7 +84,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
           <div className="product-detail detail-inline">
             <div className="detail-title">
 
-              <h6 className="price-title">{product.name.substring(0, 25)}{product.name.length > 25 ? " ..." : ""}</h6>
+              <h6 className="price-title">{product.name.substring(0, 20)}{product.name.length > 20 ? " ..." : ""}</h6>
 
               <div className="detail-left">
                 {product.model && <h6 className="model-number">{product.model_no.substring(0, 12)}{product.model_no.length > 8 ? "..." : ""}</h6>}
@@ -205,9 +205,10 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
                     </div>
                   </div>
                   <div className="product-buttons">
-                    <a href="#" className="btn btn-normal" onClick={() => addCart(product, quantity)}>
+                    <a href="#" className="btn btn-normal" onClick={() => addCart(product, quantity, selectedCondition)}>
                       add to cart
                     </a>
+
                     <a href="#" className="btn btn-normal" >
                       view detail
                     </a>

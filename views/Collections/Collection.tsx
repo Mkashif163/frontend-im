@@ -98,7 +98,10 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
                         </li>
                       ))}
                     {!!selectedColor.length && (
-                      <li className="me-1">
+                      <li
+                      className={`color-swatch`}
+                      style={{ backgroundColor: selectedColor.toString() }}
+                      >
                         {selectedColor && (
                           <a className="filter_tag">
                             {selectedColor}

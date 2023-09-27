@@ -8,13 +8,13 @@ import { CurrencyContext } from "../../../../helpers/currency/CurrencyContext";
 
 const ShoppingCart = ({ position, cartDisplay, layout }) => {
   const [openSide, setOpenSide] = useState(false);
-  const { cartItems, removeFromCart, cartTotal } = React.useContext(CartContext);
+  const { cartItems, removeFromCart } = React.useContext(CartContext);
   const { selectedCurr } = React.useContext(CurrencyContext);
   const symbol = selectedCurr.symbol;
   const { t } = useTranslation();
 
   const calculatedCartTotal = cartItems.reduce((total, item) => {
-    return total + item.new_sale_price * item.qty;
+    return total + item.selectedPrice * item.qty;
   }, 0);
 
   return (
@@ -92,9 +92,10 @@ const ShoppingCart = ({ position, cartDisplay, layout }) => {
                         </a>
                         <h4>
                           <span>
-                            {item.qty} x {symbol} {item.new_sale_price}
+                            {item.qty} x {symbol} {item.selectedPrice}
                           </span>
                         </h4>
+
                       </div>
                     </div>
                     <div className="close-circle">

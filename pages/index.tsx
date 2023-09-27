@@ -16,13 +16,16 @@ import TopCategory from "views/layouts/widgets/topCategory";
 import { useApiData } from "helpers/data/DataContext";
 
 interface CategoriesData {
-  category1: string;
+  category1: string;  
   category2: string;
   category3: string;
   category4: string;
   f_s_banner_1: string;
   f_s_banner_2: string;
   f_s_banner_3: string;
+  e_s_banner_1: string;
+  e_s_banner_2: string;
+  e_s_banner_3: string;
   center_image1: string;
 }
 
@@ -35,6 +38,9 @@ const Home: NextPage = () => {
     f_s_banner_1: "",
     f_s_banner_2: "",
     f_s_banner_3: "",
+    e_s_banner_1: "",
+    e_s_banner_2: "",
+    e_s_banner_3: "",
     center_image1: "",
   });
   const apiData = useApiData();
@@ -72,9 +78,9 @@ const Home: NextPage = () => {
           <TabProduct catId={parseInt(categoriesData.category4)} effect="icon-inline" />
           <RatioSquare />
           <CollectionBannerThree
-            ban1={categoriesData.f_s_banner_1}
-            ban2={categoriesData.f_s_banner_2}
-            ban3={categoriesData.f_s_banner_3}
+            ban1={categoriesData.e_s_banner_1}
+            ban2={categoriesData.e_s_banner_2}
+            ban3={categoriesData.e_s_banner_3}
           />
           <section className="rounded-category">
             <Suplier />

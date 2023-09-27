@@ -12,7 +12,11 @@ import Accordion from 'react-bootstrap/Accordion';
 type SideBarProps = {
   sub_cat: number;
   brand: any;
-}
+  priceRange: {
+    min: number;
+    max: number;
+  };
+};
 
 
 
@@ -42,7 +46,7 @@ const colors = [
 ];
 
 
-const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand }) => {
+const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   const {
     handleBrands,
     selectedBrands,
@@ -192,75 +196,33 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand }) => {
       {/* <!-- price filter start here --> */}
       <div className="collection-collapse-block border-0 open">
         <h3 className="collapse-block-title" onClick={togglePrice}>
-          price
+          Price Range
         </h3>
         <Collapse isOpen={isPriceOpen}>
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
-              <div className="custom-control custom-checkbox collection-filter-checkbox">
-                <Input
-                  onClick={() => setSelectedPrice({ min: 0, max: 100 })}
-                  type="radio"
-                  name="price-filter"
-                  className="custom-control-input"
-                  id="hundred"
-                  checked={radioChecked === 1}
-                  onChange={() => setRadioChecked(1)}
-                />
-                <Label className="custom-control-label">$0 - $100</Label>
-              </div>
-              <div className="custom-control custom-checkbox collection-filter-checkbox">
-                <Input
-                  onClick={() => setSelectedPrice({ min: 100, max: 200 })}
-                  type="radio"
-                  name="price-filter"
-                  className="custom-control-input"
-                  id="twohundred"
-                  checked={radioChecked === 2}
-                  onChange={() => setRadioChecked(2)}
-                />
-                <Label className="custom-control-label">$100 - $200</Label>
-              </div>
-              <div className="custom-control custom-checkbox collection-filter-checkbox">
-                <Input
-                  onClick={() => setSelectedPrice({ min: 200, max: 300 })}
-                  type="radio"
-                  name="price-filter"
-                  className="custom-control-input"
-                  id="threehundred"
-                  checked={radioChecked === 3}
-                  onChange={() => setRadioChecked(3)}
-                />
-                <Label className="custom-control-label">$200 - $300</Label>
-              </div>
-              <div className="custom-control custom-checkbox collection-filter-checkbox">
-                <Input
-                  onClick={() => setSelectedPrice({ min: 300, max: 400 })}
-                  type="radio"
-                  name="price-filter"
-                  className="custom-control-input"
-                  id="fourhundred"
-                  checked={radioChecked === 4}
-                  onChange={() => setRadioChecked(4)}
-                />
-                <Label className="custom-control-label">$300 - $400</Label>
-              </div>
-              <div className="custom-control custom-checkbox collection-filter-checkbox">
-                <Input
-                  onClick={() => setSelectedPrice({ min: 400, max: 1000 })}
-                  type="radio"
-                  name="price-filter"
-                  className="custom-control-input"
-                  id="fourhundredabove"
-                  checked={radioChecked === 5}
-                  onChange={() => setRadioChecked(5)}
-                />
-                <Label className="custom-control-label">$400 above</Label>
-              </div>
+              <input
+                type="range"
+                min={priceRange.min}
+                max={priceRange.max}
+                step="10"
+                value={selectedPrice.max}
+                onChange={(e) => {
+                  setSelectedPrice({ min: selectedPrice.min, max: parseInt(e.target.value) });
+                }}
+                className="custom-range"
+              />
+
+
+              <p className="mb-0">
+                Price Range: ${selectedPrice.min} - ${selectedPrice.max}
+              </p>
             </div>
           </div>
         </Collapse>
       </div>
+
+
     </div>
   );
 };
