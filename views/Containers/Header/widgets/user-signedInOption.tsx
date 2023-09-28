@@ -70,16 +70,6 @@ const UserSignedInOption: NextPage = () => {
                 </span>
                 <span className="myLink">
                   <Link href="/pages/account/dashboard">
-                    <span className="ms-2">My Coins</span>
-                  </Link>
-                </span>
-                <span className="myLink">
-                  <Link href="/pages/account/dashboard">
-                    <span className="ms-2">Message Center</span>
-                  </Link>
-                </span>
-                <span className="myLink">
-                  <Link href="/pages/account/dashboard">
                     <span className="ms-2">Payment</span>
                   </Link>
                 </span>
