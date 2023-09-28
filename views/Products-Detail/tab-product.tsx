@@ -24,6 +24,12 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 </NavLink>
               </NavItem>
               <NavItem>
+                <NavLink className={activeTab === "2" ? "active" : ""} onClick={() => setActiveTab("2")}>
+                  Specification
+                  <div className="material-border"></div>
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
                   Write Review
                   <div className="material-border"></div>
@@ -35,13 +41,16 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 <p className="ps-0">
                   {product.description}
                 </p>
-                <h5 className="mt-5">Specification</h5>
+              </TabPane>
+              <TabPane tabId="2">
+                <h5 className="mt-5 text-align-center">Specification</h5>
                 <div className="single-product-tables" style={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   height: '100%',
                 }}>
+
                   <table
                     style={{
                       borderCollapse: 'collapse',
@@ -89,12 +98,6 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                       </tr>
                     </tbody>
                   </table>
-                </div>
-
-              </TabPane>
-              <TabPane tabId="2">
-                <div className="mt-3 text-center">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                 </div>
               </TabPane>
               <TabPane tabId="3">
