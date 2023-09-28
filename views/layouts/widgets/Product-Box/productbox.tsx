@@ -8,13 +8,12 @@ import Link from "next/link";
 
 interface productType {
   product: any;
-  addCart: Function;
   addWish: Function;
   addCompare: Function;
-  hoverEffect: any;
+  hoverEffect: any
 }
 
-const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWish, hoverEffect }) => {
+const ProductBox: NextPage<productType> = ({ product, addCompare, addWish, hoverEffect }) => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
   const slider2 = React.useRef<Slider>();
@@ -66,7 +65,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
             </Link>
 
             <div className={`product-icon `}>
-              <button onClick={() => addCart(product, quantity, selectedCondition)}>
+              <button onClick={() => router.push(`/product-details/${productId}`)}>
                 <i className="ti-bag"></i>
               </button>
               <a onClick={() => addWish(product)}>
@@ -205,7 +204,7 @@ const ProductBox: NextPage<productType> = ({ product, addCart, addCompare, addWi
                     </div>
                   </div>
                   <div className="product-buttons">
-                    <a href="#" className="btn btn-normal" onClick={() => addCart(product, quantity, selectedCondition)}>
+                    <a href="#" className="btn btn-normal" onClick={() => router.push(`/product-details/${productId}`)}>
                       add to cart
                     </a>
 
