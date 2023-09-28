@@ -50,7 +50,7 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    if (Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
+    if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
       setCategoriesData((apiData as ApiData).Homesetting[0]);
     }
   }, [apiData]);

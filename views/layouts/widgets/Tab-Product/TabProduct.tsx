@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import { TabContent, TabPane, Row, Col, Carousel, CarouselItem } from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
-import { CartContext } from "../../../../helpers/cart/cart.context";
 import { WishlistContext } from "../../../../helpers/wishlist/wish.context";
 import { CompareContext } from "../../../../helpers/compare/compare.context";
 import { Skeleton } from "../../../../common/skeleton";
@@ -58,7 +57,6 @@ type TabProductProps = {
 
 const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const { addToWish } = React.useContext(WishlistContext);
-  const { addToCart } = React.useContext(CartContext);
   const { addToCompare } = React.useContext(CompareContext);
   const [activeTab, setActiveTab] = useState("new products");
   const [categoryName, setCategoryName] = useState('');
@@ -215,7 +213,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
                               <ProductBox
                                 hoverEffect={effect}
                                 product={product} // Pass the product data
-                                addCart={(product) => addToCart(product, 1,condition)} // Example: pass the product and quantity
+                               // Example: pass the product and quantity
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)}
                               />

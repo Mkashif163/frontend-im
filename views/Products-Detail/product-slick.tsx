@@ -48,7 +48,7 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
         data && (
           <>
             <Col lg="5">
-              <div style={{ width: "500px" }}>
+              <div style={{ width: "100%" }}>
                 <Media src={data.url} alt="" className="img-fluid w-100 image_zoom_cls-0" />
               </div>
 
