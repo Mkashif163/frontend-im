@@ -93,7 +93,6 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
     setShowAll(!showAll);
   };
 
-
   const visibleOffers = showAll ? dummyOffers : dummyOffers.slice(0, 1);
   const { addToWish } = React.useContext(WishlistContext);
 
