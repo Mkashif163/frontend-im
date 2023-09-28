@@ -7,13 +7,13 @@ const CartPage: NextPage = () => {
   const { cartItems, updateQty, removeFromCart } = React.useContext(CartContext);
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol } = selectedCurr;
-  const [quantityError, setQuantityError] = useState<Boolean>(false);
+  const [quantityError, setQuantityError] = useState<boolean>(false);
 
-
+  // Calculate the cart total taking product condition into account
   const cartTotal = cartItems.reduce((total, item) => {
-    return total + item.new_sale_price * item.qty;
-  }, 0);  
-
+    const price = item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price;
+    return total + price * item.qty;
+  }, 0);
 
   const handleQtyUpdate = (item, quantity) => {
     const parsedQty = parseInt(quantity, 10);
@@ -27,7 +27,7 @@ const CartPage: NextPage = () => {
 
   return (
     <>
-      <section className="cart-section section-big-py-space bg-light">
+      <section className="cart-section section-big-py-space">
         <div className="custom-container">
           {cartItems && cartItems.length > 0 ? (
             <>
@@ -60,14 +60,22 @@ const CartPage: NextPage = () => {
                               <div className="col-xs-3 col-3">
                                 <div className="qty-box">
                                   <div className="input-group">
-                                    <input type="text" name="quantity" onChange={(e) => updateQty(item, e.target.value)} className="form-control input-number" defaultValue={item.qty} />
+                                    <input
+                                      type="text"
+                                      name="quantity"
+                                      onChange={(e) => handleQtyUpdate(item, e.target.value)}
+                                      className="form-control input-number"
+                                      defaultValue={item.qty}
+                                      style={{ borderColor: quantityError && "red" }}
+                                      min="1"
+                                    />
                                   </div>
                                 </div>
                               </div>
                               <div className="col-xs-3 col-3">
                                 <h2 className="td-color">
                                   {symbol}
-                                  {item.new_sale_price}
+                                  {item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price}
                                 </h2>
                               </div>
                               <div className="col-xs-3 col-3">
@@ -82,7 +90,7 @@ const CartPage: NextPage = () => {
                           <td>
                             <h2>
                               {symbol}
-                              {item.new_sale_price}
+                              {item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price}
                             </h2>
                           </td>
                           <td>
@@ -97,7 +105,6 @@ const CartPage: NextPage = () => {
                                   style={{ borderColor: quantityError && "red" }}
                                   min="1"
                                 />
-
                               </div>
                             </div>
                           </td>
@@ -115,7 +122,7 @@ const CartPage: NextPage = () => {
                           <td>
                             <h2 className="td-color">
                               {symbol}
-                              {(item.new_sale_price * item.qty).toFixed(2)}
+                              {(item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price) * item.qty}
                             </h2>
                           </td>
                         </tr>
@@ -153,7 +160,7 @@ const CartPage: NextPage = () => {
                   <h3>
                     <strong>Your Cart is Empty</strong>
                   </h3>
-                  <h4>Explore more shortlist some items.</h4>
+                  <h4>Explore more, shortlist some items.</h4>
                 </div>
               </div>
             </div>

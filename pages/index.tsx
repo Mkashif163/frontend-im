@@ -16,7 +16,7 @@ import TopCategory from "views/layouts/widgets/topCategory";
 import { useApiData } from "helpers/data/DataContext";
 
 interface CategoriesData {
-  category1: string;  
+  category1: string;
   category2: string;
   category3: string;
   category4: string;
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    if (Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
+    if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
       setCategoriesData((apiData as ApiData).Homesetting[0]);
     }
   }, [apiData]);
@@ -60,8 +60,9 @@ const Home: NextPage = () => {
       <Layouts>
         <div className="bg-light">
           <Menu meneData={apiData} />
-
-          <TopCategory />
+          <div className="my-4">
+            <TopCategory />
+          </div>
           <CollectionBanner
             banner1={categoriesData.f_s_banner_1}
             banner2={categoriesData.f_s_banner_2}

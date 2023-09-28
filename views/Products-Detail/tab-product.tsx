@@ -25,13 +25,13 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
               </NavItem>
               <NavItem>
                 <NavLink className={activeTab === "2" ? "active" : ""} onClick={() => setActiveTab("2")}>
-                  Write Review
+                  Specification
                   <div className="material-border"></div>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
-                  Specification
+                  Write Review
                   <div className="material-border"></div>
                 </NavLink>
               </NavItem>
@@ -43,6 +43,64 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 </p>
               </TabPane>
               <TabPane tabId="2">
+                <h5 className="mt-5 text-align-center">Specification</h5>
+                <div className="single-product-tables" style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}>
+
+                  <table
+                    style={{
+                      borderCollapse: 'collapse',
+                      width: '80%',
+                      transition: 'transform 0.3s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <tbody>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Sku</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.sku}</td>
+                      </tr>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Weight</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.weight} {product.weight_unit}</td>
+                      </tr>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Dimensions ({product.m_unit})</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>
+                          <div>
+                            <strong>Width:</strong> {product.width}
+                          </div>
+                          <div>
+                            <strong>Height:</strong> {product.height}
+                          </div>
+                        </td>
+                      </tr>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Slug</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.slug}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </TabPane>
+              <TabPane tabId="3">
                 <Form>
                   <div className="form-row row">
                     <Col md="12">
@@ -79,51 +137,6 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                   </div>
                 </Form>
               </TabPane>
-              <TabPane tabId="3">
-                <div className="single-product-tables container-fluid">
-                  {/* Heading */}
-                  <div className="row mb-4">
-                    <div className="col-12 text-center">
-                      <h5>Specification of {product.name}</h5>
-                    </div>
-                  </div>
-
-                  {/* Table */}
-                  <div className="row">
-                    <div className="col-md-8 offset-md-2"> {/* This will center the table with a width of 8/12 of the parent */}
-                      <table className="table table-bordered w-100">
-                        <tbody>
-                          <tr>
-                            <th scope="row">Sku</th>
-                            <td>{product.sku}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Color</th>
-                            <td>{product.colors}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Weight {product.weight_unit}</th>
-                            <td>{product.weight} {product.weight_unit}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Dimensions ({product.m_unit})</th>
-                            <td>Width: {product.width}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Height</th>
-                            <td>{product.height}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Slug</th>
-                            <td>{product.slug}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </TabPane>
-
             </TabContent>
           </Col>
         </Row>

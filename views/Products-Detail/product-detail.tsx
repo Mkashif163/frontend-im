@@ -131,12 +131,10 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
     const difference = originalPrice - salePrice;
     return ((difference / originalPrice) * 100).toFixed(0); // Rounded to nearest whole number
   }
-  
+
   const originalPrice = selectedCondition === "New" ? parseFloat(productData.new_price) : parseFloat(productData.refurnished_price);
   const salePrice = selectedCondition === "New" ? parseFloat(productData.new_sale_price) : parseFloat(productData.refurnished_sale_price);
   const discountPercentage = calculateDiscountPercentage(originalPrice, salePrice);
-
-  const uniqueColor = [];
   const uniqueSize = [];
   return (
     <>
@@ -210,40 +208,37 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
           <div className="supplier-brand">
             <div className="brnd-div">
               <p>Brand:</p>
-              <img src="/images/layout-2/rounded-cat/7.png" className="img-fluid" alt="brand" />
+              <h4>{productData.brand.brand_name}</h4>
             </div>
-            <div className="suplier-div">
+            <div className="brnd-div">
               <p>Suplier:</p>
-              <img src="/images/layout-2/rounded-cat/1.png" className="img-fluid" alt="brand" />
+              <h4>{productData.make}</h4>
             </div>
           </div>
-          {item.variants &&
+          {/* {item.variants &&
             item.variants.map((vari) => {
               var findItem = uniqueColor.find((x) => x.color === vari.color);
               if (!findItem && vari.color) uniqueColor.push(vari);
               var findItemSize = uniqueSize.find((x) => x === vari.size);
               if (!findItemSize && vari.size) uniqueSize.push(vari.size);
             })}
-          {swatch ? <ImageSwatch item={item} changeColorVar={changeColorVar} /> : ""}
+          {swatch ? <ImageSwatch item={item} changeColorVar={changeColorVar} /> : ""} */}
 
           <div className="product-description border-product row">
             <div className="colors col-3">
-              <h6 className="product-title">select color</h6>
-              {changeColorVar === undefined
-                ? !!uniqueColor.length && (
-                  <ul className="color-variant">
-                    {productData.colors.map((vari, i) => {
-                      return <li className={vari.color.color_code} key={i} title={vari.color.name}></li>;
-                    })}
-                  </ul>
-                )
-                : !!uniqueColor.length && (
-                  <ul className="color-variant">
-                    {productData.colors.map((vari, i) => {
-                      return <li className={vari.color.color_code} key={i} title={vari.color.name} onClick={() => changeColorVar(i)}></li>;
-                    })}
-                  </ul>
-                )}
+              <h6 className="product-title">Color</h6>
+              {productData.colors && (
+                <ul className="color-variant">
+                  {productData.colors.map((vari, i) => {
+                    return <li
+                      key={vari.id}
+                      className={`color-swatch ${vari.color.color_code}`}
+
+                      style={{ backgroundColor: vari.color.color_code }}
+                    ></li>
+                  })}
+                </ul>
+              )}
             </div>
             <div className="product-size col-6">
               {!!uniqueSize.length && (
@@ -316,12 +311,21 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
               className="btn btn-normal"
               onClick={(e) => {
                 e.preventDefault();
-                addToCart(item);
+                addToCart(item, qty, selectedCondition)
               }}>
               add to cart
             </a>
-            <a href="/pages/account/checkout" className="btn btn-normal">
-              buy now
+            <a
+              href="/pages/account/checkout"
+              onClick={(e) => {
+                e.preventDefault();
+                addToCart(item, qty, selectedCondition);
+                document.body.style.overflow = "visible";
+                window.location.href = "/pages/account/checkout"; // Navigate after addToCart
+              }}
+              className="btn btn-normal"
+            >
+              Buy Now
             </a>
           </div>
         </div>
