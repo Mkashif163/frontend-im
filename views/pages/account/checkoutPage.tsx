@@ -5,7 +5,7 @@ import { CartContext } from "../../../helpers/cart/cart.context";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface formType {
   firstName: string;
@@ -37,7 +37,6 @@ const CheckoutPage: NextPage = () => {
     setPayment(value);
   };
 
-
   const onSuccess = (data, actions) => {
     return actions.order.capture().then(() => {
       alert("Order success");
@@ -47,19 +46,68 @@ const CheckoutPage: NextPage = () => {
     });
   };
 
-  const onSubmit = (data: formType) => {
+  const onSubmit = async (data: formType) => {
     if (data !== null) {
-      alert("You submitted the form and stuff!");
-      localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
-      emptyCart();
-      router.push({
-        pathname: "/pages/order-success",
-      });
+      const customerId = localStorage.getItem("customer_id");
+  
+      // Construct the request payload
+      const requestBody = {
+        customer_info: {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          company: "", // Add the missing field here
+          country: data.country,
+          address_01: data.address,
+          address_02: "", // Add the missing field here
+          city: data.city,
+          state: data.state,
+          postal_code: data.pincode.toString(),
+          phone1: data.phone,
+          phone2: "", // Add the missing field here
+          email: data.email,
+          comments: "", // Add the missing field here
+          payment_method: payment, // Use the selected payment method
+          shipping: "Standard", // You can modify this as needed
+          customer_id: customerId,
+          total_purchase: cartTotal, // Use the total cart amount
+          total_price: calculateCartTotal().toFixed(2), // Calculate and use the total cart price
+        },
+        products: cartItems.map((item) => ({
+          product_id: item.id, // Use the product id from your cartItems
+          quantity: item.qty,
+          p_price: item.selectedPrice, // Use the selected price from your cartItems
+          p_vendor_id: item.created_by, // Use the vendor id from your cartItems
+        })),
+      };
+  
+      try {
+        // Send the POST request to the checkout API
+        const response = await fetch("http://18.235.14.45/api/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        });
+  
+        if (response.ok) {
+          alert("Order successfully placed!");
+          localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
+          emptyCart();
+          router.push({
+            pathname: "/pages/order-success",
+          });
+        } else {
+          console.error("Error placing the order:", response.statusText);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     } else {
       console.log(errors);
     }
   };
-
+  
   const setStateFromInput = (event) => {
     obj[event.target.name] = event.target.value;
     setObj(obj);
@@ -73,11 +121,20 @@ const CheckoutPage: NextPage = () => {
     console.log("Error!", err);
   };
 
-  const paypalOptions = {
-    clientId: "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
-  };
-  const subtotal = cartItems.reduce((acc, item) => acc + item.new_sale_price * item.qty, 0);
+  // const paypalOptions = {
+  //   clientId: "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
+  // };
 
+  // Calculate the total price for each product based on quantity and condition
+  const calculateProductTotal = (item) => {
+    const selectedPrice = item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price;
+    return selectedPrice * item.qty;
+  };
+
+  // Calculate the overall cart total
+  const calculateCartTotal = () => {
+    return cartItems.reduce((acc, item) => acc + calculateProductTotal(item), 0);
+  };
 
   return (
     <>
@@ -230,7 +287,7 @@ const CheckoutPage: NextPage = () => {
                                 {item.name} × {item.qty}{" "}
                                 <span>
                                   {symbol}
-                                  {item.new_sale_price * item.qty}
+                                  {calculateProductTotal(item).toFixed(2)}
                                 </span>
                               </li>
                             ))}
@@ -240,20 +297,13 @@ const CheckoutPage: NextPage = () => {
                               Subtotal{" "}
                               <span className="count">
                                 {symbol}
-                                {(subtotal * value).toFixed(2)}
+                                {calculateCartTotal().toFixed(2)}
                               </span>
                             </li>
                             <li>
                               Shipping
                               <div className="shipping">
-                                <div className="shopping-option">
-                                  <input type="checkbox" defaultChecked={true} name="free-shipping" id="free-shipping" />
-                                  <label htmlFor="free-shipping" >Free Shipping</label>
-                                </div>
-                                <div className="shopping-option">
-                                  <input type="checkbox" name="local-pickup" id="local-pickup" />
-                                  <label htmlFor="local-pickup">Local Pickup</label>
-                                </div>
+                                {/* ...Your shipping options */}
                               </div>
                             </li>
                           </ul>
@@ -262,7 +312,7 @@ const CheckoutPage: NextPage = () => {
                               Total{" "}
                               <span className="count">
                                 {symbol}
-                                {(subtotal).toFixed(2)}
+                                {calculateCartTotal().toFixed(2)}
                               </span>
                             </li>
                           </ul>
@@ -273,30 +323,7 @@ const CheckoutPage: NextPage = () => {
                       <div className="payment-box">
                         <div className="upper-box">
                           <div className="payment-options">
-                            <ul>
-                              <li>
-                                <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-2" defaultChecked={true} onClick={() => checkhandle("stripe")} />
-                                  <label htmlFor="payment-2">
-                                    Cash On Delivery<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
-                                  </label>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="radio-option">
-                                  <input type="radio" name="payment-group" id="payment-1"  onClick={() => checkhandle("stripe")} />
-                                  <label htmlFor="payment-1">
-                                    Check Payments<span className="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
-                                  </label>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="radio-option paypal">
-                                  <input type="radio" name="payment-group" id="payment-3" onClick={() => checkhandle("paypal")} />
-                                  <label htmlFor="payment-3">PayPal</label>
-                                </div>
-                              </li>
-                            </ul>
+                            {/* ...Your payment options */}
                           </div>
                         </div>
 
@@ -307,13 +334,20 @@ const CheckoutPage: NextPage = () => {
                                 Place Order
                               </button>
                             ) : (
-                              <PayPalScriptProvider
-                                options={{
-                                  "client-id": paypalOptions.clientId,
-                                  components: "buttons",
-                                }}>
-                                <PayPalButtons forceReRender={[cartTotal]} onInit={onSuccess} onError={onError} onApprove={onSuccess} onCancel={onCancel} />
-                              </PayPalScriptProvider>
+                              <></>
+                              // <PayPalScriptProvider
+                              //   options={{
+                              //     "client-id": paypalOptions.clientId,
+                              //     components: "buttons",
+                              //   }}>
+                              //   <PayPalButtons
+                              //     forceReRender={[calculateCartTotal()]}
+                              //     onInit={onSuccess}
+                              //     onError={onError}
+                              //     onApprove={onSuccess}
+                              //     onCancel={onCancel}
+                              //   />
+                              // </PayPalScriptProvider>
                             )}
                           </div>
                         )}
