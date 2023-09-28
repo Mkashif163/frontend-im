@@ -35,37 +35,62 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 <p className="ps-0">
                   {product.description}
                 </p>
-                <div className="single-product-tables">
-                  <table>
+                <h5 className="mt-5">Specification</h5>
+                <div className="single-product-tables" style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}>
+                  <table
+                    style={{
+                      borderCollapse: 'collapse',
+                      width: '80%',
+                      transition: 'transform 0.3s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
                     <tbody>
-                      <tr>
-                        <td>Sku</td>
-                        <td>{product.sku}</td>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Sku</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.sku}</td>
                       </tr>
-                      {/* <tr>
-                        <td>Color</td>
-                        <td>{product.colors}</td>
-                      </tr> */}
-                      <tr>
-                        <td>Weight {product.weight_unit}</td>
-                        <td>{product.weight} {product.weight_unit}</td>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Weight</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.weight} {product.weight_unit}</td>
                       </tr>
-                    </tbody>
-                  </table>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Dimensions ({product.m_unit})</td>
-                        <td>Width: {product.width}</td>
-                        <td>Hieght: {product.height}</td>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Dimensions ({product.m_unit})</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>
+                          <div>
+                            <strong>Width:</strong> {product.width}
+                          </div>
+                          <div>
+                            <strong>Height:</strong> {product.height}
+                          </div>
+                        </td>
                       </tr>
-                      <tr>
-                        <td>slug</td>
-                        <td>{product.slug}</td>
+                      <tr style={{ border: '1px solid #ccc' }}>
+                        <td style={{ backgroundColor: '#f2f2f2', padding: '5px', border: '1px solid #ccc' }}>
+                          <strong>Slug</strong>
+                        </td>
+                        <td style={{ padding: '5px', border: '1px solid #ccc' }}>{product.slug}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+
               </TabPane>
               <TabPane tabId="2">
                 <div className="mt-3 text-center">
