@@ -8486,36 +8486,16 @@ button {
     margin-top: 10px;
     margin-bottom: 5px;
     gap: 48px;
-    .suplier-div {
-      width: 100px;
-      p {
-        margin-left: 3px;
-        margin-bottom: 0;
-        font-size: 15px;
-        color: var(--theme-color1);
-      }
-      img {
-        width: 100%;
-        aspect-ratio: 3/2;
-        object-fit: contain;
-        margin: 0;
-        padding: 0;
-      }
-    }
     .brnd-div {
       width: 100px;
       p {
         margin-left: 3px;
         margin-bottom: 0;
         font-size: 15px;
-        color: var(--theme-color1);
+        color: black;
       }
-      img {
-        width: 100%;
-        aspect-ratio: 3/2;
-        object-fit: contain;
-        margin: 0;
-        padding: 0;
+      h4{
+        color: var(--theme-color1);
       }
     }
   }
