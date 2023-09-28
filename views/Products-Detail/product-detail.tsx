@@ -315,8 +315,17 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
               }}>
               add to cart
             </a>
-            <a href="/pages/account/checkout" className="btn btn-normal">
-              buy now
+            <a
+              href="/pages/account/checkout"
+              onClick={(e) => {
+                e.preventDefault();
+                addToCart(item, qty, selectedCondition);
+                document.body.style.overflow = "visible";
+                window.location.href = "/pages/account/checkout"; // Navigate after addToCart
+              }}
+              className="btn btn-normal"
+            >
+              Buy Now
             </a>
           </div>
         </div>
