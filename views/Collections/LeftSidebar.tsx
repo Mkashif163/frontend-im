@@ -6,10 +6,22 @@ import Collection from "./Collection";
 import { FilterContext } from "helpers/filter/filter.context";
 import { useContext, useEffect, useState } from "react";
 import { useApiData } from "helpers/data/DataContext";
+import Slider from "react-slick";
 
 type LeftSidebarCollectionProps = {
   sub_cat: any;
 };
+
+const sliderSettings = {
+  dots: false,
+  infinite: true, 
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+};
+
 
 const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
@@ -17,6 +29,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
   const [category, setCategory] = useState("");
   const [brands, setBrands] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+  const [sliderImages, setSliderImages] = useState([]);
 
   const apiData = useApiData();
 
@@ -56,8 +69,20 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
 
       setBrands(apiData.brands);
       setPriceRange({ min: minPrice, max: maxPrice });
+      const bannerUrls = JSON.parse(category.side_sliders || "[]");
+      setSliderImages(bannerUrls);
     }
   }, [apiData, sub_cat]);
+
+  function transformImageUrl(apiImageUrl) {
+    if (!apiImageUrl) {
+      return ""; // or some default URL or error handling
+    }
+  
+    const baseUrl = 'http://18.235.14.45/';
+    return `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
+  }
+  
 
   return (
     <Row>
@@ -73,9 +98,13 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
           <Sidebar sub_cat={sub_cat} brand={brands} priceRange={priceRange} />
           <NewProduct item={undefined} />
           <div className="collection-sidebar-banner">
-            <a href="#">
-              <img src="/images/category/side-banner.png" className="img-fluid " alt="" />
-            </a>
+            <Slider {...sliderSettings}> {/* Use the slider component */}
+              {sliderImages.map((imageUrl, index) => (
+                <div key={index}>
+                  <img src={transformImageUrl(imageUrl)} className="img-fluid" alt={`Banner ${index + 1}`} />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </Col>
