@@ -38,7 +38,6 @@ const TopCategory: NextPage = () => {
     return transformedUrl;
   };
 
-  console.log(categories);
 
   const imageStyles = {
     width: "100px",

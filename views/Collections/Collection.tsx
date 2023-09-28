@@ -56,8 +56,6 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
   // Use the filteredProducts function to get the current list of products
   const currentProducts = filteredProducts();
 
-  console.log(currentProducts);
-
   const removeBrand = (val) => {
     const temp = [...selectedBrands];
     temp.splice(selectedBrands.indexOf(val), 1);

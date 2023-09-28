@@ -11,8 +11,8 @@ const ProductService: NextPage = () => (
             fill="#ff4c3b"></path>
         </svg>
         <div className="media-body">
-          <h4>free shipping</h4>
-          <p>free shipping world wide</p>
+          <h4>Fast Shipping</h4>
+          <p>Receive products in short time</p>
         </div>
       </div>
       <div className="media">
@@ -51,8 +51,8 @@ const ProductService: NextPage = () => (
           </g>
         </svg>
         <div className="media-body">
-          <h4>24 X 7 service</h4>
-          <p>online service for new customer</p>
+          <h4>Easy Returns</h4>
+          <p>Return policy that lets you shop at easy</p>
         </div>
       </div>
       <div className="media">
@@ -83,8 +83,8 @@ const ProductService: NextPage = () => (
           />
         </svg>
         <div className="media-body">
-          <h4>festival offer</h4>
-          <p>new online special festival offer</p>
+          <h4>Alway Authentic</h4>
+          <p>We only sell 100% authentic products</p>
         </div>
       </div>
       <div className="media border-0 m-0">
@@ -135,8 +135,8 @@ const ProductService: NextPage = () => (
           </g>
         </svg>
         <div className="media-body">
-          <h4>online payment</h4>
-          <p>Contrary to popular belief.</p>
+          <h4>Secure payments</h4>
+          <p>We have payement verified & tusted supplier</p>
         </div>
       </div>
     </div>
