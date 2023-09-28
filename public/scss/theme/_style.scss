@@ -1776,7 +1776,7 @@ button {
 }
 .slider-top {
   .carousel-control-prev {
-    background-color: transparent;
+    display: none;
   }
 
   .carousel-control-prev-icon {
@@ -1785,7 +1785,7 @@ button {
 
   /* Change the color of the right arrow */
   .carousel-control-next {
-    background-color: transparent;
+    display: none;
   }
 
   .carousel-control-next-icon {
