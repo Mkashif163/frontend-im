@@ -311,7 +311,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
               className="btn btn-normal"
               onClick={(e) => {
                 e.preventDefault();
-                addToCart(item,qty,selectedCondition)
+                addToCart(item, qty, selectedCondition)
               }}>
               add to cart
             </a>
