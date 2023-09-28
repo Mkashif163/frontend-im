@@ -18,7 +18,7 @@ const WishListPage: NextPage = () => {
   };
   return (
     <>
-      <section className="wishlist-section section-big-py-space bg-light">
+      <section className="wishlist-section section-big-py-space ">
         <div className="custom-container">
           {wishlistItems && wishlistItems.length > 0 ? (
             <>

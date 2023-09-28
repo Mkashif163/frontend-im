@@ -9,6 +9,7 @@ const CartPage: NextPage = () => {
   const { symbol } = selectedCurr;
   const [quantityError, setQuantityError] = useState<boolean>(false);
 
+
   // Calculate the cart total taking product condition into account
   const cartTotal = cartItems.reduce((total, item) => {
     const price = item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price;
@@ -24,6 +25,17 @@ const CartPage: NextPage = () => {
       setQuantityError(true);
     }
   };
+  // const updateCondition = (item, newCondition) => {
+  //   // Find the index of the item in the cart
+  //   const index = cartItems.findIndex((cartItem) => cartItem.id === item.id);
+
+  //   if (index !== -1) {
+  //     // Update the condition of the item
+  //     cartItems[index].condition = newCondition;
+  //     setCartItems([...cartItems]);
+  //   }
+  // };
+
 
   return (
     <>
@@ -108,6 +120,19 @@ const CartPage: NextPage = () => {
                               </div>
                             </div>
                           </td>
+                          
+                          {/* <td>
+                            <div className="condition-dropdown">
+                              <select
+                                value={item.condition}
+                                onChange={(e) => updateCondition(item, e.target.value)}
+                              >
+                                <option value="New">New</option>
+                                <option value="Refurbished">Refurbished</option>
+                              </select>
+                            </div>
+                          </td> */}
+
                           <td>
                             <a
                               href="#"
