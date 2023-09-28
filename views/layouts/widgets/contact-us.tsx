@@ -1,29 +1,31 @@
 import React from "react";
 import { NextPage } from "next";
-import { Row, Col, Container, Media } from "reactstrap";
+import { Row, Col, Container, Media, Input } from "reactstrap";
 
 const ContactUS: NextPage = () => {
   return (
     <>
       <section className="contact-banner">
         <Container>
-          <Row>
-            <Col>
-              <div className="contact-banner-contain">
-                <div className="contact-banner-img">
-                  <Media src="/images/layout-1/call-img.png" className="img-fluid" alt="call-banner" />
+          <Row className="d-flex justify-content-center">
+            <Col lg="8" md="8" sm='10' xs='12'>
+              <div className="input-group p-1 bg-white rounded-5">
+                <div className="input-group-prepend">
+                  <span className="input-group-text bg-white border-0" style={{ marginLeft: '2px' }}>
+                    <i className="fa fa-envelope-o" style={{ fontSize: '20px' }}></i>
+                  </span>
                 </div>
-                <div>
-                  <h3>if you have any question please call us</h3>
-                </div>
-                <div>
-                  <h2>0(800)123-456</h2>
+                <Input type="text" className="form-control bg-white border-0 rounded-3" placeholder="write your email here" />
+                <div className="input-group-prepend ">
+                  <span className="input-group-text telly bg-white border-0">
+                    <i className="fa fa-telegram" style={{ fontSize: '20px' }}></i>
+                  </span>
                 </div>
               </div>
             </Col>
           </Row>
         </Container>
-      </section>
+      </section >
     </>
   );
 };
