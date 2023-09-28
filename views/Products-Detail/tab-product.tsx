@@ -24,8 +24,14 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
+                <NavLink className={activeTab === "2" ? "active" : ""} onClick={() => setActiveTab("2")}>
                   Write Review
+                  <div className="material-border"></div>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
+                  Specification
                   <div className="material-border"></div>
                 </NavLink>
               </NavItem>
@@ -35,44 +41,8 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 <p className="ps-0">
                   {product.description}
                 </p>
-                <div className="single-product-tables">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Sku</td>
-                        <td>{product.sku}</td>
-                      </tr>
-                      {/* <tr>
-                        <td>Color</td>
-                        <td>{product.colors}</td>
-                      </tr> */}
-                      <tr>
-                        <td>Weight {product.weight_unit}</td>
-                        <td>{product.weight} {product.weight_unit}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Dimensions ({product.m_unit})</td>
-                        <td>Width: {product.width}</td>
-                        <td>Hieght: {product.height}</td>
-                      </tr>
-                      <tr>
-                        <td>slug</td>
-                        <td>{product.slug}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
               </TabPane>
               <TabPane tabId="2">
-                <div className="mt-3 text-center">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-                </div>
-              </TabPane>
-              <TabPane tabId="3">
                 <Form>
                   <div className="form-row row">
                     <Col md="12">
@@ -109,6 +79,51 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                   </div>
                 </Form>
               </TabPane>
+              <TabPane tabId="3">
+                <div className="single-product-tables container-fluid">
+                  {/* Heading */}
+                  <div className="row mb-4">
+                    <div className="col-12 text-center">
+                      <h5>Specification of {product.name}</h5>
+                    </div>
+                  </div>
+
+                  {/* Table */}
+                  <div className="row">
+                    <div className="col-md-8 offset-md-2"> {/* This will center the table with a width of 8/12 of the parent */}
+                      <table className="table table-bordered w-100">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Sku</th>
+                            <td>{product.sku}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Color</th>
+                            <td>{product.colors}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Weight {product.weight_unit}</th>
+                            <td>{product.weight} {product.weight_unit}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Dimensions ({product.m_unit})</th>
+                            <td>Width: {product.width}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Height</th>
+                            <td>{product.height}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Slug</th>
+                            <td>{product.slug}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </TabPane>
+
             </TabContent>
           </Col>
         </Row>
