@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Slider from "react-slick";
 import { useApiData } from "helpers/data/DataContext";
-import { TabContent, TabPane, Row, Col, Carousel, CarouselItem } from "reactstrap";
 
 const TopCategory: NextPage = () => {
   const apiData = useApiData();
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     if (apiData && apiData.menus) {
-      // Iterate through each menu
       const allCategories = [];
-
       for (const menuName in apiData.menus) {
         const menu = apiData.menus[menuName];
         for (const category of menu.categories) {
@@ -48,17 +44,7 @@ const TopCategory: NextPage = () => {
     transition: "box-shadow 0.3 ease, filter 0.3s ease",
   };
 
-  const grayscaleStyles = {
-    filter: "grayscale(100%)",
-  };
 
-  const applyShadow = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const removeShadow = () => {
-    setSelectedCategory(null);
-  };
 
   return (
     <div className="custom-container">
@@ -67,19 +53,12 @@ const TopCategory: NextPage = () => {
           categories.map((category, i) => (
             <div
               key={i}
-              onClick={() => applyShadow(category)}
-              onMouseEnter={() => applyShadow(category)}
-              onMouseLeave={() => removeShadow()}
-            // style={{
-            //   ...imageStyles,
-            //   ...(selectedCategory === category ? grayscaleStyles : {}),
-            // }}
             >
               <img
-                src={transformImageUrl(category.img)}
+                src={transformImageUrl(category.imageforapp)}
                 alt={category.name}
                 className="img-fluid"
-                style={imageStyles}
+                style={{...imageStyles, objectFit: "cover"}}
               />
 
               <h5

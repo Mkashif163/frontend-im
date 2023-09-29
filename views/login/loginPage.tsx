@@ -111,6 +111,9 @@ const Login: NextPage = () => {
                 <a href="/pages/account/register" className="txt-default pt-3 d-block">
                   Create an Account
                 </a>
+                <a href="http://dashboard.industrymall.net/" className="txt-default pt-3 d-block" target="__blank">
+                <h6>Login as vendor </h6>
+                </a>
               </div>
             </Col>
           </Row>

@@ -50,7 +50,9 @@ const TopBar: React.FC = () => {
           <Col xl="5" md="7" sm="6">
             <div className="top-header-left">
               <div className="shpping-order">
-                <h6>{t("free shipping on order over $99")} </h6>
+              <a href="http://dashboard.industrymall.net/" target="__blank">
+                <h6>{t("Sell on Industry Mall")} </h6>
+                </a>
               </div>
               <div className="app-link">
                 <h6>{t("Download app")}</h6>

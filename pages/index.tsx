@@ -72,7 +72,7 @@ const Home: NextPage = () => {
           <TabProduct catId={parseInt(categoriesData.category2)} effect="icon-inline" />
           <CollectionBannerTwo banner={categoriesData.center_image1} />
           <TabProduct catId={parseInt(categoriesData.category3)} effect="icon-inline" />
-          <ShortDisplay />
+          <ShortDisplay data={apiData}/>
           <section className="rounded-category">
             <Brands />
           </section>

@@ -48,7 +48,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
 
   const filteredProducts = () => {
     return allProductData.filter(product =>
-      (!selectedBrands.length || selectedBrands.includes(product.brand.brand_name)) &&
+      (product.brand === null && !selectedBrands.length || selectedBrands.includes(product.brand.brand_name)) &&
       (!selectedColor || product.colors.some(color => color.color.color_code === selectedColor))
     );
   };
@@ -229,7 +229,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
                               <ProductBox
                                 hoverEffect={true}
                                 product={product}
-                                addCart={(product) => addToCart(product, 1)}
+                               
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)} />
                             </div>

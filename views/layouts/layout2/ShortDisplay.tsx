@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Media, Input } from "reactstrap";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 import { CartContext } from "helpers/cart/cart.context";
@@ -132,6 +132,7 @@ const dummyOffers = [
 ];
 
 interface ShortDisplayProps {
+  data: any;
   effect?: any;
 }
 
@@ -147,13 +148,19 @@ const productImages = [
   { img: "/images/layout-2/product/9.jpg", category: "cardigans" },
 ];
 
-const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect }) => {
+const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data}) => {
   const [state, setState] = useState({ nav1: null, nav2: null });
+  
   const [qty, setQty] = useState(1);
   const { selectedCurr } = React.useContext(CurrencyContext);
   const [stock, setStock] = useState("InStock");
   const { symbol, value } = selectedCurr;
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+
+  useEffect(() => {
+  
+  }, [])
+  
 
   const quantitiy = 28;
   const { addToCart } = useContext(CartContext);
