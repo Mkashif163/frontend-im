@@ -33,12 +33,12 @@ export const ApiDataProvider = ({ children }) => {
     fetchAndCacheData();
 
     // Set up a timer to refresh the data every 25 minutes
-    const refreshInterval = 25 * 60 * 1000; // 25 minutes in milliseconds
+    const refreshInterval = 20 * 60 * 1000; // 25 minutes in milliseconds
     const refreshDataInterval = setInterval(fetchAndCacheData, refreshInterval);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(refreshDataInterval);
-  }, []);
+  }, [ApiDataContext]);
 
   return (
     <ApiDataContext.Provider value={apiData}>

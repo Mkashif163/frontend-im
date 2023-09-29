@@ -14,6 +14,7 @@ const RegisterPage: NextPage = () => {
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [gender, setGender] = useState("Male"); // Default to "Male"
+  const [role ,setRole] = useState("customer");
   const [phoneError, setPhoneError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [cPasswordError, setCPasswordError] = useState("");
@@ -64,6 +65,7 @@ const RegisterPage: NextPage = () => {
       password: password,
       c_password: cPassword,
       gender: gender,
+      role:role
     };
 
     // Set loading to true while waiting for the response
@@ -77,11 +79,11 @@ const RegisterPage: NextPage = () => {
       });
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
-        localStorage.setItem("token", response.data.success.token);
-        localStorage.setItem("customer_id", response.data.customer_id);
+        // localStorage.setItem("token", response.data.success.token);
+        // localStorage.setItem("customer_id", response.data.customer_id);
 
         // Redirect to the dashboard page
-        router.push("/pages/account/dashboard");
+        router.push("/verifyEmail/verfiyEmail");
       } else {
         toast.error("Registration failed. Please try again.", {
           position: "top-right",
@@ -237,6 +239,20 @@ const RegisterPage: NextPage = () => {
                       >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
+                      </select>
+                    </FormGroup>
+                    <FormGroup className="col-md-12">
+                      <Label htmlFor="role">Signup As Vendor</Label>
+                      <select
+                        id="role"
+                        name="role"
+                        className="form-control"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)} // Update the selected gender
+                        required
+                      >
+                        <option value="customer">Customer</option>
+                        <option value="vendor">Vendor</option>
                       </select>
                     </FormGroup>
                     <FormGroup className="col-md-12">
