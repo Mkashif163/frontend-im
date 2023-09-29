@@ -79,8 +79,8 @@ const RegisterPage: NextPage = () => {
       });
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
-        // localStorage.setItem("token", response.data.success.token);
-        // localStorage.setItem("customer_id", response.data.customer_id);
+        localStorage.setItem("token", response.data.success.token);
+        localStorage.setItem("customer_id", response.data.customer_id);
 
         // Redirect to the dashboard page
         router.push("/verifyEmail/verfiyEmail");
