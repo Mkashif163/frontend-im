@@ -30,6 +30,7 @@ interface CategoriesData {
 }
 
 const Home: NextPage = () => {
+  const [error, setError] = useState<string | null>(null);
   const [categoriesData, setCategoriesData] = useState<CategoriesData>({
     category1: "",
     category2: "",
@@ -50,14 +51,21 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
-      setCategoriesData((apiData as ApiData).Homesetting[0]);
+    try {
+      if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
+        setCategoriesData((apiData as ApiData).Homesetting[0]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch API data:", err);
+      setError("Failed to fetch data. Please try again later.");
     }
-  }, [apiData]);
+}, [apiData]);
+
 
   return (
     <>
       <Layouts>
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
         <div className="bg-light">
           <Menu meneData={apiData} />
           <div className="my-4">
