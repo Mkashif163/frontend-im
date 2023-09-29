@@ -92,7 +92,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
 
         // Check if the category has subcategories
         if (category.sub_categories.length > 0) {
-          setActiveTab(category.sub_categories[0].id.toString()); // Convert to string before setting the active sub-category to the first one
+          setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
         }
         break; // Break out of the loop once we found the category
       }
