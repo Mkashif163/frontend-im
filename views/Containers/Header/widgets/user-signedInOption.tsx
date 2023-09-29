@@ -78,12 +78,7 @@ const UserSignedInOption: NextPage = () => {
                     <span className="ms-2">Wish List</span>
                   </Link>
                 </span>
-                <span className="myLink">
-                  <Link href="/pages/account/dashboard">
-                    <span className="ms-2">My Favorite Stores</span>
-                  </Link>
-                </span>
-                <span className="myLink">
+                <span className="myLink mb-1">
                   <Link href="/pages/account/dashboard">
                     <span className="ms-2">My Coupons</span>
                   </Link>
