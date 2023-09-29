@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { NextPage } from "next";
 import { Media, Row, Col } from "reactstrap";
-import Breadcrumb from "../../views/Containers/Breadcrumb";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 
 const OrderSuccessPage: NextPage = () => {

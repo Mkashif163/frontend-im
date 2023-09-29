@@ -13,6 +13,10 @@ interface reviewProps {
   review: reviews;
 }
 
+interface Props {
+  userData: any;
+}
+
 const reviewData = [
     {
         img: "/images/avtar/1.jpg",
@@ -84,7 +88,7 @@ const ReviewList: React.FC<reviewProps> = ({ review }) => {
   );
 };
 
-const ReviewPage: NextPage = () => {
+const ReviewPage: NextPage<Props> = ({userData}) => {
   return (
     <div className="bg-light">
 

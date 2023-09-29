@@ -1,17 +1,53 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { Input, Label, Row, Col, Form, FormGroup } from "reactstrap";
-import Breadcrumb from "../../Containers/Breadcrumb";
+import axios from "axios";
 
-const Profile: NextPage = () => {
+type Props = {
+  userData: any;
+};
+
+const Profile: NextPage<Props> = ({ userData }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [firstName, setFirstName] = useState(userData.first_name || "N/A");
+  const [lastName, setLastName] = useState(userData.last_name || "N/A");
+  const [phone, setPhone] = useState(userData.phone || "N/A");
+  const [address, setAddress] = useState(userData.address || "N/A");
+  const [zipcode, setZipcode] = useState(userData.zipcode || "N/A");
+  const [city, setCity] = useState(userData.city || "N/A");
+  const [country, setCountry] = useState(userData.country || "N/A");
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
+    event.preventDefault();
+    if (isEditing) {
+      // Construct the payload
+      const payload = {
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        address: address,
+        zipcode: zipcode,
+        city: city,
+        country: country
+      };
+
+      try {
+        const response = await axios.post("http://18.235.14.45/api/update-profile", payload);
+        if (response.status === 200) {
+          console.log("Profile updated successfully");
+        } else {
+          console.log("Error updating profile");
+        }
+      } catch (error) {
+        console.error("There was an error updating the profile:", error);
+      }
+    }
     setIsEditing(false);
+  };
+  const handleEditClick = () => {
+    event.preventDefault();
+    setIsEditing(true);
   };
 
   return (
@@ -20,7 +56,7 @@ const Profile: NextPage = () => {
       <section className="contact-page register-page section-big-py-space bg-light">
         <div className="custom-container">
           <Row className="row">
-            <Col lg="6">
+            <Col lg="12">
               <h3 className="mb-3">PERSONAL DETAIL</h3>
               <Form className="theme-form">
                 <div className="form-row row">
@@ -32,7 +68,8 @@ const Profile: NextPage = () => {
                         className="form-control"
                         id="name"
                         placeholder="Enter Your name"
-                        required
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                         disabled={!isEditing}
                       />
                     </FormGroup>
@@ -45,7 +82,8 @@ const Profile: NextPage = () => {
                         className="form-control"
                         id="last-name"
                         placeholder="Last Name"
-                        required
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                         disabled={!isEditing}
                       />
                     </FormGroup>
@@ -58,36 +96,67 @@ const Profile: NextPage = () => {
                         className="form-control"
                         id="review"
                         placeholder="Enter your number"
-                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         disabled={!isEditing}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
-                    <div>
-                      <FormGroup>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          type="text"
-                          className="form-control"
-                          id="email"
-                          placeholder="Email"
-                          required
-                          disabled={!isEditing}
-                        />
-                      </FormGroup>
-                    </div>
-                  </Col>
-                  <Col className="col-md-12">
-                    <div>
-                      <Label htmlFor="review">Write Your Message</Label>
-                      <textarea
-                        className="form-control mb-0"
-                        placeholder="Write Your Message"
-                        id="exampleFormControlTextarea1"
+                    <FormGroup>
+                      <Label htmlFor="email">Address</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="email"
+                        placeholder="Enter your address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                         disabled={!isEditing}
-                      ></textarea>
-                    </div>
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="review">Zip Code</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="review"
+                        placeholder="Enter your zip code"
+                        value={zipcode}
+                        onChange={(e) => setZipcode(e.target.value)}
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="email">city</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="email"
+                        placeholder="Enter your city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <Label htmlFor="review">Country</Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        id="review"
+                        placeholder="Enter your country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        disabled={!isEditing}
+                      />
+                    </FormGroup>
                   </Col>
                   <Col md="12">
                     {isEditing ? (
@@ -109,106 +178,7 @@ const Profile: NextPage = () => {
                 </div>
               </Form>
             </Col>
-            <Col lg="6">
-              <h3 className="mb-3 spc-responsive">SHIPPING ADDRESS</h3>
-              <Form className="theme-form">
-                <div className="form-row row">
-                  <Col md="6">
-                    <FormGroup>
-                      <Label htmlFor="home-ploat">flat / plot</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        id="home-ploat"
-                        placeholder="company name"
-                        required
-                        disabled={!isEditing}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <Label htmlFor="address-two">Address *</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        id="address-two"
-                        placeholder="Address"
-                        required
-                        disabled={!isEditing}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <Label htmlFor="zip-code">Zip Code *</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        id="zip-code"
-                        placeholder="zip-code"
-                        required
-                        disabled={!isEditing}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6" className="select_input">
-                    <FormGroup>
-                      <Label>Country *</Label>
-                      <select className="form-control" disabled={!isEditing}>
-                        <option value="India">India</option>
-                        <option value="UAE">UAE</option>
-                        <option value="U.K">U.K</option>
-                        <option value="US">US</option>
-                      </select>
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <Label htmlFor="city">City *</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        id="city"
-                        placeholder="City"
-                        required
-                        disabled={!isEditing}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <Label htmlFor="region-state">Region/State *</Label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        id="region-state"
-                        placeholder="Region/state"
-                        required
-                        disabled={!isEditing}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="12">
-                    {isEditing ? (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5"
-                        onClick={handleSaveClick}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-sm btn-normal mb-lg-5"
-                        onClick={handleEditClick}
-                      >
-                        Edit
-                      </button>
-                    )}
-                  </Col>
-                </div>
-              </Form>
-            </Col>
+
           </Row>
         </div>
       </section>
