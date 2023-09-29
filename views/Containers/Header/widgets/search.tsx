@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Router from 'next/router';
+import React, { useEffect, useRef, useState } from "react";
+import Router from "next/router";
 import { NextPage } from "next";
-import { Input, InputGroup, } from "reactstrap";
+import { Input, InputGroup } from "reactstrap";
 import { useRouter } from "next/router";
-import Link from 'next/link';
+import Link from "next/link";
 
 function useDebounce(value: any, delay: any) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -25,7 +25,7 @@ const Search: NextPage = () => {
 
   const inputEl = useRef(null);
   const [isSearch, setIsSearch] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const [resultItems, setResultItems] = useState(null);
   const [loading, setLoading] = useState(false);
   // const debouncedSearchTerm = useDebounce(keyword, 300);
@@ -41,7 +41,7 @@ const Search: NextPage = () => {
   // }
 
   useEffect(() => {
-    if (keyword && keyword !== '') {
+    if (keyword && keyword !== "") {
       setLoading(true);
       if (keyword) {
         const queries = {
@@ -62,7 +62,7 @@ const Search: NextPage = () => {
           });
       } else {
         setIsSearch(false);
-        setKeyword('');
+        setKeyword("");
       }
       if (loading) {
         setIsSearch(false);
@@ -83,8 +83,8 @@ const Search: NextPage = () => {
     if (resultItems && resultItems.length > 0) {
       if (resultItems.length > 5) {
         loadMoreView = (
-          <div className="ps-panel__footer text-center">
-            <Link href="/search">
+          <div className='ps-panel__footer text-center'>
+            <Link href='/search'>
               <a>See all results</a>
             </Link>
           </div>
@@ -92,27 +92,23 @@ const Search: NextPage = () => {
       }
       productItemsView = resultItems.map((product: any, index: any) => (
         // <ProductSearchResult product={product} key={product.id} />
-        <div className="">
-          <div className="p">
-            item {index}
-          </div>
+        <div className=''>
+          <div className='p'>item {index}</div>
         </div>
       ));
     } else {
       productItemsView = <p>No product found.</p>;
     }
-    if (keyword !== '') {
+    if (keyword !== "") {
       clearTextView = (
-        <span className="ps-form__action">
-          <i className="icon icon-cross2"></i>
+        <span className='ps-form__action'>
+          <i className='icon icon-cross2'></i>
         </span>
       );
     }
   } else {
     loadingView = (
-      <span className="ps-form__action">
-        {/* <Spin size="small" /> */}
-      </span>
+      <span className='ps-form__action'>{/* <Spin size="small" /> */}</span>
     );
   }
   type Product = {
@@ -125,86 +121,110 @@ const Search: NextPage = () => {
   const products: Product[] = [
     {
       id: 1,
-      name: 'Multimeter Digital Meters',
+      name: "Multimeter Digital Meters",
       oldPrice: 45,
       newPrice: 19.99,
-      imageUrl: 'https://placekitten.com/100/100', // Replace with actual image URL
+      imageUrl: "https://placekitten.com/100/100", // Replace with actual image URL
     },
     {
       id: 2,
-      name: 'Autonics Digital Multi Panel Meter',
+      name: "Autonics Digital Multi Panel Meter",
       oldPrice: 456,
       newPrice: 299,
-      imageUrl: 'https://placekitten.com/100/101',
+      imageUrl: "https://placekitten.com/100/101",
     },
     // Add more products as needed
   ];
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const filteredProducts = searchTerm
-    ? products.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    ? products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     : [];
 
   return (
-    <div className="input-block ">
-      <div className="input-box">
-        {/* <form
-          className="ps-form--quick-search"
-          onClick={(e) => setKeyword('')}
-        >
-          <div className="ps-form__input d-flex">
-            <input
-              ref={inputEl}
-              className="form-control"
-              type="text"
-              value={keyword}
-              placeholder="I'm shopping for..."
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button className='btn rounded-3 border-1'>Clear</button>
-          </div>
-          {clearTextView}
-          {loadingView}
-          <div
-            className={`ps-panel--search-result${isSearch ? ' active ' : ''
-              }`}>
-            <div className="ps-panel__content">{productItemsView}</div>
-            {loadMoreView}
-          </div>
-        </form> */}
-        <div className="ps-form__input d-flex">
+    <div className='input-block '>
+      <div className='input-box'>
+        <div className='ps-form__input d-flex'>
           <input
-            className="form-control"
+            className='form-control'
             ref={inputEl}
-            type="text"
+            type='text'
             value={searchTerm}
             placeholder="I'm shopping for..."
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className='btn rounded-3 border-1' onClick={(e) => { setSearchTerm('') }}>Clear</button>
+          <button
+            className='btn rounded-3 border-1'
+            onClick={(e) => {
+              setSearchTerm("");
+            }}>
+            Clear
+          </button>
         </div>
 
-
         {/* Product List */}
-        {searchTerm ? filteredProducts.length > 0 ? (
-          <ul style={{ listStyle: 'none', padding: 0, marginTop: '100px', backgroundColor: 'light', display: 'flex', flexDirection: 'column', position: 'absolute', top: '50px', zIndex: 999 }}>
-            {filteredProducts.slice(0, 10).map(product => (
-              <li key={product.id} style={{ border: '1px solid #ddd', padding: '5px', margin: '10px', borderRadius: '5px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <img src={product.imageUrl} alt={product.name} style={{ width: '70px', height: '70px', objectFit: 'cover', marginRight: '10px' }} />
-                <div>
-                  <div>{product.name}</div>
+        {searchTerm ? (
+          filteredProducts.length > 0 ? (
+            <ul
+              className='ps-form__input d-flex rounded-3 form-control'
+              style={{
+                listStyle: "none",
+                padding: 0,
+                marginTop: "100px",
+                backgroundColor: "#E4EBF1", // Use 'lightgray' instead of 'light'
+                display: "flex",
+                flexDirection: "column",
+                position: "absolute",
+                top: "50px",
+                zIndex: 999,
+                width: "calc(100% - 58%)", // Adjust the width as needed
+                boxSizing: "border-box", // Include padding and border in the total width
+              }}>
+              {filteredProducts.slice(0, 10).map((product) => (
+                <li
+                  key={product.id}
+                  style={{
+                    border: "1px solid #ddd",
+                    padding: "5px",
+                    margin: "10px",
+                    borderRadius: "5px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}>
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      objectFit: "cover",
+                      marginRight: "10px",
+                    }}
+                  />
                   <div>
-                    <span style={{ textDecoration: 'line-through', marginRight: '5px' }}>${product.oldPrice.toFixed(2)}</span>
-                    <span>${product.newPrice.toFixed(2)}</span>
+                    <div>{product.name}</div>
+                    <div>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          marginRight: "5px",
+                        }}>
+                        ${product.oldPrice.toFixed(2)}
+                      </span>
+                      <span>${product.newPrice.toFixed(2)}</span>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>) :
-          <p>No product found.</p>
-          : ''
-        }
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No product found.</p>
+          )
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
