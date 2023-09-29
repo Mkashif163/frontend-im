@@ -3,18 +3,13 @@ import { Container, Row, Col, Media } from "reactstrap";
 import TopBar from "./widgets/TopBar";
 import Search from "./widgets/search";
 import ShoppingCart from "./widgets/shopping-cart";
-import Category from "./widgets/by-category";
-import User from "./widgets/user-profile";
 import UserOptions from "./widgets/user-signedInOption";
 import WishList from "./widgets/whishlist";
-import ContactUs from "./widgets/contact-us";
-import Gift from "./widgets/gift";
 import { NextPage } from "next";
-import HorizaontalMenu from "../Menu/horizontal";
 import MobileSearch from "./widgets/mobile-search";
 import MobileSetting from "./widgets/mobile-setting";
 import { MenuContext } from "helpers/menu/MenuContext";
-
+import { useApiData } from "helpers/data/DataContext";
 interface header {
   cartPopupPosition: string;
   display: string;
@@ -30,6 +25,8 @@ const Header: NextPage<header> = ({
 }) => {
   const menuContext = useContext(MenuContext);
   const [userLoggedOut, setUserLoggedOut] = useState(false);
+  const apiData = useApiData();
+  const [products, setProducts] = useState([]);
 
   const { setLeftMenu, leftMenu } = menuContext;
   const handleScroll = () => {
@@ -58,6 +55,29 @@ const Header: NextPage<header> = ({
       setUserLoggedOut(false);
     }
   }, [userLoggedOut]);
+
+
+  useEffect(() => {
+    const allProducts = [];
+
+    // Loop through each menu
+    for (const menuName in apiData.menus) {
+      // Loop through each category in the current menu
+      for (const category of apiData.menus[menuName].categories) {
+        // Loop through each sub_category in the current category
+        for (const subCategory of category.sub_categories) {
+          // Loop through each product in the current sub_category and add it to allProducts
+          for (const product of subCategory.products) {
+            allProducts.push(product)
+          }
+        }
+      }
+    }
+
+    // Set the productsData state with all fetched products
+    setProducts(allProducts);
+
+  }, [apiData]);
   return (
     <Fragment>
       <header id="stickyHeader">
@@ -89,7 +109,7 @@ const Header: NextPage<header> = ({
                       />
                     </a>
                   </div>
-                  <Search />
+                  <Search products={products}/>
                   <ShoppingCart
                     position={cartPopupPosition}
                     cartDisplay={display}

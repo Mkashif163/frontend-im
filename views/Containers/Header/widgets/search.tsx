@@ -5,6 +5,10 @@ import { Input, InputGroup } from "reactstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+interface Props {
+  products: any[];
+}
+
 function useDebounce(value: any, delay: any) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -20,7 +24,8 @@ function useDebounce(value: any, delay: any) {
 
   return debouncedValue;
 }
-const Search: NextPage = () => {
+
+const Search: NextPage<Props> = ({ products }) => {
   const router = useRouter();
 
   const inputEl = useRef(null);
@@ -28,50 +33,29 @@ const Search: NextPage = () => {
   const [keyword, setKeyword] = useState("");
   const [resultItems, setResultItems] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const debouncedSearchTerm = useDebounce(keyword, 300);
-  // function handleClearKeyword() {
-  //   setKeyword('');
-  //   setIsSearch(false);
-  //   setLoading(false);
-  // }
-
-  // function handleSubmit(e: any) {
-  //   e.preventDefault();
-  //   Router.push(`/search?keyword=${keyword}`);
-  // }
 
   useEffect(() => {
     if (keyword && keyword !== "") {
       setLoading(true);
       if (keyword) {
-        const queries = {
-          _limit: 5,
-          title_contains: keyword,
-        };
-        fetch(`http://18.235.14.45/api/search/product/${queries}`)
-          .then((response) => response.json())
-          .then((result) => {
-            setResultItems(result.data);
-            console.log(result.data);
-            setLoading(true);
-            setIsSearch(true);
-          })
-          .catch((error) => {
-            console.error("Error fetching products:", error);
-            setLoading(true);
-          });
+        // Simulating a fetch request with a filter based on the keyword
+        const filteredProducts = products.filter((product) =>
+          product.name.toLowerCase().includes(keyword.toLowerCase())
+        );
+
+        setResultItems(filteredProducts);
+        setLoading(false);
+        setIsSearch(true);
       } else {
         setIsSearch(false);
         setKeyword("");
-      }
-      if (loading) {
-        setIsSearch(false);
+        setLoading(false);
       }
     } else {
       setLoading(false);
       setIsSearch(false);
     }
-  }, [keyword]);
+  }, [keyword, products]);
 
   // Views
   let productItemsView: JSX.Element | null;
@@ -118,28 +102,11 @@ const Search: NextPage = () => {
     newPrice: number;
     imageUrl: string;
   };
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Multimeter Digital Meters",
-      oldPrice: 45,
-      newPrice: 19.99,
-      imageUrl: "https://placekitten.com/100/100", // Replace with actual image URL
-    },
-    {
-      id: 2,
-      name: "Autonics Digital Multi Panel Meter",
-      oldPrice: 456,
-      newPrice: 299,
-      imageUrl: "https://placekitten.com/100/101",
-    },
-    // Add more products as needed
-  ];
   const [searchTerm, setSearchTerm] = useState("");
   const filteredProducts = searchTerm
     ? products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : [];
 
   return (
@@ -155,7 +122,7 @@ const Search: NextPage = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            className='btn rounded-3 border-1'
+            className='btn btn-normal'
             onClick={(e) => {
               setSearchTerm("");
             }}>
@@ -171,14 +138,15 @@ const Search: NextPage = () => {
               style={{
                 listStyle: "none",
                 padding: 0,
-                marginTop: "100px",
-                backgroundColor: "#E4EBF1", // Use 'lightgray' instead of 'light'
+                marginTop: "100px", // Use 'lightgray' instead of 'light'
                 display: "flex",
                 flexDirection: "column",
                 position: "absolute",
                 top: "50px",
                 zIndex: 999,
-                width: "calc(100% - 58%)", // Adjust the width as needed
+                maxHeight: "400px",
+                overflowY: "auto",
+                width: "calc(90% - 58%)", // Adjust the width as needed
                 boxSizing: "border-box", // Include padding and border in the total width
               }}>
               {filteredProducts.slice(0, 10).map((product) => (
@@ -194,13 +162,13 @@ const Search: NextPage = () => {
                     alignItems: "center",
                   }}>
                   <img
-                    src={product.imageUrl}
+                    src={product.url}
                     alt={product.name}
                     style={{
                       width: "70px",
                       height: "70px",
                       objectFit: "cover",
-                      marginRight: "10px",
+                      marginRight: "10px"
                     }}
                   />
                   <div>
@@ -211,9 +179,9 @@ const Search: NextPage = () => {
                           textDecoration: "line-through",
                           marginRight: "5px",
                         }}>
-                        ${product.oldPrice.toFixed(2)}
+                        ${product.new_price}
                       </span>
-                      <span>${product.newPrice.toFixed(2)}</span>
+                      <span>${product.new_sale_price}</span>
                     </div>
                   </div>
                 </li>
@@ -226,7 +194,7 @@ const Search: NextPage = () => {
           ""
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
