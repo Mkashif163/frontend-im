@@ -153,10 +153,8 @@ const Search: NextPage<Props> = ({ products }) => {
                 <li
                   key={product.id}
                   style={{
-                    border: "1px solid #ddd",
                     padding: "5px",
-                    margin: "10px",
-                    borderRadius: "5px",
+                    marginLeft: "15px",
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
@@ -167,7 +165,7 @@ const Search: NextPage<Props> = ({ products }) => {
                     style={{
                       width: "70px",
                       height: "70px",
-                      objectFit: "cover",
+                      objectFit: "contain",
                       marginRight: "10px"
                     }}
                   />
