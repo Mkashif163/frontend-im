@@ -22,6 +22,20 @@ const sliderSettings = {
   autoplaySpeed: 2000,
 };
 
+interface ApiData {
+  menus?: {
+    [menuName: string]: {
+      categories: {
+        sub_categories: {
+          id: number;
+          products: any[];
+        }[];
+      }[];
+    };
+  };
+  brands?: any[];
+}
+
 
 const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
@@ -31,7 +45,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [sliderImages, setSliderImages] = useState([]);
 
-  const apiData = useApiData();
+  const apiData = useApiData() as ApiData;
 
   useEffect(() => {
     if (apiData && apiData.menus) {
@@ -48,7 +62,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
             // Check if sub-category ID matches
             if (subCat.id === +sub_cat) {
               setSubCategoryProducts(subCat.products);
-              setCategory(category);
+                setCategory(JSON.stringify(category));
 
               // Calculate min and max prices
               for (const product of subCat.products) {
@@ -69,7 +83,8 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
 
       setBrands(apiData.brands);
       setPriceRange({ min: minPrice, max: maxPrice });
-      const bannerUrls = JSON.parse(category.side_sliders || "[]");
+      const categoryWithSideSliders = category as unknown as { side_sliders: string };
+      const bannerUrls = JSON.parse(categoryWithSideSliders.side_sliders || "[]");
       setSliderImages(bannerUrls);
     }
   }, [apiData, sub_cat]);

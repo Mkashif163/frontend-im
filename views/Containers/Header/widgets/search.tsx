@@ -150,6 +150,7 @@ const Search: NextPage<Props> = ({ products }) => {
                 boxSizing: "border-box", // Include padding and border in the total width
               }}>
               {filteredProducts.slice(0, 10).map((product) => (
+                <Link href={`/product-details/${product.id}`}>
                 <li
                   key={product.id}
                   style={{
@@ -183,6 +184,7 @@ const Search: NextPage<Props> = ({ products }) => {
                     </div>
                   </div>
                 </li>
+                </Link>
               ))}
             </ul>
           ) : (

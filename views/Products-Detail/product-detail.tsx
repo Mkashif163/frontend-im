@@ -207,7 +207,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
           <div className="supplier-brand">
             <div className="brnd-div">
               <p>Brand:</p>
-              <h4>{productData.brand.brand_name}</h4>
+              {productData.brand ? <h4>{productData.brand.brand_name}</h4> : <h4>N/A</h4>}
             </div>
             <div className="brnd-div">
               <p>Suplier:</p>

@@ -17,6 +17,22 @@ interface header {
   layoutLogo: string;
 }
 
+interface ApiData {
+  menus: {
+    [menuKey: string]: {
+      categories: {
+        id: number;
+        sub_categories: {
+          id: number;
+          name: string;
+          products: any[]; // Define the actual product type
+        }[];
+      }[];
+    };
+  };
+}
+
+
 const Header: NextPage<header> = ({
   cartPopupPosition,
   display,
@@ -25,7 +41,7 @@ const Header: NextPage<header> = ({
 }) => {
   const menuContext = useContext(MenuContext);
   const [userLoggedOut, setUserLoggedOut] = useState(false);
-  const apiData = useApiData();
+  const apiData = useApiData() as ApiData; // Use the context hook to access apiData
   const [products, setProducts] = useState([]);
 
   const { setLeftMenu, leftMenu } = menuContext;

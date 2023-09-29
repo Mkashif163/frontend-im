@@ -55,6 +55,23 @@ type TabProductProps = {
   effect?: any;
 };
 
+interface ApiData {
+  menus: {
+    [menuKey: string]: {
+      categories: {
+        id: number;
+        name: string;
+        sub_categories: {
+          id: number;
+          name: string;
+          products: any[]; // Define the actual product type
+        }[];
+      }[];
+    };
+  };
+}
+
+
 const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const { addToWish } = React.useContext(WishlistContext);
   const { addToCompare } = React.useContext(CompareContext);
@@ -63,7 +80,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const [subCategoriesData, setSubCategoriesData] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const apiData = useApiData(); // Use the context hook to access apiData
+  const apiData = useApiData() as ApiData;
 
   useEffect(() => {
     for (let menuKey in apiData.menus) {
@@ -75,7 +92,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
 
         // Check if the category has subcategories
         if (category.sub_categories.length > 0) {
-          setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
+          setActiveTab(category.sub_categories[0].id.toString()); // Convert to string before setting the active sub-category to the first one
         }
         break; // Break out of the loop once we found the category
       }

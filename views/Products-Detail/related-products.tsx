@@ -89,8 +89,7 @@ const RelatedProducts: NextPage = () => {
                     <div>
                       <ProductBox
                         hoverEffect={true}
-                        product={product} // Pass the product data
-                        addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                        product={product} // Example: pass the product and quantity
                         addCompare={(product) => addToCompare(product)}
                         addWish={(product) => addToWish(product)} />
                     </div>

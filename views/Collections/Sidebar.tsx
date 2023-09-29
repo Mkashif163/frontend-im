@@ -18,6 +18,22 @@ type SideBarProps = {
   };
 };
 
+interface ApiData {
+  menus: {
+    [menuName: string]: {
+      categories: {
+        id: number;
+        name: string;
+        sub_categories: {
+          id: number;
+          name: string;
+          products: any[]; // Define the type for products
+        }[];
+      }[];
+    };
+  };
+  // Add other properties if needed
+}
 
 
 const colors = [
@@ -97,7 +113,7 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
     setSelectedPrice({ min: 0, max: 500 });
     setRadioChecked(null);
   };
-  const apiData = useApiData();
+  const apiData = useApiData() as ApiData;
 
   return (
     <div className="collection-filter-block creative-card creative-inner category-side">

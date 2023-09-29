@@ -8,6 +8,24 @@ import { useApiData } from "helpers/data/DataContext";
 
 const PRODUCTS_PER_PAGE = 12; // Number of products to show per page
 
+interface ApiData {
+    menus: {
+      [menuName: string]: {
+        categories: {
+          id: number;
+          name: string;
+          sub_categories: {
+            id: number;
+            name: string;
+            products: any[]; // Define the type for products
+          }[];
+        }[];
+      };
+    };
+    // Add other properties if needed
+  }
+  
+
 const AllProducts = () => {
     const [productsData, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +35,7 @@ const AllProducts = () => {
     const { addToCompare } = React.useContext(CompareContext);
 
 
-    const apiData = useApiData();
+    const apiData = useApiData() as ApiData;
 
     useEffect(() => {
         const allProducts = [];
@@ -71,8 +89,7 @@ const AllProducts = () => {
                                     <div className="product" style={{ height: '378PX', width: "248px" }}>
                                         <ProductBox
                                             hoverEffect={true}
-                                            product={product} // Pass the product data
-                                            addCart={(product) => addToCart(product, 1)} // Example: pass the product and quantity
+                                            product={product}// Example: pass the product and quantity
                                             addCompare={(product) => addToCompare(product)}
                                             addWish={(product) => addToWish(product)} />
                                     </div>

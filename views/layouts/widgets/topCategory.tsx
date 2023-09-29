@@ -3,8 +3,27 @@ import { NextPage } from "next";
 import Slider from "react-slick";
 import { useApiData } from "helpers/data/DataContext";
 
+
+interface ApiData {
+  menus: {
+    [menuName: string]: {
+      categories: {
+        id: number;
+        name: string;
+        sub_categories: {
+          id: number;
+          name: string;
+          products: any[]; // Define the type for products
+        }[];
+      }[];
+    };
+  };
+  // Add other properties if needed
+}
+
+
 const TopCategory: NextPage = () => {
-  const apiData = useApiData();
+  const apiData = useApiData() as ApiData;
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
