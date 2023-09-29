@@ -8,7 +8,7 @@ const Dashboard: NextPage = () => {
 
   useEffect(() => {
     // Get the user ID from localStorage
-    const storedUserId = localStorage.getItem("customer_id");
+    const storedUserId = localStorage.getItem("id");
     if (storedUserId) {
       setUserId(storedUserId);
     }

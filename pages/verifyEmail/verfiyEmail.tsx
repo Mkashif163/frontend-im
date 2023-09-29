@@ -13,12 +13,12 @@ const VerifyMail: NextPage = () => {
   };
 
   useEffect(() => {
-    // Check if the user has a token and customer_id in local storage
+    // Check if the user has a token and id in local storage
     const token = localStorage.getItem("token");
-    const customerId = localStorage.getItem("customer_id");
+    const customerId = localStorage.getItem("id");
 
     if (token && customerId) {
-      // If both token and customer_id exist, navigate to the dashboard page
+      // If both token and id exist, navigate to the dashboard page
       router.push("/pages/account/dashboard");
     }
   }, []);
