@@ -123,7 +123,6 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
   };
   const productData = item;
 
-  console.log("productData", productData);
 
 
 

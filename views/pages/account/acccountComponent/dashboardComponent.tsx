@@ -6,7 +6,6 @@ type PropsUser = {
 }
 
 const DashboardComponent: NextPage<PropsUser> = ({userData}) => {
-  console.log("user data", userData);
   return (
     <>
       <div className="Account-right">

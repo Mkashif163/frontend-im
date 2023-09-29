@@ -14,8 +14,6 @@ const Dashboard: NextPage = () => {
     }
   }, []);
 
-  console.log("userId", userId);
-
   return (
     <Layout1>
       {/* Pass the userId as a prop to DashboardPage */}
