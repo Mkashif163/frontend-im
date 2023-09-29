@@ -100,7 +100,7 @@ const OrderSuccessPage: NextPage = () => {
                   </div>
                 </div>
               </Col>
-              <Col lg="6">
+              {/* <Col lg="6">
                 <div className="row order-success-sec">
                   <div className="col-sm-6">
                     <h4>summery</h4>
@@ -130,7 +130,7 @@ const OrderSuccessPage: NextPage = () => {
                     </div>
                   </div>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
           ) : (
             <div className="col-sm-12">
