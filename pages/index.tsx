@@ -53,7 +53,6 @@
     useEffect(() => {
       try {
         if (
-          apiData &&
           Array.isArray((apiData as ApiData).Homesetting) &&
           (apiData as ApiData).Homesetting.length > 0
         ) {
