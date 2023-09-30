@@ -103,7 +103,7 @@
             <ContactBanner />
           </div>
           ) : (
-            <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="d-flex justify-content-center align-items-center">
               <div className="text-center">
                 <h1>Slow Internet 😟</h1>
                 <p>Please check your internet connection 🚧 and try reloading.</p>
