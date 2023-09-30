@@ -68,8 +68,8 @@
       <>
         <Layouts>
           {/* Only show the error if it exists */}
-          {error && <div className="alert alert-danger" role="alert">{error}</div>}
-        {/* {apiData ? ( */}
+          {/* {error && <div className="alert alert-danger" role="alert">{error}</div>} */}
+        {apiData ? (
           <div className="bg-light">
             <Menu meneData={apiData} />
             <div className="my-4">
@@ -101,15 +101,15 @@
             <AllProducts />
             <ContactBanner />
           </div>
-          {/* ) : (
+           ) : (
             <div className="d-flex justify-content-center align-items-center">
               <div className="text-center">
-                <h1>Slow Internet 😟</h1>
+                <h1>Slow Internet! 😟</h1>
                 <p>Please check your internet connection 🚧 and try reloading.</p>
                 <button className="btn btn-rounded m-3" onClick={() => window.location.reload()}>Reload</button>
               </div>
             </div>
-          )} */}
+          )} 
         </Layouts>
       </>
     );
