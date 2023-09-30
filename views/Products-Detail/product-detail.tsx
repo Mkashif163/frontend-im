@@ -109,7 +109,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
       setQty(qty - 1);
     }
   };
-  
+
   const plusQty = () => {
     if (item.stock > qty) {
       setQty(qty + 1);
@@ -117,7 +117,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
       setStock("Out of Stock !");
     }
   };
-  
+
   const changeQty = (e: any) => {
     setQty(parseInt(e.target.value));
   };
@@ -303,29 +303,36 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
           </div>
 
           <div className="product-buttons">
-            <a
-              href="#"
-              data-toggle="modal"
-              data-target="#addtocart"
-              className="btn btn-normal"
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(item, qty, selectedCondition)
-              }}>
-              add to cart
-            </a>
-            <a
-              href="/pages/account/checkout"
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(item, qty, selectedCondition);
-                document.body.style.overflow = "visible";
-                window.location.href = "/pages/account/checkout"; // Navigate after addToCart
-              }}
-              className="btn btn-normal"
-            >
-              Buy Now
-            </a>
+            {stock === "InStock" ? (
+              <>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#addtocart"
+                  className="btn btn-normal"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addToCart(item, qty, selectedCondition);
+                  }}
+                >
+                  Add to Cart
+                </a>
+                <a
+                  href="/pages/account/checkout"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addToCart(item, qty, selectedCondition);
+                    document.body.style.overflow = "visible";
+                    window.location.href = "/pages/account/checkout"; // Navigate after addToCart
+                  }}
+                  className="btn btn-normal"
+                >
+                  Buy Now
+                </a>
+              </>
+            ) : (
+              <p className="out-of-stock-message">Out of Stock</p>
+            )}
           </div>
         </div>
 
