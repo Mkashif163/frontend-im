@@ -84,7 +84,7 @@ const dummyOffers = [
 const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bundle, swatch, totalReview, offers }) => {
 
   const [qty, setQty] = useState(1);
-  const [stock, setStock] = useState("InStock");
+  const [stock, setStock] = useState(item.stock > 0 ? "InStock" : "Out of Stock !");
   const [activesize, setSize] = useState("");
   const [showAll, setShowAll] = useState(false);
   const [selectedCondition, setSelectedCondition] = useState("New");
@@ -106,18 +106,18 @@ const ProductDetail: React.FC<ProductRightProps> = ({ item, changeColorVar, bund
 
   const minusQty = () => {
     if (qty > 1) {
-      setStock("InStock");
       setQty(qty - 1);
     }
   };
-
+  
   const plusQty = () => {
-    if (item.stock >= qty) {
+    if (item.stock > qty) {
       setQty(qty + 1);
     } else {
       setStock("Out of Stock !");
     }
   };
+  
   const changeQty = (e: any) => {
     setQty(parseInt(e.target.value));
   };
