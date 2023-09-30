@@ -35,9 +35,12 @@ const Menu = ({ meneData }: MenuProps) => {
   
 
   useEffect(() => {
-    setMenuData(meneData.menus);
-    setBanners(meneData.banners);
-  }, []);
+    if (meneData && meneData.menus) {
+      setMenuData(meneData.menus);
+      setBanners(meneData.banners);
+    }
+  }, [meneData]);
+  
 
   return (
     <div className="custom-container">

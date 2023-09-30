@@ -10,21 +10,21 @@ const PRODUCTS_PER_PAGE = 12; // Number of products to show per page
 
 interface ApiData {
     menus: {
-      [menuName: string]: {
-        categories: {
-          id: number;
-          name: string;
-          sub_categories: {
-            id: number;
-            name: string;
-            products: any[]; // Define the type for products
-          }[];
-        }[];
-      };
+        [menuName: string]: {
+            categories: {
+                id: number;
+                name: string;
+                sub_categories: {
+                    id: number;
+                    name: string;
+                    products: any[]; // Define the type for products
+                }[];
+            }[];
+        };
     };
     // Add other properties if needed
-  }
-  
+}
+
 
 const AllProducts = () => {
     const [productsData, setProducts] = useState([]);
@@ -40,15 +40,17 @@ const AllProducts = () => {
     useEffect(() => {
         const allProducts = [];
 
-        // Loop through each menu
-        for (const menuName in apiData.menus) {
-            // Loop through each category in the current menu
-            for (const category of apiData.menus[menuName].categories) {
-                // Loop through each sub_category in the current category
-                for (const subCategory of category.sub_categories) {
-                    // Loop through each product in the current sub_category and add it to allProducts
-                    for (const product of subCategory.products) {
-                        allProducts.push(product);
+        if (apiData && apiData.menus) { // Check if apiData and apiData.menus exist
+            // Loop through each menu
+            for (const menuName in apiData.menus) {
+                // Loop through each category in the current menu
+                for (const category of apiData.menus[menuName].categories) {
+                    // Loop through each sub_category in the current category
+                    for (const subCategory of category.sub_categories) {
+                        // Loop through each product in the current sub_category and add it to allProducts
+                        for (const product of subCategory.products) {
+                            allProducts.push(product);
+                        }
                     }
                 }
             }
@@ -56,7 +58,7 @@ const AllProducts = () => {
 
         // Set the productsData state with all fetched products
         setProducts(allProducts);
-        setLoading(false);  // Set loading to false once data is fetched
+        setLoading(false); // Set loading to false once data is fetched
 
     }, [apiData]);
 

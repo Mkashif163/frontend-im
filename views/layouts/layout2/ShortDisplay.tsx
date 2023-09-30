@@ -143,25 +143,26 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
 
 
   useEffect(() => {
-    const allProducts = [];
+    if (data?.menus) { // Use optional chaining to check if data and data.menus exist
+      const allProducts = [];
 
-    // Loop through each menu
-    for (const menuName in data.menus) {
-      // Loop through each category in the current menu
-      for (const category of data.menus[menuName].categories) {
-        // Loop through each sub_category in the current category
-        for (const subCategory of category.sub_categories) {
-          // Loop through each product in the current sub_category and add it to allProducts
-          for (const product of subCategory.products) {
-            allProducts.push(product)
+      // Loop through each menu
+      for (const menuName in data.menus) {
+        // Loop through each category in the current menu
+        for (const category of data.menus[menuName].categories) {
+          // Loop through each sub_category in the current category
+          for (const subCategory of category.sub_categories) {
+            // Loop through each product in the current sub_category and add it to allProducts
+            for (const product of subCategory.products) {
+              allProducts.push(product);
+            }
           }
         }
       }
+
+      // Set the productsData state with all fetched products
+      setProducts(allProducts);
     }
-
-    // Set the productsData state with all fetched products
-    setProducts(allProducts);
-
   }, [data]);
 
   const getRandomProducts = (products, count) => {

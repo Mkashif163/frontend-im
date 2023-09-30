@@ -76,15 +76,27 @@ const Header: NextPage<header> = ({
   useEffect(() => {
     const allProducts = [];
 
-    // Loop through each menu
-    for (const menuName in apiData.menus) {
-      // Loop through each category in the current menu
-      for (const category of apiData.menus[menuName].categories) {
-        // Loop through each sub_category in the current category
-        for (const subCategory of category.sub_categories) {
-          // Loop through each product in the current sub_category and add it to allProducts
-          for (const product of subCategory.products) {
-            allProducts.push(product)
+    // Check if apiData and apiData.menus exist before proceeding
+    if (apiData && apiData.menus) {
+      // Loop through each menu
+      for (const menuName in apiData.menus) {
+        // Check if categories exist for the current menu
+        if (apiData.menus[menuName].categories) {
+          // Loop through each category in the current menu
+          for (const category of apiData.menus[menuName].categories) {
+            // Check if sub_categories exist for the current category
+            if (category.sub_categories) {
+              // Loop through each sub_category in the current category
+              for (const subCategory of category.sub_categories) {
+                // Check if products exist for the current sub_category
+                if (subCategory.products) {
+                  // Loop through each product in the current sub_category and add it to allProducts
+                  for (const product of subCategory.products) {
+                    allProducts.push(product);
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -92,8 +104,8 @@ const Header: NextPage<header> = ({
 
     // Set the productsData state with all fetched products
     setProducts(allProducts);
+}, [apiData]);
 
-  }, [apiData]);
   return (
     <Fragment>
       <header id="stickyHeader">

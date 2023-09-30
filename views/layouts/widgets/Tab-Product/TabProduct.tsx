@@ -83,21 +83,24 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const apiData = useApiData() as ApiData;
 
   useEffect(() => {
-    for (let menuKey in apiData.menus) {
-      let category = apiData.menus[menuKey].categories.find((cat) => cat.id === catId);
-
-      if (category) {
-        setSubCategoriesData(category.sub_categories);
-        setCategoryName(category.name); // Set the category name when found
-
-        // Check if the category has subcategories
-        if (category.sub_categories.length > 0) {
-          setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
+    if (apiData?.menus) {
+      for (let menuKey in apiData.menus) {
+        let category = apiData.menus[menuKey].categories.find((cat) => cat.id === catId);
+  
+        if (category) {
+          setSubCategoriesData(category.sub_categories);
+          setCategoryName(category.name); // Set the category name when found
+  
+          // Check if the category has subcategories
+          if (category.sub_categories.length > 0) {
+            setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
+          }
+          break; // Break out of the loop once we found the category
         }
-        break; // Break out of the loop once we found the category
       }
     }
   }, [catId, apiData]);
+  
 
   // Use this effect to update the productsData when the activeTab changes
   useEffect(() => {
