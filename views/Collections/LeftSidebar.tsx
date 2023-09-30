@@ -62,7 +62,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
             // Check if sub-category ID matches
             if (subCat.id === +sub_cat) {
               setSubCategoryProducts(subCat.products);
-                setCategory(JSON.stringify(category));
+                setCategory(category);
 
               // Calculate min and max prices
               for (const product of subCat.products) {
