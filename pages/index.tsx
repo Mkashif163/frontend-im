@@ -52,20 +52,24 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     try {
-      if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
+      if (
+        apiData &&
+        Array.isArray((apiData as ApiData).Homesetting) &&
+        (apiData as ApiData).Homesetting.length > 0
+      ) {
         setCategoriesData((apiData as ApiData).Homesetting[0]);
       }
     } catch (err) {
       console.error("Failed to fetch API data:", err);
       setError("Failed to fetch data. Please try again later.");
     }
-}, [apiData]);
-
+  }, [apiData]);
 
   return (
     <>
       <Layouts>
-      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+        {/* Only show the error if it exists */}
+        {error && <div className="alert alert-danger" role="alert">{error}</div>}
         <div className="bg-light">
           <Menu meneData={apiData} />
           <div className="my-4">
@@ -80,7 +84,7 @@ const Home: NextPage = () => {
           <TabProduct catId={parseInt(categoriesData.category2)} effect="icon-inline" />
           <CollectionBannerTwo banner={categoriesData.center_image1} />
           <TabProduct catId={parseInt(categoriesData.category3)} effect="icon-inline" />
-          <ShortDisplay data={apiData}/>
+          <ShortDisplay data={apiData} />
           <section className="rounded-category">
             <Brands />
           </section>
