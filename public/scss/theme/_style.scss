@@ -8938,9 +8938,6 @@ button {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
   display: flex;
-  .single-product {
-    background-color: #0072bb;
-  }
   .short-product-images {
     width: 83%;
   }
@@ -9081,7 +9078,7 @@ button {
     .offers {
       ul {
         margin-top: 5px;
-        max-height: 350px;
+        max-height: 317px;
         overflow-y: auto;
         list-style: none;
         li {

@@ -12,6 +12,7 @@ import Address from "./addressPage";
 import PaymentMethod from "./paymentPage";
 import Link from "next/link";
 import axios from "axios";
+import OrderHistoryPage from "../orderHistory";
 
 
 type Props = {
@@ -163,14 +164,14 @@ const Dashboard: NextPage<Props> = ({ userId }) => {
               <div className="dashboard-right">
                 {userId ? <div className="dashboard">
                   {currentComponent === "dashboard" && <DashboardComponent userData = {userData}/>}
-                  {currentComponent === "order" && <OrderComponent />}
+                  {currentComponent === "order" && <OrderHistoryPage />}
                   {currentComponent === "cart" && <CartPage />}
                   {currentComponent === "wishlist" && <WishListPage />}
-                  {currentComponent === "reviews" && <ReviewPage />}
+                  {currentComponent === "reviews" && <ReviewPage userData={userData}/>}
                   {currentComponent === "changePassword" && <ForgetPassword />}
-                  {currentComponent === "profile" && <Profile />}
-                  {currentComponent === "address" && <Address />}
-                  {currentComponent === "payment" && <PaymentMethod />}
+                  {currentComponent === "profile" && <Profile userData={userData}/>}
+                  {currentComponent === "address" && <Address userData={userData}/>}
+                  {currentComponent === "payment" && <PaymentMethod userData={userData}/>}
                 </div> : <div className="text-center">
                   <h2 className="p-5">Please Login or Signup First 😴</h2>
                   <div className="pb-5">

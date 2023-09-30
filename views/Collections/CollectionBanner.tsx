@@ -17,8 +17,8 @@ function transformImageUrl(apiImageUrl) {
 }
 
 
-
-const CollectionBanner: NextPage<CollectionBannerProps> = ({cat}) => (
+const CollectionBanner: NextPage<CollectionBannerProps> = ({cat}) => 
+(
   <div className="top-banner-wrapper">
     <a href="#">
       <Media src={transformImageUrl(cat.img)} className="img-fluid " alt="" />

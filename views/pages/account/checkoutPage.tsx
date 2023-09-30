@@ -48,7 +48,7 @@ const CheckoutPage: NextPage = () => {
 
   const onSubmit = async (data: formType) => {
     if (data !== null) {
-      const customerId = localStorage.getItem("customer_id");
+      const customerId = localStorage.getItem("id");
   
       // Construct the request payload
       const requestBody = {
@@ -68,7 +68,7 @@ const CheckoutPage: NextPage = () => {
           comments: "", // Add the missing field here
           payment_method: payment, // Use the selected payment method
           shipping: "Standard", // You can modify this as needed
-          customer_id: customerId,
+          id: customerId,
           total_purchase: cartTotal, // Use the total cart amount
           total_price: calculateCartTotal().toFixed(2), // Calculate and use the total cart price
         },

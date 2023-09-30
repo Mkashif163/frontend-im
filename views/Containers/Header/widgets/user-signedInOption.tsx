@@ -13,7 +13,7 @@ const UserSignedInOption: NextPage = () => {
   const handleLogout = async (e) => {
     // Remove the token from local storage
     localStorage.removeItem("token");
-    localStorage.removeItem("customer_id");
+    localStorage.removeItem("id");
     setUserLoggedIn(false);
     router.push("/");
     // Perform any additional logout actions if needed
@@ -78,12 +78,7 @@ const UserSignedInOption: NextPage = () => {
                     <span className="ms-2">Wish List</span>
                   </Link>
                 </span>
-                <span className="myLink">
-                  <Link href="/pages/account/dashboard">
-                    <span className="ms-2">My Favorite Stores</span>
-                  </Link>
-                </span>
-                <span className="myLink">
+                <span className="myLink mb-1">
                   <Link href="/pages/account/dashboard">
                     <span className="ms-2">My Coupons</span>
                   </Link>

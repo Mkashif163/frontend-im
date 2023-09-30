@@ -1,9 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
 import { Input, Label, Row, Col, Form, FormGroup } from "reactstrap";
-import Breadcrumb from "../../Containers/Breadcrumb";
 
-const PaymentMethod: NextPage = () => {
+type Props = {
+  userData: any;
+};
+const PaymentMethod: NextPage<Props> = ({userData}) => {
   return (
     <>
       <section className="contact-page register-page section-big-py-space bg-light">

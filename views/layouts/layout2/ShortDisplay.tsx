@@ -136,79 +136,52 @@ interface ShortDisplayProps {
   effect?: any;
 }
 
-const productImages = [
-  { img: "/images/layout-2/product/1.jpg", category: "Flower" },
-  { img: "/images/layout-2/product/2.jpg", category: "Furniture" },
-  { img: "/images/layout-2/product/3.jpg", category: "Bag" },
-  { img: "/images/layout-2/product/4.jpg", category: "Tools" },
-  { img: "/images/layout-2/product/5.jpg", category: "Grocery" },
-  { img: "/images/layout-2/product/6.jpg", category: "Camera" },
-  { img: "/images/layout-2/product/7.jpg", category: "cardigans" },
-  { img: "/images/layout-2/product/8.jpg", category: "cardigans" },
-  { img: "/images/layout-2/product/9.jpg", category: "cardigans" },
-];
+const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
 
-const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data}) => {
-  const [state, setState] = useState({ nav1: null, nav2: null });
-  
-  const [qty, setQty] = useState(1);
-  const { selectedCurr } = React.useContext(CurrencyContext);
-  const [stock, setStock] = useState("InStock");
-  const { symbol, value } = selectedCurr;
-  const [currentProductIndex, setCurrentProductIndex] = useState(0);
+  const [products, setProducts] = useState([]);
+
+
 
   useEffect(() => {
-  
-  }, [])
-  
+    const allProducts = [];
 
-  const quantitiy = 28;
-  const { addToCart } = useContext(CartContext);
-  const minusQty = () => {
-    if (qty > 1) {
-      setStock("InStock");
-      setQty(qty - 1);
+    // Loop through each menu
+    for (const menuName in data.menus) {
+      // Loop through each category in the current menu
+      for (const category of data.menus[menuName].categories) {
+        // Loop through each sub_category in the current category
+        for (const subCategory of category.sub_categories) {
+          // Loop through each product in the current sub_category and add it to allProducts
+          for (const product of subCategory.products) {
+            allProducts.push(product)
+          }
+        }
+      }
     }
-  };
 
-  const plusQty = () => {
-    if (quantitiy >= qty) {
-      setQty(qty + 1);
-    } else {
-      setStock("Out of Stock !");
+    // Set the productsData state with all fetched products
+    setProducts(allProducts);
+
+  }, [data]);
+
+  const getRandomProducts = (products, count) => {
+    const shuffled = products.slice(); // Create a copy of the products array
+    let i = products.length;
+    const selectedProducts = [];
+
+    while (i-- && selectedProducts.length < count) {
+      const randomIndex = Math.floor((i + 1) * Math.random());
+      const temp = shuffled[i];
+      shuffled[i] = shuffled[randomIndex];
+      shuffled[randomIndex] = temp;
+      selectedProducts.push(shuffled[i]);
     }
-  };
-  const changeQty = (e: any) => {
-    setQty(parseInt(e.target.value));
-  };
-  const discount = 15;
-  const price = 779;
-  const totalReview = 28;
 
-  const model = "1756-A7X-Plus-Enhanced-2023-NextGen-XYZ";
-
-  const slider1 = React.useRef<Slider>();
-  const slider2 = React.useRef<Slider>();
-  const { nav1, nav2 } = state;
-  React.useEffect(() => {
-    setState({
-      nav1: slider1.current,
-      nav2: slider2.current,
-    });
-  }, []);
-
-  const nextProduct = () => {
-    const nextIndex = (currentProductIndex + 1) % productImages.length;
-    setCurrentProductIndex(nextIndex);
+    return selectedProducts;
   };
 
-  const prevProduct = () => {
-    const prevIndex =
-      (currentProductIndex - 1 + productImages.length) % productImages.length;
-    setCurrentProductIndex(prevIndex);
-  };
+  const randomProducts = getRandomProducts(products, 5);
 
-  const currentProduct = productImages[currentProductIndex];
 
   return (
     <>
@@ -216,7 +189,7 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data}) => {
         <div className="custom-container bg-white">
           <div className="row">
             <div className="col-lg-6 mb-4 pb-3">
-              <DisplayItem />
+              <DisplayItem products={randomProducts} />
             </div>
             <div className="col-lg-6 mb-4 pb-3">
               <div className="single-producty ">
