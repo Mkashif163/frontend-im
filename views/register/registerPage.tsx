@@ -65,8 +65,10 @@ const RegisterPage: NextPage = () => {
       password: password,
       c_password: cPassword,
       gender: gender,
-      role:role
+      role: role,
+      email_verified_at: new Date().toISOString().split('T')[0] + " " + new Date().toTimeString().split(' ')[0]
     };
+    
 
     // Set loading to true while waiting for the response
     setIsLoading(true);
@@ -83,7 +85,7 @@ const RegisterPage: NextPage = () => {
         localStorage.setItem("id", response.data.success.id);
 
         // Redirect to the dashboard page
-        router.push("/verifyEmail/verfiyEmail");
+        router.push("/pages/account/dashboard");
       } else {
         toast.error("Registration failed. Please try again.", {
           position: "top-right",
@@ -241,7 +243,7 @@ const RegisterPage: NextPage = () => {
                         <option value="Female">Female</option>
                       </select>
                     </FormGroup>
-                    <FormGroup className="col-md-12">
+                    {/* <FormGroup className="col-md-12">
                       <Label htmlFor="role">Signup As Vendor</Label>
                       <select
                         id="role"
@@ -254,7 +256,7 @@ const RegisterPage: NextPage = () => {
                         <option value="customer">Customer</option>
                         <option value="vendor">Vendor</option>
                       </select>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup className="col-md-12">
                       <Button className="btn btn-normal" type="submit" disabled={isLoading}>
                         {isLoading ? "Signing Up..." : "Sign Up"}
