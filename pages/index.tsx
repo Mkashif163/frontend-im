@@ -64,50 +64,10 @@ const Home: NextPage = () => {
       setError("Failed to fetch data. Please try again later.");
     }
   }, [apiData]);
-  const [welcome, setWelcome] = useState(false);
 
   return (
     <>
-      {
-        welcome === false ?
-          <Layouts>
-            <div className="background-container">
-              <img
-                src="/images/welcomeImage.jpg"
-                alt="Background Image"
-              />
-              <button className="btn btn-rounded centered-button" onClick={() => setWelcome(true)}>Click Me</button>
-
-              <style jsx>{`
-          .background-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-  
-          .centered-button {
-            position: absolute;
-            z-index: 1; /* Ensure button is above the image */
-            padding: 10px 20px;
-            margin-top:500px;
-            font-size: 16px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          }
-        `}</style>
-            </div>
-          </Layouts>
-          :
-
-
-          <Layouts>
-            {/* Only show the error if it exists */}
+    <Layouts>
             {/* {error && <div className="alert alert-danger" role="alert">{error}</div>} */}
             {apiData ? (
               <div className="bg-light">
@@ -151,7 +111,6 @@ const Home: NextPage = () => {
               </div>
             )}
           </Layouts>
-      }
     </>
   );
 };
