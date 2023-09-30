@@ -47,6 +47,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
 
   const apiData = useApiData() as ApiData;
 
+  
   useEffect(() => {
     if (apiData && apiData.menus) {
       let minPrice = Infinity;
