@@ -9,6 +9,7 @@ import { useApiData } from "helpers/data/DataContext";
 import Slider from "react-slick";
 
 type LeftSidebarCollectionProps = {
+  cat: any;
   sub_cat: any;
 };
 
@@ -26,6 +27,7 @@ interface ApiData {
   menus?: {
     [menuName: string]: {
       categories: {
+        id: number;
         sub_categories: {
           id: number;
           products: any[];
@@ -37,13 +39,15 @@ interface ApiData {
 }
 
 
-const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat}) => {
+const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
   const [subCategoryProducts, setSubCategoryProducts] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState({});
   const [brands, setBrands] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [sliderImages, setSliderImages] = useState([]);
+  const [categoryProducts, setCategoryProducts] = useState([]);
+
 
   const apiData = useApiData() as ApiData;
 
@@ -52,6 +56,26 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
     if (apiData && apiData.menus) {
       let minPrice = Infinity;
       let maxPrice = 0;
+      const allProducts = [];
+
+      if (cat) {
+        for (const menuName in apiData.menus) {
+          const menu = apiData.menus[menuName];
+          for (const category of menu.categories) {
+            if (category.id === +cat) {
+              setCategory(category); // Assuming categories have a "name" field to compare with "cat"
+              for (const subCategory of category.sub_categories) {
+                // Loop through each product in the current sub_category and add it to allProducts
+                for (const product of subCategory.products) {
+                    allProducts.push(product);
+                }
+            }           
+            }
+          }
+        }
+        setCategoryProducts(allProducts)
+      }
+    
 
       // Iterate through each menu
       for (const menuName in apiData.menus) {
@@ -98,7 +122,6 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
     const baseUrl = 'http://18.235.14.45/';
     return `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
   }
-  
 
   return (
     <Row>
@@ -125,7 +148,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat})
         </div>
       </Col>
       {/* Collection */}
-      <Collection products={subCategoryProducts} cat={category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      <Collection products={cat ? categoryProducts : subCategoryProducts} cat={category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
     </Row>
   );
 };

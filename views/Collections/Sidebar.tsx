@@ -136,7 +136,11 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
                   <Accordion defaultActiveKey="0" flush>
                     {menu.categories.map((category) => (
                       <Accordion.Item key={category.id} eventKey={category.id.toString()}>
-                        <Accordion.Header>{category.name}</Accordion.Header>
+                        <Accordion.Header onClick={() => {
+                           router.push(`${window.location.pathname}?category=${category.id}`, undefined, {
+                            shallow: true,
+                          });
+                        }}>{category.name}</Accordion.Header>
                         <Accordion.Body>
                           <ul>
                             {category.sub_categories.map((subCategory) => (

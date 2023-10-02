@@ -7,8 +7,6 @@ type Props = {
 };
 
 const Address: NextPage<Props> = ({userData}) => {
-
-  console.log(userData)
   return (
     <>
       {/* <!-- personal deatail section start --> */}

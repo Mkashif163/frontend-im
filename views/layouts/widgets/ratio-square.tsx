@@ -97,8 +97,6 @@ const RatioSquare = () => {
   useEffect(() => {
     // console.log("My Api Data For Coupens:::", apiData.coupons);
     if (selected === "lights") {
-      // const apiUrl = apiData.coupons;
-      console.log("My Api Data For Coupens:::", apiData.coupons);
       setDataR(apiData.coupons); // Assuming data is an array in the response
       setLoading(false);
     } else {
