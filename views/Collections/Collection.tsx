@@ -47,15 +47,15 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
 
 
   const filteredProducts = () => {
-    const filtered = allProductData.filter((product) =>
-      ((product.brand === null && !selectedBrands.length) ||
-        (product.brand && selectedBrands.includes(product.brand.brand_name))) &&
-      (!selectedColor || product.colors.some((color) => color.color.color_code === selectedColor))
+    const filtered = allProductData.filter((product) => 
+        ((product.brand === null && !selectedBrands.length) || 
+        (product.brand && selectedBrands.includes(product.brand.brand_name))) && 
+        (!selectedColor || product.colors.some((color) => color.color.color_code === selectedColor)) &&
+        product.new_price >= selectedPrice.min && product.new_price <= selectedPrice.max // filter products based on price
     );
     return filtered;
-  };
-  
-  
+};
+ 
 
   // Use the filteredProducts function to get the current list of products
   const currentProducts = filteredProducts();

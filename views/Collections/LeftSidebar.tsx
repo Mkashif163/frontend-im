@@ -38,6 +38,13 @@ interface ApiData {
   brands?: any[];
 }
 
+const findMinPrice = (products) => {
+  return Math.min(...products.map(product => parseFloat(product.new_sale_price)));
+};
+
+const findMaxPrice = (products) => {
+  return Math.max(...products.map(product => parseFloat(product.new_sale_price)));
+};
 
 const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
@@ -54,8 +61,6 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
   
   useEffect(() => {
     if (apiData && apiData.menus) {
-      let minPrice = Infinity;
-      let maxPrice = 0;
       const allProducts = [];
 
       if (cat) {
@@ -88,18 +93,6 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
             if (subCat.id === +sub_cat) {
               setSubCategoryProducts(subCat.products);
                 setCategory(category);
-
-              // Calculate min and max prices
-              for (const product of subCat.products) {
-                const productPrice = parseFloat(product.price);
-                if (productPrice < minPrice) {
-                  minPrice = productPrice;
-                }
-                if (productPrice > maxPrice) {
-                  maxPrice = productPrice;
-                }
-              }
-
               break;
             }
           }
@@ -107,12 +100,25 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
       }
 
       setBrands(apiData.brands);
-      setPriceRange({ min: minPrice, max: maxPrice });
       const categoryWithSideSliders = category as unknown as { side_sliders: string };
       const bannerUrls = JSON.parse(categoryWithSideSliders.side_sliders || "[]");
       setSliderImages(bannerUrls);
     }
   }, [apiData, sub_cat]);
+
+  useEffect(() => {
+    if (categoryProducts.length > 0) {
+      const minPrice = findMinPrice(categoryProducts);
+      const maxPrice = findMaxPrice(categoryProducts);
+      setPriceRange({ min: minPrice, max: maxPrice });
+    }
+    
+    if (subCategoryProducts.length > 0) {
+      const minPrice = findMinPrice(subCategoryProducts);
+      const maxPrice = findMaxPrice(subCategoryProducts);
+      setPriceRange({ min: minPrice, max: maxPrice });
+    }
+  }, [subCategoryProducts , categoryProducts]);
 
   function transformImageUrl(apiImageUrl) {
     if (!apiImageUrl) {

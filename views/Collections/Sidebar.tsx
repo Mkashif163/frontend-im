@@ -5,6 +5,8 @@ import { Input, Label, Collapse } from "reactstrap";
 import { FilterContext } from "../../helpers/filter/filter.context";
 import { useRouter } from "next/router";
 import { useApiData } from "helpers/data/DataContext";
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import Accordion from 'react-bootstrap/Accordion';
 
 type SideBarProps = {
@@ -113,6 +115,12 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   };
 
   const apiData = useApiData() as ApiData;
+
+  const handlePriceChange = (event: Event, newValue: number | number[]) => {
+    setSelectedPrice({ min: newValue[0], max: newValue[1] });
+};
+
+const valueText = (value: number) => `$${value}`;
 
   return (
     <div className="collection-filter-block creative-card creative-inner category-side">
@@ -229,21 +237,22 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
         <Collapse isOpen={isPriceOpen}>
           <div className="collection-collapse-block-content">
             <div className="collection-brand-filter">
-              <input
-                type="range"
-                min={priceRange.min}
-                max={priceRange.max}
-                step="10"
-                value={selectedPrice.max}
-                onChange={(e) => {
-                  setSelectedPrice({ min: selectedPrice.min, max: parseInt(e.target.value) });
-                }}
-                className="custom-range"
-              />
+                <Box sx={{ width: 300 }}>
+                    <Slider
+                        getAriaLabel={() => 'Price range'}
+                        value={[selectedPrice.min, selectedPrice.max]}
+                        onChange={handlePriceChange}
+                        valueLabelDisplay="auto"
+                        getAriaValueText={valueText}
+                        min={priceRange.min}
+                        max={priceRange.max}
+                        step={10}
+                    />
+                </Box>
 
-              <p className="mb-0">
-                Price Range: ${selectedPrice.min} - ${selectedPrice.max}
-              </p>
+                <p className="mb-0">
+                    Price Range: ${selectedPrice.min} - ${selectedPrice.max}
+                </p>
             </div>
           </div>
         </Collapse>
