@@ -7,8 +7,6 @@ import { useRouter } from "next/router";
 import { useApiData } from "helpers/data/DataContext";
 import Accordion from 'react-bootstrap/Accordion';
 
-
-
 type SideBarProps = {
   sub_cat: number;
   brand: any;
@@ -35,7 +33,6 @@ interface ApiData {
   // Add other properties if needed
 }
 
-
 const colors = [
   { id: '1', name: 'Red', value: '#FF0000' },
   { id: '2', name: 'Blue', value: '#0000FF' },
@@ -60,7 +57,6 @@ const colors = [
   { id: '21', name: 'Navy', value: '#000080' },
   { id: '22', name: 'AntiqueWhite', value: '#FAF9F6' },
 ];
-
 
 const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   const {
@@ -88,13 +84,15 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   const [radioChecked, setRadioChecked] = useState(null);
   const router = useRouter();
 
+  const [activeTab, setActiveTab] = useState(null); // Track the active tab
+
   const handleSubClick = (id) => {
     setSelectedCategory(id);
     router.push(`${window.location.pathname}?sub_category=${id}`, undefined, {
       shallow: true,
     });
+    setActiveTab(id); // Set the active tab when clicked
   }
-
 
   useEffect(() => {
     const { min, max } = selectedPrice;
@@ -113,19 +111,20 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
     setSelectedPrice({ min: 0, max: 500 });
     setRadioChecked(null);
   };
+
   const apiData = useApiData() as ApiData;
 
   return (
     <div className="collection-filter-block creative-card creative-inner category-side">
-      {/* <!-- brand filter start --> */}
+      {/* brand filter start */}
       <div className="collection-mobile-back">
         <span className="filter-back" onClick={() => setLeftSidebarOpen(!leftSidebarOpen)}>
           <i className="fa fa-angle-left" aria-hidden="true"></i> back
         </span>
       </div>
-      {/* <!-- price filter start here --> */}
+      {/* price filter start here */}
       <div className="collection-collapse-block open">
-        <h3 className="collapse-block-title mt-0" onClick={toggleCategory}>
+        <h3 className="collapse-block-title mt-0" onClick={toggleCategory} style={styles.toggleTitle}>
           Our Menu & Categories
         </h3>
         <Accordion defaultActiveKey="0" flush>
@@ -141,8 +140,14 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
                         <Accordion.Body>
                           <ul>
                             {category.sub_categories.map((subCategory) => (
-                              <div className={`p-2 ${subCategory.id === sub_cat ? "active" : ""}`} onClick={() => handleSubClick(subCategory.id)}>
-                                <li className="font-weight-bold">{subCategory.name}</li>
+                              <div
+                                className={`p-2 ${subCategory.id === activeTab ? "active" : ""}`}
+                                onClick={() => handleSubClick(subCategory.id)}
+                                style={subCategory.id === activeTab ? styles.activeLi : styles.li}
+                              >
+                                <li className={`font-weight-bold ${subCategory.id === activeTab ? "active" : ""}`}>
+                                  {subCategory.name}
+                                </li>
                               </div>
                             ))}
                           </ul>
@@ -157,7 +162,7 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
       </div>
 
       <div className="collection-collapse-block open">
-        <h3 className="collapse-block-title mt-0" onClick={toggleBrand}>
+        <h3 className="collapse-block-title mt-0" onClick={toggleBrand} style={styles.toggleTitle}>
           brand
         </h3>
         <Collapse isOpen={isBrandOpen}>
@@ -185,9 +190,9 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
         </Collapse>
       </div>
 
-      {/* <!-- color filter start here --> */}
+      {/* color filter start here */}
       <div className="collection-collapse-block open">
-        <h3 className="collapse-block-title" onClick={toggleColor}>
+        <h3 className="collapse-block-title" onClick={toggleColor} style={styles.toggleTitle}>
           Colors
         </h3>
         <Collapse isOpen={isColorOpen}>
@@ -199,7 +204,10 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
                     key={color.id}
                     className={`color-swatch ${selectedColor === color.value ? "active" : ""}`}
                     onClick={() => setSelectedColor(color.value)}
-                    style={{ backgroundColor: color.value }}
+                    style={{
+                      backgroundColor: color.value,
+                      ...styles.colorLi,
+                    }}
                   >
                     {/* {color.name} */}
                   </li>
@@ -209,9 +217,9 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
           </div>
         </Collapse>
       </div>
-      {/* <!-- price filter start here --> */}
+      {/* price filter start here */}
       <div className="collection-collapse-block border-0 open">
-        <h3 className="collapse-block-title" onClick={togglePrice}>
+        <h3 className="collapse-block-title" onClick={togglePrice} style={styles.toggleTitle}>
           Price Range
         </h3>
         <Collapse isOpen={isPriceOpen}>
@@ -229,7 +237,6 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
                 className="custom-range"
               />
 
-
               <p className="mb-0">
                 Price Range: ${selectedPrice.min} - ${selectedPrice.max}
               </p>
@@ -237,10 +244,26 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
           </div>
         </Collapse>
       </div>
-
-
     </div>
   );
+};
+
+const styles = {
+  toggleTitle: {
+    cursor: "pointer",
+  },
+  activeLi: {
+    backgroundColor: "#007bff",
+    color: "#fff",
+  },
+  li: {
+    backgroundColor: "#fff", // Change to your preferred background color
+    color: "#000", // Change to your preferred text color
+    cursor: "pointer",
+  },
+  colorLi: {
+    cursor: "pointer",
+  },
 };
 
 export default Sidebar;

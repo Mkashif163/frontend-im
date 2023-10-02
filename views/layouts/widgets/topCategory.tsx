@@ -54,47 +54,39 @@ const TopCategory: NextPage = () => {
   };
 
 
-  const imageStyles = {
-    width: "100px",
-    height: "100px",
-    borderRadius: "50%",
+  const imageStyles: React.CSSProperties = {
     objectFit: "cover",
-    boxShadow: "2px 2px 4px",
-    transition: "box-shadow 0.3 ease, filter 0.3s ease",
   };
 
 
 
   return (
     <div className="custom-container">
-      <Slider {...sliderSettings}>
-        {categories.length > 0 ? (
-          categories.map((category, i) => (
-            <div
-              key={i}
-            >
-              <img
-                src={transformImageUrl(category.imageforapp)}
-                alt={category.name}
-                className="img-fluid"
-                style={{...imageStyles, objectFit: "cover"}}
-              />
-
-              <h5
-                className="name"
-                style={{ fontSize: "14px", display: "flex", justifyContent: "center", paddingTop: "6px" }}
-              >
-                {category.name.substring(0, 18)}{" "}
-                {category.name.length > 18}
-              </h5>
-            </div>
-          ))
-        ) : (
-          <div>No categories available</div>
-        )}
-      </Slider>
+        <Slider {...sliderSettings}>
+            {categories.length > 0 ? (
+                categories.map((category, i) => (
+                    <div key={i} className="d-flex flex-column align-items-center justify-content-center">
+                        <img
+                            src={transformImageUrl(category.imageforapp)}
+                            alt={category.name}
+                            className="img-fluid mb-2 rounded-circle shadow"
+                            style={imageStyles}
+                            width="100"
+                            height="100"
+                        />
+                        <p className="name text-center ">
+                            {category.name.substring(0, 12)}{" "}
+                            {category.name.length > 12 && "..."}
+                        </p>
+                    </div>
+                ))
+            ) : (
+                <div className="text-center">No categories available</div>
+            )}
+        </Slider>
     </div>
-  );
+);
+  
 };
 
 export default TopCategory;

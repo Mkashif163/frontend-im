@@ -14,6 +14,7 @@ import AllProducts from "../views/layouts/widgets/AllProducts/allProducts";
 import Menu from "views/layouts/layout1/menu";
 import TopCategory from "views/layouts/widgets/topCategory";
 import { useApiData } from "helpers/data/DataContext";
+import Image from 'next/image';
 
 interface CategoriesData {
   category1: string;
@@ -52,52 +53,64 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     try {
-      if (apiData && Array.isArray((apiData as ApiData).Homesetting) && (apiData as ApiData).Homesetting.length > 0) {
+      if (
+        Array.isArray((apiData as ApiData).Homesetting) &&
+        (apiData as ApiData).Homesetting.length > 0
+      ) {
         setCategoriesData((apiData as ApiData).Homesetting[0]);
       }
     } catch (err) {
       console.error("Failed to fetch API data:", err);
       setError("Failed to fetch data. Please try again later.");
     }
-}, [apiData]);
-
+  }, [apiData]);
 
   return (
     <>
-      <Layouts>
-      {error && <div className="alert alert-danger" role="alert">{error}</div>}
-        <div className="bg-light">
-          <Menu meneData={apiData} />
-          <div className="my-4">
-            <TopCategory />
-          </div>
-          <CollectionBanner
-            banner1={categoriesData.f_s_banner_1}
-            banner2={categoriesData.f_s_banner_2}
-            banner3={categoriesData.f_s_banner_3}
-          />
-          <TabProduct catId={parseInt(categoriesData.category1)} effect="icon-inline" />
-          <TabProduct catId={parseInt(categoriesData.category2)} effect="icon-inline" />
-          <CollectionBannerTwo banner={categoriesData.center_image1} />
-          <TabProduct catId={parseInt(categoriesData.category3)} effect="icon-inline" />
-          <ShortDisplay data={apiData}/>
-          <section className="rounded-category">
-            <Brands />
-          </section>
-          <TabProduct catId={parseInt(categoriesData.category4)} effect="icon-inline" />
-          <RatioSquare />
-          <CollectionBannerThree
-            ban1={categoriesData.e_s_banner_1}
-            ban2={categoriesData.e_s_banner_2}
-            ban3={categoriesData.e_s_banner_3}
-          />
-          <section className="rounded-category">
-            <Suplier />
-          </section>
-          <AllProducts />
-          <ContactBanner />
-        </div>
-      </Layouts>
+    <Layouts>
+            {/* {error && <div className="alert alert-danger" role="alert">{error}</div>} */}
+            {apiData ? (
+              <div className="bg-light">
+                <Menu meneData={apiData} />
+                <div className="my-4">
+                  <TopCategory />
+                </div>
+                <CollectionBanner
+                  banner1={categoriesData.f_s_banner_1}
+                  banner2={categoriesData.f_s_banner_2}
+                  banner3={categoriesData.f_s_banner_3}
+                />
+                <TabProduct catId={parseInt(categoriesData.category1)} effect="icon-inline" />
+                <TabProduct catId={parseInt(categoriesData.category2)} effect="icon-inline" />
+                <CollectionBannerTwo banner={categoriesData.center_image1} />
+                <TabProduct catId={parseInt(categoriesData.category3)} effect="icon-inline" />
+                <ShortDisplay data={apiData} />
+                <section className="rounded-category">
+                  <Brands />
+                </section>
+                <TabProduct catId={parseInt(categoriesData.category4)} effect="icon-inline" />
+                <RatioSquare />
+                <CollectionBannerThree
+                  ban1={categoriesData.e_s_banner_1}
+                  ban2={categoriesData.e_s_banner_2}
+                  ban3={categoriesData.e_s_banner_3}
+                />
+                <section className="rounded-category">
+                  <Suplier />
+                </section>
+                <AllProducts />
+                <ContactBanner />
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center align-items-center">
+                <div className="text-center">
+                  <h1>Slow Internet! 😟</h1>
+                  <p>Please check your internet connection 🚧 and try reloading.</p>
+                  <button className="btn btn-rounded m-3" onClick={() => window.location.reload()}>Reload</button>
+                </div>
+              </div>
+            )}
+          </Layouts>
     </>
   );
 };

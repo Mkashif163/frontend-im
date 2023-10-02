@@ -1,9 +1,14 @@
 import React from "react";
 import { NextPage } from "next";
 import { Input, Label, Row, Col, Form, FormGroup } from "reactstrap";
-import Breadcrumb from "../../Containers/Breadcrumb";
 
-const Address: NextPage = () => {
+type Props = {
+  userData: any;
+};
+
+const Address: NextPage<Props> = ({userData}) => {
+
+  console.log(userData)
   return (
     <>
       {/* <!-- personal deatail section start --> */}
@@ -161,26 +166,26 @@ const Address: NextPage = () => {
                           <div>
                             <Label>
                               Full Name:{" "}
-                              <span className="fw-normal">John Doe</span>
+                              <span className="fw-normal">{userData.first_name} {userData.last_name}</span>
                             </Label>
                           </div>
                           <div>
                             <Label>
                               Flat / Plot:{" "}
-                              <span className="fw-normal">123 Main St.</span>
+                              <span className="fw-normal">N/A</span>
                             </Label>
                           </div>
                           <div>
                             <Label>
                               Address:{" "}
                               <span className="fw-normal">
-                                Apt 4B, Street Name
+                                N/A
                               </span>
                             </Label>
                           </div>
                           <div>
                             <Label>
-                              Zip Code: <span className="fw-normal">12345</span>
+                              Zip Code: <span className="fw-normal">N/A</span>
                             </Label>
                           </div>
                           <div>
@@ -203,13 +208,13 @@ const Address: NextPage = () => {
                           <div>
                             <Label>
                               Phone Number:{" "}
-                              <span className="fw-normal">+929487534</span>
+                              <span className="fw-normal">{userData.phone}</span>
                             </Label>
                           </div>
                           <div>
                             <Label>
                               Email:{" "}
-                              <span className="fw-normal">abc@gmail.com</span>
+                              <span className="fw-normal">{userData.email}</span>
                             </Label>
                           </div>
                           <div>
