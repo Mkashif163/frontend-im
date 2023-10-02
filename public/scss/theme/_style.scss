@@ -1756,23 +1756,25 @@ button {
       border: 1px solid var(--theme-color1);
     }
   }
-  .side-menu-box {
-    max-height: 500px;
-    overflow-y: auto;
-
-    .custom-side-menu-category {
-      column-count: 4;
-      column-gap: 15px;
-      padding: 10px;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: rgb(232, 231, 231);
-        color: white;
-        cursor: pointer;
+      .side-menu-box {
+        max-height: 500px;
+        max-width: 100%;
+        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Maximum of four columns per row */
+        gap: 10px; /* Add some gap between columns and rows */
+      
+        .custom-side-menu-category {
+          width: 100%; /* Each category takes the full width of its column */
+          padding: 10px;
+          transition: background-color 0.3s;
+      
+          &:hover {
+            background-color: rgb(232, 231, 231);
+            cursor: pointer;
+          }
+        }
       }
-    }
-  }
 }
 .slider-top {
   .carousel-control-prev {

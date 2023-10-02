@@ -28,9 +28,16 @@ const Menu = ({ meneData }: MenuProps) => {
     return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
   }
 
-  const handleClick = (id) => (e) => {
+  const handleClick = (id,type) => (e) => {
     e.preventDefault();
-    window.location.href = `/collections/leftsidebar?sub_category=${id}`;
+    if(type==="subcat")
+    {
+      window.location.href = `/collections/leftsidebar?sub_category=${id}`;
+    }
+    if(type==="cat")
+    {
+      window.location.href = `/collections/leftsidebar?category=${id}`;
+    }
   };
   
 
@@ -71,11 +78,11 @@ const Menu = ({ meneData }: MenuProps) => {
                 <div className='side-menu-box'>
                   {menuData[menuKey].categories?.map((category, categoryIndex) => (
                     <div className="custom-side-menu-category">
-                      <Dropdown.Item key={categoryIndex} href={category.link}>
+                      <Dropdown.Item key={categoryIndex} onClick={handleClick(category.id ,"cat")} href={category.link}>
                         <h5>{category.name}</h5>
                       </Dropdown.Item>
                       {category.sub_categories?.map((subcategory, subcategoryIndex) => (
-                        <Dropdown.Item key={subcategoryIndex} href={subcategory.link} onClick={handleClick(subcategory.id)}>
+                        <Dropdown.Item key={subcategoryIndex} href={subcategory.link} onClick={handleClick(subcategory.id ,"subcat")}>
                           {subcategory.name}
                         </Dropdown.Item>
                       ))}
