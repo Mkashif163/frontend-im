@@ -41,21 +41,21 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   <div className="footer-content">
                     <ul className="list-unstyled">
                       <li className="mb-1">
-                        <Link href="/collections/leftsidebar?sub_category=122">
+                        <Link href="/term&conditions/seller">
                           <a className="footer-link" style={{ color: 'gray' }}>How to become a Seller?</a>
                         </Link>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ color: 'gray' }}>How to post a product?</a>
+                        <a href="/term&conditions/product" className="footer-link" style={{ color: 'gray' }}>How to post a product?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ color: 'gray' }}>How to become a verified Supplier?</a>
+                        <a href="/term&conditions/supplier" className="footer-link" style={{ color: 'gray' }}>How to become a verified Supplier?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ color: 'gray' }}>How to become a trusted Suppliers?</a>
+                        <a href="/term&conditions/trusted" className="footer-link" style={{ color: 'gray' }}>How to become a trusted Suppliers?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ color: 'gray' }}>How to give a discount on Product?</a>
+                        <a href="/term&conditions/discount" className="footer-link" style={{ color: 'gray' }}>How to give a discount on Product?</a>
                       </li><br />
                     </ul>
                   </div>
@@ -69,19 +69,19 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   <div className="footer-content">
                     <ul className="list-unstyled">
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to Buy?</a>
+                        <a href="/term&conditions/buy" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to Buy?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to get discount?</a>
+                        <a href="/term&conditions/getdiscount" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to get discount?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to get in touch with Supplier?</a>
+                        <a href="/term&conditions/touch" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>How to get in touch with Supplier?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>We have trusted Suppliers?</a>
+                        <a href="/term&conditions/havetrusted" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>We have trusted Suppliers?</a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>We have verified Suppliers?</a>
+                        <a href="/term&conditions/haveverified" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>We have verified Suppliers?</a>
                       </li><br />
                     </ul>
                   </div>
@@ -96,27 +96,23 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   <div className="footer-content">
                     <ul className="list-unstyled">
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           All Terms & Conditions
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Member Signing up
                         </a>
                       </li><br />
+                     
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                          Buying and Selling Advertisement
+                        <a href="/term&conditions/services" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          Services
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                          Confidential & Personals
-                        </a>
-                      </li><br />
-                      <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Warrenty
                         </a>
                       </li><br />
@@ -134,22 +130,22 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   <div className="footer-content">
                     <ul className="list-unstyled">
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/payment" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Payments Resolution
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Orders Resolution
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Shipment Resolution
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Taxes Resolution
                         </a>
                       </li><br />
@@ -165,11 +161,19 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   </div>
                   <div className="footer-contant">
                     <li className="mb-1">
-                      <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                      <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                         Latest News
                       </a>
-                    </li><br /><li className="mb-1">
-                      <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                    </li><br />
+                    
+                    <li className="mb-1">
+                      <a href="/term&conditions/registration" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                      Registration Detail
+                      </a>
+                    </li><br />
+
+                    <li className="mb-1">
+                      <a href="/term&conditions/support" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                         Support 24/7
                       </a>
                     </li><br />
@@ -192,15 +196,14 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       </a>
                     </li><br /><li className="mb-1">
                       <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        call us: 123-456-7898
+                        call us: 03065151694                      </a>
+                    </li><br /><li className="mb-1">
+                      <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        email us: salihakazmi21@gmail.com
                       </a>
                     </li><br /><li className="mb-1">
                       <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        email us: support@bigdeal.com
-                      </a>
-                    </li><br /><li className="mb-1">
-                      <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        fax 123456
+                        fax 654321
                       </a>
                     </li><br />
                   </div>
@@ -221,25 +224,26 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/decades" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Who we are
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/identities" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        Our Identities
+                          </a>
+                        </li><br/>
+                        <li className="mb-1">
+                          <a href="/term&conditions/imti" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Industry Mall Training Institute (IMTI)
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/industry" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Why Trust on Industry Mall
                           </a>
                         </li><br />
-                        <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                            Our key Features
-                          </a>
-                        </li><br />
+                        
                       </ul>
                     </div>
                   </div>
@@ -253,27 +257,27 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/sectors" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             We are specific in Industrial Sectors
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/wholesalers" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Connect wholesalers | Industrials directly
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/competitive" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Competitive price
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/regular" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Regular discounted price
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             User-friendly payment method
                           </a>
                         </li><br />
@@ -290,28 +294,28 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Member’s undertakings
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             When you agreed terms & conditions
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Agreed all rules & regulations
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Being a member liability
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                            Member’s undertakings | Breach of Contract
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                            Breach of Contract
                           </a>
                         </li><br />
                       </ul>
@@ -327,22 +331,22 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Buying Advertisements
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Selling Advertisements
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Store Exception Advertisements
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             All Advertisements
                           </a>
                         </li><br />
@@ -359,22 +363,22 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Confidential Information
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Personal Information
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Confidential and Personal
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Other Declarations
                           </a>
                         </li><br />
@@ -391,18 +395,18 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <span className="footer-link" style={{ fontSize: '12px' }}>
+                          <a href="/term&conditions/term_condition"><span className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Secure Payment Integrations
-                          </span>
+                          </span></a>
                         </li><br />
                         <li className="mb-1">
-                          <span className="footer-link" style={{ fontSize: '12px' }}>VISA Card</span>
+                        <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px' , color: 'gray' }}>VISA Card</span></a>
                         </li><br />
                         <li className="mb-1">
-                          <span className="footer-link" style={{ fontSize: '12px' }}>Master Card</span>
+                         <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px' , color: 'gray'}}>Master Card</span></a>
                         </li><br />
                         <li className="mb-1">
-                          <span className="footer-link" style={{ fontSize: '12px' }}>Direct Bank Transfer</span>
+                          <a href="/term&conditions/term_condition"><span className="footer-link" style={{ fontSize: '12px' , color: 'gray'}}>Direct Bank Transfer</span></a>
                         </li><br />
                       </ul>
                     </div>
@@ -461,7 +465,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
 
               <div className="app-item-group ">
                 <div className="social-block">
-                  <h6>follow us</h6>
+                  <h5>&nbsp; &nbsp; Follow us</h5>
                   <ul className="social" style={{ fontSize: '18px' }}>
                     <li>
                       <a href="#" style={{ fontSize: '18px' }}>
