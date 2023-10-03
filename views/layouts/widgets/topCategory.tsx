@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Slider from "react-slick";
 import { useApiData } from "helpers/data/DataContext";
+import Link from "next/link";
 
 
 interface ApiData {
@@ -56,6 +57,7 @@ const TopCategory: NextPage = () => {
 
   const imageStyles: React.CSSProperties = {
     objectFit: "cover",
+    cursor:"pointer"
   };
 
 
@@ -65,6 +67,7 @@ const TopCategory: NextPage = () => {
         <Slider {...sliderSettings}>
             {categories.length > 0 ? (
                 categories.map((category, i) => (
+                  <Link href={`/collections/leftsidebar?category=${category.id}`} style={{}} >
                     <div key={i} className="d-flex flex-column align-items-center justify-content-center">
                         <img
                             src={transformImageUrl(category.imageforapp)}
@@ -79,6 +82,7 @@ const TopCategory: NextPage = () => {
                             {category.name.length > 12 && "..."}
                         </p>
                     </div>
+                  </Link>
                 ))
             ) : (
                 <div className="text-center">No categories available</div>
