@@ -1,36 +1,74 @@
 import { NextPage } from "next";
 import { Media } from "reactstrap";
-
+import Link from "next/link";
 
 type CollectionBannerProps = {
   cat: any;
 };
 
+const imageStyles: React.CSSProperties = {
+  objectFit: "cover",
+  cursor: "pointer"
+};
 
 function transformImageUrl(apiImageUrl) {
   if (!apiImageUrl) {
-    return ""; // or some default URL or error handling
+    return "";
   }
 
   const baseUrl = 'http://18.235.14.45/';
-  return `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
+  const url = `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
+  console.log(url);
+  return url;
+
 }
-
-
-const CollectionBanner: NextPage<CollectionBannerProps> = ({cat}) => 
-(
+const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat }) => (
   <div className="top-banner-wrapper">
     <a href="#">
-      <Media src={transformImageUrl(cat.img)} className="img-fluid " alt="" />
+      <Media src={transformImageUrl(cat.img)} className="img-fluid" alt="" />
     </a>
     <div className="top-banner-content small-section">
       <h1>{cat.name}</h1>
-      {/* <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of
-        type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-        in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p> */}
+
+      {cat.sub_categories ? (
+        <div id="carouselExample" className="carousel slide" data-ride="carousel">
+          <div className="carousel-inner">
+            {cat.sub_categories.map((subCtegory, i) => (
+              <div className={`carousel-item ${i === 0 ? "active" : ""}`} key={i}>
+                {Array.from({ length: 8 }).map((_, j) => (
+                  <Link href={`/collections/leftsidebar?sub_category=${cat.sub_categories[i * 8 + j]?.id}`} key={j}>
+                    <div className="d-flex flex-column align-items-center justify-content-center" style={{ float: "left", width: "12.5%" }}>
+                      <img
+                        src={transformImageUrl(cat.sub_categories[i * 8 + j]?.img)}
+                        alt={cat.sub_categories[i * 8 + j]?.name}
+                        className="img-fluid mb-2 rounded-circle shadow"
+                        style={imageStyles}
+                        width="100"
+                        height="100"
+                      />
+                      <p className="name text-center">
+                        {cat.sub_categories[i * 8 + j]?.name.substring(0, 12)}{" "}
+                        {cat.sub_categories[i * 8 + j]?.name.length > 12 && "..."}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+          <a className="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="sr-only">Previous</span>
+          </a>
+          <a className="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="sr-only">Next</span>
+          </a>
+        </div>
+      ) : (
+        <div className="text-center">No Sub categories available</div>
+      )}
+
     </div>
   </div>
 );
