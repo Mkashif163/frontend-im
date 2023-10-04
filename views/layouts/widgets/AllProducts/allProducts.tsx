@@ -73,7 +73,7 @@ const AllProducts = () => {
     return (
         <section className="section-big-py-space ratio_asos bg-light">
             <div className="allproduct-text text-center mx-auto mb-5 ">
-                <h2 >Featured Products</h2>
+                <p style={{color:"white",fontSize:"30px",fontWeight:"100"}}>Featured Products</p>
             </div>
             <div className="custom-container">
                 {loading ? ( // Render loader while loading is true

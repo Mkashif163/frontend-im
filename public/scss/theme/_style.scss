@@ -4466,39 +4466,12 @@ button {
 /*============================
   17. Media Banner start
 ==============================*/
-.Jewellery-banner {
-  background-image: url("/images/layout-1/collection-banner/6.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 35px;
-  height: 100%;
-
-  a {
-    color: $dark;
-    text-transform: capitalize;
-    font-weight: 700;
-    font-size: 14px;
-  }
-  h6 {
-    color: var(--theme-color1);
-    font-size: 31px;
-    font-weight: 700;
-    text-transform: capitalize;
-    line-height: 1;
-  }
-}
-.layout-5 {
-  .media-banner.media-banner-1 {
-    background-color: $bg-light;
-  }
-}
 .tab-product-main .tab-prodcut-contain ul li a {
   color: $white;
 }
 .media-banner {
-  padding: 30px;
-  background-color: $body-back;
+  padding: 20px;
+  background-color: rgb(243, 243, 243);
   border-right: 1px solid $light-border;
   height: 100%;
   .media-banner-box {
@@ -4523,9 +4496,7 @@ button {
       }
     }
     .media {
-      img {
-        border: 1px solid $light-border;
-      }
+      
       .media-body {
         .media-contant {
           margin-left: 15px;
@@ -4557,114 +4528,19 @@ button {
               margin-left: 5px;
             }
           }
-          .cart-info {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            top: 0;
-            margin-top: auto;
-            margin-bottom: auto;
-            height: fit-content;
-            transition: all 0.5s ease;
-            visibility: hidden;
-            opacity: 0;
-            button {
-              padding: 0;
-              background-color: transparent;
-              line-height: 1;
-              border: none;
-              svg {
-                width: calc(
-                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
-                );
-                color: #444444;
-              }
-              i {
-                color: #444444;
-                font-size: calc(
-                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
-                );
-              }
-            }
-            a {
-              color: #444444;
-              svg {
-                width: calc(
-                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
-                );
-                color: #444444;
-              }
-              i {
-                font-size: calc(
-                  14px + (18 - 14) * ((100vw - 320px) / (1920 - 320))
-                );
-              }
-              &:nth-child(n + 2) {
-                margin-left: 5px;
-              }
-            }
-          }
-        }
-      }
-      &:hover {
-        .media-body {
-          .media-contant {
-            .cart-info {
-              opacity: 1;
-              visibility: visible;
-              transform: translateY(0);
-              button {
-                animation: fadeInUp 300ms ease-in-out;
-              }
-              a {
-                display: inline-block;
-                &:nth-child(2) {
-                  animation: fadeInUp 600ms ease-in-out;
-                }
-                &:nth-child(3) {
-                  animation: fadeInUp 700ms ease-in-out;
-                }
-                &:nth-child(4) {
-                  animation: fadeInUp 900ms ease-in-out;
-                }
-              }
-            }
-          }
         }
       }
     }
   }
   &.media-banner-1 {
-    background-color: $hot-deal;
     margin: 0 8px;
     .media-banner-box {
       .media {
         align-items: center;
         img {
-          height: 100px;
-          width: 80px;
+          height: 150px;
+          width: 100px;
           object-fit: cover;
-        }
-      }
-    }
-  }
-  &.media-banner-2 {
-    .media-banner-box {
-      margin-bottom: 10px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-  &.banner-inverse {
-    .media-banner-box {
-      .media {
-        .media-body {
-          .media-contant {
-            h6 {
-              color: var(--theme-color2);
-            }
-          }
         }
       }
     }
@@ -10617,183 +10493,7 @@ button {
   }
 }
 // parallax banner //
-.full-banner {
-  position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding-top: 190px;
-  padding-bottom: 190px;
-  background-position: center;
-  &.advertise-banner {
-    background-image: url("/images/fashion/banner.jpg");
-  }
-  &.parallax-layout {
-    padding-top: 350px;
-    padding-bottom: 350px;
-    .banner-contain {
-      h4 {
-        color: $gray1;
-      }
-    }
-  }
-  &.banner-layout-3 {
-    .banner-contain {
-      .btn-normal {
-        text-transform: uppercase;
-      }
-      h4 {
-        color: $white;
-      }
-      h3 {
-        color: $white;
-        margin-top: 10px;
-      }
-      .color {
-        color: var(--theme-color1);
-        line-height: 1;
-      }
-    }
-  }
-  &.parallax {
-    background-attachment: fixed;
-  }
-  &.p-left {
-    .banner-contain {
-      float: left;
-    }
-  }
-  &.p-right {
-    .banner-contain {
-      float: right;
-    }
-  }
-  &.p-center {
-    .banner-contain {
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-    }
-  }
-  .banner-contain {
-    .btn-solid,
-    .btn-outline {
-      margin-top: 20px;
-    }
-    h2 {
-      font-size: calc(55px + (100 - 55) * ((100vw - 320px) / (1920 - 320)));
-      font-weight: 700;
-      color: var(--theme-color1);
-      text-transform: uppercase;
-      margin-top: calc(-15px + (-20 - -15) * ((100vw - 320px) / (1920 - 320)));
-    }
-    h3 {
-      font-size: calc(36px + (60 - 36) * ((100vw - 320px) / (1920 - 320)));
-      color: $font-color;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    h4 {
-      font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
-      color: $font-color;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5em;
-      padding-top: 10px;
-      margin-bottom: -5px;
-      line-height: 1.3;
-    }
-  }
-}
-.parallax-cls {
-  section {
-    &:nth-child(odd) {
-      .full-banner {
-        background-position: right;
-      }
-    }
 
-    &:nth-child(even) {
-      .full-banner {
-        background-position: left;
-      }
-    }
-    .banner-contain {
-      margin-top: -12px;
-    }
-  }
-}
-.pet-parallax {
-  position: relative;
-  .pet-decor {
-    position: absolute;
-    left: 110px;
-    bottom: -164px;
-  }
-  .banner-contain {
-    h4,
-    h3,
-    p {
-      color: #212121;
-    }
-    p {
-      max-width: 75%;
-      margin: 0 auto;
-      line-height: 22px;
-      font-size: 16px;
-      letter-spacing: 0.04em;
-    }
-    h4 {
-      letter-spacing: 0.05em;
-      padding-top: 0 !important;
-      margin-bottom: 0;
-      line-height: 1.3;
-      margin-top: -7px;
-    }
-    h3 {
-      margin: 15px 0;
-      font-size: 48px;
-    }
-  }
-  .full-banner {
-    padding-top: 130px;
-    padding-bottom: 130px;
-    background-blend-mode: overlay;
-  }
-}
-.advertise-section {
-  .full-banner {
-    padding-bottom: 105px;
-    padding-top: 105px;
-    background-position: top;
-    .banner-contain {
-      background-color: rgba($white, 0.9);
-      padding: 40px 0;
-      width: 90%;
-      border: 3px solid var(--theme-color1);
-      h2 {
-        font-size: 75px;
-      }
-    }
-  }
-}
-.center-slider {
-  border-left: 1px solid $light-border;
-  border-right: 1px solid $light-border;
-}
-.about-text p {
-  letter-spacing: 0.06em;
-  text-align: center;
-  margin-bottom: 50px;
-}
-.full-box {
-  .theme-card {
-    .offer-slider {
-      .product-box2 {
-        overflow: hidden;
-      }
-    }
-  }
-}
 
 //  Theme pannel start  //
 .theme-pannel-main {

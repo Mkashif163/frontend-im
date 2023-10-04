@@ -10,6 +10,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
   const [activeTab, setActiveTab] = useState("1");
 
   const product = item;
+  const percentages = [16, 19, 69, 42, 59];
 
   return (
     <>
@@ -57,12 +58,12 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                       width: '80%',
                       transition: 'transform 0.3s',
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'scale(1.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
+                    // onMouseEnter={(e) => {
+                    //   e.currentTarget.style.transform = 'scale(1.2)';
+                    // }}
+                    // onMouseLeave={(e) => {
+                    //   e.currentTarget.style.transform = 'scale(1)';
+                    // }}
                   >
                     <tbody>
                       <tr style={{ border: '1px solid #ccc' }}>
@@ -101,41 +102,155 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 </div>
               </TabPane>
               <TabPane tabId="3">
-                <Form>
-                  <div className="form-row row">
-                    <Col md="12">
-                      <div className="media">
-                        <Label className="mb-0">Rating</Label>
-                        <div className="media-body ms-3">
-                          <div className="rating three-star">
-                            <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i> <i className="fa fa-star"></i>
+                <br />
+                <h6 className="text-center" style={{ fontSize: "14px" }}>Star Rating</h6>
+                <br />
+
+                <div className="mod-rating">
+                  <div className="content">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="summary">
+                          <div className="score">
+                            <span className="score-average">4.8</span>
+                            <span className="score-max">/5</span>
+                          </div>
+                          <div className="average">
+                            <div className="container-star" style={{ width: "166.25px", height: "33.25px" }}>
+                              {[...Array(5)].map((_, starIndex) => (
+                                <img
+                                  key={starIndex}
+                                  className="star"
+                                  src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
+                                  style={{ width: "33.25px", height: "33.25px" }}
+                                />
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </Col>
-                    <Col md="6">
-                      <Label htmlFor="name">Name</Label>
-                      <Input type="text" className="form-control" id="name" placeholder="Enter Your name" required />
-                    </Col>
-                    <Col md="6">
-                      <Label htmlFor="email">Email</Label>
-                      <Input type="text" className="form-control" id="email" placeholder="Email" required />
-                    </Col>
-                    <Col md="12">
-                      <Label htmlFor="review">Review Title</Label>
-                      <Input type="text" className="form-control" id="review" placeholder="Enter your Review Subjects" required />
-                    </Col>
-                    <Col md="12">
-                      <Label htmlFor="review">Review Title</Label>
-                      <textarea className="form-control" rows={4} placeholder="Write Your Testimonial Here" id="exampleFormControlTextarea1"></textarea>
-                    </Col>
-                    <Col md="12">
-                      <button className="btn btn-normal" type="submit">
-                        Submit YOur Review
-                      </button>
-                    </Col>
+                      <div className="col-md-6">
+                        <div className="custom-container">
+                          <div className="detail" style={{ float: "left" }}>
+                            <ul>
+                              {percentages.map((percent, index) => (
+                                <li key={index}>
+                                  <div className="stars-and-progress" style={{ display: "flex", alignItems: "center" }}>
+                                    <div className="container-star" style={{ width: "166.25px", height: "33.25px", display: "inline-block" }}>
+                                      {[...Array(5)].map((_, starIndex) => (
+                                        <img
+                                          key={starIndex}
+                                          className="star"
+                                          src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
+                                          style={{ width: "15.96px", height: "15.96px" }}
+                                        />
+                                      ))}
+                                    </div>
+                                    <div className="progress-wrap" style={{ marginLeft: "12px" }}>
+                                      <div className="pdp-review-progress" style={{ position: "relative", width: "100px", height: "20px", backgroundColor: "goldenrod" }}>
+                                        <div className="bar bg" style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", left: "0", right: "0", height: "4px" }}></div>
+                                        <div className="bar fg" style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", width: "91.204%", height: "4px" }}></div>
+                                      </div>
+                                    </div>
+                                    &nbsp; &nbsp; <span className="percent">{percent}</span>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </Form>
+                </div>
+                <div className="mod-reviews">
+                  <br />
+                  <h6 className="text-center" style={{ fontSize: "14px" }}>PRODUCT REVIEWS</h6>
+                  <div className="item">
+                    <div className="top">
+                      <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
+                        <div className="middle">
+                          <span className="product-id" style={{ fontSize: "14px" }}><b>Saliha</b></span>
+                        </div>
+                        <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                        <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                        <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                        <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                        <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                      </div>
+                      <span className="title-right" style={{ paddingLeft: "90%" }}>5 months ago</span>
+                    </div><br />
+                    <div className="content">
+                      I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
+
+                    <div className="products gap-5">
+                      <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                    </div>
+                    <div className="content">
+                      I am very delighted and happy to buy this logo. </div>
+                    <i className='fa fa-thumbs-up' style={{ fontSize: "24px" }}></i>
+                    <span className="">4</span>
+                  </div>
+                  <br />
+                  <br />
+                  <div className="top">
+                    <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
+                      <div className="middle">
+                        <span className="product-id" style={{ fontSize: "14px" }}><b>Amber</b></span>
+                      </div>
+                      <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                      <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                      <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                      <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                      <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                    </div>
+                    <span className="title-right" style={{ paddingLeft: "90%" }}>5 months ago</span>
+                  </div><br />
+                  <div className="content">
+                    I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
+
+                  <div className="products gap-5">
+                    <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                  </div>
+                  <div className="content">
+                    I am very delighted and happy to buy this logo. </div>
+                  <i className='fa fa-thumbs-up' style={{ fontSize: "24px" }}></i>
+                  <span className="">3</span>
+                </div>
+                <br />
+                <br />
+                <div className="top">
+                  <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
+                    <div className="middle">
+                      <span className="product-id" style={{ fontSize: "14px" }}><b>Nisha</b></span>
+                    </div>
+                    <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                    <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                    <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                    <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                    <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
+                  </div>
+                  <span className="title-right" style={{ paddingLeft: "90%" }}>5 months ago</span>
+                </div><br />
+                <div className="content">
+                  I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
+
+                <div className="products gap-5">
+                  <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                </div>
+                <div className="content">
+                  I am very delighted and happy to buy this logo. </div>
+                <i className='fa fa-thumbs-up' style={{ fontSize: "24px" }}></i>
+                <span className="">2</span>
               </TabPane>
             </TabContent>
           </Col>

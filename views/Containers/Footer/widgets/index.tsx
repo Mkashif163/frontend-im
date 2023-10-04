@@ -105,7 +105,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                           Member Signing up
                         </a>
                       </li><br />
-                     
+
                       <li className="mb-1">
                         <a href="/term&conditions/services" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Services
@@ -165,10 +165,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         Latest News
                       </a>
                     </li><br />
-                    
+
                     <li className="mb-1">
                       <a href="/term&conditions/registration" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                      Registration Detail
+                        Registration Detail
                       </a>
                     </li><br />
 
@@ -230,9 +230,9 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         </li><br />
                         <li className="mb-1">
                           <a href="/term&conditions/identities" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        Our Identities
+                            Our Identities
                           </a>
-                        </li><br/>
+                        </li><br />
                         <li className="mb-1">
                           <a href="/term&conditions/imti" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Industry Mall Training Institute (IMTI)
@@ -243,7 +243,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                             Why Trust on Industry Mall
                           </a>
                         </li><br />
-                        
+
                       </ul>
                     </div>
                   </div>
@@ -400,13 +400,13 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                           </span></a>
                         </li><br />
                         <li className="mb-1">
-                        <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px' , color: 'gray' }}>VISA Card</span></a>
+                          <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>VISA Card</span></a>
                         </li><br />
                         <li className="mb-1">
-                         <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px' , color: 'gray'}}>Master Card</span></a>
+                          <a href="/term&conditions/term_condition"> <span className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>Master Card</span></a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition"><span className="footer-link" style={{ fontSize: '12px' , color: 'gray'}}>Direct Bank Transfer</span></a>
+                          <a href="/term&conditions/term_condition"><span className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>Direct Bank Transfer</span></a>
                         </li><br />
                       </ul>
                     </div>
@@ -435,12 +435,12 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
             </div>
           </Col>
           <Col lg="6" md='6' sm='6' xs='6'>
-            <div className="footer-detail">
+            <div className="footer-detail d-flex align-items-center gap-3">
               <a href="#">
-                <FontAwesomeIcon icon={faCcMastercard} size="2xl" style={{ color: "#78a0d3", fontSize: '60px', marginRight: '10px' }} />
+                <Media src="/images/MasterCard.png" className="img-fluid" alt="Google Play" style={{ width: '90px', height: 'auto', objectFit: 'contain' }} />
               </a>
               <a href="#">
-                <FontAwesomeIcon icon={faCcVisa} size="2xl" style={{ color: "#465e86", fontSize: '60px' }} />
+                <Media src="/images/Visa.png" className="img-fluid" alt="Google Play" style={{ width: '90px', height: 'auto', objectFit: 'contain' }} />
               </a>
             </div>
           </Col>
