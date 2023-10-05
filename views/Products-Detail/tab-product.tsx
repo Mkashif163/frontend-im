@@ -170,7 +170,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                     <div className="top">
                       <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                         <div className="middle">
-                          <span className="product-id" style={{ fontSize: "14px" }}><b>Saliha</b></span>
+                          <span className="product-id" style={{ fontSize: "14px" }}><b>Motors</b></span>
                         </div>
                         <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                         <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
@@ -199,7 +199,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                   <div className="top">
                     <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                       <div className="middle">
-                        <span className="product-id" style={{ fontSize: "14px" }}><b>Amber</b></span>
+                        <span className="product-id" style={{ fontSize: "14px" }}><b>Technical</b></span>
                       </div>
                       <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                       <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
@@ -228,7 +228,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 <div className="top">
                   <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                     <div className="middle">
-                      <span className="product-id" style={{ fontSize: "14px" }}><b>Nisha</b></span>
+                      <span className="product-id" style={{ fontSize: "14px" }}><b>Vfds</b></span>
                     </div>
                     <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                     <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
