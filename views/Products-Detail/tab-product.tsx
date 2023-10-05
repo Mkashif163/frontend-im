@@ -170,7 +170,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                     <div className="top">
                       <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                         <div className="middle">
-                          <span className="product-id" style={{ fontSize: "14px" }}><b>Saliha</b></span>
+                          <span className="product-id" style={{ fontSize: "14px" }}><b>Motors</b></span>
                         </div>
                         <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                         <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
@@ -184,10 +184,10 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                       I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
 
                     <div className="products gap-5">
-                      <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                      <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/12.jpeg"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/12.jpeg"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/12.jpeg"></img>
+                      <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/12.jpeg"></img>
                     </div>
                     <div className="content">
                       I am very delighted and happy to buy this logo. </div>
@@ -199,7 +199,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                   <div className="top">
                     <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                       <div className="middle">
-                        <span className="product-id" style={{ fontSize: "14px" }}><b>Amber</b></span>
+                        <span className="product-id" style={{ fontSize: "14px" }}><b>Technical</b></span>
                       </div>
                       <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                       <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
@@ -213,10 +213,10 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                     I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
 
                   <div className="products gap-5">
-                    <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                    <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/10.jpeg"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/10.jpeg"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/10.jpeg"></img>
+                    <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/10.jpeg"></img>
                   </div>
                   <div className="content">
                     I am very delighted and happy to buy this logo. </div>
@@ -228,7 +228,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                 <div className="top">
                   <div className="container-star starCtn left" style={{ width: '83.125px', height: '16.625px' }}>
                     <div className="middle">
-                      <span className="product-id" style={{ fontSize: "14px" }}><b>Nisha</b></span>
+                      <span className="product-id" style={{ fontSize: "14px" }}><b>Vfds</b></span>
                     </div>
                     <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
                     <img className="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style={{ width: '16.625px', height: '16.625px' }} />
@@ -242,10 +242,10 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
                   I am very delighted and happy to buy this watch. I hope the watch should be very helpful and strong to withstand all kinds of hard times.</div>
 
                 <div className="products gap-5">
-                  <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
-                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/1.png"></img>
+                  <img style={{ width: "80px", height: "70px", borderRadius: "50px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/11.jpeg"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/11.jpeg"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/11.jpeg"></img>
+                  <img style={{ width: "80px", height: "70px", paddingRight: "15px" }} src="/images/layout-2/rounded-cat/11.jpeg"></img>
                 </div>
                 <div className="content">
                   I am very delighted and happy to buy this logo. </div>
