@@ -104,8 +104,8 @@ const Home: NextPage = () => {
             ) : (
               <div className="d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h1>Slow Internet! 😟</h1>
-                  <p>Please check your internet connection 🚧 and try reloading.</p>
+                  <h1>"Site Revamp ⚙️🔧"</h1>
+                  <p>"Quick Fix: We'll Be Back & Better! 🚀✨"</p>
                   <button className="btn btn-rounded m-3" onClick={() => window.location.reload()}>Reload</button>
                 </div>
               </div>

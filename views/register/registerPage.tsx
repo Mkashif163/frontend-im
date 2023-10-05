@@ -82,7 +82,7 @@ const RegisterPage: NextPage = () => {
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
         localStorage.setItem("token", response.data.success.token);
-        localStorage.setItem("id", response.data.success.id);
+        localStorage.setItem("id", response.data.succ);
 
         // Redirect to the dashboard page
         router.push("/pages/account/dashboard");

@@ -50,7 +50,9 @@ const OrderHistoryPage: NextPage = () => {
 
   useEffect(() => {
     // Fetch order data from the API
-    fetch("http://18.235.14.45/api/user/31/orders")
+    const id = localStorage.getItem('id');
+    console.log(id);
+    fetch(`http://18.235.14.45/api/user/${id}/orders`)
       .then((response) => response.json())
       .then((data) => {
         setOrders(data.orders);
@@ -68,7 +70,7 @@ const OrderHistoryPage: NextPage = () => {
 
   return (
     <div className="">
-      <section className="cart-section order-history section-big-py-space">
+     {orders ? "No Orders yet" : <section className="cart-section order-history section-big-py-space">
         <div className="custom-container">
           <Row>
             <Col sm="12">
@@ -125,7 +127,7 @@ const OrderHistoryPage: NextPage = () => {
             </Col>
           </Row>
         </div>
-      </section>
+      </section>}
     </div>
   );
 };
