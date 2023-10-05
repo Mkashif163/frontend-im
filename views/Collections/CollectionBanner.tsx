@@ -4,6 +4,7 @@ import Link from "next/link";
 
 type CollectionBannerProps = {
   cat: any;
+  sub_cat: any;
 };
 
 const imageStyles: React.CSSProperties = {
@@ -18,17 +19,18 @@ function transformImageUrl(apiImageUrl) {
 
   const baseUrl = 'http://18.235.14.45/';
   const url = `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
-  console.log(url);
   return url;
 
 }
-const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat }) => (
+const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat,sub_cat }) =>
+ {
+  return(
   <div className="top-banner-wrapper">
     <a href="#">
       <Media src={transformImageUrl(cat.img)} className="img-fluid" alt="" />
     </a>
     <div className="top-banner-content small-section">
-      <h1>{cat.name}</h1>
+      <h1>{sub_cat ? sub_cat: cat.name}</h1>
 
       {cat.sub_categories ? (
         <div id="carouselExample" className="carousel slide" data-ride="carousel">
@@ -72,5 +74,5 @@ const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat }) => (
     </div>
   </div>
 );
-
+}
 export default CollectionBanner;

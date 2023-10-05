@@ -49,6 +49,7 @@ const findMaxPrice = (products) => {
 const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, cat}) => {
   const { leftSidebarOpen } = useContext(FilterContext);
   const [subCategoryProducts, setSubCategoryProducts] = useState([]);
+  const [subCatName , setSubCatName] = useState('');
   const [category, setCategory] = useState({});
   const [brands, setBrands] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
@@ -92,6 +93,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
             // Check if sub-category ID matches
             if (subCat.id === +sub_cat) {
               setSubCategoryProducts(subCat.products);
+              setSubCatName(subCat.name);
                 setCategory(category);
               break;
             }
@@ -154,7 +156,11 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
         </div>
       </Col>
       {/* Collection */}
-      <Collection products={cat ? categoryProducts : subCategoryProducts} cat={category} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+       {cat ? (
+        <Collection products={categoryProducts} cat={category} sub_cat={''} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      ) : (
+        <Collection products={subCategoryProducts} cat={category} sub_cat={subCatName} cols="col-xl-3 col-md-4 col-6 col-grid-box" layoutList="" />
+      )}
     </Row>
   );
 };

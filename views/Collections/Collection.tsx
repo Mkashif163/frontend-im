@@ -15,9 +15,10 @@ type CollectionProps = {
   layoutList: string;
   products: any;
   cat:any
+  sub_cat:any
 };
 
-const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat }) => {
+const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,sub_cat }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToWish } = React.useContext(WishlistContext);
@@ -85,7 +86,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat 
         <Row>
           <Col sm="12">
             {/* Collection Banner */}
-            <CollectionBanner cat={cat}/>
+            <CollectionBanner cat={cat} sub_cat={sub_cat}/>
             <div className="collection-product-wrapper">
               <Row>
                 <Col xs="12">
