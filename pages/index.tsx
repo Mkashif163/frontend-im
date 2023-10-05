@@ -102,11 +102,11 @@ const Home: NextPage = () => {
                 <ContactBanner />
               </div>
             ) : (
-              <div className="d-flex justify-content-center align-items-center">
-                <div className="text-center">
-                  <h1>"Site Revamp ⚙️🔧"</h1>
-                  <p>"Quick Fix: We'll Be Back & Better! 🚀✨"</p>
-                  <button className="btn btn-rounded m-3" onClick={() => window.location.reload()}>Reload</button>
+              <div className="d-flex justify-content-center align-items-center m-5 p-5">
+                <div className="text-center m-5 p-5">
+                  <h1>"Server Meteor Strike! 🌠⚡ - We're Fixing It!" 🛠️🚀"</h1>
+                  {/* <h5>"Quick Fix: We'll Be Back & Better! 🚀✨"</h5> */}
+                  {/* <button className="btn btn-rounded m-3" onClick={() => window.location.reload()}>Reload</button> */}
                 </div>
               </div>
             )}
