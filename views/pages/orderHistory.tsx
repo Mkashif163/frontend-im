@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Media, Row, Col } from "reactstrap";
-import { CurrencyContext } from "helpers/currency/CurrencyContext";
 import { useApiData } from "helpers/data/DataContext";
+import { Router, useRouter } from "next/router";
 
 
 interface ApiData {
@@ -22,9 +22,9 @@ interface ApiData {
 
 
 const OrderHistoryPage: NextPage = () => {
-  const [error, setError] = useState<string | null>(null);
   const apiData = useApiData() as ApiData;
   const [orders, setOrders] = useState([]);
+  const router = useRouter();
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -62,72 +62,75 @@ const OrderHistoryPage: NextPage = () => {
       });
   }, []);
 
-  // Function to find product by id and return its URL
-  const getProductImageUrl = (productId) => {
-    const product = products.find((p) => p.id === productId);
-    return product ? product.url : "";
-  };
-
   return (
     <div className="">
-     {orders ? "No Orders yet" : <section className="cart-section order-history section-big-py-space">
-        <div className="custom-container">
-          <Row>
-            <Col sm="12">
-              <table className="table cart-table table-responsive-xs">
-                <thead>
-                  {/* Table headers */}
-                </thead>
-                <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.id}>
-                      <td>
-                        <a href="#">
-                          {/* Display the product image based on the product ID */}
-                          <Media
-                            src={products.find((product) => product.id === order.product_id)?.url}
-                            alt="product"
-                            className="img-fluid"
-                          />
-                        </a>
-                      </td>
-                      <td>
-                        <a href="#">
-                          order no: <span className="dark-data">{order.id}</span> <br />
-                          {order.comments}
-                        </a>
-                        {/* Render other order details here */}
-                      </td>
-                      <td>
-                        <h4>${order.total_price}</h4>
-                      </td>
-                      <td>
-                        <span>Size: {order.size}</span>
-                        <br />
-                        <span>Quantity: {order.quantity}</span>
-                      </td>
-                      <td>
-                        <div className="responsive-data">
-                          <h4 className="price">${order.total_price}</h4>
-                          <span>Size: {order.size}</span>|<span>Quantity: {order.quantity}</span>
-                        </div>
-                        <span className="dark-data">{order.status}</span> ({order.created_at})
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Col>
-          </Row>
-          <Row className="cart-buttons">
-            <Col xs="12" className="pull-right">
-              <a href="#" className="btn btn-normal btn-sm">
-                Show All Orders
-              </a>
-            </Col>
-          </Row>
+      {orders ?
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
+          <div className="text-center">
+            <h1>No Orders yet 🛒</h1>
+            <button className="btn btn-outline btn-rounded m-5" onClick={()=>router.push("/")}>Continue Shopping</button>
+          </div>
         </div>
-      </section>}
+
+        :
+        <section className="cart-section order-history section-big-py-space">
+          <div className="custom-container">
+            <Row>
+              <Col sm="12">
+                <table className="table cart-table table-responsive-xs">
+                  <thead>
+                    {/* Table headers */}
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order.id}>
+                        <td>
+                          <a href="#">
+                            {/* Display the product image based on the product ID */}
+                            <Media
+                              src={products.find((product) => product.id === order.product_id)?.url}
+                              alt="product"
+                              className="img-fluid"
+                            />
+                          </a>
+                        </td>
+                        <td>
+                          <a href="#">
+                            order no: <span className="dark-data">{order.id}</span> <br />
+                            {order.comments}
+                          </a>
+                          {/* Render other order details here */}
+                        </td>
+                        <td>
+                          <h4>${order.total_price}</h4>
+                        </td>
+                        <td>
+                          <span>Size: {order.size}</span>
+                          <br />
+                          <span>Quantity: {order.quantity}</span>
+                        </td>
+                        <td>
+                          <div className="responsive-data">
+                            <h4 className="price">${order.total_price}</h4>
+                            <span>Size: {order.size}</span>|<span>Quantity: {order.quantity}</span>
+                          </div>
+                          <span className="dark-data">{order.status}</span> ({order.created_at})
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Col>
+            </Row>
+            <Row className="cart-buttons">
+              <Col xs="12" className="pull-right">
+                <a href="#" className="btn btn-normal btn-sm">
+                  Show All Orders
+                </a>
+              </Col>
+            </Row>
+          </div>
+        </section>}
     </div>
   );
 };
