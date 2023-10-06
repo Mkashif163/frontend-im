@@ -5,6 +5,7 @@ import { CartContext } from "../../../helpers/cart/cart.context";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
+import Link from "next/link";
 // import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface formType {
@@ -49,7 +50,7 @@ const CheckoutPage: NextPage = () => {
   const onSubmit = async (data: formType) => {
     if (data !== null) {
       const customerId = localStorage.getItem("id");
-  
+
       // Construct the request payload
       const requestBody = {
         customer_info: {
@@ -79,7 +80,7 @@ const CheckoutPage: NextPage = () => {
           p_vendor_id: item.created_by, // Use the vendor id from your cartItems
         })),
       };
-  
+
       try {
         // Send the POST request to the checkout API
         const response = await fetch("http://18.235.14.45/api/checkout", {
@@ -89,7 +90,7 @@ const CheckoutPage: NextPage = () => {
           },
           body: JSON.stringify(requestBody),
         });
-  
+
         if (response.ok) {
           alert("Order successfully placed!");
           localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
@@ -107,7 +108,7 @@ const CheckoutPage: NextPage = () => {
       console.log(errors);
     }
   };
-  
+
   const setStateFromInput = (event) => {
     obj[event.target.name] = event.target.value;
     setObj(obj);
@@ -283,15 +284,23 @@ const CheckoutPage: NextPage = () => {
                           </div>
                           <ul className="qty">
                             {cartItems.map((item, index) => (
-                              <li key={index}>
-                                {item.name} × {item.qty}{" "}
-                                <span>
-                                  {symbol}
-                                  {calculateProductTotal(item).toFixed(2)}
-                                </span>
-                              </li>
+
+                              <>
+                                <Link href={`/product-details/${item.id}`}>
+                                  <li key={index}>
+                                    <img src={item.url} alt={item.name.substring(0, 9)} width="100px" />
+                                    <span>{item.name} × {item.qty}{" "}</span>
+                                    <span>
+                                      {symbol}
+                                      {calculateProductTotal(item).toFixed(2)}
+                                    </span>
+                                  </li>
+                                </Link>
+                              </>
                             ))}
                           </ul>
+
+
                           <ul className="sub-total">
                             <li>
                               Subtotal{" "}

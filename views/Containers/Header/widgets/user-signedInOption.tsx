@@ -1,10 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
-import { Label, Input, Form, FormGroup, Button } from "reactstrap";
 import { toast } from "react-toastify";
-import { CartContext } from "helpers/cart/cart.context";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const UserSignedInOption: NextPage = () => {
   const [userLoggedIn, setUserLoggedIn] = useState(false); // Replace with your authentication state logic
@@ -16,13 +17,25 @@ const UserSignedInOption: NextPage = () => {
     localStorage.removeItem("id");
     setUserLoggedIn(false);
     router.push("/");
-    // Perform any additional logout actions if needed
-    // For example, you can redirect the user to the login page
-    // or clear user-related state.
-
-    // Display a logout success message using toast or any other method
     toast.success("You have been Signed out successfully!");
   };
+
+  const userId = localStorage.getItem("id");
+
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    // Fetch user data from the API
+    axios.get(`http://18.235.14.45/api/profile/${userId}`)
+      .then((response) => {
+        setUserData(response.data.success);
+      })
+      .catch((error) => {
+        // Handle request error
+        console.error("Error fetching user data:", error);
+      });
+  }
+    , [userId]);
 
   // Use useEffect to respond to changes in the userLoggedIn state
   useEffect(() => {
@@ -39,6 +52,8 @@ const UserSignedInOption: NextPage = () => {
     }
   }, []); // Empty dependency array for one-time initialization
 
+  console.log(userData)
+
   return (
     <>
       <li className="mobile-user onhover-dropdown mt-2">
@@ -50,21 +65,19 @@ const UserSignedInOption: NextPage = () => {
             {userLoggedIn ? (
               <>
                 <span className="d-flex">
-                  <span className="col-2 m-2">
-                    <img
-                      className={`userImage img-fluid`}
-                      src="/images/layout-2/product/4.jpg"
-                      alt="image"
-                    />
+                  <span className="col-8 my-3 mx-2">
+                    <h5 style={{ color: "#0272BC" }}>{userData.first_name} {userData.last_name}</h5>
                   </span>
-                  <p className="fs-6 ms-2 mt-1">{`Welcome back, username`}</p>
+                  <span className="col-3 m-2">
+                    <FontAwesomeIcon icon={faUser} className="mx-2" size="2xl" style={{ color: "#0272BC" }} />
+                  </span>
                 </span>
                 <a href="/" onClick={handleLogout}>
-                  <span className="ms-2 text-primary">Sign Out</span>
+                  <span className="btn-sm btn btn-outline-primary">Sign Out</span>
                 </a>
                 <hr className="m-2" />
                 <span className="myLink">
-                  <Link href="/pages/account/dashboard">
+                  <Link href="/pages/order-history">
                     <span className="ms-2">My Orders</span>
                   </Link>
                 </span>
@@ -74,13 +87,13 @@ const UserSignedInOption: NextPage = () => {
                   </Link>
                 </span>
                 <span className="myLink">
-                  <Link href="/pages/account/dashboard">
+                  <Link href="/pages/account/wishlist">
                     <span className="ms-2">Wish List</span>
                   </Link>
                 </span>
                 <span className="myLink mb-1">
-                  <Link href="/pages/account/dashboard">
-                    <span className="ms-2">My Coupons</span>
+                  <Link href="/pages/account/cart">
+                    <span className="ms-2">My Cart</span>
                   </Link>
                 </span>
               </>
@@ -95,7 +108,7 @@ const UserSignedInOption: NextPage = () => {
                     className=" text-white m-0 p-0 d-flex justify-content-center test"
                     id="test"
                   >
-                    <button className="btn btn-danger btn-sm fw-bold">
+                    <button className="btn btn-outline-success btn-sm fw-bold">
                       Register
                     </button>
                   </a>
@@ -111,45 +124,26 @@ const UserSignedInOption: NextPage = () => {
                 </span>
                 <hr className="m-2" />
                 <span className="myLink">
-                  <Link href="/pages/account/login">
+                  <Link href="/pages/account/dashboard">
                     <span className="ms-2">My Orders</span>
                   </Link>
                 </span>
                 <span className="myLink">
-                  <Link href="/pages/account/login">
-                    <span className="ms-2">My Coins</span>
-                  </Link>
-                </span>
-                <span className="myLink">
-                  <Link href="/pages/account/login">
-                    <span className="ms-2">Message Center</span>
-                  </Link>
-                </span>
-                <span className="myLink">
-                  <Link href="/pages/account/login">
+                  <Link href="/pages/account/dashboard">
                     <span className="ms-2">Payment</span>
                   </Link>
                 </span>
                 <span className="myLink">
-                  <Link href="/pages/account/login">
+                  <Link href="/pages/account/wishlist">
                     <span className="ms-2">Wish List</span>
                   </Link>
                 </span>
                 <span className="myLink">
-                  <Link href="/pages/account/login">
-                    <span className="ms-2">My favorite Stores</span>
-                  </Link>
-                </span>
-                <span className="myLink">
-                  <Link href="/pages/account/login">
-                    <span className="ms-2">My Coupons</span>
+                  <Link href="/pages/account/cart">
+                    <span className="ms-2">My Cart</span>
                   </Link>
                 </span>
               </>
-              // <Link href="/pages/account/login">
-              //   <button className="btn btn-sm btn-primary ">Login</button>
-              //   <button className="btn btn-sm btn-primary ">SignUp</button>
-              // </Link>
             )}
           </div>
         </div>

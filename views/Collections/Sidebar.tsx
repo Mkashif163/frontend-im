@@ -119,7 +119,6 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
     setSelectedPrice({ min: newValue[0], max: newValue[1] });
 };
-
 const valueText = (value: number) => `$${value}`;
 
   return (
