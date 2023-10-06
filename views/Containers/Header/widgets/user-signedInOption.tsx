@@ -52,7 +52,6 @@ const UserSignedInOption: NextPage = () => {
     }
   }, []); // Empty dependency array for one-time initialization
 
-  console.log(userData)
 
   return (
     <>

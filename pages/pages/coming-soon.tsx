@@ -46,7 +46,7 @@ const ComingSoon: NextPage = () => {
                 </div>
               </div>
               <div id="powered">
-                <p>© 2021, Powered by Bigdeal.</p>
+                <p>© 2021, Powered by Industry Mall.</p>
               </div>
             </div>
           </div>
