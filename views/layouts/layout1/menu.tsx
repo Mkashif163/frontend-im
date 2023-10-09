@@ -69,8 +69,8 @@ const Menu = ({ meneData }: MenuProps) => {
                     onMouseEnter={() => handleMouseEnter(index)} // Set the index when mouse enters
                   >
                     <div>
-                      {menuData[menuKey].menu_name.substring(0, 23)}
-                      {menuData[menuKey].menu_name.length > 25 ? '...' : ''}
+                      {menuData[menuKey].menu_name.substring(0, 35)}
+                      {menuData[menuKey].menu_name.length > 35 ? '...' : ''}
                     </div>
                   </div>
                 }

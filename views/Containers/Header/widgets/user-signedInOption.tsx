@@ -76,6 +76,11 @@ const UserSignedInOption: NextPage = () => {
                 </a>
                 <hr className="m-2" />
                 <span className="myLink">
+                  <Link href="/pages/account/dashboard">
+                    <span className="ms-2">My Account</span>
+                  </Link>
+                </span>
+                <span className="myLink">
                   <Link href="/pages/order-history">
                     <span className="ms-2">My Orders</span>
                   </Link>
@@ -122,6 +127,11 @@ const UserSignedInOption: NextPage = () => {
                   </a>
                 </span>
                 <hr className="m-2" />
+                <span className="myLink">
+                  <Link href="/pages/account/dashboard">
+                    <span className="ms-2">My Account</span>
+                  </Link>
+                </span>
                 <span className="myLink">
                   <Link href="/pages/account/dashboard">
                     <span className="ms-2">My Orders</span>

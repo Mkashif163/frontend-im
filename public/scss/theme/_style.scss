@@ -1734,6 +1734,11 @@ button {
   width: 315px;
   height: 100%;
   background-color: rgb(240, 239, 239);
+  .custom-text-black {
+    padding-left: 15px;
+    text-align: left;
+  }
+  
   .custom-input-group-text {
     background-color: var(--theme-color1);
     color: white;
