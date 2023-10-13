@@ -30,6 +30,7 @@ interface ApiData {
         id: number;
         sub_categories: {
           id: number;
+          name:any;
           products: any[];
         }[];
       }[];

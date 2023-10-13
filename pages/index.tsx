@@ -14,7 +14,6 @@ import AllProducts from "../views/layouts/widgets/AllProducts/allProducts";
 import Menu from "views/layouts/layout1/menu";
 import TopCategory from "views/layouts/widgets/topCategory";
 import { useApiData } from "helpers/data/DataContext";
-import Image from 'next/image';
 
 interface CategoriesData {
   category1: string;
@@ -50,6 +49,9 @@ const Home: NextPage = () => {
   interface ApiData {
     Homesetting: CategoriesData[];
   }
+
+  const ip = process.env.NEXT_PUBLIC_BACKEND_URL;
+  console.log("backend url",ip)
 
   useEffect(() => {
     try {

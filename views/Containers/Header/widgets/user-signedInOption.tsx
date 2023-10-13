@@ -7,6 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+
+
+interface user  {
+  first_name:any
+  last_name:any
+}
 const UserSignedInOption: NextPage = () => {
   const [userLoggedIn, setUserLoggedIn] = useState(false); // Replace with your authentication state logic
   const router = useRouter();
@@ -22,7 +28,7 @@ const UserSignedInOption: NextPage = () => {
 
   const userId = localStorage.getItem("id");
 
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<user>({first_name:'',last_name:''});
 
   useEffect(() => {
     // Fetch user data from the API

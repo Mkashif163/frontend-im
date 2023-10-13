@@ -38,12 +38,12 @@ const LeftSidebar: NextPage = () => {
           <div className="flex">
             <div className="accordian">
               {/* Render the fetched terms_and_conditions data here */}
-              {termsAndConditions.map((term) => (
+              {/* {termsAndConditions.map((term) => (
                 <div key={termsAndConditions.id}>
                   <h2>{termsAndConditions.title}</h2>
                   <div dangerouslySetInnerHTML={{ __html: termsAndConditions.description }} />
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>

@@ -59,10 +59,10 @@ interface ApiData {
   menus: {
     [menuKey: string]: {
       categories: {
-        id: number;
+        id: any;
         name: string;
         sub_categories: {
-          id: number;
+          id: any;
           name: string;
           products: any[]; // Define the actual product type
         }[];

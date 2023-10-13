@@ -6,7 +6,7 @@ import ReviewPage from "../../views/pages/revidewPage";
 const Review: NextPage = () => {
   return (
     <Layout1>
-      <ReviewPage />
+      <ReviewPage userData={undefined} />
     </Layout1>
   );
 };

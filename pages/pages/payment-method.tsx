@@ -6,7 +6,7 @@ import PaymentMethod from "views/pages/account/paymentPage";
 const PaymentHistory: NextPage = () => {
   return (
     <Layout1>
-      <PaymentMethod />
+      <PaymentMethod userData={undefined} />
     </Layout1>
   );
 };

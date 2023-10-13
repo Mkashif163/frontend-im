@@ -62,6 +62,10 @@ var settings = {
   ],
 };
 
+interface coupen{
+  coupons: any;
+}
+
 const chunkArray = (array, size) => {
   const result = [];
   for (let value of array) {
@@ -92,7 +96,7 @@ const RatioSquare = () => {
     setSelected(tabName);
     setLoading(true);
   };
-  const apiData = useApiData();
+  const apiData = useApiData() as coupen;
 
   useEffect(() => {
     // console.log("My Api Data For Coupens:::", apiData.coupons);
