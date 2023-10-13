@@ -32,7 +32,7 @@ const UserSignedInOption: NextPage = () => {
 
   useEffect(() => {
     // Fetch user data from the API
-    axios.get(`https://18.235.14.45/api/profile/${userId}`)
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/profile/${userId}`)
       .then((response) => {
         setUserData(response.data.success);
       })

@@ -73,7 +73,7 @@ const SearchPage: NextPage = () => {
   // Get the search query from the URL and update the state
   useEffect(() => {
       // Fetch data based on the search query
-      fetch(`https://18.235.14.45/api/search/product/${searchQuery}`)
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/product/${searchQuery}`)
         .then((response) => response.json())
         .then((data) => {
           setSearchResults(data.data);

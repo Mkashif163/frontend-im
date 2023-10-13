@@ -59,7 +59,7 @@ const RelatedProducts: NextPage = () => {
   const [productsData, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('https://18.235.14.45/api/products')
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`)
       .then(response => response.json())
       .then(data => {
         setProducts(data[0]);

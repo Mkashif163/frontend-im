@@ -17,7 +17,7 @@ function transformImageUrl(apiImageUrl) {
     return "";
   }
 
-  const baseUrl = 'https://18.235.14.45/';
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/`;
   const url = `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
   return url;
 

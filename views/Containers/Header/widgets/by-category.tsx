@@ -14,7 +14,7 @@ const ByCategory: NextPage<byCategory> = ({ category }) => {
   const { leftMenu, setLeftMenu } = menuContext;
 
   useEffect(() => {
-    fetch("https://18.235.14.45/api/menus")
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/menus`)
       .then((res) => res.json())
       .then((data) => {
         setMenuData(data);

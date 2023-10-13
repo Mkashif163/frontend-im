@@ -50,7 +50,7 @@ const TopCategory: NextPage = () => {
     slidesToScroll: 1,
   };
   const transformImageUrl = (apiImageUrl) => {
-    const transformedUrl = `https://18.235.14.45/${apiImageUrl.replace(/ /g, '%20')}`;
+    const transformedUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${apiImageUrl.replace(/ /g, '%20')}`;
     return transformedUrl;
   };
 

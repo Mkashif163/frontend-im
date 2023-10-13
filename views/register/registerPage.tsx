@@ -74,7 +74,7 @@ const RegisterPage: NextPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("https://18.235.14.45/api/register", formData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/register`, formData, {
         headers: {
           "Content-Type": "application/json",
         },

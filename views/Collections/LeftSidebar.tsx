@@ -128,7 +128,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
       return ""; // or some default URL or error handling
     }
   
-    const baseUrl = 'https://18.235.14.45/';
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/`;
     return `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
   }
 
