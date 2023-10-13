@@ -12,7 +12,7 @@ export const ApiDataProvider = ({ children }) => {
   useEffect(() => {
     const fetchAndCacheData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/homeap`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/homeapi`);
         if (response.ok) {
           const data = await response.json();
 
