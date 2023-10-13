@@ -10,6 +10,7 @@ import MobileSearch from "./widgets/mobile-search";
 import MobileSetting from "./widgets/mobile-setting";
 import { MenuContext } from "helpers/menu/MenuContext";
 import { useApiData } from "helpers/data/DataContext";
+import Link from "next/link";
 interface header {
   cartPopupPosition: string;
   display: string;
@@ -128,14 +129,14 @@ const Header: NextPage<header> = ({
                     </span>
                   </div>
                   <div className="logo-block">
-                    <a href="/#">
+                    <Link href="/#">
                       <Media
                         src={`/images/layout-2/logo/im-logo.png`}
                         className="img-fluid logo"
                         width="150px"
                         alt="logo"
                       />
-                    </a>
+                    </Link>
                   </div>
                   <Search products={products}/>
                   <ShoppingCart

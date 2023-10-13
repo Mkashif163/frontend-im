@@ -32,11 +32,11 @@ const Menu = ({ meneData }: MenuProps) => {
     e.preventDefault();
     if(type==="subcat")
     {
-      window.location.href = `/collections/leftsidebar?sub_category=${id}`;
+      router.push(`/collections/leftsidebar?sub_category=${id}`);
     }
     if(type==="cat")
     {
-      window.location.href = `/collections/leftsidebar?category=${id}`;
+      router.push(`/collections/leftsidebar?category=${id}`);
     }
   };
   
