@@ -13,7 +13,7 @@ interface CollectionBannerProps {
 
 const CollectionBannerList = ({ banner }) => {
   function transformImageUrl(apiImageUrl) {
-    return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
+    return `https://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
   }
   const apiImageUrl = banner;
   const transformedImageUrl = transformImageUrl(apiImageUrl);  

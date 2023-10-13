@@ -83,7 +83,7 @@ const CheckoutPage: NextPage = () => {
 
       try {
         // Send the POST request to the checkout API
-        const response = await fetch("http://18.235.14.45/api/checkout", {
+        const response = await fetch("https://18.235.14.45/api/checkout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

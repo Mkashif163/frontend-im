@@ -17,7 +17,7 @@ function transformImageUrl(apiImageUrl) {
     return "";
   }
 
-  const baseUrl = 'http://18.235.14.45/';
+  const baseUrl = 'https://18.235.14.45/';
   const url = `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
   return url;
 

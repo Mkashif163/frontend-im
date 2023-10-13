@@ -52,7 +52,7 @@ const OrderHistoryPage: NextPage = () => {
     // Fetch order data from the API
     const id = localStorage.getItem('id');
     console.log(id);
-    fetch(`http://18.235.14.45/api/user/${id}/orders`)
+    fetch(`https://18.235.14.45/api/user/${id}/orders`)
       .then((response) => response.json())
       .then((data) => {
         setOrders(data.orders);

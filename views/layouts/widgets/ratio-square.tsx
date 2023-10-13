@@ -104,7 +104,7 @@ const RatioSquare = () => {
       setDataR(apiData.coupons); // Assuming data is an array in the response
       setLoading(false);
     } else {
-      const apiUrl = `http://18.235.14.45/api/search/product/${selected}`;
+      const apiUrl = `https://18.235.14.45/api/search/product/${selected}`;
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {

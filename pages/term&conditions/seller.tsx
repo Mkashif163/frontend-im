@@ -19,7 +19,7 @@ const LeftSidebar: NextPage = () => {
   // Use useEffect to fetch data from the API when the component mounts
   useEffect(() => {
     // Fetch data directly within the useEffect
-    fetch("http://18.235.14.45/$terms_and_conditions")
+    fetch("https://18.235.14.45/$terms_and_conditions")
       .then((response) => response.json())
       .then((data: TermCondition[]) => {
         // Update the state with the fetched data

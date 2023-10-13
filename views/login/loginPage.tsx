@@ -32,7 +32,7 @@ const Login: NextPage = () => {
       };
 
       // Make a POST request to the API endpoint
-      const response = await axios.post("http://18.235.14.45/api/login", requestData, {
+      const response = await axios.post("https://18.235.14.45/api/login", requestData, {
         headers: {
           "Content-Type": "application/json",
         },

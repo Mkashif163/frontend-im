@@ -27,7 +27,7 @@ const Dashboard: NextPage<Props> = ({ userId }) => {
 
   useEffect(() => {
       // Fetch user data from the API
-      axios.get(`http://18.235.14.45/api/profile/${userId}`)
+      axios.get(`https://18.235.14.45/api/profile/${userId}`)
         .then((response) => {
             setUserData(response.data.success);
         })
