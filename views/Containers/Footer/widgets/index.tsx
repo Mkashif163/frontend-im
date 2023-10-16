@@ -196,10 +196,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       </a>
                     </li><br /><li className="mb-1">
                       <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        call us: 03065151694                      </a>
-                    </li><br /><li className="mb-1">
-                      <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                        email us: salihakazmi21@gmail.com
+                        Email us: industrymall@gmail.com
                       </a>
                     </li><br /><li className="mb-1">
                       <a href="#" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
