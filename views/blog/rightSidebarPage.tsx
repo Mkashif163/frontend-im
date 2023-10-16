@@ -8,12 +8,10 @@ import Link from "next/link";
 const RightSidebarPage: NextPage = () => {
   return (
     <div className="bg-light">
-
       {/* <!-- section start --> */}
       <section className="section-big-py-space blog-page ratio2_3">
         <div className="custom-container">
           <Row>
-            
             {/* <!--Blog List start--> */}
             <Col xl="9" lg="8" md="7" className="order-sec">
               <MediaPage />
@@ -22,6 +20,7 @@ const RightSidebarPage: NextPage = () => {
 
             {/* <!--Blog sidebar start--> */}
             <BlogPage />
+            <p>test</p>
             {/* <!--Blog sidebar start--> */}
           </Row>
         </div>
