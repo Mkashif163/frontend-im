@@ -26,7 +26,8 @@ const UserSignedInOption: NextPage = () => {
 
   useEffect(() => {
     // Fetch user data from the API
-    axios.get(`http://18.235.14.45/api/profile/${userId}`)
+    axios
+      .get(`http://18.235.14.45/api/profile/${userId}`)
       .then((response) => {
         setUserData(response.data.success);
       })
@@ -34,8 +35,7 @@ const UserSignedInOption: NextPage = () => {
         // Handle request error
         console.error("Error fetching user data:", error);
       });
-  }
-    , [userId]);
+  }, [userId]);
 
   // Use useEffect to respond to changes in the userLoggedIn state
   useEffect(() => {
@@ -52,7 +52,6 @@ const UserSignedInOption: NextPage = () => {
     }
   }, []); // Empty dependency array for one-time initialization
 
-
   return (
     <>
       <li className="mobile-user onhover-dropdown mt-2">
@@ -65,14 +64,21 @@ const UserSignedInOption: NextPage = () => {
               <>
                 <span className="d-flex">
                   <span className="col-8 my-3 mx-2">
-                    <h5 style={{ color: "#0272BC" }}>{userData.first_name} {userData.last_name}</h5>
+                    {/* <h5 style={{ color: "#0272BC" }}>{userData.first_name} {userData.last_name}</h5> */}
                   </span>
                   <span className="col-3 m-2">
-                    <FontAwesomeIcon icon={faUser} className="mx-2" size="2xl" style={{ color: "#0272BC" }} />
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="mx-2"
+                      size="2xl"
+                      style={{ color: "#0272BC" }}
+                    />
                   </span>
                 </span>
                 <a href="/" onClick={handleLogout}>
-                  <span className="btn-sm btn btn-outline-primary">Sign Out</span>
+                  <span className="btn-sm btn btn-outline-primary">
+                    Sign Out
+                  </span>
                 </a>
                 <hr className="m-2" />
                 <span className="myLink">

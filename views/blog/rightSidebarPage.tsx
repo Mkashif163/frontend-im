@@ -7,25 +7,35 @@ import Link from "next/link";
 
 const RightSidebarPage: NextPage = () => {
   return (
-    <div className="bg-light">
-
-      {/* <!-- section start --> */}
-      <section className="section-big-py-space blog-page ratio2_3">
-        <div className="custom-container">
-          <Row>
-            
-            {/* <!--Blog List start--> */}
-            <Col xl="9" lg="8" md="7" className="order-sec">
-              <MediaPage />
-            </Col>
-            {/* <!--Blog List start--> */}
-
-            {/* <!--Blog sidebar start--> */}
-            <BlogPage />
-            {/* <!--Blog sidebar start--> */}
-          </Row>
+    <div className="container">
+      <div className="row d-flex">
+        <div className="col-6 p-1">
+          <img
+            className="img-fluid"
+            src="../images/dummy.jpg"
+            alt="dummy image"
+          />
         </div>
-      </section>
+        <div className="col-6 p-1">
+          <img
+            style={{ height: "33%", width: "100%", objectFit: "cover" }}
+            src="../images/dummy.jpg"
+            alt="dummy image"
+          />
+          <span className="d-flex mt-3">
+            <img
+              style={{ height: "50%", width: "50%", objectFit: "cover" }}
+              src="../images/dummy.jpg"
+              alt="dummy image"
+            />{" "}
+            <img
+              style={{ height: "50%", width: "50%", objectFit: "cover" }}
+              src="../images/dummy.jpg"
+              alt="dummy image"
+            />
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
