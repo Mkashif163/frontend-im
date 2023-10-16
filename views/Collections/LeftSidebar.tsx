@@ -7,6 +7,7 @@ import { FilterContext } from "helpers/filter/filter.context";
 import { useContext, useEffect, useState } from "react";
 import { useApiData } from "helpers/data/DataContext";
 import Slider from "react-slick";
+import Image from "next/image";
 
 type LeftSidebarCollectionProps = {
   cat: any;
@@ -149,7 +150,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
             <Slider {...sliderSettings}> {/* Use the slider component */}
               {sliderImages.map((imageUrl, index) => (
                 <div key={index}>
-                  <img src={transformImageUrl(imageUrl)} className="img-fluid" alt={`Banner ${index + 1}`} />
+                  <Image src={transformImageUrl(imageUrl)} className="img-fluid" alt={`Banner ${index + 1}`} />
                 </div>
               ))}
             </Slider>

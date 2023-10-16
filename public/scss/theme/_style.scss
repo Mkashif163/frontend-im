@@ -1834,7 +1834,32 @@ button {
     object-fit: cover;
   }
 }
+// Media Query for screen sizes up to 548px
+@media (max-width: 548px) {
+  .custom-container {
+      .d-flex {
+          flex-direction: column; // Stack children vertically
+      }
 
+      .custom-menus {
+          width: 100%; // Take the full width of the container
+      }
+
+      .slider-top {
+          width: 100vw; // Set the width to 100% of the viewport width
+          margin-bottom: 20px; // Add some space between menu and carousel on small screens
+
+          .carousel-control-prev, .carousel-control-next {
+              display: block; // Show the carousel controls on mobile
+          }
+      }
+
+      .menu-banners {
+          width: 100%; // Take the full width of the container
+          margin-top: 20px; // Add some space between the carousel and the banner image
+      }
+  }
+}
 //////////////////////////////
 
 /*============================

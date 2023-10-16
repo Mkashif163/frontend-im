@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Media } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import TopBar from "./widgets/TopBar";
 import Search from "./widgets/search";
 import ShoppingCart from "./widgets/shopping-cart";
@@ -10,6 +10,7 @@ import MobileSearch from "./widgets/mobile-search";
 import MobileSetting from "./widgets/mobile-setting";
 import { MenuContext } from "helpers/menu/MenuContext";
 import { useApiData } from "helpers/data/DataContext";
+import Image from "next/image";
 import Link from "next/link";
 interface header {
   cartPopupPosition: string;
@@ -32,7 +33,6 @@ interface ApiData {
     };
   };
 }
-
 
 const Header: NextPage<header> = ({
   cartPopupPosition,
@@ -73,7 +73,6 @@ const Header: NextPage<header> = ({
     }
   }, [userLoggedOut]);
 
-
   useEffect(() => {
     const allProducts = [];
 
@@ -105,7 +104,7 @@ const Header: NextPage<header> = ({
 
     // Set the productsData state with all fetched products
     setProducts(allProducts);
-}, [apiData]);
+  }, [apiData]);
 
   return (
     <Fragment>
@@ -130,15 +129,16 @@ const Header: NextPage<header> = ({
                   </div>
                   <div className="logo-block">
                     <Link href="/#">
-                      <Media
-                        src={`/images/layout-2/logo/im-logo.png`}
+                      <Image
+                        src="/images/layout-2/logo/im-logo.png"
                         className="img-fluid logo"
-                        width="150px"
+                        width={150}
+                        height={50}
                         alt="logo"
                       />
                     </Link>
                   </div>
-                  <Search products={products}/>
+                  <Search products={products} />
                   <ShoppingCart
                     position={cartPopupPosition}
                     cartDisplay={display}
