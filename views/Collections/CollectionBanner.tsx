@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { Media } from "reactstrap";
 import Link from "next/link";
-import Image from "next/image";
 
 type CollectionBannerProps = {
   cat: any;
@@ -28,7 +27,7 @@ const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat,sub_cat }) =>
   return(
   <div className="top-banner-wrapper">
     <a href="#">
-      <Image src={transformImageUrl(cat.img)} className="img-fluid" alt="" />
+      <Media src={transformImageUrl(cat.img)} className="img-fluid" alt="" />
     </a>
     <div className="top-banner-content small-section">
       <h1>{sub_cat ? sub_cat: cat.name}</h1>
@@ -41,7 +40,7 @@ const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat,sub_cat }) =>
                 {Array.from({ length: 8 }).map((_, j) => (
                   <Link href={`/collections/leftsidebar?sub_category=${cat.sub_categories[i * 8 + j]?.id}`} key={j}>
                     <div className="d-flex flex-column align-items-center justify-content-center" style={{ float: "left", width: "12.5%" }}>
-                      <Image
+                      <img
                         src={transformImageUrl(cat.sub_categories[i * 8 + j]?.img)}
                         alt={cat.sub_categories[i * 8 + j]?.name}
                         className="img-fluid mb-2 rounded-circle shadow"

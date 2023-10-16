@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { Media } from "reactstrap";
+import Image from "next/image";
 
 interface gifts {
   img1: string;
@@ -50,12 +51,12 @@ const GiftList: React.FC<giftProps> = ({ gift }) => {
   return (
     <div className="media">
       <div className="me-3">
-        <Media src={gift.img1} alt="Generic placeholder image" />
+        <Image src={gift.img1} alt="Generic placeholder image" />
       </div>
       <div className="media-body">
         <h5 className="mt-0">{gift.title}</h5>
         <div>
-          <Media src={gift.img2} className="cash" alt="curancy" />
+          <Image src={gift.img2} className="cash" alt="curancy" />
           {gift.desc}
         </div>
       </div>

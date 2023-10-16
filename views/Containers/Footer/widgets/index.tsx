@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Media, Input } from "reactstrap";
 import CustomDropDown from "./CustomDropdown";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCcMastercard } from '@fortawesome/free-brands-svg-icons';
-import { faCcVisa } from '@fortawesome/free-brands-svg-icons';
-
+import Image from "next/image";
 
 
 const dropDownProfile = () => {
@@ -424,7 +421,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                 <li className="list-inline-item mx-4">
                   <div className="footer-logo">
                     <a href="#">
-                      <Media src={`/images/layout-2/logo/im-logo.png`} width="150px" className="img-fluid" alt="logo" style={{ marginLeft: '0%', gap: '20%' }} />
+                      <Image src="/images/layout-2/logo/im-logo.png" width={150} height={48} alt="logo" /> {/* Set the width and height */}
                     </a>
                   </div>
                 </li><br />
@@ -434,10 +431,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
           <Col lg="6" md='6' sm='6' xs='6'>
             <div className="footer-detail d-flex align-items-center gap-3">
               <a href="#">
-                <Media src="/images/MasterCard.png" className="img-fluid" alt="Google Play" style={{ width: '90px', height: 'auto', objectFit: 'contain' }} />
+                <Image src="/images/MasterCard.png" width={90} height={43} alt="Google Play" /> {/* Set the width and height */}
               </a>
               <a href="#">
-                <Media src="/images/Visa.png" className="img-fluid" alt="Google Play" style={{ width: '90px', height: 'auto', objectFit: 'contain' }} />
+                <Image src="/images/Visa.png" width={90} height={38} alt="Google Play" /> {/* Set the width and height */}
               </a>
             </div>
           </Col>
@@ -447,19 +444,18 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
         <Container>
           <Row>
             <div className="app-link-bloc-contain app-link-bloc-contain-1">
-              <div className="app-item-group">
+            <div className="app-item-group">
                 <div className="app-item">
                   <a href="#" rel="noopener noreferrer">
-                    <Media src="/images/GooglePlay.png" className="img-fluid" alt="Google Play" style={{ width: '150px', height: 'auto', objectFit: 'contain' }} />
+                    <Image src="/images/GooglePlay.png" width={150} height={48} alt="Google Play" /> {/* Set the width and height */}
                   </a>
                 </div>
                 <div className="app-item">
                   <a href="#" rel="noopener noreferrer">
-                    <Media src="/images/AppStore.png" className="img-fluid" alt="App Store" style={{ width: '140px', height: 'auto', objectFit: 'contain' }} />
+                    <Image src="/images/AppStore.png" width={150} height={65} alt="App Store" /> {/* Set the width and height */}
                   </a>
                 </div>
               </div>
-
               <div className="app-item-group ">
                 <div className="social-block">
                   <h5>&nbsp; &nbsp; Follow us</h5>
