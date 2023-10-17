@@ -5,7 +5,6 @@ import Footer from "../../Containers/Footer";
 // import TopBrand from "../widgets/TopBrand";
 import { FilterProvider } from "../../../helpers/filter/filter.provider";
 import { CartProvider } from "../../../helpers/cart/cart.provider";
-import Loader from "common/Loader";
 
 interface Props {
   children: ReactNode;
