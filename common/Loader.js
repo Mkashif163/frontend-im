@@ -5,7 +5,7 @@ const Loader = (props) => {
   useEffect(() => {
     setTimeout(function () {
       setIsLoading(false);
-    }, 1000);
+    }, 1);
   }, []);
   return (
     <Fragment>
