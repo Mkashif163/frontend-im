@@ -12,6 +12,7 @@ import { MenuContext } from "helpers/menu/MenuContext";
 import { useApiData } from "helpers/data/DataContext";
 import Image from "next/image";
 import Link from "next/link";
+import UserProfile from "./widgets/user-profile";
 interface header {
   cartPopupPosition: string;
   display: string;
@@ -129,13 +130,14 @@ const Header: NextPage<header> = ({
                   </div>
                   <div className="logo-block">
                     <Link href="/#">
-                      <Image
-                        src="/images/layout-2/logo/im-logo.png"
-                        className="img-fluid logo"
-                        width={150}
-                        height={50}
-                        alt="logo"
-                      />
+                      <a>
+                        <Media
+                          src={`/images/layout-2/logo/im-logo.png`}
+                          className="img-fluid logo"
+                          width="150px"
+                          alt="logo"
+                        />
+                      </a>
                     </Link>
                   </div>
                   <Search products={products} />
@@ -154,8 +156,12 @@ const Header: NextPage<header> = ({
                               <div className="icon-block mt-3 ">
                                 <ul>
                                   <span className="ms-2 d-flex">
-                                    {/* <User /> */}
-                                    <UserOptions />
+                                    <span className="d-block d-sm-none">
+                                      <UserProfile />
+                                    </span>
+                                    <span className="d-none d-sm-block">
+                                      <UserOptions />
+                                    </span>
                                     <WishList />
                                     <MobileSearch />
                                     <MobileSetting />

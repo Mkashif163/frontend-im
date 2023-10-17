@@ -7,11 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-
-
-interface user  {
-  first_name:any
-  last_name:any
+interface user {
+  first_name: any;
+  last_name: any;
 }
 const UserSignedInOption: NextPage = () => {
   const [userLoggedIn, setUserLoggedIn] = useState(false); // Replace with your authentication state logic
@@ -29,11 +27,15 @@ const UserSignedInOption: NextPage = () => {
   const userId = typeof window !== 'undefined' ? localStorage.getItem("id") : null;
 
 
-  const [userData, setUserData] = useState<user>({first_name:'',last_name:''});
+  const [userData, setUserData] = useState<user>({
+    first_name: "",
+    last_name: "",
+  });
 
   useEffect(() => {
     // Fetch user data from the API
-    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/profile/${userId}`)
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/profile/${userId}`)
       .then((response) => {
         setUserData(response.data.success);
       })
@@ -41,8 +43,7 @@ const UserSignedInOption: NextPage = () => {
         // Handle request error
         console.error("Error fetching user data:", error);
       });
-  }
-    , [userId]);
+  }, [userId]);
 
   // Use useEffect to respond to changes in the userLoggedIn state
   useEffect(() => {
@@ -59,7 +60,6 @@ const UserSignedInOption: NextPage = () => {
     }
   }, []); // Empty dependency array for one-time initialization
 
-
   return (
     <>
       <li className="mobile-user onhover-dropdown mt-2">
@@ -72,14 +72,23 @@ const UserSignedInOption: NextPage = () => {
               <>
                 <span className="d-flex">
                   <span className="col-8 my-3 mx-2">
-                    <h5 style={{ color: "#0272BC" }}>{userData.first_name} {userData.last_name}</h5>
+                    <h5 style={{ color: "#0272BC" }}>
+                      {userData.first_name} {userData.last_name}
+                    </h5>
                   </span>
                   <span className="col-3 m-2">
-                    <FontAwesomeIcon icon={faUser} className="mx-2" size="2xl" style={{ color: "#0272BC" }} />
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="mx-2"
+                      size="2xl"
+                      style={{ color: "#0272BC" }}
+                    />
                   </span>
                 </span>
                 <a href="/" onClick={handleLogout}>
-                  <span className="btn-sm btn btn-outline-primary">Sign Out</span>
+                  <span className="btn-sm btn btn-outline-primary">
+                    Sign Out
+                  </span>
                 </a>
                 <hr className="m-2" />
                 <span className="myLink">
@@ -114,7 +123,7 @@ const UserSignedInOption: NextPage = () => {
                   <p className="p-2 fs-6">Welcome to Industry Mall!</p>
                 </span>
                 <span className="d-flex justify-content-center">
-                  <a
+                  <Link
                     href="/pages/account/register"
                     className=" text-white m-0 p-0 d-flex justify-content-center test"
                     id="test"
@@ -122,16 +131,16 @@ const UserSignedInOption: NextPage = () => {
                     <button className="btn btn-outline-success btn-sm fw-bold">
                       Register
                     </button>
-                  </a>
+                  </Link>
                   <span className="me-4"></span>
-                  <a
+                  <Link
                     href="/pages/account/login"
                     className="text-white m-0 p-0 d-flex justify-content-center test"
                   >
                     <button className="btn btn-primary btn-sm fw-bold">
                       Login
                     </button>
-                  </a>
+                  </Link>
                 </span>
                 <hr className="m-2" />
                 <span className="myLink">
