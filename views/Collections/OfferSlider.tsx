@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Slider from "react-slick";
 import { Media } from "reactstrap";
+import Image from "next/image";
 
 var OfferSetting = {
   dots: false,
@@ -63,7 +64,7 @@ const OfferSlider: NextPage = () => (
           <div key={i}>
             <div className="media">
               <a href="">
-                <Media className="img-fluid " src={`/images/product-sidebar/${offer.image}`} alt="" />
+                <Image className="img-fluid " src={`/images/product-sidebar/${offer.image}`} alt="" />
               </a>
               <div className="media-body align-self-center">
                 <div className="rating">

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Media, Input } from "reactstrap";
 import CustomDropDown from "./CustomDropdown";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCcMastercard } from "@fortawesome/free-brands-svg-icons";
-import { faCcVisa } from "@fortawesome/free-brands-svg-icons";
+import Image from "next/image";
 
 const dropDownProfile = () => {
   const [openProfile, setOpenProfile] = useState(false);
@@ -318,7 +316,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <li className="mb-1">
                       <Link href="#" className="footer-link">
                         <a className="footer-link text-secondary">
-                          big deal store demo store
+                          Industry Mall store
                         </a>
                       </Link>
                     </li>
@@ -326,15 +324,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <li className="mb-1">
                       <Link href="#" className="footer-link">
                         <a className="footer-link text-secondary">
-                          call us: 03065151694{" "}
-                        </a>
-                      </Link>
-                    </li>
-                    <br />
-                    <li className="mb-1">
-                      <Link href="#" className="footer-link">
-                        <a className="footer-link text-secondary">
-                          email us: salihakazmi21@gmail.com
+                          email us: Industrymall@gmail.com
                         </a>
                       </Link>
                     </li>
@@ -727,6 +717,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                 <li className="list-inline-item mx-4">
                   <div className="footer-logo">
                     <a href="#">
+
                       <Media
                         src={`/images/layout-2/logo/im-logo.png`}
                         width="150px"
@@ -775,7 +766,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
         <Container>
           <Row>
             <div className="app-link-bloc-contain app-link-bloc-contain-1">
-              <div className="app-item-group">
+            <div className="app-item-group">
                 <div className="app-item">
                   <a href="#" rel="noopener noreferrer">
                     <Media
@@ -788,6 +779,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         objectFit: "contain",
                       }}
                     />
+
                   </a>
                 </div>
                 <div className="app-item">
@@ -805,7 +797,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   </a>
                 </div>
               </div>
-
               <div className="app-item-group ">
                 <div className="social-block">
                   <h5>&nbsp; &nbsp; Follow us</h5>

@@ -10,14 +10,14 @@ interface Props {
 }
 const Layout2Section: NextPage<Props> = ({ children }) => (
   <div className="bg-light">
-    <Loader>
+    
       <div>
         <CartProvider>
           <FilterProvider>{children}</FilterProvider>
           <Footer />
         </CartProvider>
       </div>
-    </Loader>
+  
   </div>
 );
 

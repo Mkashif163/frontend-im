@@ -24,7 +24,8 @@ const UserSignedInOption: NextPage = () => {
     toast.success("You have been Signed out successfully!");
   };
 
-  const userId = localStorage.getItem("id");
+  const userId = typeof window !== 'undefined' ? localStorage.getItem("id") : null;
+
 
   const [userData, setUserData] = useState<user>({
     first_name: "",

@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import React from "react";
 import Slider from "react-slick";
 import { Media } from "reactstrap";
+import Image from "next/image";
 
 
 interface NewProductData {
@@ -37,7 +38,7 @@ const NewProduct: React.FC<NewProductData> = ({ item }) => {
         <div>
           <div className="media">
             <a href="">
-              <Media className="img-fluid " src={item.url} alt="" />
+              <Image className="img-fluid " src={item.url} alt="" />
             </a>
             <div className="media-body align-self-center">
               <div className="rating">
@@ -57,7 +58,7 @@ const NewProduct: React.FC<NewProductData> = ({ item }) => {
         <div>
           <div className="media">
             <a href="">
-              <Media className="img-fluid " src={item.url} alt="" />
+              <Image className="img-fluid " src={item.url} alt="" />
             </a>
             <div className="media-body align-self-center">
               <div className="rating">
