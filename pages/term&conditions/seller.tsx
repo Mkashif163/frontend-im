@@ -11,25 +11,29 @@ interface TermCondition {
 }
 
 const LeftSidebar: NextPage = () => {
-  // Define state to store the fetched terms and conditions
   const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
     []
   );
 
-  // Use useEffect to fetch data from the API when the component mounts
   useEffect(() => {
+<<<<<<< HEAD
+    fetch("http://18.235.14.45/api/homeapi")
+=======
     // Fetch data directly within the useEffect
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}$terms_and_conditions`)
+>>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
       .then((response) => response.json())
-      .then((data: TermCondition[]) => {
-        // Update the state with the fetched data
-        setTermsAndConditions(data);
+      .then((data: { terms_and_conditions: TermCondition[] }) => {
+        const termsData = data.terms_and_conditions;
+        setTermsAndConditions(termsData);
       })
       .catch((error: Error) => {
         // Handle any errors here
         console.error("Error fetching data:", error);
       });
-  }, []); // The empty array means this effect runs only once when the component mounts
+  }, []); 
+
+  const filteredTerm = termsAndConditions.find((term) => term.id === 11);
 
   return (
     <Layout1>
@@ -37,6 +41,35 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
+<<<<<<< HEAD
+              {filteredTerm && (
+                <div>
+                  <b>
+                    <h2
+                      className="title"
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "800",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {filteredTerm.title}
+                    </h2>
+                  </b>
+                  <br />
+                  <div
+                    className="description"
+                    style={{
+                      textAlign: "justify",
+                      fontSize: "14px",
+                      textJustify: "inter-word",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
+                  />
+                  <br />
+                </div>
+              )}
+=======
               {/* Render the fetched terms_and_conditions data here */}
               {/* {termsAndConditions.map((term) => (
                 <div key={termsAndConditions.id}>
@@ -44,6 +77,7 @@ const LeftSidebar: NextPage = () => {
                   <div dangerouslySetInnerHTML={{ __html: termsAndConditions.description }} />
                 </div>
               ))} */}
+>>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
             </div>
           </div>
         </div>

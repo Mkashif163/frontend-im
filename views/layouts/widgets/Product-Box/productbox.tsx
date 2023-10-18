@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { Media, Modal, ModalBody, Badge } from "reactstrap";
+import { Media, Modal, ModalBody } from "reactstrap";
 import { CurrencyContext } from "../../../../helpers/currency/CurrencyContext";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
@@ -10,7 +10,7 @@ interface productType {
   product: any;
   addWish: Function;
   addCompare: Function;
-  hoverEffect: any;
+  hoverEffect: any
 }
 
 const ProductBox: NextPage<productType> = ({
@@ -31,9 +31,14 @@ const ProductBox: NextPage<productType> = ({
   const [selectedCondition, setSelectedCondition] = useState("New");
   const uniqueSize = [];
   const uniqueColor = [];
+  const [isZoomed, setIsZoomed] = useState(false);
 
   const changeColorVar = (img_id) => {
     slider2.current.slickGoTo(img_id);
+  };
+
+  const handleImageClick = () => {
+    setIsZoomed(!isZoomed);
   };
 
   const minusQty = () => {
@@ -281,4 +286,5 @@ const ProductBox: NextPage<productType> = ({
     </>
   );
 };
+
 export default ProductBox;

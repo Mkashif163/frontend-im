@@ -29,7 +29,7 @@ const LeftSidebar: NextPage = () => {
   }, []); // The empty array means this effect runs only once when the component mounts
 
   // Filter the termsAndConditions array to only include the term with id 11
-  const filteredTerm = termsAndConditions.find((term) => term.id === 30);
+  const filteredTerm = termsAndConditions.find((term) => term.id === 32);
 
   return (
     <Layout1>

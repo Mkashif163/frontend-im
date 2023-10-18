@@ -452,16 +452,10 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         </li>
                         <br />
                         <li className="mb-1">
-                          <Link
-                            href="/term&conditions/term_condition"
-                            className="footer-link"
-                          >
-                            <a className="footer-link text-secondary">
-                              User-friendly payment method
-                            </a>
-                          </Link>
-                        </li>
-                        <br />
+                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                            User-friendly payment method
+                          </a>
+                        </li><br />
                       </ul>
                     </div>
                   </div>

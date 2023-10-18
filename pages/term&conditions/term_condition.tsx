@@ -11,19 +11,16 @@ interface TermCondition {
 }
 
 const LeftSidebar: NextPage = () => {
-  // Define state to store the fetched terms and conditions
   const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
     []
   );
 
-  // Use useEffect to fetch data from the API when the component mounts
   useEffect(() => {
-    // Fetch data directly within the useEffect
-    fetch("your_api_endpoint_here")
+    fetch("http://18.235.14.45/api/homeapi")
       .then((response) => response.json())
-      .then((data: TermCondition[]) => {
-        // Update the state with the fetched data
-        setTermsAndConditions(data);
+      .then((data: { terms_and_conditions: TermCondition[] }) => {
+        const termsData = data.terms_and_conditions;
+        setTermsAndConditions(termsData);
       })
       .catch((error: Error) => {
         // Handle any errors here
@@ -40,8 +37,10 @@ const LeftSidebar: NextPage = () => {
               {/* Render the fetched terms_and_conditions data here */}
               {termsAndConditions.map((term) => (
                 <div key={term.id}>
-                  <h2>{term.title}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: term.description }} />
+                  <b><h2 className="title" style={{ fontSize: '16px', fontWeight: '800', textTransform: 'uppercase'}}>{term.title}</h2></b>
+                  <br/>
+                  <div className="description" style={{textAlign: 'justify', fontSize: '14px', textJustify: 'inter-word'}} dangerouslySetInnerHTML={{ __html: term.description }} />
+                  <br/>
                 </div>
               ))}
             </div>
@@ -53,5 +52,3 @@ const LeftSidebar: NextPage = () => {
 };
 
 export default LeftSidebar;
-
-   
