@@ -156,7 +156,7 @@ const valueText = (value: number) => `$${value}`;
                                 onClick={() => handleSubClick(subCategory.id)}
                                 style={subCategory.id === activeTab ? styles.activeLi : styles.li}
                               >
-                                <li className={`font-weight-bold ${subCategory.id === activeTab ? "active" : ""}`}>
+                                <li className={`${subCategory.id === activeTab ? "active" : ""}`}>
                                   {subCategory.name}
                                 </li>
                               </div>
