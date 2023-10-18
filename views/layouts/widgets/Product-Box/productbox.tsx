@@ -128,7 +128,7 @@ const ProductBox: NextPage<productType> = ({
                         }`}
                         onClick={() => setSelectedCondition("New")}
                       >
-                        New
+                        <span style={{ cursor: "pointer" }}>New</span>
                       </span>
                     </div>
                     <div>
@@ -138,7 +138,7 @@ const ProductBox: NextPage<productType> = ({
                         }`}
                         onClick={() => setSelectedCondition("Used")}
                       >
-                        Used
+                        <span style={{ cursor: "pointer" }}>Used</span>
                       </span>
                     </div>
                   </div>

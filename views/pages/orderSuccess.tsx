@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import { NextPage } from "next";
 import { Media, Row, Col } from "reactstrap";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
+import Link from "next/link";
 
 const OrderSuccessPage: NextPage = () => {
-  const items = JSON.parse(localStorage.getItem("order-sucess-items"))
+  const items = JSON.parse(localStorage.getItem("order-sucess-items"));
   let subtotal = 0;
   items && items?.map((item) => (subtotal += item.new_price * item.qty));
   const shippingCharge = 12;
@@ -18,12 +19,13 @@ const OrderSuccessPage: NextPage = () => {
   const getDateFormate = () => {
     var currentDate: any = new Date();
     var temp = new Date(currentDate.setDate(currentDate.getDate() + 1));
-    return temp.getDate() + "/" + (temp.getMonth() + 1) + "/" + temp.getFullYear();
+    return (
+      temp.getDate() + "/" + (temp.getMonth() + 1) + "/" + temp.getFullYear()
+    );
   };
 
   return (
     <>
-
       {/* <!-- order-detail section start --> */}
       <section className="section-big-py-space mt--5 bg-light">
         <div className="custom-container">
@@ -37,7 +39,11 @@ const OrderSuccessPage: NextPage = () => {
                       return (
                         <Fragment key={i}>
                           <Col xs="3">
-                            <Media src={item.url} alt="" className="img-fluid " />
+                            <Media
+                              src={item.url}
+                              alt=""
+                              className="img-fluid "
+                            />
                           </Col>
                           <Col xs="3" className="order_detail">
                             <div>
@@ -71,7 +77,7 @@ const OrderSuccessPage: NextPage = () => {
                         subtotal{" "}
                         <span>
                           {symbol}
-                          {(subtotal).toFixed(2)}
+                          {subtotal.toFixed(2)}
                         </span>
                       </li>
                       <li>
@@ -136,19 +142,23 @@ const OrderSuccessPage: NextPage = () => {
             <div className="col-sm-12">
               <div>
                 <div className="col-sm-12 empty-cart-cls text-center">
-                  <img src={`static/images/icon-empty-cart.png`} className="img-fluid mb-4" alt="" />
+                  <img
+                    src={`static/images/icon-empty-cart.png`}
+                    className="img-fluid mb-4"
+                    alt=""
+                  />
                   <h3 className="mb-3">
                     <strong>You are not placing any order</strong>
                   </h3>
                   <div className="row cart-buttons">
                     <div className="col-12">
-                      <a href="/" className="btn btn-normal">
-                        continue shopping
-                      </a>
+                      <Link href="/">
+                        <a className="btn btn-normal">continue shopping</a>
+                      </Link>
                       {items && (
-                        <a href="/pages/account/checkout" className="btn btn-normal ms-3">
-                          check out
-                        </a>
+                        <Link href="/pages/account/checkout">
+                          <a className="btn btn-normal ms-3">check out</a>
+                        </Link>
                       )}
                     </div>
                   </div>

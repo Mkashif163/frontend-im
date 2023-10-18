@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import router from "next/router";
+import Link from "next/link";
 
 const RegisterPage: NextPage = () => {
   const [first_name, setFirstName] = useState("");
@@ -14,7 +15,7 @@ const RegisterPage: NextPage = () => {
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [gender, setGender] = useState("Male"); // Default to "Male"
-  const [role ,setRole] = useState("customer");
+  const [role, setRole] = useState("customer");
   const [phoneError, setPhoneError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [cPasswordError, setCPasswordError] = useState("");
@@ -37,7 +38,9 @@ const RegisterPage: NextPage = () => {
 
     // Password validation: must have 8 characters with alphabets and special characters
     if (!/^(?=.*[A-Za-z])(?=.*[@#$%^&+=!])(?=.{8,})/.test(password)) {
-      setPasswordError("Password must have 8 characters with alphabets and special characters");
+      setPasswordError(
+        "Password must have 8 characters with alphabets and special characters"
+      );
       isFormValid = false;
     } else {
       setPasswordError(""); // Clear password error if valid
@@ -66,19 +69,25 @@ const RegisterPage: NextPage = () => {
       c_password: cPassword,
       gender: gender,
       role: role,
-      email_verified_at: new Date().toISOString().split('T')[0] + " " + new Date().toTimeString().split(' ')[0]
+      email_verified_at:
+        new Date().toISOString().split("T")[0] +
+        " " +
+        new Date().toTimeString().split(" ")[0],
     };
-    
 
     // Set loading to true while waiting for the response
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/register`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/register`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
         localStorage.setItem("token", response.data.success.token);
@@ -93,7 +102,12 @@ const RegisterPage: NextPage = () => {
         });
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error && error.response.data.error.email) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.error &&
+        error.response.data.error.email
+      ) {
         // Handle email error
         setEmailError(error.response.data.error.email[0]);
       } else {
@@ -176,7 +190,9 @@ const RegisterPage: NextPage = () => {
                           setEmailError(""); // Clear email error on input change
                         }}
                       />
-                      {emailError && <div className="text-danger">{emailError}</div>}
+                      {emailError && (
+                        <div className="text-danger">{emailError}</div>
+                      )}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="phone_number">Phone Number</Label>
@@ -193,7 +209,9 @@ const RegisterPage: NextPage = () => {
                           setPhoneError(""); // Clear phone error on input change
                         }}
                       />
-                      {phoneError && <div className="text-danger">{phoneError}</div>}
+                      {phoneError && (
+                        <div className="text-danger">{phoneError}</div>
+                      )}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="password">Password</Label>
@@ -210,7 +228,9 @@ const RegisterPage: NextPage = () => {
                           setPasswordError(""); // Clear password error on input change
                         }}
                       />
-                      {passwordError && <div className="text-danger">{passwordError}</div>}
+                      {passwordError && (
+                        <div className="text-danger">{passwordError}</div>
+                      )}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="c_password">Confirm Password</Label>
@@ -227,7 +247,9 @@ const RegisterPage: NextPage = () => {
                           setCPasswordError(""); // Clear confirm password error on input change
                         }}
                       />
-                      {cPasswordError && <div className="text-danger">{cPasswordError}</div>}
+                      {cPasswordError && (
+                        <div className="text-danger">{cPasswordError}</div>
+                      )}
                     </FormGroup>
                     <FormGroup className="col-md-12">
                       <Label htmlFor="gender">Gender</Label>
@@ -258,7 +280,11 @@ const RegisterPage: NextPage = () => {
                       </select>
                     </FormGroup> */}
                     <FormGroup className="col-md-12">
-                      <Button className="btn btn-normal" type="submit" disabled={isLoading}>
+                      <Button
+                        className="btn btn-normal"
+                        type="submit"
+                        disabled={isLoading}
+                      >
                         {isLoading ? "Signing Up..." : "Sign Up"}
                       </Button>
                     </FormGroup>
@@ -267,9 +293,9 @@ const RegisterPage: NextPage = () => {
                     <Col md="12">
                       <p>
                         Have you already an account?{" "}
-                        <a href="/pages/account/login" className="txt-default">
-                          Click here to Login
-                        </a>
+                        <Link href="/pages/account/login">
+                          <a className="txt-default">Click here to Login</a>
+                        </Link>
                       </p>
                     </Col>
                   </div>

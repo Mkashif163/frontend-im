@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { CurrencyContext } from "../../../../../helpers/currency/CurrencyContext";
 import { useTranslation } from "react-i18next";
 import dataa from "../../../../../data/langConfig.json";
+import Link from "next/link";
 
 const GET_CURRENCY = gql`
   query getCurrency {
@@ -28,7 +29,9 @@ const TopBar: React.FC = () => {
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang.val);
     setSelectedLang(lang);
-    lang.val === "es" ? document.body.classList.add(lang.val) : document.body.classList.remove("es");
+    lang.val === "es"
+      ? document.body.classList.add(lang.val)
+      : document.body.classList.remove("es");
   };
   const toggleCurrency = () => {
     setOpenUsd(!openUsd);
@@ -44,15 +47,19 @@ const TopBar: React.FC = () => {
   }, []);
 
   return (
-    <div className={`top-header ${url === "layout6" ? "top-header-inverse" : ""}`}>
+    <div
+      className={`top-header ${url === "layout6" ? "top-header-inverse" : ""}`}
+    >
       <div className="custom-container">
         <Row>
           <Col xl="5" md="7" sm="6">
             <div className="top-header-left">
               <div className="shpping-order">
-              <a href="http://dashboard.industrymall.net/" target="__blank">
-                <h6>{t("Sell on Industry Mall")} </h6>
-                </a>
+                <Link href="http://dashboard.industrymall.net/">
+                  <a target="__blank">
+                    <h6>{t("Sell on Industry Mall")} </h6>
+                  </a>
+                </Link>
               </div>
               <div className="app-link">
                 <h6>{t("Download app")}</h6>
@@ -106,11 +113,20 @@ const TopBar: React.FC = () => {
               <div className="language-block">
                 <div className="language-dropdown">
                   <Dropdown isOpen={openLang} toggle={toggleLang}>
-                    <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={openLang} className="language-dropdown-click">
+                    <DropdownToggle
+                      tag="span"
+                      data-toggle="dropdown"
+                      aria-expanded={openLang}
+                      className="language-dropdown-click"
+                    >
                       {lang.lang}
                       <i className="fa fa-angle-down" aria-hidden="true"></i>
                     </DropdownToggle>
-                    <ul className={`language-dropdown-open ${openLang ? "" : "open"}`}>
+                    <ul
+                      className={`language-dropdown-open ${
+                        openLang ? "" : "open"
+                      }`}
+                    >
                       {dataa.map((lang: any, i) => (
                         <li key={i}>
                           <a
@@ -118,7 +134,8 @@ const TopBar: React.FC = () => {
                             onClick={() => {
                               changeLanguage(lang);
                               toggleLang();
-                            }}>
+                            }}
+                          >
                             {lang.lang}
                           </a>
                         </li>
@@ -128,18 +145,28 @@ const TopBar: React.FC = () => {
                 </div>
                 <div className="curroncy-dropdown">
                   <Dropdown isOpen={openUsd} toggle={toggleCurrency}>
-                    <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={openUsd} className="curroncy-dropdown-click">
+                    <DropdownToggle
+                      tag="span"
+                      data-toggle="dropdown"
+                      aria-expanded={openUsd}
+                      className="curroncy-dropdown-click"
+                    >
                       {selectedCurr.currency}
                       <i className="fa fa-angle-down" aria-hidden="true"></i>
                     </DropdownToggle>
-                    <ul className={`curroncy-dropdown-open ${openUsd ? "" : "open"}`}>
+                    <ul
+                      className={`curroncy-dropdown-open ${
+                        openUsd ? "" : "open"
+                      }`}
+                    >
                       {data.currency.map((cur, i) => (
                         <li key={i}>
                           <div
                             onClick={() => {
                               selectedCurrency(cur);
                               toggleCurrency();
-                            }}>
+                            }}
+                          >
                             <div>{cur.symbol}</div>
                             <div> {cur.currency}</div>
                           </div>

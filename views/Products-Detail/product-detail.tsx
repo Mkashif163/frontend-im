@@ -4,12 +4,14 @@ import ImageGroup from "./common/ImageGroup";
 import { CartContext } from "helpers/cart/cart.context";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
 import { WishlistContext } from "helpers/wishlist/wish.context";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
   faMedal,
   faTags,
 } from "@fortawesome/free-solid-svg-icons";
+
 import axios from "axios";
 
 interface ProductRightProps {
@@ -20,6 +22,7 @@ interface ProductRightProps {
   totalReview: number;
   offers: number;
 }
+
 
 const ProductDetail: React.FC<ProductRightProps> = ({
   item,
@@ -36,6 +39,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({
   const [activesize, setSize] = useState("");
   const [showAll, setShowAll] = useState(false);
   const [selectedCondition, setSelectedCondition] = useState("New");
+  const router = useRouter();
 
   const [offrs, setOffers] = useState([]); // State to store the fetched offers
 
@@ -277,6 +281,7 @@ const ProductDetail: React.FC<ProductRightProps> = ({
               </div>
             </div>
             <div className="product-description border-product">
+
               <h6 className="product-title">quantity</h6>
               <div className="qty-box">
                 <div className="input-group">
@@ -381,6 +386,100 @@ const ProductDetail: React.FC<ProductRightProps> = ({
                   <h6 className="product-title">No Offers availble</h6>
                 </div>
               )}
+              <h6 className="product-title">quantity</h6>
+              <div className="qty-box">
+                <div className="input-group">
+                  <span className="input-group-prepend">
+                    <button
+                      type="button"
+                      className="btn quantity-left-minus"
+                      data-type="minus"
+                      data-field=""
+                      onClick={minusQty}
+                    >
+                      <i className="ti-angle-left"></i>
+                    </button>
+                  </span>
+                  <Input
+                    type="text"
+                    name="quantity"
+                    className="form-control input-number"
+                    value={qty}
+                    onChange={changeQty}
+                  />
+                  <span className="input-group-prepend">
+                    <button
+                      type="button"
+                      className="btn quantity-right-plus"
+                      data-type="plus"
+                      data-field=""
+                      onClick={plusQty}
+                    >
+                      <i className="ti-angle-right"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="product-buttons">
+              {stock === "InStock" ? (
+                <>
+                  <a
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#addtocart"
+                    className="btn btn-normal"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      addToCart(item, qty, selectedCondition);
+                    }}
+                  >
+                    Add to Cart
+                  </a>
+                  <a
+                    href="/pages/account/checkout"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      addToCart(item, qty, selectedCondition);
+                      document.body.style.overflow = "visible";
+                      router.push("/pages/account/checkout"); // Navigate after addToCart
+                    }}
+                    className="btn btn-normal"
+                  >
+                    Buy Now
+                  </a>
+                </>
+              ) : (
+                <p className="out-of-stock-message">Out of Stock</p>
+              )}
+            </div>
+          </div>
+
+          <div className="product-description border-product">
+            <div className="coupens">
+              <div className="coupens-title">
+                <FontAwesomeIcon className="tag" icon={faTags} size="xl" />
+                <h6 className="product-title">
+                  {dummyOffers.length} Offers availble
+                </h6>
+              </div>
+
+              <div className="offers">
+                <ul className="Offers-list">
+                  {visibleOffers.map((offer, index) => (
+                    <li key={index}>
+                      <span className="offer">{offer.offerCode}</span>
+                      <div className="offer-details">
+                        <h5>{offer.title}</h5>
+                        <p>{offer.description}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <h5 className="show-offer" onClick={toggleShowAll}>
+                  {showAll ? "Show Less" : "Show More"}
+                </h5>
+              </div>
             </div>
           </div>
 

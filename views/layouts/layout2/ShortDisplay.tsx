@@ -137,13 +137,11 @@ interface ShortDisplayProps {
 }
 
 const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
-
   const [products, setProducts] = useState([]);
 
-
-
   useEffect(() => {
-    if (data?.menus) { // Use optional chaining to check if data and data.menus exist
+    if (data?.menus) {
+      // Use optional chaining to check if data and data.menus exist
       const allProducts = [];
 
       // Loop through each menu
@@ -166,8 +164,10 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
   }, [data]);
 
   const getRandomProducts = (products, count) => {
-    const shuffled = products.slice(); // Create a copy of the products array
-    let i = products.length;
+    const availableProducts = products.filter((product) => product.stock > 0);
+
+    const shuffled = availableProducts.slice(); // Create a copy of the availableProducts array
+    let i = availableProducts.length;
     const selectedProducts = [];
 
     while (i-- && selectedProducts.length < count) {
@@ -182,7 +182,6 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
   };
 
   const randomProducts = getRandomProducts(products, 5);
-
 
   return (
     <>
