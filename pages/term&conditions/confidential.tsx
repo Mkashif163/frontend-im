@@ -26,10 +26,9 @@ const LeftSidebar: NextPage = () => {
         // Handle any errors here
         console.error("Error fetching data:", error);
       });
-  }, []); // The empty array means this effect runs only once when the component mounts
+  }, []); 
 
-  // Filter the termsAndConditions array to only include the term with id 11
-  const filteredTerm = termsAndConditions.find((term) => term.id === 30);
+  const filteredTerm = termsAndConditions.find((term) => term.id === 35);
 
   return (
     <Layout1>
@@ -37,32 +36,23 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
-              {/* Render the fetched term with id 11 here */}
               {filteredTerm && (
-                <div>
-                  <b>
-                    <h2
-                      className="title"
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "800",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {filteredTerm.title}
-                    </h2>
-                  </b>
-                  <br />
-                  <div
-                    className="description"
-                    style={{
+                <div className="description" style={{
+                    textAlign: "justify",
+                    fontSize: "16px",
+                    textJustify: "inter-word"}}>
+               <button className="accordion-button">
+                    <b><h2>{filteredTerm.title}</h2></b>
+                  </button>
+                <div className="accordion-content">
+                    <div className="description" style={{
                       textAlign: "justify",
-                      fontSize: "14px",
-                      textJustify: "inter-word",
+                      fontSize: "16px",
+                      textJustify: "inter-word"
                     }}
-                    dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
-                  />
-                  <br />
+                      dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
@@ -71,6 +61,7 @@ const LeftSidebar: NextPage = () => {
       </section>
     </Layout1>
   );
+  
 };
 
 export default LeftSidebar;

@@ -56,7 +56,7 @@ const CollectionBanner: NextPage<CollectionBannerProps> = ({ cat,sub_cat }) =>
                   </Link>
                 ))}
               </div>
-            ))}
+            ))}  
           </div>
           <a className="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>

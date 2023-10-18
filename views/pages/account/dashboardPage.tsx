@@ -88,7 +88,6 @@ const Dashboard: NextPage<Props> = ({ userId }) => {
                     >
                       <Link href={""}>My Orders</Link>
                     </li>
-                    {/* Updated "Account" Link with sub-items */}
                     <li
                       className={currentComponent === "account" ? "active" : ""}
                     >
@@ -137,7 +136,6 @@ const Dashboard: NextPage<Props> = ({ userId }) => {
                         </ul>
                       </div>
                     </li>
-                    {/* Continue with the other list items */}
                     <li
                       className={
                         currentComponent === "wishlist" ? "active" : ""

@@ -118,6 +118,7 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ products }) => {
         <div className="container-fluid">
           <div className="row d-flex justify-content-center">
             <div className="col-6">
+              <div className="product-box">
               <div className="short-product-images m-3 p-2">
                 <Slider>
                   <Col lg="5">
@@ -134,7 +135,7 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ products }) => {
                           src={currentProduct.url}
                           alt=""
                           className={`img-fluid`}
-                          style={{ maxWidth: "80%", maxHeight: "100%" }}
+                          style={{ maxWidth: "80%", maxHeight: "60%" }}
                         />
                       </div>
                     </Slider>
@@ -160,7 +161,7 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ products }) => {
                                   className="img-fluid image_zoom_cls-0"
                                   style={{
                                     maxWidth: "100%",
-                                    maxHeight: "100%",
+                                    maxHeight: "60%",
                                   }}
                                   onClick={() => setSelectedImageIndex(i)}
                                 />
@@ -172,6 +173,7 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ products }) => {
                     </Row>
                   </Col>
                 </Slider>
+              </div>
               </div>
             </div>
             <div className="col-6">

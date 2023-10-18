@@ -108,12 +108,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
 
                       <li className="mb-1">
                         <a href="/term&conditions/services" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                          Services
-                        </a>
-                      </li><br />
-                      <li className="mb-1">
-                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
-                          Warrenty
+                         Customer Services
                         </a>
                       </li><br />
                     </ul>
@@ -135,17 +130,17 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/order" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Orders Resolution
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/shipping" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Shipment Resolution
                         </a>
                       </li><br />
                       <li className="mb-1">
-                        <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                        <a href="/term&conditions/tax" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                           Taxes Resolution
                         </a>
                       </li><br />
@@ -277,7 +272,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/paymentmethod" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             User-friendly payment method
                           </a>
                         </li><br />
@@ -304,12 +299,12 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/faq" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Agreed all rules & regulations
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/liability" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Being a member liability
                           </a>
                         </li><br />
@@ -363,22 +358,22 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                     <div className="footer-content">
                       <ul className="list-unstyled">
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/confidential" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Confidential Information
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/confidential" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Personal Information
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/confidential" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Confidential and Personal
                           </a>
                         </li><br />
                         <li className="mb-1">
-                          <a href="/term&conditions/term_condition" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
+                          <a href="/term&conditions/confidential" className="footer-link" style={{ fontSize: '12px', color: 'gray' }}>
                             Other Declarations
                           </a>
                         </li><br />

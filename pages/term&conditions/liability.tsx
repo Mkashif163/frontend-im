@@ -28,8 +28,8 @@ const LeftSidebar: NextPage = () => {
       });
   }, []); // The empty array means this effect runs only once when the component mounts
 
-  // Filter the termsAndConditions array to only include the term with id 11
-  const filteredTerm = termsAndConditions.find((term) => term.id === 30);
+  // Filter the termsAndConditions array to only include the term with id 5
+  const filteredTerm = termsAndConditions.find((term) => term.id === 33 || 6);
 
   return (
     <Layout1>
@@ -37,7 +37,6 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
-              {/* Render the fetched term with id 11 here */}
               {filteredTerm && (
                 <div>
                   <b>
