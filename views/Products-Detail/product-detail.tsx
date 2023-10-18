@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
+import { useRouter } from "next/router";
 
 interface ProductRightProps {
   item: any;
