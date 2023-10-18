@@ -4,7 +4,7 @@ import {  Row, Col, Form, Input, Label } from "reactstrap";
 function CustomerMessageForm() {
   return (
     <>
-   <section className="tab-product tab-exes creative-card creative-inner mb-0">
+   <section id="support" className="tab-product tab-exes creative-card creative-inner mb-0">
   <Row>
     <Col sm="12" lg="12">
       <Form>
@@ -55,7 +55,7 @@ function CustomerMessageForm() {
 
           <Col md="12 mt-3" className="mt-3">
             <button className="btn btn-normal" type="submit">
-              Submit Your Review
+              Submit Your Query
             </button>
           </Col>
         </div>

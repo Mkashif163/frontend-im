@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import ProductDetail from "./product-detail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowDown, faFilePdf, faHeadset } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 interface ProductSlickProps {
   item: any;
@@ -89,10 +90,12 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
                 </Col>
                 <Col>
                   <div className="support-div w-100">
+                  <Link href={"#support"}>
                     <div className="product-contact">
                       <FontAwesomeIcon icon={faHeadset} size="2xl" />
                       <h6>support</h6>
                     </div>
+                    </Link>
                     <div className="product-contact">
                       <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
                       <h6>Download pdf</h6>
