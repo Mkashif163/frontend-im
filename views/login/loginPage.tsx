@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { Row, Col, Input, Label } from "reactstrap";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -32,11 +33,15 @@ const Login: NextPage = () => {
       };
 
       // Make a POST request to the API endpoint
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // Check if the login was successful
       if (response.status === 200 && response.data.success) {
@@ -51,12 +56,15 @@ const Login: NextPage = () => {
         setTimeout(() => {
           router.push(`/pages/account/dashboard`);
         }, 200);
-        
       } else {
         setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error === "Unauthorised") {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.error === "Unauthorised"
+      ) {
         setError("Password or email is invalid.");
       } else {
         setError("Network error. Please try again later.");
@@ -71,7 +79,12 @@ const Login: NextPage = () => {
       <section className="login-page section-big-py-space">
         <div className="custom-container">
           <Row className="row">
-            <Col xl="4" lg="6" md="8" className="offset-xl-4 offset-lg-3 offset-md-2">
+            <Col
+              xl="4"
+              lg="6"
+              md="8"
+              className="offset-xl-4 offset-lg-3 offset-md-2"
+            >
               <div className="theme-card bg-light">
                 <h3 className="text-center">Login</h3>
                 <form className="theme-form">
@@ -99,20 +112,37 @@ const Login: NextPage = () => {
                       required
                     />
                   </div>
-                  <button type="button" className="btn btn-normal" onClick={() => loginAuth(email, password)} disabled={isLoading}>
+                  <button
+                    type="button"
+                    className="btn btn-normal"
+                    onClick={() => loginAuth(email, password)}
+                    disabled={isLoading}
+                  >
                     {isLoading ? "Logging In..." : "Login"}
                   </button>
                   {error && <p className="text-danger mt-2">{error}</p>}
-                  <a className="float-end txt-default mt-2" href="/pages/account/forget-password" id="fgpwd">
+                  <a
+                    className="float-end txt-default mt-2"
+                    href="/pages/account/forget-password"
+                    id="fgpwd"
+                  >
                     Forgot your password?
                   </a>
                 </form>
-                <p className="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
-                <a href="/pages/account/register" className="txt-default pt-3 d-block">
-                  Create an Account
-                </a>
-                <a href="http://dashboard.industrymall.net/" className="txt-default pt-3 d-block" target="__blank">
-                <h6>Login as vendor </h6>
+                <p className="mt-3">
+                  Sign up for a free account at our store. Registration is quick
+                  and easy. It allows you to be able to order from our shop. To
+                  start shopping click register.
+                </p>
+                <Link href="/pages/account/register">
+                  <a className="txt-default pt-3 d-block">Create an Account</a>
+                </Link>
+                <a
+                  href="http://dashboard.industrymall.net/"
+                  className="txt-default pt-3 d-block"
+                  target="__blank"
+                >
+                  <h6>Login as vendor </h6>
                 </a>
               </div>
             </Col>

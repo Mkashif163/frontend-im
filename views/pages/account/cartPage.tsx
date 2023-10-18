@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { CartContext } from "../../../helpers/cart/cart.context";
 import { CurrencyContext } from "helpers/currency/CurrencyContext";
+import Link from "next/link";
 
 const CartPage: NextPage = () => {
-  const { cartItems, updateQty, removeFromCart } = React.useContext(CartContext);
+  const { cartItems, updateQty, removeFromCart } =
+    React.useContext(CartContext);
   const { selectedCurr } = React.useContext(CurrencyContext);
   const { symbol } = selectedCurr;
   const [quantityError, setQuantityError] = useState<boolean>(false);
 
-
   // Calculate the cart total taking product condition into account
   const cartTotal = cartItems.reduce((total, item) => {
-    const price = item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price;
+    const price =
+      item.condition === "New"
+        ? item.new_sale_price
+        : item.refurnished_sale_price;
     return total + price * item.qty;
   }, 0);
 
@@ -35,7 +39,6 @@ const CartPage: NextPage = () => {
   //     setCartItems([...cartItems]);
   //   }
   // };
-
 
   return (
     <>
@@ -75,10 +78,14 @@ const CartPage: NextPage = () => {
                                     <input
                                       type="text"
                                       name="quantity"
-                                      onChange={(e) => handleQtyUpdate(item, e.target.value)}
+                                      onChange={(e) =>
+                                        handleQtyUpdate(item, e.target.value)
+                                      }
                                       className="form-control input-number"
                                       defaultValue={item.qty}
-                                      style={{ borderColor: quantityError && "red" }}
+                                      style={{
+                                        borderColor: quantityError && "red",
+                                      }}
                                       min="1"
                                     />
                                   </div>
@@ -87,12 +94,18 @@ const CartPage: NextPage = () => {
                               <div className="col-xs-3 col-3">
                                 <h2 className="td-color">
                                   {symbol}
-                                  {item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price}
+                                  {item.condition === "New"
+                                    ? item.new_sale_price
+                                    : item.refurnished_sale_price}
                                 </h2>
                               </div>
                               <div className="col-xs-3 col-3">
                                 <h2 className="td-color">
-                                  <a href="#" className="icon" onClick={(e) => e.preventDefault()}>
+                                  <a
+                                    href="#"
+                                    className="icon"
+                                    onClick={(e) => e.preventDefault()}
+                                  >
                                     <i className="ti-close"></i>
                                   </a>
                                 </h2>
@@ -102,7 +115,9 @@ const CartPage: NextPage = () => {
                           <td>
                             <h2>
                               {symbol}
-                              {item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price}
+                              {item.condition === "New"
+                                ? item.new_sale_price
+                                : item.refurnished_sale_price}
                             </h2>
                           </td>
                           <td>
@@ -111,16 +126,20 @@ const CartPage: NextPage = () => {
                                 <input
                                   type="number"
                                   name="quantity"
-                                  onChange={(e) => handleQtyUpdate(item, e.target.value)}
+                                  onChange={(e) =>
+                                    handleQtyUpdate(item, e.target.value)
+                                  }
                                   className="form-control input-number"
                                   defaultValue={item.qty}
-                                  style={{ borderColor: quantityError && "red" }}
+                                  style={{
+                                    borderColor: quantityError && "red",
+                                  }}
                                   min="1"
                                 />
                               </div>
                             </div>
                           </td>
-                          
+
                           {/* <td>
                             <div className="condition-dropdown">
                               <select
@@ -140,14 +159,17 @@ const CartPage: NextPage = () => {
                               onClick={(e) => {
                                 e.preventDefault();
                                 removeFromCart(item);
-                              }}>
+                              }}
+                            >
                               <i className="ti-close"></i>
                             </a>
                           </td>
                           <td>
                             <h2 className="td-color">
                               {symbol}
-                              {(item.condition === "New" ? item.new_sale_price : item.refurnished_sale_price) * item.qty}
+                              {(item.condition === "New"
+                                ? item.new_sale_price
+                                : item.refurnished_sale_price) * item.qty}
                             </h2>
                           </td>
                         </tr>
@@ -168,12 +190,12 @@ const CartPage: NextPage = () => {
               </div>
               <div className="row cart-buttons">
                 <div className="col-12">
-                  <a href="/" className="btn btn-normal">
-                    continue shopping
-                  </a>
-                  <a href="/pages/account/checkout" className="btn btn-normal ms-3">
-                    check out
-                  </a>
+                  <Link href="/">
+                    <a className="btn btn-normal">continue shopping</a>
+                  </Link>
+                  <Link href="/pages/account/checkout">
+                    <a className="btn btn-normal ms-3">check out</a>
+                  </Link>
                 </div>
               </div>
             </>
@@ -181,7 +203,11 @@ const CartPage: NextPage = () => {
             <div className="col-sm-12">
               <div>
                 <div className="col-sm-12 empty-cart-cls text-center">
-                  <img src={`static/images/icon-empty-cart.png`} className="img-fluid mb-4" alt="" />
+                  <img
+                    src={`static/images/icon-empty-cart.png`}
+                    className="img-fluid mb-4"
+                    alt=""
+                  />
                   <h3>
                     <strong>Your Cart is Empty</strong>
                   </h3>

@@ -24,8 +24,8 @@ const UserSignedInOption: NextPage = () => {
     toast.success("You have been Signed out successfully!");
   };
 
-  const userId = typeof window !== 'undefined' ? localStorage.getItem("id") : null;
-
+  const userId =
+    typeof window !== "undefined" ? localStorage.getItem("id") : null;
 
   const [userData, setUserData] = useState<user>({
     first_name: "",
@@ -85,11 +85,13 @@ const UserSignedInOption: NextPage = () => {
                     />
                   </span>
                 </span>
-                <a href="/" onClick={handleLogout}>
-                  <span className="btn-sm btn btn-outline-primary">
-                    Sign Out
-                  </span>
-                </a>
+                <Link href="/">
+                  <a onClick={handleLogout}>
+                    <span className="btn-sm btn btn-outline-primary">
+                      Sign Out
+                    </span>
+                  </a>
+                </Link>
                 <hr className="m-2" />
                 <span className="myLink">
                   <Link href="/pages/account/dashboard">

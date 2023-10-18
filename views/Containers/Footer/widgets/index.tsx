@@ -269,10 +269,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   </div>
                   <div className="footer-contant">
                     <li className="mb-1">
-                      <Link
-                        href="/term&conditions/term_condition"
-                        className="footer-link"
-                      >
+                      <Link href="/blog/right-sidebar" className="footer-link">
                         <a className="footer-link text-secondary">
                           Latest News
                         </a>
@@ -717,7 +714,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                 <li className="list-inline-item mx-4">
                   <div className="footer-logo">
                     <a href="#">
-
                       <Media
                         src={`/images/layout-2/logo/im-logo.png`}
                         width="150px"
@@ -766,7 +762,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
         <Container>
           <Row>
             <div className="app-link-bloc-contain app-link-bloc-contain-1">
-            <div className="app-item-group">
+              <div className="app-item-group">
                 <div className="app-item">
                   <a href="#" rel="noopener noreferrer">
                     <Media
@@ -779,7 +775,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         objectFit: "contain",
                       }}
                     />
-
                   </a>
                 </div>
                 <div className="app-item">

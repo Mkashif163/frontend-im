@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
 import { Container, Row, Col, Media } from "reactstrap";
@@ -41,13 +42,22 @@ const BlogSection: React.FC = () => (
             <div>
               <div className="blog-contain">
                 <div className="blog-img">
-                  <Media src="/images/layout-1/blog/1.jpg" alt="blog" className="img-fluid  w-100" />
+                  <Media
+                    src="/images/layout-1/blog/1.jpg"
+                    alt="blog"
+                    className="img-fluid  w-100"
+                  />
                 </div>
                 <div className="blog-details">
                   <h4>Latest News Post</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur eleifend a massa rhoncus gravida.
+                  </p>
                   <span>
-                    <a href="/blog/blog-details">read more</a>
+                    <Link href="/blog/blog-details">
+                      <a>read more</a>
+                    </Link>
                   </span>
                 </div>
                 <div className="blog-label">
@@ -58,13 +68,22 @@ const BlogSection: React.FC = () => (
             <div>
               <div className="blog-contain">
                 <div className="blog-img">
-                  <Media src="/images/layout-1/blog/2.jpg" alt="blog" className="img-fluid w-100 " />
+                  <Media
+                    src="/images/layout-1/blog/2.jpg"
+                    alt="blog"
+                    className="img-fluid w-100 "
+                  />
                 </div>
                 <div className="blog-details">
                   <h4>Latest News Post</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur eleifend a massa rhoncus gravida.
+                  </p>
                   <span>
-                    <a href="/blog/blog-details">read more</a>
+                    <Link href="/blog/blog-details">
+                      <a>read more</a>
+                    </Link>
                   </span>
                 </div>
                 <div className="blog-label">
@@ -75,13 +94,22 @@ const BlogSection: React.FC = () => (
             <div>
               <div className="blog-contain">
                 <div className="blog-img">
-                  <Media src="/images/layout-1/blog/3.jpg" alt="blog" className="img-fluid w-100 " />
+                  <Media
+                    src="/images/layout-1/blog/3.jpg"
+                    alt="blog"
+                    className="img-fluid w-100 "
+                  />
                 </div>
                 <div className="blog-details">
                   <h4>Latest News Post</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur eleifend a massa rhoncus gravida.
+                  </p>
                   <span>
-                    <a href="/blog/blog-details">read more</a>
+                    <Link href="/blog/blog-details">
+                      <a>read more</a>
+                    </Link>
                   </span>
                 </div>
                 <div className="blog-label">
@@ -92,13 +120,22 @@ const BlogSection: React.FC = () => (
             <div>
               <div className="blog-contain">
                 <div className="blog-img">
-                  <Media src="/images/layout-1/blog/2.jpg" alt="blog" className="img-fluid  w-100" />
+                  <Media
+                    src="/images/layout-1/blog/2.jpg"
+                    alt="blog"
+                    className="img-fluid  w-100"
+                  />
                 </div>
                 <div className="blog-details">
                   <h4>Latest News Post</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur eleifend a massa rhoncus gravida.
+                  </p>
                   <span>
-                    <a href="/blog/blog-details">read more</a>
+                    <Link href="/blog/blog-details">
+                      <a>read more</a>
+                    </Link>
                   </span>
                 </div>
                 <div className="blog-label">
