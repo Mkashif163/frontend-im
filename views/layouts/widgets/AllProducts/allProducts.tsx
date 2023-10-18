@@ -98,7 +98,7 @@ const AllProducts = () => {
                   {/* Use different column sizes based on screen size */}
                   <div
                     className="product"
-                    style={{ height: "378px", marginBottom:"35px"}}
+                    style={{ height: "250px",width:"257px", marginBottom:"160px"}}
                   >
                     <ProductBox
                       hoverEffect={true}

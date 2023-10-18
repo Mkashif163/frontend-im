@@ -2418,18 +2418,14 @@ button {
       }
     }
   }
-  &:hover {
-    
-      .product-front {
-       transform: scale(1.1);
-      }
-    }
+  
   }
 
-.product-imgbox:hover img {
-  transform: scale(1.2); 
-  cursor: zoom-in; 
-}
+  .product-imgbox:hover img {
+    transform: scale(1.2);
+    transition: transform 0.3s ease; /* You can adjust the duration and timing function (e.g., ease-in-out) as needed */
+  }
+  
 .no-slider {
   .product-box {
     width: 100%;
