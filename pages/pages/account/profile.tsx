@@ -6,7 +6,7 @@ import ProfilePage from "../../../views/pages/account/profilePage";
 const Profile: NextPage = () => {
   return (
     <Layout1>
-      <ProfilePage />
+      <ProfilePage userData={undefined} />
     </Layout1>
   );
 };

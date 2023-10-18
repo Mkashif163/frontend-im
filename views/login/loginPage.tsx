@@ -32,7 +32,7 @@ const Login: NextPage = () => {
       };
 
       // Make a POST request to the API endpoint
-      const response = await axios.post("http://18.235.14.45/api/login", requestData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -42,7 +42,7 @@ const Login: NextPage = () => {
       if (response.status === 200 && response.data.success) {
         // Store the token and user ID in localStorage
         localStorage.setItem("token", response.data.success.token);
-        localStorage.setItem("id", response.data.id);
+        localStorage.setItem("id", response.data.customer_id);
 
         // Set the user's name in localStorage
         localStorage.setItem("Name", "Emay Walter");

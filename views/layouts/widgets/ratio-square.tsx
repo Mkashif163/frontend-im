@@ -62,6 +62,10 @@ var settings = {
   ],
 };
 
+interface coupen{
+  coupons: any;
+}
+
 const chunkArray = (array, size) => {
   const result = [];
   for (let value of array) {
@@ -92,7 +96,7 @@ const RatioSquare = () => {
     setSelected(tabName);
     setLoading(true);
   };
-  const apiData = useApiData();
+  const apiData = useApiData() as coupen;
 
   useEffect(() => {
     // console.log("My Api Data For Coupens:::", apiData.coupons);
@@ -100,7 +104,7 @@ const RatioSquare = () => {
       setDataR(apiData.coupons); // Assuming data is an array in the response
       setLoading(false);
     } else {
-      const apiUrl = `http://18.235.14.45/api/search/product/${selected}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/product/${selected}`;
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {

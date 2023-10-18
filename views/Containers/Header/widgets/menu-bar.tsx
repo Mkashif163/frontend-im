@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import Link from "next/link";
 import data from "../../../../data/menu.json";
 import { NextPage } from "next";
-import { Media, Col, Row, Container } from "reactstrap";
 import { MenuContext } from "../../../../helpers/menu/MenuContext";
 import { useTranslation } from "react-i18next";
 import useOutSideClick from "utils/outSideClick";

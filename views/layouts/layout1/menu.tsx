@@ -25,18 +25,18 @@ const Menu = ({ meneData }: MenuProps) => {
   };
 
   function transformImageUrl(apiImageUrl) {
-    return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
+    return `${process.env.NEXT_PUBLIC_BACKEND_URL}/${apiImageUrl.replace(/ /g, '%20')}`;
   }
 
   const handleClick = (id,type) => (e) => {
     e.preventDefault();
     if(type==="subcat")
     {
-      window.location.href = `/collections/leftsidebar?sub_category=${id}`;
+      router.push(`/collections/leftsidebar?sub_category=${id}`);
     }
     if(type==="cat")
     {
-      window.location.href = `/collections/leftsidebar?category=${id}`;
+      router.push(`/collections/leftsidebar?category=${id}`);
     }
   };
   
@@ -69,8 +69,8 @@ const Menu = ({ meneData }: MenuProps) => {
                     onMouseEnter={() => handleMouseEnter(index)} // Set the index when mouse enters
                   >
                     <div>
-                      {menuData[menuKey].menu_name.substring(0, 23)}
-                      {menuData[menuKey].menu_name.length > 25 ? '...' : ''}
+                      {menuData[menuKey].menu_name.substring(0, 35)}
+                      {menuData[menuKey].menu_name.length > 35 ? '...' : ''}
                     </div>
                   </div>
                 }

@@ -65,7 +65,7 @@ const DashboardComponent: NextPage<PropsUser> = ({userData}) => {
                     <h3>E-mail</h3>
                   </div>
                   <div className="box-content">
-                    <p>{userData.email ? userData.email : "N/A"}</p>
+                    <p>{userData.email}</p>
                   </div>
                 </div>
               </div>

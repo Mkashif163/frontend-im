@@ -12,7 +12,7 @@ interface Banners {
 
 const CollectionBannerList = ({ banner }) => {
   function transformImageUrl(apiImageUrl) {
-    return `http://18.235.14.45${apiImageUrl.replace(/ /g, '%20')}`;
+    return `${process.env.NEXT_PUBLIC_BACKEND_URL}/${apiImageUrl.replace(/ /g, '%20')}`;
   }
   const apiImageUrl = banner;
   const transformedImageUrl = transformImageUrl(apiImageUrl);  

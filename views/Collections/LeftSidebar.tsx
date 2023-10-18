@@ -30,6 +30,7 @@ interface ApiData {
         id: number;
         sub_categories: {
           id: number;
+          name:any;
           products: any[];
         }[];
       }[];
@@ -127,7 +128,7 @@ const LeftSidebarCollection: NextPage<LeftSidebarCollectionProps> = ({ sub_cat, 
       return ""; // or some default URL or error handling
     }
   
-    const baseUrl = 'http://18.235.14.45/';
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/`;
     return `${baseUrl}${apiImageUrl.replace(/ /g, '%20')}`;
   }
 

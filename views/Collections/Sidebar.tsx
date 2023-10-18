@@ -119,7 +119,6 @@ const Sidebar: NextPage<SideBarProps> = ({ sub_cat, brand, priceRange }) => {
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
     setSelectedPrice({ min: newValue[0], max: newValue[1] });
 };
-
 const valueText = (value: number) => `$${value}`;
 
   return (
@@ -157,7 +156,7 @@ const valueText = (value: number) => `$${value}`;
                                 onClick={() => handleSubClick(subCategory.id)}
                                 style={subCategory.id === activeTab ? styles.activeLi : styles.li}
                               >
-                                <li className={`font-weight-bold ${subCategory.id === activeTab ? "active" : ""}`}>
+                                <li className={`${subCategory.id === activeTab ? "active" : ""}`}>
                                   {subCategory.name}
                                 </li>
                               </div>

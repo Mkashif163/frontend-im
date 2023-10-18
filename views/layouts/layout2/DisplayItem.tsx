@@ -179,8 +179,8 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ products }) => {
             <div className="col-6">
               <div className="short-product-discription m-3 p-2 col-6">
                 <div className="title">
-                  <h2>{currentProduct.name}</h2>
-                  <h5>Model: {currentProduct.model_no}</h5>
+                <h2>{currentProduct.name.substring(0,18)}{currentProduct.name.length > 15 ? "..." : ""}</h2>
+                  <h5>Model: {currentProduct.model_no.substring(0,18)}{currentProduct.model_no.length > 15 ? "..." : ""}</h5>
                 </div>
                 {/* Display other product details */}
                 <div className="price-box">

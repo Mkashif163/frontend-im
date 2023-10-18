@@ -10,6 +10,9 @@ import MobileSearch from "./widgets/mobile-search";
 import MobileSetting from "./widgets/mobile-setting";
 import { MenuContext } from "helpers/menu/MenuContext";
 import { useApiData } from "helpers/data/DataContext";
+import Image from "next/image";
+import Link from "next/link";
+import UserProfile from "./widgets/user-profile";
 interface header {
   cartPopupPosition: string;
   display: string;
@@ -31,7 +34,6 @@ interface ApiData {
     };
   };
 }
-
 
 const Header: NextPage<header> = ({
   cartPopupPosition,
@@ -72,7 +74,6 @@ const Header: NextPage<header> = ({
     }
   }, [userLoggedOut]);
 
-
   useEffect(() => {
     const allProducts = [];
 
@@ -104,7 +105,7 @@ const Header: NextPage<header> = ({
 
     // Set the productsData state with all fetched products
     setProducts(allProducts);
-}, [apiData]);
+  }, [apiData]);
 
   return (
     <Fragment>
@@ -128,16 +129,18 @@ const Header: NextPage<header> = ({
                     </span>
                   </div>
                   <div className="logo-block">
-                    <a href="/#">
-                      <Media
-                        src={`/images/layout-2/logo/im-logo.png`}
-                        className="img-fluid logo"
-                        width="150px"
-                        alt="logo"
-                      />
-                    </a>
+                    <Link href="/#">
+                      <a>
+                        <Media
+                          src={`/images/layout-2/logo/im-logo.png`}
+                          className="img-fluid logo"
+                          width="150px"
+                          alt="logo"
+                        />
+                      </a>
+                    </Link>
                   </div>
-                  <Search products={products}/>
+                  <Search products={products} />
                   <ShoppingCart
                     position={cartPopupPosition}
                     cartDisplay={display}
@@ -153,8 +156,12 @@ const Header: NextPage<header> = ({
                               <div className="icon-block mt-3 ">
                                 <ul>
                                   <span className="ms-2 d-flex">
-                                    {/* <User /> */}
-                                    <UserOptions />
+                                    <span className="d-block d-sm-none">
+                                      <UserProfile />
+                                    </span>
+                                    <span className="d-none d-sm-block">
+                                      <UserOptions />
+                                    </span>
                                     <WishList />
                                     <MobileSearch />
                                     <MobileSetting />

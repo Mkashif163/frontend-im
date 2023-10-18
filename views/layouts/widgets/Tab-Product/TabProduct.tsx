@@ -43,8 +43,8 @@ var settings = {
     {
       breakpoint: 576,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 1,
+        slidesToScroll: 1,
       },
     },
   ],
@@ -59,10 +59,10 @@ interface ApiData {
   menus: {
     [menuKey: string]: {
       categories: {
-        id: number;
+        id: any;
         name: string;
         sub_categories: {
-          id: number;
+          id: any;
           name: string;
           products: any[]; // Define the actual product type
         }[];

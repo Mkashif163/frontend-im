@@ -1734,6 +1734,11 @@ button {
   width: 315px;
   height: 100%;
   background-color: rgb(240, 239, 239);
+  .custom-text-black {
+    padding-left: 15px;
+    text-align: left;
+  }
+
   .custom-input-group-text {
     background-color: var(--theme-color1);
     color: white;
@@ -1756,25 +1761,25 @@ button {
       border: 1px solid var(--theme-color1);
     }
   }
-      .side-menu-box {
-        max-height: 500px;
-        max-width: 100%;
-        overflow: auto;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Maximum of four columns per row */
-        gap: 10px; /* Add some gap between columns and rows */
-      
-        .custom-side-menu-category {
-          width: 100%; /* Each category takes the full width of its column */
-          padding: 10px;
-          transition: background-color 0.3s;
-      
-          &:hover {
-            background-color: rgb(232, 231, 231);
-            cursor: pointer;
-          }
-        }
+  .side-menu-box {
+    max-height: 500px;
+    max-width: 100%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Maximum of four columns per row */
+    gap: 10px; /* Add some gap between columns and rows */
+
+    .custom-side-menu-category {
+      width: 100%; /* Each category takes the full width of its column */
+      padding: 10px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: rgb(232, 231, 231);
+        cursor: pointer;
       }
+    }
+  }
 }
 .slider-top {
   .carousel-control-prev {
@@ -1829,7 +1834,32 @@ button {
     object-fit: cover;
   }
 }
+// Media Query for screen sizes up to 548px
+@media (max-width: 548px) {
+  .custom-container {
+      .d-flex {
+          flex-direction: column; // Stack children vertically
+      }
 
+      .custom-menus {
+          width: 100%; // Take the full width of the container
+      }
+
+      .slider-top {
+          width: 100vw; // Set the width to 100% of the viewport width
+          margin-bottom: 20px; // Add some space between menu and carousel on small screens
+
+          .carousel-control-prev, .carousel-control-next {
+              display: block; // Show the carousel controls on mobile
+          }
+      }
+
+      .menu-banners {
+          width: 100%; // Take the full width of the container
+          margin-top: 20px; // Add some space between the carousel and the banner image
+      }
+  }
+}
 //////////////////////////////
 
 /*============================
@@ -4498,7 +4528,6 @@ button {
       }
     }
     .media {
-      
       .media-body {
         .media-contant {
           margin-left: 15px;
@@ -8372,7 +8401,7 @@ button {
         font-size: 15px;
         color: black;
       }
-      h4{
+      h4 {
         color: var(--theme-color1);
       }
     }
@@ -10496,7 +10525,6 @@ button {
 }
 // parallax banner //
 
-
 //  Theme pannel start  //
 .theme-pannel-main {
   background-color: $white;
@@ -11569,7 +11597,6 @@ button {
   z-index: 1;
 }
 
-
 // styles from israr rashid
 
 #user-wish {
@@ -11694,20 +11721,3 @@ button {
 .userImage {
   border-radius: 50%;
 }
-.options{
-  background-color: #0272bc;
-}
-.parent{
-&:hover{
-  background-color: #f00; 
-}
-}
-
-.accordion-box {
-  span.options {
-    &:hover {
-      color: red;
-    }
-  }
-}
-

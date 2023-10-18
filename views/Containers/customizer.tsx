@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { NextPage } from "next";
 
 const Customizer: NextPage = () => {
@@ -57,7 +58,7 @@ const Customizer: NextPage = () => {
       </div>
       <div className={`color-picker ${colorStyle ? "r-0" : "color-style"}`}>
         <a href="#" className="handle title" onClick={() => setColorStyle(!colorStyle)}>
-          <img src="/images/paint.png" alt="paint" />
+          <Image src="/images/paint.png" alt="paint" />
         </a>
         <div>
           <h4>Choose color</h4>

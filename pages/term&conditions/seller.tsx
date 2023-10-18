@@ -16,7 +16,12 @@ const LeftSidebar: NextPage = () => {
   );
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch("http://18.235.14.45/api/homeapi")
+=======
+    // Fetch data directly within the useEffect
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}$terms_and_conditions`)
+>>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
       .then((response) => response.json())
       .then((data: { terms_and_conditions: TermCondition[] }) => {
         const termsData = data.terms_and_conditions;
@@ -36,6 +41,7 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
+<<<<<<< HEAD
               {filteredTerm && (
                 <div>
                   <b>
@@ -63,6 +69,15 @@ const LeftSidebar: NextPage = () => {
                   <br />
                 </div>
               )}
+=======
+              {/* Render the fetched terms_and_conditions data here */}
+              {/* {termsAndConditions.map((term) => (
+                <div key={termsAndConditions.id}>
+                  <h2>{termsAndConditions.title}</h2>
+                  <div dangerouslySetInnerHTML={{ __html: termsAndConditions.description }} />
+                </div>
+              ))} */}
+>>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
             </div>
           </div>
         </div>

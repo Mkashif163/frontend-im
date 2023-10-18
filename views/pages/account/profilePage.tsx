@@ -33,7 +33,7 @@ const Profile: NextPage<Props> = ({ userData }) => {
       };
 
       try {
-        const response = await axios.post("http://18.235.14.45/api/update-profile", payload);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/update-profile`, payload);
         if (response.status === 200) {
           console.log("Profile updated successfully");
         } else {

@@ -10,10 +10,15 @@ interface productType {
   product: any;
   addWish: Function;
   addCompare: Function;
-  hoverEffect: any;
-} 
+  hoverEffect: any
+}
 
-const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hoverEffect }) => {
+const ProductBox: NextPage<productType> = ({
+  product,
+  addCompare,
+  addWish,
+  hoverEffect,
+}) => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
   const slider2 = React.useRef<Slider>();
@@ -62,21 +67,24 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
     <>
       {product && (
         <Fragment>
-          <div className='product-box'>
+          <div className="product-box">
             <div className="product-imgbox bg-white">
               <Link href={`/product-details/${productId}`}>
-                <div className="product-front">
-                  <Media
-                    src={product.url}
-                    className={`img-fluid ${isZoomed ? 'zoomed-image' : ''}`}
-                    alt="product"
-                    onClick={handleImageClick}
-                  />
-                </div>
+                <a>
+                  <div className="product-front ">
+                    <Media
+                      src={product.url}
+                      className="img-fluid"
+                      alt="product"
+                    />
+                  </div>
+                </a>
               </Link>
 
-              <div className={`product-icon`}>
-                <button onClick={() => router.push(`/product-details/${productId}`)}>
+              <div className={`product-icon `}>
+                <button
+                  onClick={() => router.push(`/product-details/${productId}`)}
+                >
                   <i className="ti-bag"></i>
                 </button>
                 <a onClick={() => addWish(product)}>
@@ -115,7 +123,9 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                   <div className="condition-box d-flex mt-3">
                     <div>
                       <span
-                        className={`condition-text rounded ${selectedCondition === "New" ? "active bg-black" : ""}`}
+                        className={`condition-text rounded ${
+                          selectedCondition === "New" ? "active bg-black" : ""
+                        }`}
                         onClick={() => setSelectedCondition("New")}
                       >
                         New
@@ -123,7 +133,9 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                     </div>
                     <div>
                       <span
-                        className={`condition-text rounded ${selectedCondition === "Used" ? "active bg-black" : ""}`}
+                        className={`condition-text rounded ${
+                          selectedCondition === "Used" ? "active bg-black" : ""
+                        }`}
                         onClick={() => setSelectedCondition("Used")}
                       >
                         Used
@@ -134,12 +146,16 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                 <div className="detail-right">
                   <div className="check-price">
                     {selectedCurr.symbol}
-                    {selectedCondition === "New" ? product.new_price : product.refurnished_price}{" "}
+                    {selectedCondition === "New"
+                      ? product.new_price
+                      : product.refurnished_price}{" "}
                   </div>
                   <div className="price">
                     <div className="price">
                       {selectedCurr.symbol}
-                      {selectedCondition === "New" ? product.new_sale_price : product.refurnished_sale_price}
+                      {selectedCondition === "New"
+                        ? product.new_sale_price
+                        : product.refurnished_sale_price}
                     </div>
                   </div>
                   <div className={stock > 0 ? "stock" : "out-stock"}>
@@ -149,16 +165,30 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
               </div>
             </div>
           </div>
-          <Modal className="fade bd-example-modal-lg theme-modal show quick-view-modal" isOpen={modal} toggle={() => setModal(!modal)} centered size="lg">
+          <Modal
+            className="fade bd-example-modal-lg theme-modal show quick-view-modal"
+            isOpen={modal}
+            toggle={() => setModal(!modal)}
+            centered
+            size="lg"
+          >
             <ModalBody>
-              <button type="button" className="close" onClick={() => setModal(!modal)}>
+              <button
+                type="button"
+                className="close"
+                onClick={() => setModal(!modal)}
+              >
                 <span>&times;</span>
               </button>
               <div className="row">
                 <div className="col-lg-6 col-xs-12">
                   <Slider ref={(slider) => (slider2.current = slider)}>
                     <div key={product.id}>
-                      <Media src={product.url} alt="" className="img-fluid image_zoom_cls-0" />
+                      <Media
+                        src={product.url}
+                        alt=""
+                        className="img-fluid image_zoom_cls-0"
+                      />
                     </div>
                   </Slider>
                 </div>
@@ -195,12 +225,20 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                           ))}
                         </ul>
                       </div>
-                      {stockState !== "InStock" ? <span className="instock-cls">{stockState}</span> : ""}
+                      {stockState !== "InStock" ? (
+                        <span className="instock-cls">{stockState}</span>
+                      ) : (
+                        ""
+                      )}
                       <h6 className="product-title">quantity</h6>
                       <div className="qty-box">
                         <div className="input-group">
                           <span className="input-group-prepend">
-                            <button type="button" className="btn quantity-left-minus" onClick={minusQty}>
+                            <button
+                              type="button"
+                              className="btn quantity-left-minus"
+                              onClick={minusQty}
+                            >
                               <i className="ti-angle-left"></i>
                             </button>
                           </span>
@@ -212,7 +250,11 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                             onChange={changeQty}
                           />
                           <span className="input-group-prepend">
-                            <button type="button" className="btn quantity-right-plus" onClick={plusQty}>
+                            <button
+                              type="button"
+                              className="btn quantity-right-plus"
+                              onClick={plusQty}
+                            >
                               <i className="ti-angle-right"></i>
                             </button>
                           </span>
@@ -220,7 +262,13 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
                       </div>
                     </div>
                     <div className="product-buttons">
-                      <a href="#" className="btn btn-normal" onClick={() => router.push(`/product-details/${productId}`)}>
+                      <a
+                        href="#"
+                        className="btn btn-normal"
+                        onClick={() =>
+                          router.push(`/product-details/${productId}`)
+                        }
+                      >
                         add to cart
                       </a>
 
@@ -239,4 +287,4 @@ const ProductItem: React.FC<productType> = ({ product, addCompare, addWish, hove
   );
 };
 
-export default ProductItem;
+export default ProductBox;
