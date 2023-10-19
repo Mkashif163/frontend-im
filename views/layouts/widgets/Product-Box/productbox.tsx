@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import Slider from "react-slick";
 import Link from "next/link";
+import { CartContext } from "helpers/cart/cart.context";
 
 interface productType {
   product: any;
@@ -21,6 +22,7 @@ const ProductBox: NextPage<productType> = ({
 }) => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
+  const { addToCart } = useContext(CartContext);
   const slider2 = React.useRef<Slider>();
   const stock = product.stock;
 
@@ -83,7 +85,7 @@ const ProductBox: NextPage<productType> = ({
 
               <div className={`product-icon `}>
                 <button
-                  onClick={() => router.push(`/product-details/${productId}`)}
+                  onClick={() => addToCart(product, 1, selectedCondition)}
                 >
                   <i className="ti-bag"></i>
                 </button>
