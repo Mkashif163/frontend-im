@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Media, Input } from "reactstrap";
 import CustomDropDown from "./CustomDropdown";
 import Link from "next/link";
-import Image from "next/image";
 
-const dropDownProfile = () => {
-  const [openProfile, setOpenProfile] = useState(false);
-};
 type FooterSectionProps = {
   layoutLogo: string;
 };

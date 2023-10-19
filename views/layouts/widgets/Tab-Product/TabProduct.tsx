@@ -241,7 +241,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
                   </ul>
                 </div>
                 <div className="view-akk">
-                  <Link href="/collections/leftsidebar">
+                  <Link href={`/collections/leftsidebar?category=${catId}`}>
                     <a>View all</a>
                   </Link>
                 </div>
