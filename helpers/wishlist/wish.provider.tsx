@@ -28,17 +28,17 @@ export const WishlistProvider = (props: any) => {
   const addToWish = (item) => {
     const index = wishlistItems.findIndex((wish) => wish.id === item.id);
     if (index === -1) {
-      toast.success("Product Added to Wishlist Successfully !");
+      toast.success("Product Added to Wishlist Successfully !"), { autoClose: 500 };
       setWishlistItems([...wishlistItems, item]);
     } else {
-      toast.error("This Product Already Added !");
+      toast.error("This Product Already Added !", { autoClose: 500 });
     }
   };
 
   // Remove Product From Wishlist
   const removeFromWish = (item) => {
     setWishlistItems(wishlistItems.filter((e) => e.id !== item.id));
-    toast.error("Product Removed from Wishlist Successfully !");
+    toast.error("Product Removed from Wishlist Successfully !"), { autoClose: 500 };
   };
 
   return (

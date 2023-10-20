@@ -3103,6 +3103,11 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
 
+react-form-wizard-component@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/react-form-wizard-component/-/react-form-wizard-component-0.1.7.tgz#b0fb3075c53511213158fcd9ba90c1dbedba57b6"
+  integrity sha512-GN4TnYI+2qqRxannwZSzinbhh1u0FEXLxhs1WjC9QhZu+w9Hk+LxrWAldQvnQuC8zp5flcDw7hdSESCfBXO2sQ==
+
 react-hook-form@^7.33.1:
   version "7.47.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.47.0.tgz#a42f07266bd297ddf1f914f08f4b5f9783262f31"
