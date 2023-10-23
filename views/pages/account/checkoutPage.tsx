@@ -23,6 +23,7 @@ interface formType {
   address2: string;
   city: string;
   pincode: number;
+  paymentMethod: string;
 }
 
 const CheckoutPage: NextPage = () => {
@@ -41,6 +42,7 @@ const CheckoutPage: NextPage = () => {
     address2: "",
     city: "",
     pincode: 0,
+    paymentMethod: "",
   });
 
   const {
@@ -64,68 +66,31 @@ const CheckoutPage: NextPage = () => {
     });
   };
 
-  const onSubmit = async (data: formType) => {
-    if (data !== null) {
-      const customerId = localStorage.getItem("id");
+  const [cardInputs, setCardInputs] = useState({
+    cardNumber: "",
+    cardExpiry: "",
+    cardCVC: "",
+  });
 
-      // Construct the request payload
-      const requestBody = {
-        customer_info: {
-          first_name: data.firstName,
-          last_name: data.lastName,
-          company: "", // Add the missing field here
-          country: data.country,
-          address_01: data.address,
-          address_02: data.address2, // Add the missing field here
-          city: data.city,
-          state: data.state,
-          postal_code: data.pincode.toString(),
-          phone1: data.phone,
-          phone2: "", // Add the missing field here
-          email: data.email,
-          comments: "", // Add the missing field here
-          payment_method: payment, // Use the selected payment method
-          shipping: "Standard", // You can modify this as needed
-          id: customerId,
-          total_purchase: cartTotal, // Use the total cart amount
-          total_price: calculateCartTotal().toFixed(2), // Calculate and use the total cart price
-        },
-        products: cartItems.map((item) => ({
-          product_id: item.id, // Use the product id from your cartItems
-          quantity: item.qty,
-          p_price: item.selectedPrice, // Use the selected price from your cartItems
-          p_vendor_id: item.created_by, // Use the vendor id from your cartItems
-        })),
-      };
+  const handleCardInputChange = (field, value) => {
+    let regex;
 
-      // try {
-      //   // Send the POST request to the checkout API
-      //   const response = await fetch(
-      //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/checkout`,
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify(requestBody),
-      //     }
-      //   );
+    switch (field) {
+      case "cardNumber":
+        regex = /^[0-9\s]{0,14}$/; // Only allow digits and spaces
+        break;
+      case "cardExpiry":
+        regex = /^[1-9]{0,4}$/; // Allow MM, MM/YY, or MM/ (month/year)
+        break;
+      case "cardCVC":
+        regex = /^[0-9]{0,3}$/; // Only allow digits
+        break;
+      default:
+        break;
+    }
 
-      //   if (response.ok) {
-      //     alert("Order successfully placed!");
-      //     localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
-      //     emptyCart();
-      //     router.push({
-      //       pathname: "/pages/order-success",
-      //     });
-      //   } else {
-      //     console.error("Error placing the order:", response.statusText);
-      //   }
-      // } catch (error) {
-      //   console.error("An error occurred:", error);
-      // }
-    } else {
-      console.log(errors);
+    if (regex.test(value) || value === "") {
+      setCardInputs((prevState) => ({ ...prevState, [field]: value }));
     }
   };
 
@@ -165,13 +130,70 @@ const CheckoutPage: NextPage = () => {
     });
   };
 
-  const handleComplete = () => {
-    // You can handle form completion logic here
-    // For instance, you may want to redirect the user, show a message, etc.
-    console.log("Checkout Completed");
-  };
+  const handleComplete = async () => {
+    if (formData !== null) {
+      const customerId = localStorage.getItem("id");
+      // Construct the request payload
+      alert("testing" , formData.firstName);
+      const requestBody = {
+        customer_info: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          company: "", // Add the missing field here
+          country: formData.country,
+          address_01: formData.address,
+          address_02: formData.address2, // Add the missing field here
+          city: formData.city,
+          state: formData.state,
+          postal_code: formData.pincode.toString(),
+          phone1: formData.phone,
+          phone2: "", // Add the missing field here
+          email: formData.email,
+          comments: "", // Add the missing field here
+          payment_method: formData.paymentMethod, // Use the selected payment method
+          shipping: "Standard", // You can modify this as needed
+          id: customerId,
+          total_purchase: cartTotal, // Use the total cart amount
+          total_price: calculateCartTotal().toFixed(2), // Calculate and use the total cart price
+        },
+        products: cartItems.map((item) => ({
+          product_id: item.id, // Use the product id from your cartItems
+          quantity: item.qty,
+          p_price: item.selectedPrice, // Use the selected price from your cartItems
+          p_vendor_id: item.created_by, // Use the vendor id from your cartItems
+        })),
+      };
 
-  const handleTabChange = ({ prevIndex, nextIndex }) => {};
+      try {
+        // Send the POST request to the checkout API
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/checkout`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+          }
+        );
+
+        if (response.ok) {
+          alert("Order successfully placed!");
+          localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
+          emptyCart();
+          router.push({
+            pathname: "/pages/order-success",
+          });
+        } else {
+          console.error("Error placing the order:", response.statusText);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    } else {
+      console.log(errors);
+    }
+  };
 
   return (
     <>
@@ -179,10 +201,7 @@ const CheckoutPage: NextPage = () => {
       <section className="section-big-py-space">
         <div className="custom-container">
           <div className="checkout-page contact-page">
-            <FormWizard
-              onComplete={handleComplete}
-              onTabChange={handleTabChange}
-            >
+            <FormWizard onComplete={handleComplete}>
               {/* Step 1: Shopping Cart */}
               <FormWizard.TabContent
                 title="Shopping Cart"
@@ -200,7 +219,7 @@ const CheckoutPage: NextPage = () => {
                   <Row>
                     <Col lg="6" sm="12" xs="12">
                       <div className="checkout-title">
-                        <h3>Billing Details</h3>
+                        <h3>Shipping Details</h3>
                       </div>
                       <div className="theme-form">
                         <Row className="check-out">
@@ -586,6 +605,7 @@ const CheckoutPage: NextPage = () => {
                   </Row>
                 </Form>
               </FormWizard.TabContent>
+
               <FormWizard.TabContent title="Order Review" icon="ti-comment-alt">
                 {/* step 3 */}
                 {/* show form details here in text form in a box here with */}
@@ -626,10 +646,8 @@ const CheckoutPage: NextPage = () => {
                           </li>
                           <li className="list-group-item d-flex justify-content-between">
                             <span className="fw-bold">Shipping Address:</span>
-                            <span className="ml-auto">
-                              {formData.address2}
-                            </span>
-                            </li>
+                            <span className="ml-auto">{formData.address2}</span>
+                          </li>
                           <li className="list-group-item d-flex justify-content-between">
                             <span className="fw-bold">City:</span>
                             <span className="ml-auto">{formData.city}</span>
@@ -647,7 +665,7 @@ const CheckoutPage: NextPage = () => {
                     </div>
                   </Col>
                   <Col lg="6" sm="12" xs="12">
-                    <div className="checkout-details theme-form  section-big-mt-space">
+                    <div className="checkout-details">
                       {cartItems && cartItems.length > 0 ? (
                         <div className="order-box">
                           <div className="title-box">
@@ -742,14 +760,240 @@ const CheckoutPage: NextPage = () => {
                   </Col>
                 </Row>
               </FormWizard.TabContent>
-              <FormWizard.TabContent
-                title="Payment"
-                icon="ti-credit-card"
-              >
-                
-              </FormWizard.TabContent>
-              <FormWizard.TabContent title="Order Successful" icon="ti-check">
-                <div>Order successful!</div>
+
+              <FormWizard.TabContent title="Payment" icon="ti-credit-card">
+                <div className="checkout-details theme-form section-big-mt-space">
+                  <Row>
+                    <Col lg="6" sm="12" xs="12">
+                      <div className="checkout-details ">
+                        <div className="order-box">
+                          <div className="title-box">
+                            <h3>Billing Details</h3>
+                          </div>
+
+                          <ul className="list-group">
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">First Name:</span>
+                              <span className="ml-auto">
+                                {formData.firstName}
+                              </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Last Name:</span>
+                              <span className="ml-auto">
+                                {formData.lastName}
+                              </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Phone:</span>
+                              <span className="ml-auto">{formData.phone}</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Email:</span>
+                              <span className="ml-auto">{formData.email}</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Country:</span>
+                              <span className="ml-auto">
+                                {formData.country}
+                              </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Address:</span>
+                              <span className="ml-auto">
+                                {formData.address}
+                              </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Shipping Address:</span>
+                              <span className="ml-auto">
+                                {formData.address2}
+                              </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">City:</span>
+                              <span className="ml-auto">{formData.city}</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">State:</span>
+                              <span className="ml-auto">{formData.state}</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span className="fw-bold">Postal Code:</span>
+                              <span className="ml-auto">
+                                {formData.pincode}
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </Col>
+
+                    <Col lg="6" sm="12" xs="12">
+                      <div className="checkout-details">
+                        {cartItems && cartItems.length > 0 ? (
+                          <div className="order-box">
+                            <div className="title-box">
+                              <div>
+                                Product <span>Total</span>
+                              </div>
+                            </div>
+                            <ul className="qty">
+                              {cartItems.map((item, index) => (
+                                <>
+                                  <Link href={`/product-details/${item.id}`}>
+                                    <li key={index}>
+                                      <img
+                                        src={item.url}
+                                        alt={item.name.substring(0, 9)}
+                                        width="100px"
+                                      />
+                                      <span>
+                                        {item.name} × {item.qty}{" "}
+                                      </span>
+                                      <span>
+                                        {symbol}
+                                        {calculateProductTotal(item).toFixed(2)}
+                                      </span>
+                                    </li>
+                                  </Link>
+                                </>
+                              ))}
+                            </ul>
+
+                            <ul className="sub-total">
+                              <li>
+                                Subtotal{" "}
+                                <span className="count">
+                                  {symbol}
+                                  {calculateCartTotal().toFixed(2)}
+                                </span>
+                              </li>
+                              <li>
+                                Shipping
+                                <div className="shipping">
+                                  {/* ...Your shipping options */}
+                                </div>
+                              </li>
+                            </ul>
+                            <ul className="total">
+                              <li>
+                                Total{" "}
+                                <span className="count">
+                                  {symbol}
+                                  {calculateCartTotal().toFixed(2)}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <div className="payment-box">
+                          <div className="upper-box">
+                            <div className="payment-options">
+                              {/* ...Your payment options */}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Col lg="6" sm="12" xs="12">
+                    <FormGroup tag="fieldset">
+                      <div className="checkout-title">
+                        <h3>Select Payment Method</h3>
+                      </div>
+                      <FormGroup check>
+                        <Label check className="d-flex justify-content-start ">
+                          <Input
+                            type="radio"
+                            name="paymentMethod"
+                            value="cod"
+                            onChange={(e) =>
+                              handleInputChange("paymentMethod", e.target.value)
+                            }
+                          />
+                          Cash on Delivery
+                        </Label>
+                      </FormGroup>
+                      <FormGroup check>
+                        <Label check className="d-flex justify-content-start">
+                          <Input
+                            type="radio"
+                            name="paymentMethod"
+                            value="card"
+                            onChange={(e) =>
+                              handleInputChange("paymentMethod", e.target.value)
+                            }
+                          />
+                          Credit/Debit Card
+                        </Label>
+                      </FormGroup>
+                      {/* <FormGroup check>
+                <Label check className="d-flex justify-content-start ">
+                    <Input type="radio" name="paymentMethod" value="stripe" onChange={(e) => handleInputChange("paymentMethod", e.target.value)}/> 
+                    Stripe
+                </Label>
+            </FormGroup> */}
+                    </FormGroup>
+
+                    {formData.paymentMethod === "card" && (
+                      <div>
+                        <Label
+                          for="cardNumber"
+                          className="d-flex justify-content-start"
+                        >
+                          Card Number
+                        </Label>
+                        <Input
+                          type="text"
+                          name="cardNumber"
+                          id="cardNumber"
+                          value={cardInputs.cardNumber}
+                          placeholder="1234 1234 1234 1234"
+                          onChange={(e) =>
+                            handleCardInputChange("cardNumber", e.target.value)
+                          }
+                        />
+
+                        <Label
+                          for="cardExpiry"
+                          className="d-flex justify-content-start"
+                        >
+                          Expiry Date
+                        </Label>
+                        <Input
+                          type="text"
+                          name="cardExpiry"
+                          id="cardExpiry"
+                          value={cardInputs.cardExpiry}
+                          placeholder="MM/YY"
+                          onChange={(e) =>
+                            handleCardInputChange("cardExpiry", e.target.value)
+                          }
+                        />
+
+                        <Label
+                          for="cardCVC"
+                          className="d-flex justify-content-start"
+                        >
+                          CVC
+                        </Label>
+                        <Input
+                          type="text"
+                          name="cardCVC"
+                          id="cardCVC"
+                          value={cardInputs.cardCVC}
+                          placeholder="CVC"
+                          onChange={(e) =>
+                            handleCardInputChange("cardCVC", e.target.value)
+                          }
+                        />
+                      </div>
+                    )}
+                  </Col>
+                </div>
               </FormWizard.TabContent>
             </FormWizard>
           </div>
