@@ -9,6 +9,7 @@ import Link from "next/link";
 import ShoppingCart from "./checkoutWizard/shopingCart";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
+import { Select } from "@mui/material";
 // import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface formType {
@@ -181,180 +182,157 @@ const CheckoutPage: NextPage = () => {
                       <div className="checkout-title">
                         <h3>Billing Details</h3>
                       </div>
-                      <div className="theme-form">
-                        <Row className="check-out ">
-                          <FormGroup className="col-md-6 col-sm-6 col-xs-12">
-                            <Label>First Name</Label>
-                            <input
-                              type="text"
-                              {...register("firstName", { required: true })}
-                              name="firstName"
-                              defaultValue=""
-                              placeholder=""
-                              className={`${
-                                errors.firstName ? "error_border" : ""
-                              }`}
-                              id="firstName"
-                            />
-                            <span className="error-message">
-                              {errors.firstName && "First name is required"}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-6 col-sm-6 col-xs-12">
-                            <Label>Last Name</Label>
-                            <input
-                              type="text"
-                              className={`${
-                                errors.lastName ? "error_border" : ""
-                              }`}
-                              id="lastName"
-                              name="lastName"
-                              defaultValue=""
-                              placeholder=""
-                              {...register("lastName", { required: true })}
-                            />
-                            <span className="error-message">
-                              {errors.lastName && "Last name is required"}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-6 col-sm-6 col-xs-12">
-                            <Label className="field-label">Phone</Label>
-                            <input
-                              type="text"
-                              className={`${
-                                errors.phone ? "error_border" : ""
-                              }`}
-                              id="phone"
-                              name="phone"
-                              defaultValue=""
-                              placeholder=""
-                              {...register("phone", { pattern: /\d+/ })}
-                            />
-                            <span className="error-message">
-                              {errors.phone && "Please enter number for phone."}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-6 col-sm-6 col-xs-12">
-                            <Label className="field-label">Email Address</Label>
-                            <input
-                              type="text"
-                              className={`${
-                                errors.email ? "error_border" : ""
-                              }`}
-                              name="email"
-                              defaultValue=""
-                              placeholder=""
-                              id="email"
-                              {...register("email", {
-                                required: true,
-                                pattern: /^\S+@\S+$/i,
-                              })}
-                            />
-                            <span className="error-message">
-                              {errors.email &&
-                                "Please enter proper email address ."}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-12 col-sm-12 col-xs-12">
-                            <Label className="field-label">Country</Label>
-                            <select
-                              id="country"
-                              name="country"
-                              {...register("country", { required: true })}
-                            >
-                              <option>Pakistan</option>
-                              <option>South Africa</option>
-                              <option>United State</option>
-                              <option>Australia</option>
-                            </select>
-                          </FormGroup>
-                          <FormGroup className="col-md-12 col-sm-12 col-xs-12">
-                            <Label className="field-label">Address</Label>
-                            <input
-                              type="text"
-                              name="address"
-                              id="address"
-                              defaultValue=""
-                              placeholder="Street address"
-                              className={`${
-                                errors.address ? "error_border" : ""
-                              }`}
-                              {...register("address", {
-                                required: true,
-                                min: 20,
-                                max: 120,
-                              })}
-                            />
-                            <span className="error-message">
-                              {errors.address && "Please right your address ."}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-12 col-sm-12 col-xs-12">
-                            <Label className="field-label">Town/City</Label>
-                            <input
-                              type="text"
-                              className={`${errors.city ? "error_border" : ""}`}
-                              id="city"
-                              name="city"
-                              defaultValue=""
-                              {...register("city", { required: true })}
-                              placeholder=""
-                              onChange={setStateFromInput}
-                            />
-                            <span className="error-message">
-                              {errors.city && "select one city"}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-12 col-sm-6 col-xs-12">
-                            <Label className="field-label">
-                              State / County
-                            </Label>
-                            <input
-                              type="text"
-                              className={`${
-                                errors.state ? "error_border" : ""
-                              }`}
-                              name="state"
-                              {...register("state", { required: true })}
-                              onChange={setStateFromInput}
-                              id="state"
-                              defaultValue=""
-                              placeholder=""
-                            />
-                            <span className="error-message">
-                              {errors.state && "select one state"}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-md-12 col-sm-6 col-xs-12">
-                            <Label className="field-label">Postal Code</Label>
-                            <input
-                              type="text"
-                              name="pincode"
-                              className={`${
-                                errors.pincode ? "error_border" : ""
-                              }`}
-                              {...register("pincode", { pattern: /\d+/ })}
-                              id="pincode"
-                              defaultValue=""
-                              placeholder=""
-                            />
-                            <span className="error-message">
-                              {errors.pincode && "Required integer"}
-                            </span>
-                          </FormGroup>
-                          <FormGroup className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <Input
-                              type="checkbox"
-                              name="shipping-option"
-                              id="account-option"
-                            />{" "}
-                            &ensp;
-                            <Label htmlFor="account-option">
-                              Create An Account?
-                            </Label>
-                          </FormGroup>
-                        </Row>
-                      </div>
+                     <div className="theme-form">
+          <Row className="check-out">
+            <FormGroup className="col-md-6 col-sm-6 col-xs-12">
+              <Label for="firstName">First Name</Label>
+              <Input
+                type="text"
+                {...register("firstName", { required: true })}
+                name="firstName"
+                defaultValue=""
+                placeholder=""
+                className={`${errors.firstName ? "error_border" : ""}`}
+                id="firstName"
+              />
+              <span className="error-message">
+                {errors.firstName && "First name is required"}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-6 col-sm-6 col-xs-12">
+              <Label for="lastName">Last Name</Label>
+              <Input
+                type="text"
+                className={`${errors.lastName ? "error_border" : ""}`}
+                id="lastName"
+                name="lastName"
+                defaultValue=""
+                placeholder=""
+                {...register("lastName", { required: true })}
+              />
+              <span className="error-message">
+                {errors.lastName && "Last name is required"}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-6 col-sm-6 col-xs-12">
+              <Label for="phone">Phone</Label>
+              <Input
+                type="text"
+                className={`${errors.phone ? "error_border" : ""}`}
+                id="phone"
+                name="phone"
+                defaultValue=""
+                placeholder=""
+                {...register("phone", { pattern: /\d+/ })}
+              />
+              <span className="error-message">
+                {errors.phone && "Please enter a number for phone."}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-6 col-sm-6 col-xs-12">
+              <Label for="email">Email Address</Label>
+              <Input
+                type="text"
+                className={`${errors.email ? "error_border" : ""}`}
+                name="email"
+                defaultValue=""
+                placeholder=""
+                id="email"
+                {...register("email", {
+                  required: true,
+                  pattern: /^\S+@\S+$/i,
+                })}
+              />
+              <span className="error-message">
+                {errors.email && "Please enter a proper email address ."}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-12 col-sm-12 col-xs-12">
+              <Label for="country">Country</Label>
+              <select
+                id="country"
+                name="country"
+                {...register("country", { required: true })}
+              >
+                <option>Pakistan</option>
+                <option>South Africa</option>
+                <option>United States</option>
+                <option>Australia</option>
+              </select>
+            </FormGroup>
+            <FormGroup className="col-md-12 col-sm-12 col-xs-12">
+              <Label for="address">Address</Label>
+              <Input
+                type="text"
+                name="address"
+                id="address"
+                defaultValue=""
+                placeholder=""
+                className={`${errors.address ? "error_border" : ""}`}
+                {...register("address", { required: true, min: 20, max: 120 })}
+              />
+              <span className="error-message">
+                {errors.address && "Please write your address."}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-12 col-sm-12 col-xs-12">
+              <Label for="city">Town/City</Label>
+              <Input
+                type="text"
+                className={`${errors.city ? "error_border" : ""}`}
+                id="city"
+                name="city"
+                defaultValue=""
+                {...register("city", { required: true })}
+                placeholder=""
+                onChange={setStateFromInput}
+              />
+              <span className="error-message">
+                {errors.city && "Select one city"}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-12 col-sm-6 col-xs-12">
+              <Label for="state">State / County</Label>
+              <Input
+                type="text"
+                className={`${errors.state ? "error_border" : ""}`}
+                name="state"
+                {...register("state", { required: true })}
+                onChange={setStateFromInput}
+                id="state"
+                defaultValue=""
+                placeholder=""
+              />
+              <span className="error-message">
+                {errors.state && "Select one state"}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-md-12 col-sm-6 col-xs-12">
+              <Label for="pincode">Postal Code</Label>
+              <Input
+                type="text"
+                name="pincode"
+                className={`${errors.pincode ? "error_border" : ""}`}
+                {...register("pincode", { pattern: /\d+/ })}
+                id="pincode"
+                defaultValue=""
+                placeholder=""
+              />
+              <span className="error-message">
+                {errors.pincode && "Required integer"}
+              </span>
+            </FormGroup>
+            <FormGroup className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <Input
+                type="checkbox"
+                name="shipping-option"
+                id="account-option"
+              />{" "}
+              &ensp;
+              <Label htmlFor="account-option">Create An Account?</Label>
+            </FormGroup>
+          </Row>
+        </div>
                     </Col>
                     <Col lg="6" sm="12" xs="12">
                       <div className="checkout-details theme-form  section-big-mt-space">
