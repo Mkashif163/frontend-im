@@ -10,6 +10,7 @@ import ShoppingCart from "./checkoutWizard/shopingCart";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 import { Select } from "@mui/material";
+import { toast } from "react-toastify";
 // import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface formType {
@@ -134,7 +135,7 @@ const CheckoutPage: NextPage = () => {
     if (formData !== null) {
       const customerId = localStorage.getItem("id");
       // Construct the request payload
-      alert("testing" , formData.firstName);
+    
       const requestBody = {
         customer_info: {
           first_name: formData.firstName,
@@ -178,7 +179,7 @@ const CheckoutPage: NextPage = () => {
         );
 
         if (response.ok) {
-          alert("Order successfully placed!");
+          toast.success("Order placed successfully!");
           localStorage.setItem("order-sucess-items", JSON.stringify(cartItems));
           emptyCart();
           router.push({
@@ -201,7 +202,9 @@ const CheckoutPage: NextPage = () => {
       <section className="section-big-py-space">
         <div className="custom-container">
           <div className="checkout-page contact-page">
-            <FormWizard onComplete={handleComplete}>
+            <FormWizard 
+            onComplete={handleComplete}
+            >
               {/* Step 1: Shopping Cart */}
               <FormWizard.TabContent
                 title="Shopping Cart"
@@ -995,6 +998,8 @@ const CheckoutPage: NextPage = () => {
                   </Col>
                 </div>
               </FormWizard.TabContent>
+
+              
             </FormWizard>
           </div>
         </div>
