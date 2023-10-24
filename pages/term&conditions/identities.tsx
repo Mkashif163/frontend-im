@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Layout1 from "views/layouts/layout1";
 import React, { useEffect, useState } from "react";
+import { useApiData } from "helpers/data/DataContext";
 
 interface TermCondition {
   id: number;
@@ -10,23 +11,24 @@ interface TermCondition {
   updated_at: string;
 }
 
+interface termsCon {
+  terms_and_conditions :any
+}
+
 const LeftSidebar: NextPage = () => {
   const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
     []
   );
 
+  const apiData = useApiData() as termsCon;
+
   useEffect(() => {
-    fetch("http://18.235.14.45/api/homeapi")
-      .then((response) => response.json())
-      .then((data: { terms_and_conditions: TermCondition[] }) => {
-        const termsData = data.terms_and_conditions;
-        setTermsAndConditions(termsData);
-      })
-      .catch((error: Error) => {
-        // Handle any errors here
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+
+
+    
+        setTermsAndConditions(apiData.terms_and_conditions);
+    
+  }, []); // The empty array means this effect runs only once when the component mounts
 
   const filteredTerm = termsAndConditions.find((term) => term.id === 34);
 
@@ -38,25 +40,30 @@ const LeftSidebar: NextPage = () => {
             <div className="accordian">
               {filteredTerm && (
                 <div>
-                  <button
-                    className="accordion-button"
-                    style={{ fontSize: '18px', fontWeight: '600' }}
-                  >
-                    {filteredTerm.title}
-                  </button>
-                  <div className="accordion-content">
-                    <div
-                      className="description"
+                  <b>
+                    <h2
+                      className="title"
                       style={{
-                        textAlign: "justify",
-                        fontSize: "14px",
-                        textJustify: "inter-word",
+                        fontSize: "16px",
+                        fontWeight: "800",
+                        textTransform: "uppercase",
+                        textAlign: "center",
                       }}
-                      dangerouslySetInnerHTML={{
-                        __html: filteredTerm.description,
-                      }}
-                    />
-                  </div>
+                    >
+                      {filteredTerm.title}
+                    </h2>
+                  </b>
+                  <br />
+                  <div
+                    className="description"
+                    style={{
+                      textAlign: "justify",
+                      fontSize: "14px",
+                      textJustify: "inter-word",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
+                  />
+                  <br />
                 </div>
               )}
             </div>

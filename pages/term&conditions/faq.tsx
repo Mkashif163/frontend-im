@@ -4,41 +4,31 @@ import React, { useEffect, useState } from "react";
 import { Card, CardHeader, Collapse, Container, Row, Col } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { useApiData } from "helpers/data/DataContext";
 
-interface TermCondition {
+
+interface HelpCenter {
   id: number;
   question: string;
   answer: string;
-  created_at: string;
-  updated_at: string;
+}
+
+interface HelpCenter {
+  help_center :any
 }
 
 const LeftSidebar: NextPage = () => {
-  const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
+  const [termsAndConditions, setTermsAndConditions] = useState<HelpCenter[]>(
     []
   );
 
-  useEffect(() => {
-    // Use async/await for cleaner asynchronous code
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://18.235.14.45/api/homeapi");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        const termsData = data.help_center;
-        setTermsAndConditions(termsData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
 
-    fetchData();
+  const apiData = useApiData() as HelpCenter;
+  useEffect(() => {
+setTermsAndConditions(apiData.help_center);
   }, []);
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
-
   const toggleAccordion = (id: number) => {
     setExpandedId((prevId) => (prevId === id ? null : id));
   };
@@ -63,10 +53,13 @@ const LeftSidebar: NextPage = () => {
                             aria-controls={`collapse${term.id}`}
                           >
                             <strong><span className="text-black" style={{ textAlign: 'left', float: 'left'}} >{term.question}</span>{" "}</strong>
-                            <FontAwesomeIcon
-                              icon={expandedId === term.id ? faCaretUp : faCaretDown}
-                              className="dropdown-icon text-dark" style={{textAlign: 'right' , float: 'right'}}
-                            />
+                            <div style={{ width: '200%', display: 'block' }}>
+  <FontAwesomeIcon
+    icon={expandedId === term.id ? faCaretUp : faCaretDown}
+    className="dropdown-icon text-dark" style={{ float: 'right' }}
+  />
+</div>
+
                           </button>
                         </h5>
                       </CardHeader>

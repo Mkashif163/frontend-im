@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Layout1 from "views/layouts/layout1";
 import React, { useEffect, useState } from "react";
+import { useApiData } from "helpers/data/DataContext";
 
 interface TermCondition {
   id: number;
@@ -10,28 +11,24 @@ interface TermCondition {
   updated_at: string;
 }
 
+interface termsCon {
+  terms_and_conditions :any
+}
+
 const LeftSidebar: NextPage = () => {
   const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
     []
   );
 
+  const apiData = useApiData() as termsCon;
+
   useEffect(() => {
-<<<<<<< HEAD
-    fetch("http://18.235.14.45/api/homeapi")
-=======
-    // Fetch data directly within the useEffect
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}$terms_and_conditions`)
->>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
-      .then((response) => response.json())
-      .then((data: { terms_and_conditions: TermCondition[] }) => {
-        const termsData = data.terms_and_conditions;
-        setTermsAndConditions(termsData);
-      })
-      .catch((error: Error) => {
-        // Handle any errors here
-        console.error("Error fetching data:", error);
-      });
-  }, []); 
+
+
+    
+        setTermsAndConditions(apiData.terms_and_conditions);
+    
+  }, []); // The empty array means this effect runs only once when the component mounts
 
   const filteredTerm = termsAndConditions.find((term) => term.id === 11);
 
@@ -41,16 +38,16 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
-<<<<<<< HEAD
               {filteredTerm && (
                 <div>
                   <b>
                     <h2
                       className="title"
                       style={{
-                        fontSize: "16px",
+                        fontSize: "18px",
                         fontWeight: "800",
                         textTransform: "uppercase",
+                      textAlign: "center",
                       }}
                     >
                       {filteredTerm.title}
@@ -69,15 +66,6 @@ const LeftSidebar: NextPage = () => {
                   <br />
                 </div>
               )}
-=======
-              {/* Render the fetched terms_and_conditions data here */}
-              {/* {termsAndConditions.map((term) => (
-                <div key={termsAndConditions.id}>
-                  <h2>{termsAndConditions.title}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: termsAndConditions.description }} />
-                </div>
-              ))} */}
->>>>>>> 1cd19f0243b4cd35c982051ae84b7042326ce330
             </div>
           </div>
         </div>

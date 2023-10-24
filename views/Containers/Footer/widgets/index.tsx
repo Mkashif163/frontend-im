@@ -238,7 +238,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       <br />
                       <li className="mb-1">
                         <Link
-                          href="/term&conditions/term_condition"
+                          href="/term&conditions/shipping"
                           className="footer-link"
                         >
                           <a className="footer-link text-secondary">
@@ -249,7 +249,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       <br />
                       <li className="mb-1">
                         <Link
-                          href="/term&conditions/term_condition"
+                          href="/term&conditions/tax"
                           className="footer-link"
                         >
                           <a className="footer-link text-secondary">
@@ -270,11 +270,11 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   <div className="footer-contant">
                     <li className="mb-1">
                       <Link
-                        href="/term&conditions/term_condition"
+                        href="/term&conditions/faq"
                         className="footer-link"
                       >
                         <a className="footer-link text-secondary">
-                          Latest News
+                          Help Center
                         </a>
                       </Link>
                     </li>
@@ -599,7 +599,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       <ul className="list-unstyled">
                         <li className="mb-1">
                           <Link
-                            href="/term&conditions/term_condition"
+                            href="/term&conditions/confidential"
                             className="footer-link"
                           >
                             <a className="footer-link text-secondary">
@@ -610,7 +610,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         <br />
                         <li className="mb-1">
                           <Link
-                            href="/term&conditions/term_condition"
+                            href="/term&conditions/confidential"
                             className="footer-link"
                           >
                             <a className="footer-link text-secondary">
@@ -621,7 +621,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         <br />
                         <li className="mb-1">
                           <Link
-                            href="/term&conditions/term_condition"
+                            href="/term&conditions/confidential"
                             className="footer-link"
                           >
                             <a className="footer-link text-secondary">
@@ -632,7 +632,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         <br />
                         <li className="mb-1">
                           <Link
-                            href="/term&conditions/term_condition"
+                            href="/term&conditions/other"
                             className="footer-link"
                           >
                             <a className="footer-link text-secondary">

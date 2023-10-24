@@ -1,83 +1,268 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import { NextPage } from 'next';
 import Layout1 from 'views/layouts/layout1';
-import { NextPage } from "next";
-import { Row, Col } from "reactstrap";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import {
+  Card,
+  CardHeader,
+  Collapse,
+  Container,
+  Row,
+  Col,
+} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCaretDown,
+  faCaretUp,
+} from '@fortawesome/free-solid-svg-icons';
+import { useApiData } from "helpers/data/DataContext";
 
-const Accordion: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const options = [
-    'For Seller',
-    'For Buyer',
-    'Customer Services',
-    'Dispute & Resolution',
-    'Support',
-    'Contact Us',
-    'Our key Features',
-    'Member Signing up',
-    'Advertisements',
-    'Information',
-    'Payment Methods',
-  ];
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+}
 
-  const optionContents = [
-    ['How to Become a Seller?', 'How to Post a Product?', 'How to Become a Verified Supplier?', 'How to Become a Trusted Supplier?', 'How to Give a Discount on Product?'],
-    ['How to Buy?', 'How to Get Discount?', 'How to Get in Touch with Supplier?', 'We have Trusted Suppliers?', 'We have Verified Suppliers'],
-    ['All Terms & Conditions', 'Member Signing up', 'Services', 'Warranty'],
-    ['Payments Resolution', 'Orders Resolution', 'Shipment Resolution', 'Taxes Resolution'],
-    ['Latest News', 'Registration Detail', 'Support 24/7'],
-    ['Our Identities', 'Who we are?', 'Industry Mall Training Institute (IMTI)', 'Why trust on Industry Mall'],
-    ['We are specific in industrial sectors.', 'Connect wholesalers | Industrials directly', 'Competitive price', 'Regular discounted price', 'User-friendly payment method'],
-    ['Member’s undertakings', 'When you agreed terms & conditions', 'Agreed all rules & regulations', 'Being a member liability', 'Breach of Contract'],
-    ['Buying Advertisements', 'Selling Advertisements', 'Store Exception Advertisements', 'All Advertisements'],
-    ['Confidential Information', 'Personal Information', 'Confidential & Personal', 'Other declarations'],
-    ['Secure Payment Integrations', 'Visa Card', 'Master Card', 'Direct Bank Transfer'],
-  ];
+const FaqDropdown: NextPage = () => {
+  const [faqData, setFaqData] = useState<FAQ[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentComponent, setCurrentComponent] = useState<string>('');
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const toggleAccordion = (terms_and_conditions: number) => {
-    if (terms_and_conditions === activeIndex) {
-      setActiveIndex(null);
-      setSelectedOption(null);
-    } else {
-      setActiveIndex(terms_and_conditions);
-      setSelectedOption(options[terms_and_conditions]);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'http://18.235.14.45/api/homeapi'
+        );
+        if (response.status !== 200) {
+          throw new Error('Network response was not ok');
+        }
+        const data = response.data;
+        const termsData = data.help_center;
+        setFaqData(termsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  const renderOptions = options.map((option, terms_and_conditions) => {
-    const isActive = terms_and_conditions === activeIndex;
-    return (
-      <div key={terms_and_conditions} className="accordion-option">
-        <div
-          onClick={() => toggleAccordion(terms_and_conditions)}
-          className={`accordion-title ${isActive ? 'active' : ''}`}
-        >
-          {option}
-        </div>
-        {isActive && (
-          <div className="accordion-content">
-            {optionContents[terms_and_conditions].map((line, lineIndex) => (
-              <div key={lineIndex}>{line}</div>
-            ))}
-          </div>
-        )}
-      </div>
+    fetchData();
+  }, []);
+
+  let filteredTerms: FAQ[] = [];
+
+  if (currentComponent === 'Awaiting Order Arrival') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 1 || term.id === 2 || term.id === 3
     );
-  });
+  } else if (currentComponent === 'Aftersales') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 4 || term.id === 5 || term.id === 6 || term.id === 7
+    );
+  } else if (currentComponent === 'Refund') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 8 || term.id === 9 || term.id === 10 || term.id === 11 || term.id === 12);
+  } else if (currentComponent === 'Ordering & Payment') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 9 || term.id === 10
+    );
+  } else if (currentComponent === 'Account Management') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 11 || term.id === 12
+    );
+  } else if (currentComponent === 'Promotions & coupons') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 11 || term.id === 12
+    );
+  } else if (currentComponent === 'Product Management') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 11 || term.id === 12
+    );
+  } else if (currentComponent === 'Feedback') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 11 || term.id === 12
+    );
+  } else if (currentComponent === 'Contact Information') {
+    filteredTerms = faqData.filter(
+      (term) => term.id === 20 || term.id === 21
+    );
+  }
 
   return (
     <Layout1>
-      <div className='custom-container' style={{ display: 'flex' }}>
-        <div className="accordion-box" style={{ width: '240px', flexShrink: 0, alignItems: 'flex-start', cursor: 'pointer'}}>
-          <span className='options'>{renderOptions}</span>
+      <section className="section-big-py-space bg-light">
+        <div className="custom-container">
+          <Row>
+            <Col lg="2" className="m-0 p-0">
+              <div
+                className="account-sidebar"
+                onClick={() => {
+                  setIsOpen(true);
+                  setCurrentComponent('Awaiting Order Arrival');
+                  setExpandedId(null);
+                }}
+              >
+                <a className="popup-btn">Awaiting Order Arrival</a>
+              </div>
+              <div
+                className={`dashboard-left`}
+                style={{
+                  left: isOpen ? '0px' : '',
+                }}
+              > 
+                <div className="block-content">
+                  <ul>
+                  <li
+  className={
+    currentComponent === 'Awaiting Order Arrival'
+      ? 'active'
+      : ''
+  }
+  onClick={() => {
+    setCurrentComponent('Awaiting Order Arrival');
+    setExpandedId(null);
+  }}
+>
+  <a href="#">Awaiting Order Arrival</a>
+</li>
+
+                    <li
+                      className={
+                        currentComponent === 'Aftersales' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Aftersales');
+                        setExpandedId(null); 
+                      }}
+                    >
+                      <a href="#">Aftersales</a>
+                    </li>
+                    <li
+                      className={currentComponent === 'Refund' ? 'active' : ''}
+                      onClick={() => {
+                        setCurrentComponent('Refund');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Refund</a>
+                    </li>
+                    <li
+                      className={
+                        currentComponent === 'Ordering & Payment' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Ordering & Payment');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Ordering & Payment</a>
+                    </li>
+                    <li
+                      className={
+                        currentComponent === 'Account Management' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Account Management');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Account Management</a>
+                    </li>
+                    <li
+                      className={
+                        currentComponent === 'Promotions & Coupons' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Promotions & Coupons');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Promotion & Coupon</a>
+                    </li>
+                    <li
+                      className={
+                        currentComponent === 'Product Management' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Product Management');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Product Management</a>
+                    </li>
+                    <li
+                      className={currentComponent === 'Feedback' ? 'active' : ''}
+                      onClick={() => {
+                        setCurrentComponent('Feedback');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Feedback</a>
+                    </li>
+                    <li
+                      className={
+                        currentComponent === 'Contact Information' ? 'active' : ''
+                      }
+                      onClick={() => {
+                        setCurrentComponent('Contact Information');
+                        setExpandedId(null);
+                      }}
+                    >
+                      <a href="#">Contact Information</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </Col>
+            <Col lg="10">
+              <div className="dashboard-right">
+                {filteredTerms.length > 0 ? (
+                  <div className="accordion" id="accordionExample">
+                    {filteredTerms.slice(0, 3).map((term) => (
+                      <div key={term.id} style={{ marginBottom: '20px' }}>
+                        <Card>
+                          <CardHeader
+                            onClick={() => {
+                              if (expandedId === term.id) {
+                                setExpandedId(null);
+                              } else {
+                                setExpandedId(term.id);
+                              }
+                            }}
+                          >
+                            <strong><span className="text-black" style={{ textAlign: 'left', float: 'left'}} >{term.question}</span>{" "}</strong>
+                            <div style={{ width: '200%', display: 'block' }}>
+  <FontAwesomeIcon
+    icon={expandedId === term.id ? faCaretUp : faCaretDown}
+    className="dropdown-icon text-dark" style={{ float: 'right' }}
+  />
+</div>
+                          </CardHeader>
+                          <Collapse
+                            isOpen={expandedId === term.id}
+                            id={`collapse${term.id}`}
+                            aria-labelledby={`heading${term.id}`}
+                            data-parent="#accordionExample"
+                          >
+                            <div className="card-body">
+                              <p>{term.answer}</p>
+                            </div>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No FAQ data available for the selected component.</p>
+                )}
+              </div>
+            </Col>
+          </Row>
         </div>
-        <div className='right-box' style={{ backgroundColor: 'lightgray', display: 'flex', width: '100%' }}>
-        </div>
-      </div>
+      </section>
     </Layout1>
   );
 };
 
-export default Accordion;
+export default FaqDropdown;

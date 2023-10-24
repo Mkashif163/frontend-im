@@ -28,9 +28,9 @@ const LeftSidebar: NextPage = () => {
     
         setTermsAndConditions(apiData.terms_and_conditions);
     
-  }, []); // The empty array means this effect runs only once when the component mounts
+  }, []);
 
-  const filteredTerm = termsAndConditions.find((term) => term.id === 22);
+  const filteredTerms = termsAndConditions.filter((term) => term.id === 8 || term.id === 9);
 
   return (
     <Layout1>
@@ -38,19 +38,19 @@ const LeftSidebar: NextPage = () => {
         <div className="custom-container">
           <div className="flex">
             <div className="accordian">
-              {filteredTerm && (
-                <div>
-                   <b>
+              {filteredTerms.map((term) => (
+                <div key={term.id}>
+                  <b>
                     <h2
                       className="title"
                       style={{
-                        fontSize: "18px",
+                        fontSize: "16px",
                         fontWeight: "800",
                         textTransform: "uppercase",
-                      textAlign: "center",
+                        textAlign: "center",
                       }}
                     >
-                      {filteredTerm.title}
+                      {term.title}
                     </h2>
                   </b>
                   <br />
@@ -61,11 +61,11 @@ const LeftSidebar: NextPage = () => {
                       fontSize: "14px",
                       textJustify: "inter-word",
                     }}
-                    dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
+                    dangerouslySetInnerHTML={{ __html: term.description }}
                   />
                   <br />
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </div>

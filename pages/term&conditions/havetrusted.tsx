@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Layout1 from "views/layouts/layout1";
 import React, { useEffect, useState } from "react";
+import { useApiData } from "helpers/data/DataContext";
 
 interface TermCondition {
   id: number;
@@ -10,22 +11,23 @@ interface TermCondition {
   updated_at: string;
 }
 
+interface termsCon {
+  terms_and_conditions :any
+}
+
 const LeftSidebar: NextPage = () => {
   const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>(
     []
   );
 
+  const apiData = useApiData() as termsCon;
+
   useEffect(() => {
-    fetch("http://18.235.14.45/api/homeapi")
-      .then((response) => response.json())
-      .then((data: { terms_and_conditions: TermCondition[] }) => {
-        const termsData = data.terms_and_conditions;
-        setTermsAndConditions(termsData);
-      })
-      .catch((error: Error) => {
-        // Handle any errors here
-        console.error("Error fetching data:", error);
-      });
+
+
+    
+        setTermsAndConditions(apiData.terms_and_conditions);
+    
   }, []); // The empty array means this effect runs only once when the component mounts
 
   const filteredTerm = termsAndConditions.find((term) => term.id === 19);
@@ -45,6 +47,7 @@ const LeftSidebar: NextPage = () => {
                         fontSize: "16px",
                         fontWeight: "800",
                         textTransform: "uppercase",
+                        textAlign: "center"
                       }}
                     >
                       {filteredTerm.title}
