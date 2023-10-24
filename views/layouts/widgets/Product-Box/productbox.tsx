@@ -11,7 +11,7 @@ interface productType {
   product: any;
   addWish: Function;
   addCompare: Function;
-  hoverEffect: any
+  hoverEffect: any;
 }
 
 const ProductBox: NextPage<productType> = ({
@@ -85,7 +85,12 @@ const ProductBox: NextPage<productType> = ({
 
               <div className={`product-icon `}>
                 <button
-                  onClick={() => addToCart(product, 1, selectedCondition)}
+                  onClick={() => {
+                    if (stock > 0) {
+                      addToCart(product, 1, selectedCondition);
+                    }
+                  }}
+                  disabled={stock <= 0}
                 >
                   <i className="ti-bag"></i>
                 </button>
@@ -134,14 +139,20 @@ const ProductBox: NextPage<productType> = ({
                       </span>
                     </div>
                     <div>
-                      <span
-                        className={`condition-text rounded ${
-                          selectedCondition === "Used" ? "active bg-black" : ""
-                        }`}
-                        onClick={() => setSelectedCondition("Used")}
-                      >
-                        <span style={{ cursor: "pointer" }}>Used</span>
-                      </span>
+                      {product.refurnished_sale_price ? (
+                        <span
+                          className={`condition-text rounded ${
+                            selectedCondition === "Used"
+                              ? "active bg-black"
+                              : ""
+                          }`}
+                          onClick={() => setSelectedCondition("Used")}
+                        >
+                          <span style={{ cursor: "pointer" }}>Used</span>
+                        </span>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
