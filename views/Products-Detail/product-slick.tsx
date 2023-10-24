@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row, Media } from "reactstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Col, Media, Row } from "reactstrap";
 import Slider from "react-slick";
 import ProductDetail from "./product-detail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileArrowDown, faFilePdf, faHeadset } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFileArrowDown,
+  faFilePdf,
+  faHeadset,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Image from "next/image"; // Import next/image
 
 interface ProductSlickProps {
   item: any;
@@ -12,18 +17,20 @@ interface ProductSlickProps {
   swatch: boolean;
 }
 
-const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => {
+const ProductSlick: React.FC<ProductSlickProps> = ({
+  item,
+  bundle,
+  swatch,
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState({ nav1: null, nav2: null });
-  const [isLoading, setIsLoading] = useState(true); // Track loading state
   const data = item;
 
+  // Create a single ref for the sliders
   const slider1 = React.useRef<Slider>();
   const slider2 = React.useRef<Slider>();
 
   useEffect(() => {
-    if (data) {
-      setIsLoading(false);
-    }
     setState({
       nav1: slider1.current,
       nav2: slider2.current,
@@ -32,16 +39,27 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
 
   const { nav1, nav2 } = state;
 
-  const changeColorVar = (img_id) => {
+  const changeImage = (img_id) => {
     slider1.current.slickGoTo(img_id);
+    slider2.current.slickGoTo(img_id);
   };
+
+  useEffect(() => {
+    if (data) {
+      setIsLoading(false);
+    }
+  }, [item]);
 
   return (
     <>
-      {isLoading ? ( // Show loader when data is fetching
+      {isLoading ? (
         <div className="d-flex justify-content-center">
           <button className="btn btn-dark" type="button" disabled>
-            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
             Loading...
           </button>
         </div>
@@ -49,52 +67,68 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
         data && (
           <>
             <Col lg="5">
-              <div style={{ width: "100%" }}>
-                <Media src={data.url} alt="" className="img-fluid w-100 image_zoom_cls-0" />
-              </div>
-
-              {/* <Slider className="product-slick" asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
-                {data &&
-                  data.product_images.map((img: any, i: any) => {
-                    return (
-                      <div key={i}>
-                        <Media src={data.url} alt="" className="img-fluid  image_zoom_cls-0" />
-                      </div>
-                    );
-                  })}
-              </Slider> */}
+              <Slider className="product-slick" asNavFor={nav2} ref={slider1}>
+                {data.product_images.map((img: any, i: any) => (
+                  <div
+                    key={i}
+                    className="image-container"
+                    onClick={() => changeImage(i)}
+                  >
+                    <Image
+                      src={img.url}
+                      alt=""
+                      width={500}
+                      height={500}
+                      layout="fill"
+                      objectFit="contain"
+                      priority
+                    />
+                  </div>
+                ))}
+              </Slider>
               <Row>
                 <Col>
-                  <div style={{ width: "500px" }}>
-
-                    {/* <Slider
+                  <div>
+                    <Slider
                       className="slider-nav"
                       asNavFor={nav1}
-                      ref={(slider) => (slider2.current = slider)}
-                      slidesToShow={3}
+                      ref={slider2}
+                      slidesToShow={
+                        data.product_images.length < 4
+                          ? data.product_images.length
+                          : 4
+                      }
                       swipeToSlide={true}
                       focusOnSelect={true}
                       arrows={false}
-                      adaptiveHeight={true}
+                      infinite={false}
                     >
-                      {data &&
-                        data.product_images.map((img: any, i: any) => {
-                          return (
-                            <div key={i}>
-                              <Media src={img.url} alt="" className="img-fluid  image_zoom_cls-0" />
-                            </div>
-                          );
-                        })}
-                    </Slider> */}
+                      {data.product_images.map((img: any, i: any) => (
+                        <div
+                          key={i}
+                          className="image-container"
+                          onClick={() => changeImage(i)}
+                        >
+                          <Image
+                            src={img.url}
+                            alt=""
+                            width={100}
+                            height={100}
+                            objectFit="contain"
+                            priority
+                          />
+                        </div>
+                      ))}
+                    </Slider>
                   </div>
                 </Col>
                 <Col>
                   <div className="support-div w-100">
-                  <Link href={"#support"}>
-                    <div className="product-contact">
-                      <FontAwesomeIcon icon={faHeadset} size="2xl" />
-                      <h6>support</h6>
-                    </div>
+                    <Link href="#support">
+                      <div className="product-contact">
+                        <FontAwesomeIcon icon={faHeadset} size="2xl" />
+                        <h6>support</h6>
+                      </div>
                     </Link>
                     <div className="product-contact">
                       <FontAwesomeIcon icon={faFileArrowDown} size="2xl" />
@@ -109,7 +143,14 @@ const ProductSlick: React.FC<ProductSlickProps> = ({ item, bundle, swatch }) => 
               </Row>
             </Col>
             <Col lg="7" className="rtl-text">
-              <ProductDetail item={item} changeColorVar={changeColorVar} bundle={bundle} swatch={swatch} totalReview={0} offers={0} />
+              <ProductDetail
+                item={item}
+                bundle={bundle}
+                swatch={swatch}
+                totalReview={0}
+                offers={0}
+                changeColorVar={undefined}
+              />
             </Col>
           </>
         )

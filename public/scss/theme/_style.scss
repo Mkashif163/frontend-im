@@ -7927,6 +7927,12 @@ button {
 .rtl-product-slick,
 .product-right-slick,
 .rtl-product-right-slick {
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* or any desired fixed height */
+    overflow: hidden;
+}
   img {
     width: 100%;
   }
