@@ -36,7 +36,7 @@ const CheckoutPage: NextPage = () => {
     firstName: "",
     lastName: "",
     phone: "",
-    country: "",
+    country: "Pakistan",
     email: "",
     state: "",
     address: "",
@@ -135,7 +135,7 @@ const CheckoutPage: NextPage = () => {
     if (formData !== null) {
       const customerId = localStorage.getItem("id");
       // Construct the request payload
-    
+
       const requestBody = {
         customer_info: {
           first_name: formData.firstName,
@@ -202,9 +202,7 @@ const CheckoutPage: NextPage = () => {
       <section className="section-big-py-space">
         <div className="custom-container">
           <div className="checkout-page contact-page">
-            <FormWizard 
-            onComplete={handleComplete}
-            >
+            <FormWizard onComplete={handleComplete}>
               {/* Step 1: Shopping Cart */}
               <FormWizard.TabContent
                 title="Shopping Cart"
@@ -342,6 +340,7 @@ const CheckoutPage: NextPage = () => {
                               labelId="country-label"
                               id="country"
                               name="country"
+                              defaultValue="Pakistan" // setting the default value
                               {...register("country", { required: true })}
                               native
                               fullWidth
@@ -998,8 +997,6 @@ const CheckoutPage: NextPage = () => {
                   </Col>
                 </div>
               </FormWizard.TabContent>
-
-              
             </FormWizard>
           </div>
         </div>
