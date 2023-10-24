@@ -24,11 +24,18 @@ const LeftSidebar: NextPage = () => {
 
   useEffect(() => {
 
-
-    
-        setTermsAndConditions(apiData.terms_and_conditions);
-    
-  }, []); // The empty array means this effect runs only once when the component mounts
+    // Fetch data directly within the useEffect
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}$terms_and_conditions`)
+      .then((response) => response.json())
+      .then((data: { terms_and_conditions: TermCondition[] }) => {
+        const termsData = data.terms_and_conditions;
+        setTermsAndConditions(termsData);
+      })
+      .catch((error: Error) => {
+        // Handle any errors here
+        console.error("Error fetching data:", error);
+      });
+  }, []); 
 
   const filteredTerm = termsAndConditions.find((term) => term.id === 11);
 

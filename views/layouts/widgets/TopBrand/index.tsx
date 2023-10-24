@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { Fragment } from "react";
 
 type TopBrandProps = {};
@@ -14,28 +15,44 @@ const TopBrand: React.FC<TopBrandProps> = () => {
             <a>:</a>
           </li>
           <li>
-            <a href="collections/leftsidebar">aerie</a>
+            <Link href="collections/leftsidebar">
+              <a>aerie</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">baci lingrie</a>
+            <Link href="collections/leftsidebar">
+              <a>baci lingrie</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">gerbe</a>
+            <Link href="collections/leftsidebar">
+              <a>gerbe</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">jolidon</a>
+            <Link href="collections/leftsidebar">
+              <a>jolidon</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">Wonderbra</a>
+            <Link href="collections/leftsidebar">
+              <a>Wonderbra</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">Ultimo</a>
+            <Link href="collections/leftsidebar">
+              <a>Ultimo</a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">Vassarette </a>
+            <Link href="collections/leftsidebar">
+              <a>Vassarette </a>
+            </Link>
           </li>
           <li>
-            <a href="collections/leftsidebar">Oysho</a>
+            <Link href="collections/leftsidebar">
+              <a>Oysho</a>
+            </Link>
           </li>
         </ul>
       </div>

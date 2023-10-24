@@ -5,12 +5,13 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import Slider from "react-slick";
 import Link from "next/link";
+import { CartContext } from "helpers/cart/cart.context";
 
 interface productType {
   product: any;
   addWish: Function;
   addCompare: Function;
-  hoverEffect: any
+  hoverEffect: any;
 }
 
 const ProductBox: NextPage<productType> = ({
@@ -21,6 +22,7 @@ const ProductBox: NextPage<productType> = ({
 }) => {
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurr } = currencyContext;
+  const { addToCart } = useContext(CartContext);
   const slider2 = React.useRef<Slider>();
   const stock = product.stock;
 
@@ -83,7 +85,12 @@ const ProductBox: NextPage<productType> = ({
 
               <div className={`product-icon `}>
                 <button
-                  onClick={() => router.push(`/product-details/${productId}`)}
+                  onClick={() => {
+                    if (stock > 0) {
+                      addToCart(product, 1, selectedCondition);
+                    }
+                  }}
+                  disabled={stock <= 0}
                 >
                   <i className="ti-bag"></i>
                 </button>
@@ -128,18 +135,24 @@ const ProductBox: NextPage<productType> = ({
                         }`}
                         onClick={() => setSelectedCondition("New")}
                       >
-                        New
+                        <span style={{ cursor: "pointer" }}>New</span>
                       </span>
                     </div>
                     <div>
-                      <span
-                        className={`condition-text rounded ${
-                          selectedCondition === "Used" ? "active bg-black" : ""
-                        }`}
-                        onClick={() => setSelectedCondition("Used")}
-                      >
-                        Used
-                      </span>
+                      {product.refurnished_sale_price ? (
+                        <span
+                          className={`condition-text rounded ${
+                            selectedCondition === "Used"
+                              ? "active bg-black"
+                              : ""
+                          }`}
+                          onClick={() => setSelectedCondition("Used")}
+                        >
+                          <span style={{ cursor: "pointer" }}>Used</span>
+                        </span>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>

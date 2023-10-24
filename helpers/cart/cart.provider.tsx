@@ -33,7 +33,7 @@ export const CartProvider = (props: any) => {
 
   // Function to add a product to the cart
   const addToCart = (item, qty, condition) => {
-    toast.success("Product Added to Cart Successfully !");
+    toast.success("Product Added to Cart Successfully !", { autoClose: 500 });
     const index = cartItems.findIndex((itm) => itm.id === item.id);
   
     if (index !== -1) {
@@ -76,7 +76,7 @@ export const CartProvider = (props: any) => {
         cartItems[index] = { ...product, ...item, qty: quantity, total: item.price * quantity };
 
         setCartItems([...cartItems]);
-        toast.info("Product Quantity Updated !");
+        toast.info("Product Quantity Updated !", { autoClose: 500 });
       } else {
         const product = { ...item, qty: quantity, total: item.price * quantity };
         setCartItems([...cartItems, product]);
@@ -89,7 +89,7 @@ export const CartProvider = (props: any) => {
   
   // Function to remove a product from the cart
   const removeFromCart = (item) => {
-    toast.error("Product Removed from Cart Successfully !");
+    toast.error("Product Removed from Cart Successfully !", { autoClose: 500 });
     setCartItems(cartItems.filter((e) => e.id !== item.id));
   };
   

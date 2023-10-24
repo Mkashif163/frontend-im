@@ -32,7 +32,7 @@ const TabProduct: React.FC<ProductDeskProps> = ({ item }) => {
               </NavItem>
               <NavItem>
                 <NavLink className={activeTab === "3" ? "active" : ""} onClick={() => setActiveTab("3")}>
-                  Write Review
+                  Reviews
                   <div className="material-border"></div>
                 </NavLink>
               </NavItem>

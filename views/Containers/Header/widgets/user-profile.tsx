@@ -4,6 +4,7 @@ import firebase from "../../../../config/base";
 import { Label, Input, Form, FormGroup } from "reactstrap";
 import { toast } from "react-toastify";
 import { CartContext } from "helpers/cart/cart.context";
+import Link from "next/link";
 
 const UserProfile: NextPage = () => {
   const { emptyCart } = useContext(CartContext);
@@ -125,9 +126,9 @@ const UserProfile: NextPage = () => {
                     </a>
                   </h5>
                   <h6 className="forget-class">
-                    <a href="/pages/account/register" className="d-block">
-                      new to store? Signup now
-                    </a>
+                    <Link href="/pages/account/register">
+                      <a className="d-block">new to store? Signup now</a>
+                    </Link>
                   </h6>
                 </FormGroup>
               )}

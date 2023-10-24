@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
-import { TabContent, TabPane, Row, Col, Carousel, CarouselItem } from "reactstrap";
+import {
+  TabContent,
+  TabPane,
+  Row,
+  Col,
+  Carousel,
+  CarouselItem,
+} from "reactstrap";
 import ProductBox from "../Product-Box/productbox";
 import Slider from "react-slick";
 import { WishlistContext } from "../../../../helpers/wishlist/wish.context";
 import { CompareContext } from "../../../../helpers/compare/compare.context";
 import { Skeleton } from "../../../../common/skeleton";
 import { useApiData } from "helpers/data/DataContext"; // Make sure to provide the correct path
+import Link from "next/link";
 
 var settings = {
   arrows: true,
@@ -71,12 +79,11 @@ interface ApiData {
   };
 }
 
-
 const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   const { addToWish } = React.useContext(WishlistContext);
   const { addToCompare } = React.useContext(CompareContext);
   const [activeTab, setActiveTab] = useState("new products");
-  const [categoryName, setCategoryName] = useState('');
+  const [categoryName, setCategoryName] = useState("");
   const [subCategoriesData, setSubCategoriesData] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,12 +92,14 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
   useEffect(() => {
     if (apiData?.menus) {
       for (let menuKey in apiData.menus) {
-        let category = apiData.menus[menuKey].categories.find((cat) => cat.id === catId);
-  
+        let category = apiData.menus[menuKey].categories.find(
+          (cat) => cat.id === catId
+        );
+
         if (category) {
           setSubCategoriesData(category.sub_categories);
           setCategoryName(category.name); // Set the category name when found
-  
+
           // Check if the category has subcategories
           if (category.sub_categories.length > 0) {
             setActiveTab(category.sub_categories[0].id); // Set the active sub-category to the first one
@@ -100,12 +109,13 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
       }
     }
   }, [catId, apiData]);
-  
 
   // Use this effect to update the productsData when the activeTab changes
   useEffect(() => {
     if (activeTab) {
-      const activeSubCategory = subCategoriesData.find((subCategory) => subCategory.id === activeTab);
+      const activeSubCategory = subCategoriesData.find(
+        (subCategory) => subCategory.id === activeTab
+      );
       if (activeSubCategory) {
         setProductsData(activeSubCategory.products);
         setLoading(false);
@@ -117,7 +127,9 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
 
   const next = () => {
     // Find the index of the currently active tab
-    const currentIndex = subCategoriesData.findIndex((subCategory) => subCategory.id === activeTab);
+    const currentIndex = subCategoriesData.findIndex(
+      (subCategory) => subCategory.id === activeTab
+    );
 
     // If on the 7th category (index 6) and there's an 8th category, just move to the next category (8th)
     if (currentIndex === 6 && subCategoriesData.length > 7) {
@@ -130,7 +142,9 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
       // Check if the carousel needs to be moved to display the newly active category
       const visibleCategories = currentIndex % 7; // Check which set of 7 categories we are viewing
       if (visibleCategories === 6) {
-        setActiveIndex((activeIndex + 1) % Math.ceil(subCategoriesData.length / 7));
+        setActiveIndex(
+          (activeIndex + 1) % Math.ceil(subCategoriesData.length / 7)
+        );
       }
     }
     setLoading(true);
@@ -138,7 +152,9 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
 
   const previous = () => {
     // Find the index of the currently active tab
-    const currentIndex = subCategoriesData.findIndex((subCategory) => subCategory.id === activeTab);
+    const currentIndex = subCategoriesData.findIndex(
+      (subCategory) => subCategory.id === activeTab
+    );
 
     // If on the 1st category of the next slide (e.g., the 8th category if each slide displays 7 categories)
     if (currentIndex % 7 === 0 && currentIndex !== 0) {
@@ -146,13 +162,18 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
       setActiveIndex(activeIndex - 1); // Move the carousel to show the previous set of categories
     } else {
       // Calculate the index of the previous tab (cyclically)
-      const previousIndex = (currentIndex - 1 + subCategoriesData.length) % subCategoriesData.length;
+      const previousIndex =
+        (currentIndex - 1 + subCategoriesData.length) %
+        subCategoriesData.length;
       setActiveTab(subCategoriesData[previousIndex].id);
 
       // Check if the carousel needs to be moved to display the newly active category
       const visibleCategories = (currentIndex - 1) % 7; // Check which set of 7 categories we are viewing
       if (visibleCategories === 6) {
-        setActiveIndex((activeIndex - 1 + Math.ceil(subCategoriesData.length / 7)) % Math.ceil(subCategoriesData.length / 7));
+        setActiveIndex(
+          (activeIndex - 1 + Math.ceil(subCategoriesData.length / 7)) %
+            Math.ceil(subCategoriesData.length / 7)
+        );
       }
     }
     setLoading(true);
@@ -165,28 +186,40 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
           <div className="tab-product-main">
             <div className="tab-prodcut-contain">
               <div className="category-title">
-                <h3>{categoryName.substring(0, 15)}{categoryName.length > 15 ? "..." : ""}</h3>
+                <h3>
+                  {categoryName.substring(0, 15)}
+                  {categoryName.length > 15 ? "..." : ""}
+                </h3>
               </div>
 
               <div className="top-bar-product-catogories">
-                <Carousel activeIndex={activeIndex} next={next} previous={previous} interval={false}>
+                <Carousel
+                  activeIndex={activeIndex}
+                  next={next}
+                  previous={previous}
+                  interval={false}
+                >
                   {subCategoriesData.map((subCategory, i) => (
                     <CarouselItem key={subCategory.id}>
                       <ul className="product-catogories">
-                        {subCategoriesData.slice(i, i + 9).map((subCategory) => (
-                          <li className="top-catogories">
-                            <a
-                              className={activeTab === subCategory.id ? "active" : ""}
-                              onClick={() => {
-                                setLoading(true);
-                                setActiveTab(subCategory.id);
-                              }}
-                            >
-                              {subCategory.name.substring(0, 12)}
-                              {subCategory.name.length > 12 ? "..." : ""}
-                            </a>
-                          </li>
-                        ))}
+                        {subCategoriesData
+                          .slice(i, i + 9)
+                          .map((subCategory) => (
+                            <li className="top-catogories">
+                              <a
+                                className={
+                                  activeTab === subCategory.id ? "active" : ""
+                                }
+                                onClick={() => {
+                                  setLoading(true);
+                                  setActiveTab(subCategory.id);
+                                }}
+                              >
+                                {subCategory.name.substring(0, 12)}
+                                {subCategory.name.length > 12 ? "..." : ""}
+                              </a>
+                            </li>
+                          ))}
                       </ul>
                     </CarouselItem>
                   ))}
@@ -208,7 +241,9 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
                   </ul>
                 </div>
                 <div className="view-akk">
-                  <a href="/collections/leftsidebar">View all</a>
+                  <Link href={`/collections/leftsidebar?category=${catId}`}>
+                    <a>View all</a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -233,7 +268,7 @@ const TabProduct: NextPage<TabProductProps> = ({ catId, effect }) => {
                               <ProductBox
                                 hoverEffect={effect}
                                 product={product} // Pass the product data
-                               // Example: pass the product and quantity
+                                // Example: pass the product and quantity
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)}
                               />

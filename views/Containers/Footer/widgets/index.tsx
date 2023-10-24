@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Media, Input } from "reactstrap";
 import CustomDropDown from "./CustomDropdown";
 import Link from "next/link";
-import Image from "next/image";
 
-const dropDownProfile = () => {
-  const [openProfile, setOpenProfile] = useState(false);
-};
 type FooterSectionProps = {
   layoutLogo: string;
 };
@@ -269,6 +265,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   </div>
                   <div className="footer-contant">
                     <li className="mb-1">
+                      <Link href="/blog/right-sidebar" className="footer-link">
                       <Link
                         href="/term&conditions/faq"
                         className="footer-link"
@@ -711,7 +708,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                 <li className="list-inline-item mx-4">
                   <div className="footer-logo">
                     <a href="#">
-
                       <Media
                         src={`/images/layout-2/logo/im-logo.png`}
                         width="150px"
@@ -760,7 +756,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
         <Container>
           <Row>
             <div className="app-link-bloc-contain app-link-bloc-contain-1">
-            <div className="app-item-group">
+              <div className="app-item-group">
                 <div className="app-item">
                   <a href="#" rel="noopener noreferrer">
                     <Media
@@ -773,7 +769,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         objectFit: "contain",
                       }}
                     />
-
                   </a>
                 </div>
                 <div className="app-item">

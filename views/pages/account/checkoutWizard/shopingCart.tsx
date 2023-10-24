@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { CartContext } from "../../../helpers/cart/cart.context";
-import { CurrencyContext } from "helpers/currency/CurrencyContext";
+import { CartContext } from "../../../../helpers/cart/cart.context";
+import { CurrencyContext } from "../../../../helpers/currency/CurrencyContext";
 import Link from "next/link";
 
-const CartPage: NextPage = () => {
+const ShoppingCart: NextPage = () => {
   const { cartItems, updateQty, removeFromCart } =
     React.useContext(CartContext);
   const { selectedCurr } = React.useContext(CurrencyContext);
@@ -188,7 +188,7 @@ const CartPage: NextPage = () => {
                   </table>
                 </div>
               </div>
-              <div className="row cart-buttons">
+              {/* <div className="row cart-buttons">
                 <div className="col-12">
                   <Link href="/">
                     <a className="btn btn-normal">continue shopping</a>
@@ -197,7 +197,7 @@ const CartPage: NextPage = () => {
                     <a className="btn btn-normal ms-3">check out</a>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : (
             <div className="col-sm-12">
@@ -222,4 +222,4 @@ const CartPage: NextPage = () => {
   );
 };
 
-export default CartPage;
+export default ShoppingCart;

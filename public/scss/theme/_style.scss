@@ -1837,27 +1837,28 @@ button {
 // Media Query for screen sizes up to 548px
 @media (max-width: 548px) {
   .custom-container {
-      .d-flex {
-          flex-direction: column; // Stack children vertically
-      }
+    .d-flex {
+      flex-direction: column; // Stack children vertically
+    }
 
-      .custom-menus {
-          width: 100%; // Take the full width of the container
-      }
+    .custom-menus {
+      width: 100%; // Take the full width of the container
+    }
 
-      .slider-top {
-          width: 100vw; // Set the width to 100% of the viewport width
-          margin-bottom: 20px; // Add some space between menu and carousel on small screens
+    .slider-top {
+      width: 100vw; // Set the width to 100% of the viewport width
+      margin-bottom: 20px; // Add some space between menu and carousel on small screens
 
-          .carousel-control-prev, .carousel-control-next {
-              display: block; // Show the carousel controls on mobile
-          }
+      .carousel-control-prev,
+      .carousel-control-next {
+        display: block; // Show the carousel controls on mobile
       }
+    }
 
-      .menu-banners {
-          width: 100%; // Take the full width of the container
-          margin-top: 20px; // Add some space between the carousel and the banner image
-      }
+    .menu-banners {
+      width: 100%; // Take the full width of the container
+      margin-top: 20px; // Add some space between the carousel and the banner image
+    }
   }
 }
 //////////////////////////////
@@ -2417,18 +2418,14 @@ button {
       }
     }
   }
-  &:hover {
-    
-      .product-front {
-       transform: scale(1.1);
-      }
-    }
+  
   }
 
-.product-imgbox:hover img {
-  transform: scale(1.2); 
-  cursor: zoom-in; 
-}
+  .product-imgbox:hover img {
+    transform: scale(1.2);
+    transition: transform 0.3s ease; /* You can adjust the duration and timing function (e.g., ease-in-out) as needed */
+  }
+  
 .no-slider {
   .product-box {
     width: 100%;
@@ -7930,6 +7927,12 @@ button {
 .rtl-product-slick,
 .product-right-slick,
 .rtl-product-right-slick {
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* or any desired fixed height */
+    overflow: hidden;
+}
   img {
     width: 100%;
   }
@@ -8846,12 +8849,12 @@ button {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
   display: flex;
-  width: 95%;
-  height: 80%;
+  // width: 95%;
+  // height: 80%;
    .short-product-images {
-    // width: 83%;
-    width: 70%;
-    height: 50%;
+    width: 83%;
+    // width: 70%;
+    // height: 50%;
   }
  .product-box{
  width: 100%;
@@ -8994,7 +8997,7 @@ button {
     .offers {
       ul {
         margin-top: 5px;
-        max-height: 317px;
+        max-height: 335px;
         overflow-y: auto;
         list-style: none;
         li {
@@ -11606,25 +11609,63 @@ button {
 // DisplayItem css
 
 .imgContainer {
-  // width: "15rem";
-  // height: "15rem";
-  // position: "relative";
-  // overflow: "hidden";
+  width: 15rem;
+  height: 15rem;
+  position: relative;
+  overflow: hidden;
 }
+.imgContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
 .miniImgContainer {
-  // width: "10rem";
-  // height: "10rem";
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+  overflow: hidden;
 }
-.imgContainerImg {
-  // position: "absolute";
-  // top: "0";
-  // left: "0";
-  // width: "100%";
-  // height: "100%";
-  // object-fit: "cover";
-  // margin: "0";
-  // padding: "0";
+
+.miniImgContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  outline: none;
 }
+
+.selectedThumbnailContainer {
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.selectedThumbnailContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  // border: 2px solid #007bff;
+}
+
 .selectedThumbnail {
   // border: "2px solid #007bff";
 }

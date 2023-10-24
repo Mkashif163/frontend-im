@@ -5,6 +5,7 @@ import BlogPage from "./common/blogPage";
 import MediaPage from "./common/mediaPage";
 import Link from "next/link";
 import { useState, useRef } from "react";
+import Slider from "react-slick";
 
 const RightSidebarPage: NextPage = () => {
   const [projects, setProjects] = useState([]);
@@ -53,6 +54,27 @@ const RightSidebarPage: NextPage = () => {
     ],
   };
 
+  const groupProjectsByCategory = (projects) => {
+    return projects.reduce((grouped, project) => {
+      if (!grouped[project.categoryName]) {
+        grouped[project.categoryName] = [];
+      }
+      grouped[project.categoryName].push(project);
+      return grouped;
+    }, {});
+  };
+
+  const groupedProjects = groupProjectsByCategory(projects);
+
+  const filterProjects = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProjects =
+    selectedCategory === "All Projects"
+      ? projects
+      : projects.filter((project) => project.categoryName === selectedCategory);
+
   return (
     <div className="bg-light">
       <h3 className="text-center">Latest News</h3>
@@ -66,7 +88,10 @@ const RightSidebarPage: NextPage = () => {
               <div className="row">
                 <div className="col-md-6 tn-left">
                   <div className="tn-img">
-                    <img src="/blog-page-assets/img/top-news-1.jpg" />
+                    <img
+                      className="blog-tn-img"
+                      src="/blog-page-assets/img/top-news-1.jpg"
+                    />
                     <div className="tn-content">
                       <div className="tn-content-inner">
                         <a className="tn-date" href="">
@@ -83,7 +108,10 @@ const RightSidebarPage: NextPage = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="tn-img">
-                        <img src="/blog-page-assets/img/top-news-2.jpg" />
+                        <img
+                          className="blog-tn-img"
+                          src="/blog-page-assets/img/top-news-2.jpg"
+                        />
                         <div className="tn-content">
                           <div className="tn-content-inner">
                             <a className="tn-date" href="">
@@ -98,7 +126,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="tn-img">
-                        <img src="/blog-page-assets/img/top-news-3.jpg" />
+                        <img
+                          className="blog-tn-img"
+                          src="/blog-page-assets/img/top-news-3.jpg"
+                        />
                         <div className="tn-content">
                           <div className="tn-content-inner">
                             <a className="tn-date" href="">
@@ -113,7 +144,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="tn-img">
-                        <img src="/blog-page-assets/img/top-news-4.jpg" />
+                        <img
+                          className="blog-tn-img"
+                          src="/blog-page-assets/img/top-news-4.jpg"
+                        />
                         <div className="tn-content">
                           <div className="tn-content-inner">
                             <a className="tn-date" href="">
@@ -128,7 +162,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="tn-img">
-                        <img src="/blog-page-assets/img/top-news-5.jpg" />
+                        <img
+                          className="blog-tn-img"
+                          src="/blog-page-assets/img/top-news-5.jpg"
+                        />
                         <div className="tn-content">
                           <div className="tn-content-inner">
                             <a className="tn-date" href="">
@@ -184,7 +221,10 @@ const RightSidebarPage: NextPage = () => {
                   <div className="row cn-slider">
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-1.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-1.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -199,7 +239,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-2.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-2.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -214,7 +257,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-3.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-3.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -236,7 +282,10 @@ const RightSidebarPage: NextPage = () => {
                   <div className="row cn-slider">
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-4.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-4.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -251,7 +300,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-5.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-5.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -266,7 +318,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-6.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-6.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -297,7 +352,10 @@ const RightSidebarPage: NextPage = () => {
                   <div className="row cn-slider">
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-7.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-7.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -312,7 +370,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-8.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-8.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -327,7 +388,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-9.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-9.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -349,7 +413,10 @@ const RightSidebarPage: NextPage = () => {
                   <div className="row cn-slider">
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-10.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-10.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -364,7 +431,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-11.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-11.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -379,7 +449,10 @@ const RightSidebarPage: NextPage = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="cn-img">
-                        <img src="/blog-page-assets/img/cat-news-12.jpg" />
+                        <img
+                          className="blog-cn-img"
+                          src="/blog-page-assets/img/cat-news-12.jpg"
+                        />
                         <div className="cn-content">
                           <div className="cn-content-inner">
                             <a className="cn-date" href="">
@@ -412,7 +485,10 @@ const RightSidebarPage: NextPage = () => {
                       <div className="row">
                         <div className="col-lg-6">
                           <div className="mn-img">
-                            <img src="/blog-page-assets/img/latest-news.jpg" />
+                            <img
+                              className="blog-mn-img"
+                              src="/blog-page-assets/img/latest-news.jpg"
+                            />
                           </div>
                           <div className="mn-content">
                             <a className="mn-title" href="">
@@ -432,7 +508,10 @@ const RightSidebarPage: NextPage = () => {
                         <div className="col-lg-6">
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -445,7 +524,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -458,7 +540,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -471,7 +556,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -484,7 +572,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -505,7 +596,10 @@ const RightSidebarPage: NextPage = () => {
                       <div className="row">
                         <div className="col-lg-6">
                           <div className="mn-img">
-                            <img src="/blog-page-assets/img/popular-news.jpg" />
+                            <img
+                              className="blog-mn-img"
+                              src="/blog-page-assets/img/popular-news.jpg"
+                            />
                           </div>
                           <div className="mn-content">
                             <a className="mn-title" href="">
@@ -525,7 +619,10 @@ const RightSidebarPage: NextPage = () => {
                         <div className="col-lg-6">
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/popular-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/popular-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -538,7 +635,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/popular-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/popular-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -551,7 +651,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/popular-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/popular-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -564,7 +667,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/popular-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/popular-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -577,7 +683,10 @@ const RightSidebarPage: NextPage = () => {
                           </div>
                           <div className="mn-list">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/popular-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/popular-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -604,7 +713,10 @@ const RightSidebarPage: NextPage = () => {
                         <div className="row">
                           <div className="col">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">
@@ -633,7 +745,10 @@ const RightSidebarPage: NextPage = () => {
                         <div className="row">
                           <div className="col">
                             <div className="mn-img">
-                              <img src="/blog-page-assets/img/latest-news.jpg" />
+                              <img
+                                className="blog-mn-img"
+                                src="/blog-page-assets/img/latest-news.jpg"
+                              />
                             </div>
                             <div className="mn-content">
                               <a className="mn-title" href="">

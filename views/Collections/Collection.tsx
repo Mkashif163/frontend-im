@@ -14,11 +14,11 @@ type CollectionProps = {
   cols: any;
   layoutList: string;
   products: any;
-  cat:any
-  sub_cat:any
+  cat: any
+  sub_cat: any
 };
 
-const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,sub_cat }) => {
+const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products, cat, sub_cat }) => {
   const { selectedCategory, selectedBrands, selectedColor, selectedPrice, setSelectedColor, setSelectedBrands, setLeftSidebarOpen, leftSidebarOpen } = useContext(FilterContext);
   const { addToCart } = React.useContext(CartContext);
   const { addToWish } = React.useContext(WishlistContext);
@@ -30,7 +30,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,
   const [isLoading, setIsLoading] = useState(true);
   const [allProductData, setAllProductData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(allProductData.length / pageLimit);
+ 
+
 
 
   useEffect(() => {
@@ -43,21 +44,22 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,
 
 
   const handlePagination = (page) => {
-    page
+    setCurrentPage(page);
   };
 
 
+
   const filteredProducts = () => {
-    const filtered = allProductData.filter((product) => 
-        ((product.brand === null && !selectedBrands.length) || 
-        (product.brand && selectedBrands.includes(product.brand.brand_name))) && 
-        (!selectedColor || product.colors.some((color) => color.color.color_code === selectedColor)) &&
-        product.new_price >= selectedPrice.min && product.new_price <= selectedPrice.max // filter products based on price
+    const filtered = allProductData.filter((product) =>
+      ((product.brand === null && !selectedBrands.length) ||
+        (product.brand && selectedBrands.includes(product.brand.brand_name))) &&
+      (!selectedColor || product.colors.some((color) => color.color.color_code === selectedColor)) &&
+      product.new_price >= selectedPrice.min && product.new_price <= selectedPrice.max
     );
     return filtered;
-};
- 
+  };
 
+  const totalPages = Math.ceil(filteredProducts().length / pageLimit);
   // Use the filteredProducts function to get the current list of products
   const currentProducts = filteredProducts();
 
@@ -86,7 +88,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,
         <Row>
           <Col sm="12">
             {/* Collection Banner */}
-            <CollectionBanner cat={cat} sub_cat={sub_cat}/>
+            <CollectionBanner cat={cat} sub_cat={sub_cat} />
             <div className="collection-product-wrapper">
               <Row>
                 <Col xs="12">
@@ -102,8 +104,8 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,
                       ))}
                     {!!selectedColor.length && (
                       <li
-                      className={`color-swatch`}
-                      style={{ backgroundColor: selectedColor.toString() }}
+                        className={`color-swatch`}
+                        style={{ backgroundColor: selectedColor.toString() }}
                       >
                         {selectedColor && (
                           <a className="filter_tag">
@@ -234,7 +236,7 @@ const Collection: NextPage<CollectionProps> = ({ cols, layoutList, products,cat,
                               <ProductBox
                                 hoverEffect={true}
                                 product={product}
-                               
+
                                 addCompare={(product) => addToCompare(product)}
                                 addWish={(product) => addToWish(product)} />
                             </div>

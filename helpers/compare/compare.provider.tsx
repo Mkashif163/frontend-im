@@ -28,18 +28,18 @@ export const CompareProvider = (props) => {
   const addToCompare = (item) => {
     const index = compareItems.findIndex((compare) => compare.id === item.id);
     if (index === -1) {
-      toast.success("Product Added to Compare Successfully !");
+      toast.success("Product Added to Compare Successfully !", { autoClose: 500 });
       setcompareItems([...compareItems, item]);
       router.push("/pages/compare/compare-1");
     } else {
-      toast.error("This Product is Already Added to Compare !");
+      toast.error("This Product is Already Added to Compare !", { autoClose: 500 });
     }
   };
 
   // Remove Product From compare
   const removeFromComapre = (item) => {
     setcompareItems(compareItems.filter((e) => e.id !== item.id));
-    toast.error("Product Removed from Compare Successfully !");
+    toast.error("Product Removed from Compare Successfully !", { autoClose: 500 });
   };
 
   return (
