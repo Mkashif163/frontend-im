@@ -46,40 +46,35 @@ var settings = {
   ],
 };
 
-const BrandList = [
-  { img: "/images/layout-2/rounded-cat/1.png", category: "Flower" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "Furniture" },
-  { img: "/images/layout-2/rounded-cat/3.png", category: "Bag" },
-  { img: "/images/layout-2/rounded-cat/4.png", category: "Tools" },
-  { img: "/images/layout-2/rounded-cat/5.png", category: "Grocery" },
-  { img: "/images/layout-2/rounded-cat/6.png", category: "Camera" },
-  { img: "/images/layout-2/rounded-cat/7.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/8.png", category: "cardigans" },
-  { img: "/images/layout-2/rounded-cat/9.png", category: "cardigans" },
-];
-const Suplier: NextPage = () => {
+interface BrandList {
+  brands:any,
+}
+const Suplier: NextPage<BrandList> = (brands) => {
+  const brandList = brands.brands;
+
+  function transformImageUrl(apiImageUrl) {
+    if (apiImageUrl) {
+      return `${process.env.NEXT_PUBLIC_BACKEND_URL}/${apiImageUrl.replace(/ /g, '%20')}`;
+    }
+    return ''; // Handle the case where apiImageUrl is not defined
+  }
   return (
     <>
     <div className="custom-container">
-      <div className="container-brands">
-        
-            <div className="slide-6 no-arrow">
+      <div className="container-brands slide-6 no-arrow">
               <Slider {...settings}>
-                {BrandList.map((data, i) => (
-                  <div key={i}>
-                    <div className="category-contain">
+                {brandList.map((data, i) => (
+                    <div className="category-contain" key={i}>
                 
                         <div className="img-wrapper">
-                          <Media src={data.img} alt="category" className="img-fluid brands-img" />
+                          <Media src={transformImageUrl(data.logo)} alt="category" className="img-fluid brands-img" />
                         </div>
                         {/* <div>
                           <div className="btn-rounded">{data.category}</div>
                 </div> */}
                     </div>
-                  </div>
                 ))}
               </Slider>
-            </div>
       </div>
     </div>
     </>

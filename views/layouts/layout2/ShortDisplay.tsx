@@ -101,8 +101,6 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
 
   const randomProducts = getRandomProducts(products, 5);
 
-  console.log("coupens",coupens[0])
-
   return (
     <>
       <section className="short-disply section-py-space ratio_asos product">

@@ -1167,6 +1167,7 @@ button {
         transition: 0.5s ease;
         .brands-img {
           width: 100%;
+          mix-blend-mode: multiply;
           filter: grayscale(1);
           aspect-ratio: 3/2;
           object-fit: contain;
