@@ -126,7 +126,8 @@ const ShortDisplay: React.FC<ShortDisplayProps> = ({ effect, data }) => {
                           <span className="offer">{offer.coupon_code}</span>
                           <div className="offer-details">
                             <h5>{offer.coupon_title}</h5>
-                            <p>{offer.discount_type}</p>
+                           
+                            <p>Start Date: {offer.start_date} Exp Date:{offer.end_date}</p>
                           </div>
                         </li>
                       ))}
