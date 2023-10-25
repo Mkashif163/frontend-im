@@ -1,27 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Row, Col, Dropdown, DropdownToggle } from "reactstrap";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
+
 import { CurrencyContext } from "../../../../../helpers/currency/CurrencyContext";
 import { useTranslation } from "react-i18next";
 import dataa from "../../../../../data/langConfig.json";
 import Link from "next/link";
 
-const GET_CURRENCY = gql`
-  query getCurrency {
-    currency {
-      currency
-      symbol
-      value
-    }
-  }
-`;
+const currencyData = {
+  currency: [
+    { currency: "USD", symbol: "$", value: "USD" },
+    { currency: "Euro", symbol: "€", value: "EUR" },
+    // Add more currencies as needed
+  ],
+};
+
 
 const TopBar: React.FC = () => {
   const { i18n, t } = useTranslation();
   const [openLang, setOpenLang] = useState(false);
   const [openUsd, setOpenUsd] = useState(false);
-  const { data = { currency: [] } } = useQuery(GET_CURRENCY);
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurrency, selectedCurr } = currencyContext;
   const [lang, setSelectedLang] = useState({ lang: "English", val: "en" });
@@ -159,7 +156,7 @@ const TopBar: React.FC = () => {
                         openUsd ? "" : "open"
                       }`}
                     >
-                      {data.currency.map((cur, i) => (
+                      {currencyData.currency.map((cur, i) => (
                         <li key={i}>
                           <div
                             onClick={() => {

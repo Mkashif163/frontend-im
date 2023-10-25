@@ -1,7 +1,5 @@
 import React from "react";
-import { ApolloProvider } from "@apollo/client";
 import { ToastContainer } from "react-toastify";
-import { useApollo } from "../helpers/apollo";
 import { FilterProvider } from "../helpers/filter/filter.provider";
 import { CartProvider } from "../helpers/cart/cart.provider";
 import { WishlistProvider } from "../helpers/wishlist/wish.provider";
@@ -21,10 +19,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "../data/i18n";
 
 function MyApp({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps);
   return (
     <>
-      <ApolloProvider client={apolloClient}>
+     
         <Loader>
           <div>
             <ApiDataProvider>
@@ -47,7 +44,7 @@ function MyApp({ Component, pageProps }) {
             </ApiDataProvider>
           </div>
         </Loader>
-      </ApolloProvider>
+
     </>
   );
 }

@@ -1,23 +1,19 @@
 import React, { useContext, useState } from "react";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
+
 import { CurrencyContext } from "../../../../helpers/currency/CurrencyContext";
 import { useTranslation } from "react-i18next";
 import dataa from "../../../../data/langConfig.json";
 
-const GET_CURRENCY = gql`
-  query getCurrency {
-    currency {
-      currency
-      symbol
-      value
-    }
-  }
-`;
+const currencyData = {
+  currency: [
+    { currency: "US Dollar", symbol: "$", value: "USD" },
+    { currency: "Euro", symbol: "€", value: "EUR" },
+    // Add more currencies as needed
+  ],
+};
 
 const MobileSetting: React.FC = () => {
   const { i18n } = useTranslation();
-  const { data = { currency: [] } } = useQuery(GET_CURRENCY);
   const currencyContext = useContext(CurrencyContext);
   const { selectedCurrency } = currencyContext;
   const [open, setOpen] = useState(false);
@@ -75,7 +71,7 @@ const MobileSetting: React.FC = () => {
               </ul>
               <h5>currency</h5>
               <ul>
-                {data.currency.map((cur, i) => (
+                {currencyData.currency.map((cur, i) => (
                   <li key={i}>
                     <div
                       onClick={() => {
