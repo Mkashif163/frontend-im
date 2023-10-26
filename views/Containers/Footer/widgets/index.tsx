@@ -265,7 +265,6 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                   </div>
                   <div className="footer-contant">
                     <li className="mb-1">
-                      <Link href="/blog/right-sidebar" className="footer-link">
                       <Link
                         href="/term&conditions/faq"
                         className="footer-link"

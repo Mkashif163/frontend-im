@@ -22,10 +22,7 @@ const LeftSidebar: NextPage = () => {
 
   const apiData = useApiData() as termsCon;
 
-  useEffect(() => {
-
-
-    
+  useEffect(() => {    
         setTermsAndConditions(apiData.terms_and_conditions);
     
   }, []); // The empty array means this effect runs only once when the component mounts
