@@ -28,7 +28,10 @@ interface CategoriesData {
   e_s_banner_3: string;
   center_image1: string;
 }
-
+interface ApiData {
+  Homesetting: CategoriesData[];
+  brands: any;
+}
 const Home: NextPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [categoriesData, setCategoriesData] = useState<CategoriesData>({
@@ -44,11 +47,9 @@ const Home: NextPage = () => {
     e_s_banner_3: "",
     center_image1: "",
   });
-  const apiData = useApiData();
+  const apiData = useApiData() as ApiData;
 
-  interface ApiData {
-    Homesetting: CategoriesData[];
-  }
+ 
 
   const ip = process.env.NEXT_PUBLIC_BACKEND_URL;
   console.log("backend url",ip)
@@ -66,7 +67,6 @@ const Home: NextPage = () => {
       setError("Failed to fetch data. Please try again later.");
     }
   }, [apiData]);
-
   return (
     <>
     <Layouts>
@@ -88,7 +88,7 @@ const Home: NextPage = () => {
                 <TabProduct catId={parseInt(categoriesData.category3)} effect="icon-inline" />
                 <ShortDisplay data={apiData} />
                 <section className="rounded-category">
-                  <Brands />
+                  <Brands brands={apiData.brands}/>
                 </section>
                 <TabProduct catId={parseInt(categoriesData.category4)} effect="icon-inline" />
                 <RatioSquare />
@@ -98,7 +98,7 @@ const Home: NextPage = () => {
                   ban3={categoriesData.e_s_banner_3}
                 />
                 <section className="rounded-category">
-                  <Suplier />
+                  <Suplier brands={apiData.brands}/>
                 </section>
                 <AllProducts />
                 <ContactBanner />
