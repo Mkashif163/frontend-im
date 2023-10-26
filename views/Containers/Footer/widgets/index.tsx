@@ -171,7 +171,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       <br />
                       <li className="mb-1">
                         <Link
-                          href="/term&conditions/term_condition"
+                          href="/term&conditions/member"
                           className="footer-link"
                         >
                           <a className="footer-link text-secondary">
@@ -223,7 +223,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                       <br />
                       <li className="mb-1">
                         <Link
-                          href="/term&conditions/term_condition"
+                          href="/term&conditions/order"
                           className="footer-link"
                         >
                           <a className="footer-link text-secondary">
@@ -270,11 +270,20 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         className="footer-link"
                       >
                         <a className="footer-link text-secondary">
-                          Help Center
+                          Latest News
                         </a>
                       </Link>
                     </li>
                     <br />
+                    <li className="mb-1">
+                      <Link
+                        href="/term&conditions/support"
+                        className="footer-link">
+                        <a className="footer-link text-secondary">
+                          Support 24/7
+                        </a>
+                      </Link>
+                    </li><br/>
 
                     <li className="mb-1">
                       <Link
@@ -286,16 +295,14 @@ const FooterSection: React.FC<FooterSectionProps> = ({ layoutLogo }) => {
                         </a>
                       </Link>
                     </li>
-                    <br />
-
+                    <br/>
                     <li className="mb-1">
                       <Link
-                        href="/term&conditions/support"
-                        className="footer-link"
-                      >
+                        href="/term&conditions/helpcenter"
+                        className="footer-link">
                         <a className="footer-link text-secondary">
-                          Support 24/7
-                        </a>
+                          Help Center
+                        </a> 
                       </Link>
                     </li>
                     <br />

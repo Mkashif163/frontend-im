@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { CurrencyContext } from "../../../helpers/currency/CurrencyContext";
 import Link from "next/link";
 import ShoppingCart from "./checkoutWizard/shopingCart";
-import FormWizard from "react-form-wizard-component";
+ import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 import { Select } from "@mui/material";
 import { toast } from "react-toastify";

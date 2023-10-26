@@ -20,15 +20,14 @@ const LeftSidebar: NextPage = () => {
     []
   );
 
+  const apiData = useApiData() as termsCon;
 
-    const apiData = useApiData() as termsCon;
-  
-    useEffect(() => {
-          setTermsAndConditions(apiData.terms_and_conditions);
-      
-    }, []);
+  useEffect(() => {    
+        setTermsAndConditions(apiData.terms_and_conditions);
+    
+  }, []); // The empty array means this effect runs only once when the component mounts
 
-  const filteredTerm = termsAndConditions.find((term) => term.id === 35);
+  const filteredTerm = termsAndConditions.find((term) => term.id === 38);
 
   return (
     <Layout1>
@@ -38,29 +37,30 @@ const LeftSidebar: NextPage = () => {
             <div className="accordian">
               {filteredTerm && (
                 <div>
-              <b>
+                  <b>
                     <h2
                       className="title"
                       style={{
-                        fontSize: "18px",
+                        fontSize: "16px",
                         fontWeight: "800",
                         textTransform: "uppercase",
-                      textAlign: "center",
+                        textAlign: "center",
                       }}
                     >
                       {filteredTerm.title}
                     </h2>
                   </b>
                   <br />
-                  <div className="accordion-content">
-                    <div className="description" style={{
+                  <div
+                    className="description"
+                    style={{
                       textAlign: "justify",
                       fontSize: "14px",
-                      textJustify: "inter-word"
+                      textJustify: "inter-word",
                     }}
-                      dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
-                    />
-                  </div>
+                    dangerouslySetInnerHTML={{ __html: filteredTerm.description }}
+                  />
+                  <br />
                 </div>
               )}
             </div>
@@ -69,9 +69,6 @@ const LeftSidebar: NextPage = () => {
       </section>
     </Layout1>
   );
-  
 };
 
 export default LeftSidebar;
-
-   

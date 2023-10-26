@@ -6,7 +6,6 @@ import {
   Card,
   CardHeader,
   Collapse,
-  Container,
   Row,
   Col,
 } from 'reactstrap';
@@ -17,252 +16,299 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApiData } from "helpers/data/DataContext";
 
-
-interface FAQ {
+// Define the interface for the API response
+interface TermCondition {
   id: number;
-  question: string;
-  answer: string;
+  title: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
 }
 
-const FaqDropdown: NextPage = () => {
-  const [faqData, setFaqData] = useState<FAQ[]>([]);
+// Define the interface for the API response containing terms and conditions
+interface TermsCon {
+  terms_and_conditions: TermCondition[];
+}
+
+const LeftSidebar: NextPage = () => {
+  const [termsAndConditions, setTermsAndConditions] = useState<TermCondition[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentComponent, setCurrentComponent] = useState<string>('');
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
+  // Assuming useApiData provides the data from your API
+  const apiData = useApiData() as TermsCon;
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'http://18.235.14.45/api/homeapi'
-        );
-        if (response.status !== 200) {
-          throw new Error('Network response was not ok');
-        }
-        const data = response.data;
-        const termsData = data.help_center;
-        setFaqData(termsData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
+    // Make an API request to fetch data
+    axios.get('http://18.235.14.45/api/homeapi')
+      .then((response) => {
+        const apiData = response.data as TermsCon;
+        setTermsAndConditions(apiData.terms_and_conditions);
+      })
+      .catch((error) => {
+        console.error('API request failed:', error);
+      });
   }, []);
+  let filteredTerms: TermCondition[] = [];
 
-  let filteredTerms: FAQ[] = [];
-
-  if (currentComponent === 'Awaiting Order Arrival') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 1 || term.id === 2 || term.id === 3
+  if (currentComponent === 'For Seller') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 11 && term.id <= 15
     );
-  } else if (currentComponent === 'Aftersales') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 4 || term.id === 5 || term.id === 6 || term.id === 7
+  } 
+  if(currentComponent === 'For Buyer') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 16 && term.id <= 20
     );
-  } else if (currentComponent === 'Refund') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 8 || term.id === 9 || term.id === 10 || term.id === 11 || term.id === 12);
-  } else if (currentComponent === 'Ordering & Payment') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 9 || term.id === 10
+  } 
+  if(currentComponent === 'CUSTOMER SERVICES') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 11 && term.id <= 15
     );
-  } else if (currentComponent === 'Account Management') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 11 || term.id === 12
+  } 
+  if(currentComponent === 'DISPUTE & RESOLUTION') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 25 && term.id <= 29
     );
-  } else if (currentComponent === 'Promotions & coupons') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 11 || term.id === 12
+  } 
+  if(currentComponent === 'SUPPORT') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 30 && term.id <= 33
     );
-  } else if (currentComponent === 'Product Management') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 11 || term.id === 12
+  } 
+  if(currentComponent === 'CONTACT US') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 34 && term.id <= 37
     );
-  } else if (currentComponent === 'Feedback') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 11 || term.id === 12
+  } 
+  if(currentComponent === 'OUR KEY FEATURES') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 38 && term.id <= 42
     );
-  } else if (currentComponent === 'Contact Information') {
-    filteredTerms = faqData.filter(
-      (term) => term.id === 20 || term.id === 21
+  } 
+  if(currentComponent === 'MEMBER SIGNING UP') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 43 && term.id <= 47
     );
   }
-
+  if(currentComponent === 'ADVERTISEMENTS') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 48 && term.id <= 51
+    );
+  }  
+  if(currentComponent === 'INFORMATION') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 52 && term.id <= 55
+    );
+  } 
+  if(currentComponent === 'PAYMENT METHODS') {
+    filteredTerms = termsAndConditions.filter(
+        (term) => term.id >= 56 && term.id <= 59
+    );
+  } 
   return (
     <Layout1>
-      <section className="section-big-py-space bg-light">
-        <div className="custom-container">
-          <Row>
-            <Col lg="2" className="m-0 p-0">
-              <div
-                className="account-sidebar"
-                onClick={() => {
-                  setIsOpen(true);
-                  setCurrentComponent('Awaiting Order Arrival');
-                  setExpandedId(null);
-                }}
-              >
-                <a className="popup-btn">Awaiting Order Arrival</a>
-              </div>
-              <div
-                className={`dashboard-left`}
-                style={{
-                  left: isOpen ? '0px' : '',
-                }}
-              > 
-                <div className="block-content">
-                  <ul>
-                  <li
-  className={
-    currentComponent === 'Awaiting Order Arrival'
-      ? 'active'
-      : ''
-  }
-  onClick={() => {
-    setCurrentComponent('Awaiting Order Arrival');
-    setExpandedId(null);
-  }}
+    <section className="section-big-py-space bg-light">
+      <div className="custom-container">
+        <Row>
+          <Col lg="2" className="m-0 p-0">
+            <div
+              className="account-sidebar"
+              onClick={() => {
+                setIsOpen(true);
+                setCurrentComponent('FOR SELLER');
+                setExpandedId(null);
+              }}
+            >
+              <a className="popup-btn">FOR SELLER</a>
+            </div>
+            <div
+              className={`dashboard-left`}
+              style={{
+                left: isOpen ? '0px' : '',
+              }}
+            > 
+              <div className="block-content">
+                <ul>
+                <li
+className={
+  currentComponent === 'FOR SELLER'
+    ? 'active'
+    : ''
+}
+onClick={() => {
+  setCurrentComponent('FOR SELLER');
+  setExpandedId(null);
+}}
 >
-  <a href="#">Awaiting Order Arrival</a>
+<a href="#">FOR SELLER</a>
 </li>
 
-                    <li
-                      className={
-                        currentComponent === 'Aftersales' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Aftersales');
-                        setExpandedId(null); 
-                      }}
-                    >
-                      <a href="#">Aftersales</a>
-                    </li>
-                    <li
-                      className={currentComponent === 'Refund' ? 'active' : ''}
-                      onClick={() => {
-                        setCurrentComponent('Refund');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Refund</a>
-                    </li>
-                    <li
-                      className={
-                        currentComponent === 'Ordering & Payment' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Ordering & Payment');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Ordering & Payment</a>
-                    </li>
-                    <li
-                      className={
-                        currentComponent === 'Account Management' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Account Management');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Account Management</a>
-                    </li>
-                    <li
-                      className={
-                        currentComponent === 'Promotions & Coupons' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Promotions & Coupons');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Promotion & Coupon</a>
-                    </li>
-                    <li
-                      className={
-                        currentComponent === 'Product Management' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Product Management');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Product Management</a>
-                    </li>
-                    <li
-                      className={currentComponent === 'Feedback' ? 'active' : ''}
-                      onClick={() => {
-                        setCurrentComponent('Feedback');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Feedback</a>
-                    </li>
-                    <li
-                      className={
-                        currentComponent === 'Contact Information' ? 'active' : ''
-                      }
-                      onClick={() => {
-                        setCurrentComponent('Contact Information');
-                        setExpandedId(null);
-                      }}
-                    >
-                      <a href="#">Contact Information</a>
-                    </li>
-                  </ul>
-                </div>
+                  <li
+                    className={
+                      currentComponent === 'FOR BUYER' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('FOR BUYER');
+                      setExpandedId(null); 
+                    }}
+                  >
+                    <a href="#">FOR BUYER</a>
+                  </li>
+                  <li
+                    className={currentComponent === 'CUSTOMER SERVICES' ? 'active' : ''}
+                    onClick={() => {
+                      setCurrentComponent('CUSTOMER SERVICES');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">CUSTOMER SERVICES</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'DISPUTE&RESOLUTION' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('DISPUTE&RESOLUTION');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">DISPUTE&RESOLUTION</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'SUPPORT' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('SUPPORT');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">SUPPORT</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'CONTACT US' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('CONTACT US');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">CONTACT US</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'OUR KEY FEATURES' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('OUR KEY FEATURES');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">OUR KEY FEATURES</a>
+                  </li>
+                  <li
+                    className={currentComponent === 'MEMBER SIGNING UP' ? 'active' : ''}
+                    onClick={() => {
+                      setCurrentComponent('MEMBER SIGNING UP');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">MEMBER SIGNING UP</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'ADVERTISEMENTS' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('ADVERTISEMENTS');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">ADVERTISEMENTS</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'INFORMATION' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('INFORMATION');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">INFORMATION</a>
+                  </li>
+                  <li
+                    className={
+                      currentComponent === 'PAYMENT METHOD' ? 'active' : ''
+                    }
+                    onClick={() => {
+                      setCurrentComponent('PAYMENT METHOD');
+                      setExpandedId(null);
+                    }}
+                  >
+                    <a href="#">PAYMENT METHOD</a>
+                  </li>
+                </ul>
               </div>
-            </Col>
-            <Col lg="10">
-              <div className="dashboard-right">
-                {filteredTerms.length > 0 ? (
-                  <div className="accordion" id="accordionExample">
-                    {filteredTerms.slice(0, 3).map((term) => (
-                      <div key={term.id} style={{ marginBottom: '20px' }}>
-                        <Card>
-                          <CardHeader
-                            onClick={() => {
-                              if (expandedId === term.id) {
-                                setExpandedId(null);
-                              } else {
-                                setExpandedId(term.id);
-                              }
-                            }}
-                          >
-                            <strong><span className="text-black" style={{ textAlign: 'left', float: 'left'}} >{term.question}</span>{" "}</strong>
-                            <div style={{ width: '200%', display: 'block' }}>
-  <FontAwesomeIcon
-    icon={expandedId === term.id ? faCaretUp : faCaretDown}
-    className="dropdown-icon text-dark" style={{ float: 'right' }}
-  />
-</div>
-                          </CardHeader>
-                          <Collapse
-                            isOpen={expandedId === term.id}
-                            id={`collapse${term.id}`}
-                            aria-labelledby={`heading${term.id}`}
-                            data-parent="#accordionExample"
-                          >
-                            <div className="card-body">
-                              <p>{term.answer}</p>
-                            </div>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p>No FAQ data available for the selected component.</p>
-                )}
+            </div>
+          </Col>
+          <Col lg="10">
+<div className="dashboard-right">
+  {filteredTerms.length > 0 ? (
+    <div className="accordion" id="accordionExample">
+      {filteredTerms.slice(0, 3).map((term) => (
+        <div key={term.id} style={{ marginBottom: '20px' }}>
+          <Card>
+            <CardHeader
+              onClick={() => {
+                if (expandedId === term.id) {
+                  setExpandedId(null);
+                } else {
+                  setExpandedId(term.id);
+                }
+              }}
+            >
+              <strong>
+                <span className="text-black" style={{ textAlign: 'left', float: 'left' }}>
+                  {term.title}
+                </span>
+              </strong>
+              <div style={{ width: '200%', display: 'block' }}>
+                <FontAwesomeIcon
+                  icon={expandedId === term.id ? faCaretUp : faCaretDown}
+                  className="dropdown-icon text-dark"
+                  style={{ float: 'right' }}
+                />
               </div>
-            </Col>
-          </Row>
+            </CardHeader>
+            <Collapse
+              isOpen={expandedId === term.id}
+              id={`collapse${term.id}`}
+              aria-labelledby={`heading${term.id}`}
+              data-parent="#accordionExample"
+            >
+              <div className="card-body">
+                <p>{term.description}</p>
+              </div>
+            </Collapse>
+          </Card>
         </div>
-      </section>
-    </Layout1>
+      ))}
+    </div>
+  ) : (
+    <div>No filtered terms available.</div>
+  )}
+</div>
+</Col>
+
+        </Row>
+      </div>
+    </section>
+  </Layout1>
   );
 };
 
-export default FaqDropdown;
+export default LeftSidebar;
