@@ -28,7 +28,7 @@ const LeftSidebar: NextPage = () => {
     
         setTermsAndConditions(apiData.terms_and_conditions);
     
-  }, []); // The empty array means this effect runs only once when the component mounts
+  }, []); 
 
   const filteredTerm = termsAndConditions.find((term) => term.id === 32);
 
